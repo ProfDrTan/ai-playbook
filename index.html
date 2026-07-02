@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Playbook — Working Draft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A;
+    --blue-mid:#123C5E;
+    --blue-panel:#163F63;
+    --line-cyan:#8FC7DE;
+    --line-dim:#3E6683;
+    --paper:#EAF3F8;
+    --amber:#E8A63C;
+    --coral:#D9694F;
+    --text-body: #CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{display:flex; max-width:1200px; margin:0 auto; min-height:100vh;}
+
+  /* Sidebar */
+  .sidebar{
+    width:260px; flex-shrink:0;
+    padding:40px 20px;
+    position:sticky; top:0; align-self:flex-start; height:100vh;
+    border-right:1px solid var(--line-dim);
+  }
+  .sidebar .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--amber); margin-bottom:6px;
+  }
+  .sidebar h1{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:20px; line-height:1.3; color:var(--paper);
+    margin-bottom:28px; font-weight:600;
+  }
+  .sidebar nav ul{list-style:none;}
+  .sidebar nav li{margin-bottom:2px;}
+  .sidebar nav a{
+    display:flex; gap:10px; align-items:baseline;
+    text-decoration:none; font-size:13.5px; color:var(--text-body);
+    padding:8px 6px; border-radius:2px;
+  }
+  .sidebar nav a:hover{background:rgba(143,199,222,0.08); color:var(--paper);}
+  .sidebar nav a.active{color:var(--amber);}
+  .sidebar nav .num{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim);
+    width:20px; flex-shrink:0;
+  }
+  .sidebar nav .draft-mark{
+    font-family:'IBM Plex Mono', monospace; font-size:9px; color:var(--coral);
+    border:1px solid var(--coral); padding:1px 4px; border-radius:2px; margin-left:auto;
+  }
+
+  /* Main */
+  main{flex:1; padding:60px 60px 120px;}
+  .cover{margin-bottom:80px;}
+  .cover .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px;
+    color:var(--amber); text-transform:uppercase; margin-bottom:16px;
+  }
+  .cover h2{
+    font-family:'IBM Plex Mono', monospace; font-weight:700;
+    font-size:clamp(32px,5vw,52px); color:var(--paper); line-height:1.15; margin-bottom:20px;
+    max-width:800px;
+  }
+  .cover p.sub{font-size:17px; color:var(--text-body); max-width:600px; margin-bottom:28px;}
+  .stamp{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    letter-spacing:2px; color:var(--coral); border:2px solid var(--coral);
+    padding:6px 14px; transform:rotate(-3deg); border-radius:3px;
+  }
+
+  .sheet{
+    border:1px solid var(--line-dim);
+    background:rgba(10,40,64,0.35);
+    margin-bottom:56px;
+    position:relative;
+  }
+  .sheet-body{padding:44px 48px 32px;}
+  .sheet-titleblock{
+    border-top:1px solid var(--line-dim);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 48px; font-family:'IBM Plex Mono', monospace; font-size:11px;
+    color:var(--line-dim); letter-spacing:1px;
+  }
+  .chapter-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber);
+    letter-spacing:2px; margin-bottom:10px;
+  }
+  h3.chapter-title{
+    font-family:'IBM Plex Mono', monospace; font-size:28px; color:var(--paper);
+    margin-bottom:8px; font-weight:600;
+  }
+  .chapter-dek{color:var(--line-cyan); font-size:15px; margin-bottom:36px; max-width:640px;}
+
+  h4{
+    font-family:'IBM Plex Mono', monospace; font-size:15px; color:var(--paper);
+    margin:34px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line-dim);
+  }
+  p{margin-bottom:14px; max-width:700px; font-size:15.5px;}
+  .example{
+    background:rgba(0,0,0,0.18); border-left:3px solid var(--line-cyan);
+    padding:14px 18px; margin:16px 0; font-size:14.5px; max-width:680px;
+  }
+  .example .label{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--coral); margin-bottom:6px; display:block;
+  }
+  .example.strong{border-left-color:var(--amber);}
+  .example.strong .label{color:var(--amber);}
+  .try-this{
+    background:rgba(232,166,60,0.08); border:1px dashed var(--amber);
+    padding:16px 20px; margin:22px 0; max-width:680px; border-radius:2px;
+  }
+  .try-this .label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1.5px;
+    color:var(--amber); margin-bottom:8px; display:block;
+  }
+  .checklist{list-style:none; max-width:680px; margin-top:10px;}
+  .checklist li{
+    display:flex; gap:10px; padding:7px 0; font-size:14.5px;
+    border-bottom:1px solid rgba(143,199,222,0.1);
+  }
+  .checklist li::before{
+    content:"☐"; color:var(--line-cyan); font-size:15px; flex-shrink:0;
+  }
+
+  .draft-sheet .sheet-body{padding:40px 48px;}
+  .draft-sheet h3.chapter-title{color:var(--line-dim);}
+  .draft-sheet .chapter-eyebrow{color:var(--line-dim);}
+  .draft-stamp{
+    display:inline-block; margin-top:14px; font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:2px; color:var(--coral); border:1.5px solid var(--coral);
+    padding:5px 12px; transform:rotate(-2deg); border-radius:2px;
+  }
+
+  footer{
+    text-align:center; padding:40px; font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--line-dim); letter-spacing:1px;
+  }
+
+  @media (max-width:900px){
+    .sidebar{display:none;}
+    main{padding:40px 24px 80px;}
+    .sheet-body{padding:30px 24px 24px;}
+    .sheet-titleblock{padding:12px 24px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <aside class="sidebar">
+    <div class="tag">Working Draft · v0.1</div>
+    <h1>The AI Playbook</h1>
+    <nav>
+      <ul>
+        <li><a href="#ch1" class="active"><span class="num">01</span> Prompting Fundamentals</a></li>
+        <li><a href="#ch2"><span class="num">02</span> Choosing Your Tool <span class="draft-mark">DRAFT</span></a></li>
+        <li><a href="#ch3"><span class="num">03</span> Delegating Real Work <span class="draft-mark">DRAFT</span></a></li>
+        <li><a href="#ch4"><span class="num">04</span> Automating the Repeatable <span class="draft-mark">DRAFT</span></a></li>
+        <li><a href="#ch5"><span class="num">05</span> Working With AI on a Team <span class="draft-mark">DRAFT</span></a></li>
+        <li><a href="#ch6"><span class="num">06</span> When AI Gets It Wrong <span class="draft-mark">DRAFT</span></a></li>
+        <li><a href="#ch7"><span class="num">07</span> A Starter Toolkit <span class="draft-mark">DRAFT</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="cover">
+      <div class="eyebrow">A Practical Guide — Not a Strategy Book</div>
+      <h2>Tactics for using AI to actually get your work done.</h2>
+      <p class="sub">Short chapters. Concrete prompt templates. No jargon. Built for professionals and students who want to use AI as a working tool, not a novelty.</p>
+      <span class="stamp">DRAFT — REVIEW COPY</span>
+    </div>
+
+    <section class="sheet" id="ch1">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 01</div>
+        <h3 class="chapter-title">Prompting Fundamentals</h3>
+        <p class="chapter-dek">From asking questions to delegating work.</p>
+
+        <p>Most people use AI like a search engine with better manners. They ask a question, get an answer, and move on. That's not wrong — but it's leaving most of the value on the table.</p>
+        <p>The shift that matters isn't learning clever "prompt hacks." It's a mental shift: from <em>asking</em> AI things to <em>delegating</em> work to it. Once you make that shift, the same tool that used to save you five minutes starts saving you five hours.</p>
+
+        <h4>1. Say What You Want Done, Not What You Want to Know</h4>
+        <div class="example">
+          <span class="label">Weak Prompt</span>
+          "What should I include in a project status report?"
+        </div>
+        <div class="example strong">
+          <span class="label">Strong Prompt</span>
+          "Write a one-page project status report for my team's Q3 rollout. Use these three updates: [paste your rough notes]. Flag anything that sounds like a risk. Keep it to bullet points, no fluff."
+        </div>
+        <p>The difference isn't politeness or length — it's that the second version hands over a finished task, not a question.</p>
+        <div class="try-this">
+          <span class="label">Try This</span>
+          Next time you're about to Google "how to write X," stop and instead ask an AI tool to draft X directly, using whatever raw material you already have. It's faster to edit a draft than to write one from a blank page.
+        </div>
+
+        <h4>2. Give It the Materials, Not Just the Instructions</h4>
+        <p>AI tools are only as good as what you hand them. A request without source material forces the tool to guess — and guessing is where generic, off-target output comes from.</p>
+        <div class="example strong">
+          <span class="label">Strong Prompt</span>
+          "Here's our launch plan doc [paste it]. Summarize the three biggest risks in plain language, and for each one suggest a one-line mitigation."
+        </div>
+        <p>If you have real data, a real document, a real spreadsheet — paste it in or upload it. Don't make the AI invent context you already have sitting in a file.</p>
+
+        <h4>3. Set the Format Before You Need to Fix It</h4>
+        <p>Getting the right format the first time saves more editing time than almost anything else.</p>
+        <div class="try-this">
+          <span class="label">Template</span>
+          "[Task]. Format it as [bullet points / a table / a short email / three short paragraphs]. Keep it under [length]. Tone should be [formal / casual / direct]."
+        </div>
+        <p><em>Example: "Draft a follow-up email to a client who hasn't responded in two weeks. Format as an email with subject line. Under 100 words. Tone: friendly but direct."</em></p>
+
+        <h4>4. Ask for the Reasoning When the Stakes Are Higher</h4>
+        <p>For low-stakes tasks, just take the output. For higher-stakes ones — a financial decision, a technical fix — ask the tool to show its reasoning before you act on it.</p>
+        <div class="try-this">
+          <span class="label">Try This</span>
+          "Before you answer, walk through your reasoning step by step, then give me your recommendation."
+        </div>
+
+        <h4>5. Correct in the Same Conversation, Not From Scratch</h4>
+        <p>If the output isn't right, don't start over — tell the AI what's wrong and let it revise. This habit alone separates people who feel AI "doesn't get it" from people who get consistently good results.</p>
+        <div class="example strong">
+          <span class="label">Correction</span>
+          "This is too formal — make it sound like I'm talking to a colleague, not writing a memo."
+        </div>
+
+        <h4>6. Delegate the Whole Task, Not Just a Piece of It</h4>
+        <p>Instead of asking for a paragraph or an idea, hand over an entire deliverable and let the tool own it end to end.</p>
+        <div class="example strong">
+          <span class="label">Full Delegation</span>
+          "Here's my raw sales data [attach]. Build me a complete one-page summary report with a short narrative at the top, a table of the numbers, and three recommendations. Make it ready to send to my manager as-is."
+        </div>
+        <p>The more complete the deliverable you ask for, the more time you actually save.</p>
+
+        <h4>Quick-Reference: The Prompt Checklist</h4>
+        <ul class="checklist">
+          <li>Did I ask for a finished thing, not just information?</li>
+          <li>Did I give it the actual materials it needs?</li>
+          <li>Did I specify format, length, and tone?</li>
+          <li>For anything high-stakes, did I ask it to show its reasoning?</li>
+          <li>Am I ready to correct and iterate, rather than accepting the first draft?</li>
+        </ul>
+      </div>
+      <div class="sheet-titleblock">
+        <span>SHEET 01 / 07</span>
+        <span>THE AI PLAYBOOK — REV A</span>
+      </div>
+    </section>
+
+    <section class="sheet draft-sheet" id="ch2">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 02</div>
+        <h3 class="chapter-title">Choosing Your Tool</h3>
+        <p>A practical matrix for knowing which AI assistant to reach for, and when free tools are genuinely enough.</p>
+        <span class="draft-stamp">NOT YET DRAFTED</span>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 02 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet draft-sheet" id="ch3">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 03</div>
+        <h3 class="chapter-title">Delegating Real Work</h3>
+        <p>Writing, research, and document generation — with before/after prompt examples.</p>
+        <span class="draft-stamp">NOT YET DRAFTED</span>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 03 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet draft-sheet" id="ch4">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 04</div>
+        <h3 class="chapter-title">Automating the Repeatable</h3>
+        <p>Turning recurring tasks into set-it-up-once workflows.</p>
+        <span class="draft-stamp">NOT YET DRAFTED</span>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 04 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet draft-sheet" id="ch5">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 05</div>
+        <h3 class="chapter-title">Working With AI on a Team</h3>
+        <p>Multi-agent thinking, made simple, for group projects and shared work.</p>
+        <span class="draft-stamp">NOT YET DRAFTED</span>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 05 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet draft-sheet" id="ch6">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 06</div>
+        <h3 class="chapter-title">When AI Gets It Wrong</h3>
+        <p>Verification habits, outage resilience, and avoiding overconfidence in AI output.</p>
+        <span class="draft-stamp">NOT YET DRAFTED</span>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 06 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet draft-sheet" id="ch7">
+      <div class="sheet-body">
+        <div class="chapter-eyebrow">CHAPTER 07</div>
+        <h3 class="chapter-title">A Starter Toolkit</h3>
+        <p>Cheat sheets, prompt templates, and quick-reference tables to keep at hand.</p>
+        <span class="draft-stamp">NOT YET DRAFTED</span>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 07 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <footer>© 2026 Professor Dr. Tan · Working Draft, Not For Distribution</footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('.sidebar nav a');
+  const sections = document.querySelectorAll('.sheet');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      const rect = s.getBoundingClientRect();
+      if (rect.top <= 140) current = s.id;
+    });
+    links.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
