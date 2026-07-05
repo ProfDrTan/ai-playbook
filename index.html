@@ -190,6 +190,67 @@
     color:var(--line-dim); cursor:pointer; font-size:14px;
   }
 
+  /* Read Aloud */
+  .listen-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.5px;
+    background:rgba(143,199,222,0.1); color:var(--line-cyan);
+    border:1px solid var(--line-dim); padding:6px 12px; border-radius:16px;
+    cursor:pointer; margin-left:12px; vertical-align:middle;
+  }
+  .listen-btn:hover{background:rgba(143,199,222,0.18);}
+  .listen-btn.playing{background:var(--amber); color:var(--blue-deep); border-color:var(--amber);}
+  .chapter-head-row{display:flex; align-items:center; flex-wrap:wrap; gap:4px;}
+
+  .read-block.reading-active{
+    background:rgba(232,166,60,0.14);
+    outline:1px solid rgba(232,166,60,0.4);
+    border-radius:3px;
+  }
+
+  .readaloud-pill{
+    position:fixed; bottom:24px; left:24px; z-index:50;
+    background:var(--blue-panel); color:var(--paper);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
+    letter-spacing:0.5px; padding:11px 18px; border-radius:24px;
+    border:1px solid var(--line-cyan); cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .readaloud-panel{
+    position:fixed; bottom:76px; left:24px; z-index:50;
+    width:300px; max-width:calc(100vw - 48px);
+    background:var(--blue-mid); border:1px solid var(--line-dim);
+    border-radius:6px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,0.5);
+    display:none;
+  }
+  .readaloud-panel.open{display:block;}
+  .readaloud-panel h5{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan);
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;
+  }
+  .readaloud-panel .close{
+    position:absolute; top:14px; right:16px; background:none; border:none;
+    color:var(--line-dim); cursor:pointer; font-size:14px;
+  }
+  .ra-controls{display:flex; gap:8px; margin-bottom:16px;}
+  .ra-controls button{
+    flex:1; background:rgba(143,199,222,0.1); border:1px solid var(--line-dim);
+    color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:16px;
+    padding:8px 0; border-radius:4px; cursor:pointer;
+  }
+  .ra-controls button:hover{background:rgba(143,199,222,0.2);}
+  .ra-speed-row{margin-bottom:6px;}
+  .ra-speed-row label{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim);
+    display:flex; justify-content:space-between; margin-bottom:6px;
+  }
+  .ra-speed-row input[type=range]{width:100%; accent-color:var(--amber);}
+  .ra-status{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim);
+    margin-top:10px; min-height:14px;
+  }
+
   .draft-sheet .sheet-body{padding:40px 48px;}
   .draft-sheet h3.chapter-title{color:var(--line-dim);}
   .draft-sheet .chapter-eyebrow{color:var(--line-dim);}
@@ -241,7 +302,7 @@
 
     <section class="sheet" id="ch1">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 01</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 01</div><button class="listen-btn" data-chapter="ch1" onclick="toggleChapterListen('ch1', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Prompting Fundamentals</h3>
         <p class="chapter-dek">From asking questions to delegating work.</p>
 
@@ -318,7 +379,7 @@
 
     <section class="sheet" id="ch2">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 02</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 02</div><button class="listen-btn" data-chapter="ch2" onclick="toggleChapterListen('ch2', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Choosing Your Tool</h3>
         <p class="chapter-dek">A practical matrix for knowing which AI assistant to reach for — and when free tools are genuinely enough.</p>
 
@@ -368,7 +429,7 @@
 
     <section class="sheet" id="ch3">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 03</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 03</div><button class="listen-btn" data-chapter="ch3" onclick="toggleChapterListen('ch3', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Delegating Real Work</h3>
         <p class="chapter-dek">Writing, research, and documents — with before/after prompts you can copy directly.</p>
 
@@ -419,7 +480,7 @@
 
     <section class="sheet draft-sheet" id="ch4">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 04</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 04</div><button class="listen-btn" data-chapter="ch4" onclick="toggleChapterListen('ch4', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Automating the Repeatable</h3>
         <p>Turning recurring tasks into set-it-up-once workflows.</p>
         <span class="draft-stamp">NOT YET DRAFTED</span>
@@ -429,7 +490,7 @@
 
     <section class="sheet draft-sheet" id="ch5">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 05</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 05</div><button class="listen-btn" data-chapter="ch5" onclick="toggleChapterListen('ch5', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Working With AI on a Team</h3>
         <p>Multi-agent thinking, made simple, for group projects and shared work.</p>
         <span class="draft-stamp">NOT YET DRAFTED</span>
@@ -439,7 +500,7 @@
 
     <section class="sheet draft-sheet" id="ch6">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 06</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 06</div><button class="listen-btn" data-chapter="ch6" onclick="toggleChapterListen('ch6', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">When AI Gets It Wrong</h3>
         <p>Verification habits, outage resilience, and avoiding overconfidence in AI output.</p>
         <span class="draft-stamp">NOT YET DRAFTED</span>
@@ -449,7 +510,7 @@
 
     <section class="sheet draft-sheet" id="ch7">
       <div class="sheet-body">
-        <div class="chapter-eyebrow">CHAPTER 07</div>
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 07</div><button class="listen-btn" data-chapter="ch7" onclick="toggleChapterListen('ch7', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">A Starter Toolkit</h3>
         <p>Cheat sheets, prompt templates, and quick-reference tables to keep at hand.</p>
         <span class="draft-stamp">NOT YET DRAFTED</span>
@@ -490,6 +551,155 @@
       l.classList.toggle('active', l.getAttribute('href') === '#' + current);
     });
   });
+</script>
+
+<button class="readaloud-pill" onclick="document.getElementById('readaloud-panel').classList.toggle('open')">
+  &#128266; Read Aloud
+</button>
+<div class="readaloud-panel" id="readaloud-panel">
+  <button class="close" onclick="document.getElementById('readaloud-panel').classList.remove('open')">✕</button>
+  <h5>Listen to the Book</h5>
+  <div class="ra-controls">
+    <button onclick="readWholeBook()" title="Play whole book">▶</button>
+    <button onclick="pauseResumeReading()" title="Pause / Resume">⏸</button>
+    <button onclick="stopReading()" title="Stop">⏹</button>
+  </div>
+  <div class="ra-speed-row">
+    <label><span>Speed</span><span id="ra-speed-val">1.0x</span></label>
+    <input type="range" id="ra-speed" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed(this.value)">
+  </div>
+  <div class="ra-status" id="ra-status">Ready.</div>
+</div>
+
+<script>
+  // ===== READ ALOUD ENGINE =====
+  let raQueueEls = [];
+  let raIndex = 0;
+  let raRate = 1.0;
+  let raVoice = null;
+  let raPlaying = false;
+  let raCurrentChapterBtn = null;
+
+  function pickVoice(){
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    let v = voices.find(v => /UK/i.test(v.name) && /Female/i.test(v.name));
+    if (!v) v = voices.find(v => v.lang === 'en-GB' && /female/i.test(v.name));
+    if (!v) v = voices.find(v => v.lang === 'en-GB');
+    if (!v) v = voices.find(v => /^en/i.test(v.lang));
+    return v || voices[0];
+  }
+  window.speechSynthesis.onvoiceschanged = () => { raVoice = pickVoice(); };
+  raVoice = pickVoice();
+
+  function elToText(el){
+    if (el.tagName === 'TR'){
+      const cells = Array.from(el.children).map(c => c.textContent.trim()).filter(Boolean);
+      return cells.join(', ');
+    }
+    return el.textContent.trim();
+  }
+
+  function collectReadEls(scope){
+    const sel = 'h3.chapter-title, p.chapter-dek, h4, p, .example, .try-this, .checklist li, table.comparo tr';
+    return Array.from(scope.querySelectorAll(sel)).filter(el => elToText(el).length > 0);
+  }
+
+  function clearHighlight(){
+    document.querySelectorAll('.reading-active').forEach(el => el.classList.remove('reading-active'));
+  }
+
+  function setStatus(msg){
+    const s = document.getElementById('ra-status');
+    if (s) s.textContent = msg;
+  }
+
+  function resetChapterButtons(){
+    document.querySelectorAll('.listen-btn').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '&#128266; Listen';
+    });
+  }
+
+  function speakNext(){
+    if (raIndex >= raQueueEls.length){
+      clearHighlight();
+      raPlaying = false;
+      resetChapterButtons();
+      setStatus('Finished.');
+      return;
+    }
+    const el = raQueueEls[raIndex];
+    clearHighlight();
+    el.classList.add('reading-active');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    const text = elToText(el);
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.rate = raRate;
+    if (raVoice) utter.voice = raVoice;
+    utter.onend = () => { raIndex++; speakNext(); };
+    utter.onerror = () => { raIndex++; speakNext(); };
+    window.speechSynthesis.speak(utter);
+    setStatus('Reading ' + (raIndex+1) + ' / ' + raQueueEls.length + '...');
+  }
+
+  function startReading(elements, label){
+    window.speechSynthesis.cancel();
+    raQueueEls = elements;
+    raIndex = 0;
+    raPlaying = true;
+    setStatus('Starting: ' + label);
+    speakNext();
+  }
+
+  function readWholeBook(){
+    resetChapterButtons();
+    raCurrentChapterBtn = null;
+    const scope = document.querySelector('main');
+    startReading(collectReadEls(scope), 'Whole Book');
+  }
+
+  function toggleChapterListen(chapterId, btn){
+    if (raPlaying && raCurrentChapterBtn === btn){
+      stopReading();
+      return;
+    }
+    resetChapterButtons();
+    raCurrentChapterBtn = btn;
+    btn.classList.add('playing');
+    btn.innerHTML = '&#9209; Stop';
+    const scope = document.getElementById(chapterId);
+    startReading(collectReadEls(scope), chapterId);
+  }
+
+  function pauseResumeReading(){
+    if (!raPlaying) return;
+    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+      window.speechSynthesis.pause();
+      setStatus('Paused.');
+    } else if (window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setStatus('Resumed.');
+    }
+  }
+
+  function stopReading(){
+    window.speechSynthesis.cancel();
+    raPlaying = false;
+    clearHighlight();
+    resetChapterButtons();
+    raCurrentChapterBtn = null;
+    setStatus('Stopped.');
+  }
+
+  function updateSpeed(val){
+    raRate = parseFloat(val);
+    document.getElementById('ra-speed-val').textContent = raRate.toFixed(1) + 'x';
+    if (raPlaying && window.speechSynthesis.speaking){
+      window.speechSynthesis.cancel();
+      speakNext();
+    }
+  }
 </script>
 </body>
 </html>
