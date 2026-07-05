@@ -284,10 +284,10 @@
         <li><a href="#ch1" class="active"><span class="num">01</span> Prompting Fundamentals</a></li>
         <li><a href="#ch2"><span class="num">02</span> Choosing Your Tool</a></li>
         <li><a href="#ch3"><span class="num">03</span> Delegating Real Work</a></li>
-        <li><a href="#ch4"><span class="num">04</span> Automating the Repeatable <span class="draft-mark">DRAFT</span></a></li>
-        <li><a href="#ch5"><span class="num">05</span> Working With AI on a Team <span class="draft-mark">DRAFT</span></a></li>
-        <li><a href="#ch6"><span class="num">06</span> When AI Gets It Wrong <span class="draft-mark">DRAFT</span></a></li>
-        <li><a href="#ch7"><span class="num">07</span> A Starter Toolkit <span class="draft-mark">DRAFT</span></a></li>
+        <li><a href="#ch4"><span class="num">04</span> Automating the Repeatable</a></li>
+        <li><a href="#ch5"><span class="num">05</span> Working With AI on a Team</a></li>
+        <li><a href="#ch6"><span class="num">06</span> When AI Gets It Wrong</a></li>
+        <li><a href="#ch7"><span class="num">07</span> A Starter Toolkit</a></li>
       </ul>
     </nav>
   </aside>
@@ -297,7 +297,7 @@
       <div class="eyebrow">A Practical Guide — Not a Strategy Book</div>
       <h2>Tactics for using AI to actually get your work done.</h2>
       <p class="sub">Short chapters. Concrete prompt templates. No jargon. Built for professionals and students who want to use AI as a working tool, not a novelty.</p>
-      <span class="stamp">DRAFT — REVIEW COPY</span>
+      <span class="stamp">DRAFT COMPLETE — ALL 7 CHAPTERS — REVIEW COPY</span>
     </div>
 
     <section class="sheet" id="ch1">
@@ -478,42 +478,136 @@
       <div class="sheet-titleblock"><span>SHEET 03 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
 
-    <section class="sheet draft-sheet" id="ch4">
+    <section class="sheet" id="ch4">
       <div class="sheet-body">
         <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 04</div><button class="listen-btn" data-chapter="ch4" onclick="toggleChapterListen('ch4', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Automating the Repeatable</h3>
-        <p>Turning recurring tasks into set-it-up-once workflows.</p>
-        <span class="draft-stamp">NOT YET DRAFTED</span>
+        <p class="chapter-dek">Turning tasks you do every week into something you set up once.</p>
+
+        <h4>Build a Prompt, Not Just an Answer</h4>
+        <p>If you catch yourself typing a similar request more than twice — a weekly status update, a standard client email, a recurring report format — that's a signal to build a reusable prompt template instead of retyping it from memory each time.</p>
+        <div class="try-this">
+          <span class="label">Template Structure</span>
+          "Every [week/month], I need [output]. Use this structure: [format]. Here's this period's raw input: [paste new data each time]." Save this as a note you copy-paste from, so only the bracketed part changes.
+        </div>
+
+        <h4>Use Your Tool's Built-In Memory Features</h4>
+        <p>Most major AI tools now let you save standing instructions that apply automatically to every new conversation — a persistent role, tone, or context you don't want to repeat each time. Setting this up once, properly, saves far more time than any individual clever prompt.</p>
+        <div class="example strong">
+          <span class="label">Standing Instruction Example</span>
+          "I'm a [your role]. I write in a direct, practitioner tone — no corporate fluff. When I ask for a document, give me the finished thing, not an outline first, unless I ask for an outline."
+        </div>
+
+        <h4>Chain Tasks Instead of Repeating Them</h4>
+        <p>For a recurring multi-step process — draft, review, format, send — ask the AI to walk through all the steps in one exchange rather than starting a fresh conversation for each stage. This preserves context and catches inconsistencies between steps automatically.</p>
+
+        <h4>Know When Automation Isn't Worth It</h4>
+        <p>Not everything benefits from a template. One-off tasks, highly variable requests, or anything requiring fresh judgment each time are often faster handled directly. Reserve automation effort for things you're confident you'll repeat at least five or six more times.</p>
+
+        <h4>Quick-Reference Checklist</h4>
+        <ul class="checklist">
+          <li>Have I done this exact task three or more times without saving a reusable version?</li>
+          <li>Have I set up standing instructions for my role, tone, and default output format?</li>
+          <li>Am I starting a new conversation for each step of a process that could be chained together?</li>
+          <li>Is this task actually repeated enough to be worth automating, or am I over-engineering a one-off?</li>
+        </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 04 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
 
-    <section class="sheet draft-sheet" id="ch5">
+    <section class="sheet" id="ch5">
       <div class="sheet-body">
         <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 05</div><button class="listen-btn" data-chapter="ch5" onclick="toggleChapterListen('ch5', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">Working With AI on a Team</h3>
-        <p>Multi-agent thinking, made simple, for group projects and shared work.</p>
-        <span class="draft-stamp">NOT YET DRAFTED</span>
+        <p class="chapter-dek">Multi-agent thinking, simplified — for group projects and shared work.</p>
+
+        <h4>Split the Work by Role, Not Just by Person</h4>
+        <p>Teams that get the most out of AI don't just each use it individually — they assign different AI-assisted roles the way you'd assign human roles. One useful split: one pass for gathering raw information, a separate pass for analysis, and a final pass for synthesis and decision-making. Treating these as distinct steps, even when one person does all three, produces sharper results than asking for everything at once.</p>
+        <div class="example strong">
+          <span class="label">Three-Pass Structure</span>
+          Pass 1 — "Gather and summarize the raw facts on [topic], no analysis yet." Pass 2 — "Given these facts, what are the three most important patterns or risks?" Pass 3 — "Given that analysis, what's the recommended decision, and why?"
+        </div>
+
+        <h4>Keep a Shared Source of Truth</h4>
+        <p>When multiple people on a team are each prompting AI tools separately, outputs drift apart fast. Keep one shared document with the agreed facts, data, and decisions, and have everyone paste from that same source into their prompts — not from memory or a personal interpretation of it.</p>
+
+        <h4>Assign a Human Reviewer to Every AI Output Going to a Stakeholder</h4>
+        <p>Anything AI-assisted that leaves the team — a client email, a report, a recommendation — should have one clearly assigned person responsible for reading it fully before it goes out. Diffused responsibility is how errors slip through in team settings specifically.</p>
+
+        <h4>Disagreement Is a Feature, Not a Bug</h4>
+        <p>If two team members get different AI outputs on the same question, don't just pick one — that's often a signal the question was ambiguous or the inputs differed. Compare the two outputs directly to find where they diverge before deciding.</p>
+
+        <h4>Quick-Reference Checklist</h4>
+        <ul class="checklist">
+          <li>Are we treating gathering, analysis, and decision-making as separate steps?</li>
+          <li>Is everyone prompting from the same shared facts, or drifting from memory?</li>
+          <li>Does every external-facing output have one named human reviewer?</li>
+          <li>When outputs disagree, are we investigating why instead of just picking one?</li>
+        </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 05 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
 
-    <section class="sheet draft-sheet" id="ch6">
+    <section class="sheet" id="ch6">
       <div class="sheet-body">
         <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 06</div><button class="listen-btn" data-chapter="ch6" onclick="toggleChapterListen('ch6', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">When AI Gets It Wrong</h3>
-        <p>Verification habits, outage resilience, and avoiding overconfidence in AI output.</p>
-        <span class="draft-stamp">NOT YET DRAFTED</span>
+        <p class="chapter-dek">Verification habits, outage resilience, and avoiding overconfidence in AI output.</p>
+
+        <h4>Confident and Wrong Is the Default Failure Mode</h4>
+        <p>AI tools rarely say "I don't know" unless specifically prompted to consider that option. A wrong answer usually reads exactly as fluent and certain as a right one. The practical fix isn't distrust — it's building a verification habit for anything that matters.</p>
+        <div class="try-this">
+          <span class="label">Try This</span>
+          For any factual claim you'll act on — a number, a date, a name, a current status — ask directly: "How confident are you in this, and what would change your answer?" This surfaces uncertainty the tool won't volunteer unprompted.
+        </div>
+
+        <h4>Know What Your Tool Can't See</h4>
+        <p>Every AI tool has a knowledge cutoff, and most can't independently verify facts unless they have live web access turned on. Treat anything about current events, prices, availability, or recent changes as unverified until you've checked it against a live source.</p>
+
+        <h4>Don't Let a Single Tool Be a Single Point of Failure</h4>
+        <p>Outages happen — to every AI provider, not just one. If your work depends on AI assistance for anything with a deadline, keep a second tool as a backup and don't schedule critical work for the last possible hour. This is less about any one tool's reliability and more about not building a workflow with no slack in it.</p>
+
+        <h4>Correct, Don't Just Discard</h4>
+        <p>When you catch an AI tool getting something wrong, tell it specifically what was wrong rather than abandoning the conversation and starting fresh elsewhere. This often produces a better result than a brand-new attempt, since the tool now knows exactly what to avoid.</p>
+
+        <h4>Quick-Reference Checklist</h4>
+        <ul class="checklist">
+          <li>Did I verify anything I'm about to act on that's a fact, number, or current status?</li>
+          <li>Am I aware of this tool's knowledge cutoff and whether it has live web access?</li>
+          <li>Do I have a backup tool ready in case this one is unavailable when I need it?</li>
+          <li>When something's wrong, am I correcting it directly instead of just giving up?</li>
+        </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 06 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
 
-    <section class="sheet draft-sheet" id="ch7">
+    <section class="sheet" id="ch7">
       <div class="sheet-body">
         <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 07</div><button class="listen-btn" data-chapter="ch7" onclick="toggleChapterListen('ch7', this)">&#128266; Listen</button></div>
         <h3 class="chapter-title">A Starter Toolkit</h3>
-        <p>Cheat sheets, prompt templates, and quick-reference tables to keep at hand.</p>
-        <span class="draft-stamp">NOT YET DRAFTED</span>
+        <p class="chapter-dek">The templates and checklists from every chapter, in one place to keep at hand.</p>
+
+        <h4>The Five Prompt Templates You'll Use Most</h4>
+        <div class="example strong"><span class="label">Draft-First Writing</span> "Here's my rough draft: [paste]. Clean it up, keep my key points, tone should be [X]."</div>
+        <div class="example strong"><span class="label">Full Delegation</span> "Here's my raw data: [paste/attach]. Build me a complete, ready-to-send [deliverable] with [structure]."</div>
+        <div class="example strong"><span class="label">Verified Research</span> "Research [topic]. Cite sources for each claim. Flag anything you're not confident about."</div>
+        <div class="example strong"><span class="label">Reasoning Check</span> "Before answering, walk through your reasoning step by step, then give your recommendation."</div>
+        <div class="example strong"><span class="label">Standing Instruction</span> "I'm a [role]. I write in a [tone] style. Default to giving me the finished output, not an outline, unless I ask."</div>
+
+        <h4>The Master Checklist</h4>
+        <ul class="checklist">
+          <li>Am I asking for a finished thing, not just information?</li>
+          <li>Have I given it real materials — notes, data, documents — instead of making it guess?</li>
+          <li>Have I specified format, length, and tone?</li>
+          <li>For anything high-stakes, have I asked for reasoning and a confidence check?</li>
+          <li>Am I ready to correct and iterate rather than accepting the first draft?</li>
+          <li>Do I know which tool's persistence feature I'm relying on, and is it switched on?</li>
+          <li>If this is recurring, have I saved it as a reusable template?</li>
+          <li>If this is going to a stakeholder, has a human reviewed it fully?</li>
+        </ul>
+
+        <h4>Where to Go From Here</h4>
+        <p>This book is deliberately short because the real learning happens in your own repeated use, not in reading about it once. Pick one template above, use it on your very next task today, and adjust it to your own voice. That's the whole method.</p>
       </div>
       <div class="sheet-titleblock"><span>SHEET 07 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
