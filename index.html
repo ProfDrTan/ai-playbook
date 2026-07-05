@@ -141,6 +141,55 @@
     content:"☐"; color:var(--line-cyan); font-size:15px; flex-shrink:0;
   }
 
+  table.comparo{
+    width:100%; max-width:720px; border-collapse:collapse; margin:18px 0 28px;
+    font-size:13.5px;
+  }
+  table.comparo th{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--amber); text-align:left;
+    padding:8px 12px; border-bottom:1px solid var(--line-dim);
+  }
+  table.comparo td{
+    padding:10px 12px; border-bottom:1px solid rgba(143,199,222,0.12);
+    color:var(--text-body); vertical-align:top;
+  }
+  table.comparo tr:hover td{background:rgba(143,199,222,0.04);}
+
+  /* Tool Watch pill */
+  .toolwatch-pill{
+    position:fixed; bottom:24px; right:24px; z-index:50;
+    background:var(--amber); color:var(--blue-deep);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
+    letter-spacing:0.5px; padding:11px 18px; border-radius:24px;
+    border:none; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .toolwatch-pill .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--coral);
+  }
+  .toolwatch-panel{
+    position:fixed; bottom:76px; right:24px; z-index:50;
+    width:320px; max-width:calc(100vw - 48px);
+    background:var(--blue-mid); border:1px solid var(--line-dim);
+    border-radius:6px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,0.5);
+    display:none;
+  }
+  .toolwatch-panel.open{display:block;}
+  .toolwatch-panel h5{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber);
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:12px;
+  }
+  .toolwatch-item{margin-bottom:14px; font-size:13px; line-height:1.5;}
+  .toolwatch-item .date{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--line-dim);
+    display:block; margin-bottom:2px;
+  }
+  .toolwatch-panel .close{
+    position:absolute; top:14px; right:16px; background:none; border:none;
+    color:var(--line-dim); cursor:pointer; font-size:14px;
+  }
+
   .draft-sheet .sheet-body{padding:40px 48px;}
   .draft-sheet h3.chapter-title{color:var(--line-dim);}
   .draft-sheet .chapter-eyebrow{color:var(--line-dim);}
@@ -267,12 +316,52 @@
       </div>
     </section>
 
-    <section class="sheet draft-sheet" id="ch2">
+    <section class="sheet" id="ch2">
       <div class="sheet-body">
         <div class="chapter-eyebrow">CHAPTER 02</div>
         <h3 class="chapter-title">Choosing Your Tool</h3>
-        <p>A practical matrix for knowing which AI assistant to reach for, and when free tools are genuinely enough.</p>
-        <span class="draft-stamp">NOT YET DRAFTED</span>
+        <p class="chapter-dek">A practical matrix for knowing which AI assistant to reach for — and when free tools are genuinely enough.</p>
+
+        <h4>The Persistence Problem — Why Redoing Work Is the #1 AI Time-Waster</h4>
+        <p>A tech reviewer recently described losing hours of work in Gemini simply because there was no easy way to pick up a past project — every session felt like starting over. That single complaint points at the most underrated feature category in AI tools: not raw intelligence, but whether the tool <em>remembers where you left off</em>.</p>
+        <p>Every major AI assistant has now taken a swing at this problem — but they've landed in very different places. Here's the honest, apples-to-apples comparison:</p>
+
+        <table class="comparo">
+          <thead><tr><th>Tool</th><th>What it offers</th><th>How it works</th></tr></thead>
+          <tbody>
+            <tr><td>Gemini</td><td>Library</td><td>Saves generated docs/images/video, links back to the original chat, can turn saved material into quizzes or study guides</td></tr>
+            <tr><td>ChatGPT</td><td>Library</td><td>Saves every uploaded/created file in a sidebar tab; "Add from Library" reuses it in any new chat; storage scales with your plan</td></tr>
+            <tr><td>Claude</td><td>Projects + Artifacts + Memory</td><td>Same problem solved with three separate tools instead of one: a persistent knowledge base (Projects), revisitable/editable outputs (Artifacts), and auto-summarized context (Memory)</td></tr>
+            <tr><td>DeepSeek</td><td>None</td><td>No cross-session memory or file library — every chat starts from zero. Widely flagged by users as its biggest gap</td></tr>
+          </tbody>
+        </table>
+
+        <div class="try-this">
+          <span class="label">Try This</span>
+          Before starting any multi-session project — a report you'll revise over weeks, a client deliverable with several drafts — check whether your tool has a persistence feature and turn it on deliberately. Don't rely on scrolling back through old chats to find your own work.
+        </div>
+
+        <h4>Free vs. Paid — What You Actually Need</h4>
+        <p>Free tiers of every major assistant can draft emails, summarize documents, and answer everyday questions competently. Paying unlocks three things specifically: longer memory/context, higher usage limits, and access to the strongest reasoning models for genuinely hard problems. If your work is mostly quick, everyday tasks, free is enough. If you're doing sustained project work — the kind this book is about — a paid tier on at least one tool pays for itself within the first real deliverable it saves you from redoing.</p>
+
+        <h4>The Task-to-Tool Matrix</h4>
+        <table class="comparo">
+          <thead><tr><th>Task</th><th>Reach for</th></tr></thead>
+          <tbody>
+            <tr><td>Quick fact-check, everyday question</td><td>Any tool — no meaningful difference</td></tr>
+            <tr><td>Long project you'll return to over days/weeks</td><td>Whichever has the strongest persistence feature for your plan (see table above)</td></tr>
+            <tr><td>Image generation</td><td>ChatGPT or Gemini — Claude doesn't generate images</td></tr>
+            <tr><td>Precise document/spreadsheet formatting</td><td>Whichever tool your workplace already standardizes on — consistency beats marginal quality gains</td></tr>
+            <tr><td>Sensitive or high-stakes work</td><td>Read the tool's data policy first — this matters more than model quality</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Quick-Reference Checklist</h4>
+        <ul class="checklist">
+          <li>Do I know which tool I'm using has a persistence/library feature, and is it turned on?</li>
+          <li>Am I paying for capability I actually use, or just habit?</li>
+          <li>For this specific task, does the tool I'm using actually matter — or am I overthinking a simple question?</li>
+        </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 02 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
@@ -329,6 +418,22 @@
 
     <footer>© 2026 Professor Dr. Tan · Working Draft, Not For Distribution</footer>
   </main>
+</div>
+
+<button class="toolwatch-pill" onclick="document.getElementById('toolwatch-panel').classList.toggle('open')">
+  <span class="dot"></span> Tool Watch
+</button>
+<div class="toolwatch-panel" id="toolwatch-panel">
+  <button class="close" onclick="document.getElementById('toolwatch-panel').classList.remove('open')">✕</button>
+  <h5>Recent Changes — Chapter 2</h5>
+  <div class="toolwatch-item">
+    <span class="date">MAR 23, 2026</span>
+    OpenAI launches Library in ChatGPT — saves all uploaded/created files in a persistent sidebar tab, reusable across chats.
+  </div>
+  <div class="toolwatch-item">
+    <span class="date">2026</span>
+    Google's Gemini Library lets users resume past generated work directly, avoiding the redo-from-scratch problem covered in this chapter.
+  </div>
 </div>
 
 <script>
