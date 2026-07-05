@@ -362,6 +362,11 @@
         </div>
         <p>The more complete the deliverable you ask for, the more time you actually save.</p>
 
+        <div class="example strong">
+          <span class="label">Field Note</span>
+          An Anthropic engineer recently made the case that with today's models, the real bottleneck has shifted — it's no longer the model's capability, it's the user's blind spots. Deliberately checking your own assumptions before trusting an output now matters more than crafting a cleverer prompt. Everything in this chapter is really in service of that one shift.
+        </div>
+
         <h4>Quick-Reference: The Prompt Checklist</h4>
         <ul class="checklist">
           <li>Did I ask for a finished thing, not just information?</li>
@@ -404,6 +409,10 @@
 
         <h4>Free vs. Paid — What You Actually Need</h4>
         <p>Free tiers of every major assistant can draft emails, summarize documents, and answer everyday questions competently. Paying unlocks three things specifically: longer memory/context, higher usage limits, and access to the strongest reasoning models for genuinely hard problems. If your work is mostly quick, everyday tasks, free is enough. If you're doing sustained project work — the kind this book is about — a paid tier on at least one tool pays for itself within the first real deliverable it saves you from redoing.</p>
+        <div class="example strong">
+          <span class="label">Tool Watch — Pricing Convergence</span>
+          As of mid-2026, ChatGPT Plus, Claude Pro, and Google AI Pro have all landed at roughly $20/month. The meaningful differences aren't in price anymore — they're hidden in usage limits, default models, and data-training defaults. Read the fine print, not the sticker price.
+        </div>
 
         <h4>The Task-to-Tool Matrix</h4>
         <table class="comparo">
@@ -501,6 +510,15 @@
         <h4>Chain Tasks Instead of Repeating Them</h4>
         <p>For a recurring multi-step process — draft, review, format, send — ask the AI to walk through all the steps in one exchange rather than starting a fresh conversation for each stage. This preserves context and catches inconsistencies between steps automatically.</p>
 
+        <div class="example strong">
+          <span class="label">Tool Watch — Desktop Automation Arrives</span>
+          Google's Gemini Spark recently expanded to desktop, able to sort files into folders or build a budget spreadsheet directly from a folder of invoices, and can be kicked off remotely from your phone. This is the automation pattern this chapter is about — pointing at real, unglamorous busywork instead of chasing a flashier use case.
+        </div>
+        <div class="example">
+          <span class="label">Field Note</span>
+          OpenAI's president has said the 2023 wave of ChatGPT "plugins" mostly failed because the underlying models weren't reliable enough yet to use them well — not because the idea was wrong. The lesson for automating your own work: don't give up on an automation idea just because an early version of it disappointed you. The tools underneath have often caught up since.
+        </div>
+
         <h4>Know When Automation Isn't Worth It</h4>
         <p>Not everything benefits from a template. One-off tasks, highly variable requests, or anything requiring fresh judgment each time are often faster handled directly. Reserve automation effort for things you're confident you'll repeat at least five or six more times.</p>
 
@@ -534,6 +552,11 @@
         <h4>Assign a Human Reviewer to Every AI Output Going to a Stakeholder</h4>
         <p>Anything AI-assisted that leaves the team — a client email, a report, a recommendation — should have one clearly assigned person responsible for reading it fully before it goes out. Diffused responsibility is how errors slip through in team settings specifically.</p>
 
+        <div class="example strong">
+          <span class="label">Tool Watch — Governance in Practice</span>
+          Samsung recently reversed a companywide ban on public AI tools that had been in place since a 2023 data-leak incident — but this time rolled ChatGPT, Gemini, and Claude back out behind an internal security control layer, not as an open free-for-all. That's the practical model for teams: the answer to a past AI mistake is usually better guardrails, not a permanent ban.
+        </div>
+
         <h4>Disagreement Is a Feature, Not a Bug</h4>
         <p>If two team members get different AI outputs on the same question, don't just pick one — that's often a signal the question was ambiguous or the inputs differed. Compare the two outputs directly to find where they diverge before deciding.</p>
 
@@ -556,6 +579,10 @@
 
         <h4>Confident and Wrong Is the Default Failure Mode</h4>
         <p>AI tools rarely say "I don't know" unless specifically prompted to consider that option. A wrong answer usually reads exactly as fluent and certain as a right one. The practical fix isn't distrust — it's building a verification habit for anything that matters.</p>
+        <div class="example strong">
+          <span class="label">Tool Watch — The Learning Trade-Off</span>
+          A study of more than 26,000 students found that those using AI finished homework faster and scored higher on it — but performed up to 24% worse on exams covering the same material. The pattern generalizes beyond school: speed on the task in front of you can quietly cost you the understanding you'd need without the tool. Use AI to produce the output, but don't skip the step of understanding what it produced.
+        </div>
         <div class="try-this">
           <span class="label">Try This</span>
           For any factual claim you'll act on — a number, a date, a name, a current status — ask directly: "How confident are you in this, and what would change your answer?" This surfaces uncertainty the tool won't volunteer unprompted.
@@ -566,6 +593,10 @@
 
         <h4>Don't Let a Single Tool Be a Single Point of Failure</h4>
         <p>Outages happen — to every AI provider, not just one. If your work depends on AI assistance for anything with a deadline, keep a second tool as a backup and don't schedule critical work for the last possible hour. This is less about any one tool's reliability and more about not building a workflow with no slack in it.</p>
+        <div class="example">
+          <span class="label">Tool Watch — A Real Outage, Start to Finish</span>
+          In mid-2026, Anthropic's Fable 5 model was pulled entirely for 19 days over a security concern, then fully restored once resolved. Anyone whose workflow depended solely on that one model lost nearly three weeks of access. This is the exact scenario the backup-tool habit in this chapter is meant to protect you from — not hypothetical, and not rare.
+        </div>
 
         <h4>Correct, Don't Just Discard</h4>
         <p>When you catch an AI tool getting something wrong, tell it specifically what was wrong rather than abandoning the conversation and starting fresh elsewhere. This often produces a better result than a brand-new attempt, since the tool now knows exactly what to avoid.</p>
@@ -622,6 +653,10 @@
 <div class="toolwatch-panel" id="toolwatch-panel">
   <button class="close" onclick="document.getElementById('toolwatch-panel').classList.remove('open')">✕</button>
   <h5>Recent Changes — Chapter 2</h5>
+  <div class="toolwatch-item">
+    <span class="date">JUL 1, 2026</span>
+    Anthropic makes Claude Sonnet 5 the new default for all Free and Pro users — most agentic Sonnet model yet, priced for high-volume use.
+  </div>
   <div class="toolwatch-item">
     <span class="date">MAR 23, 2026</span>
     OpenAI launches Library in ChatGPT — saves all uploaded/created files in a persistent sidebar tab, reusable across chats.
