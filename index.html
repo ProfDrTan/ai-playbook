@@ -66,6 +66,9 @@
     font-family:'IBM Plex Mono', monospace; font-size:9px; color:var(--coral);
     border:1px solid var(--coral); padding:1px 4px; border-radius:2px; margin-left:auto;
   }
+  .sidebar-divider{
+    height:1px; background:var(--line-dim); margin:16px 0;
+  }
 
   /* Main */
   main{flex:1; padding:60px 60px 120px;}
@@ -288,6 +291,10 @@
         <li><a href="#ch5"><span class="num">05</span> Working With AI on a Team</a></li>
         <li><a href="#ch6"><span class="num">06</span> When AI Gets It Wrong</a></li>
         <li><a href="#ch7"><span class="num">07</span> A Starter Toolkit</a></li>
+      </ul>
+      <div class="sidebar-divider"></div>
+      <ul>
+        <li><a href="#notes"><span class="num">&#128203;</span> Project Notes</a></li>
       </ul>
     </nav>
   </aside>
@@ -646,6 +653,51 @@
     <footer>© 2026 Professor Dr. Tan · Working Draft, Not For Distribution</footer>
   </main>
 </div>
+
+<section class="sheet" id="notes" style="margin: 0 60px 56px;">
+  <div class="sheet-body">
+    <div class="chapter-eyebrow">PROJECT NOTES</div>
+    <h3 class="chapter-title">Continuity &amp; Master Prompt</h3>
+    <p class="chapter-dek">Everything a fresh AI conversation needs to pick this project up with no lost context.</p>
+
+    <h4>Status Snapshot</h4>
+    <ul class="checklist">
+      <li>All 7 chapters drafted: Prompting Fundamentals, Choosing Your Tool, Delegating Real Work, Automating the Repeatable, Working With AI on a Team, When AI Gets It Wrong, A Starter Toolkit</li>
+      <li>Repo: github.com/ProfDrTan/ai-playbook (public) — live site hosted via GitHub Pages at profdrtan.github.io/ai-playbook/</li>
+      <li>Cloudflare Pages hosting attempted but hit an unresolved connection issue — GitHub Pages used instead and works reliably</li>
+      <li>Read-aloud engine live: per-chapter + whole-book, headers included, speed control, UK female voice where available</li>
+      <li>Tool Watch digest routine established and tested — see below</li>
+    </ul>
+
+    <h4>Standing Technical Rules</h4>
+    <ul class="checklist">
+      <li>Deployment is via GitHub API / git push directly to the ai-playbook repo — no manual uploads, no ZIPs</li>
+      <li>Access token for this repo is kept in the private local cheat sheet document, not on this public site — a new session should ask for it rather than assume it</li>
+      <li>Single-file index.html architecture — all CSS/JS inline, matching the AI Power Shift site pattern</li>
+      <li>Visual identity: "blueprint" theme (deep blue, grid backdrop, mono type, sheet/title-block layout) — deliberately distinct from AI Power Shift's navy/gold editorial look</li>
+    </ul>
+
+    <h4>The Tool Watch Digest Routine</h4>
+    <p>Start any new conversation with "Tool Watch digest" to trigger a fresh search sweep across AI tool updates, model releases, and workplace-AI news. Claude filters the raw results down to what's actually book-relevant, presents a numbered list with suggested chapter placement, and waits for a go-ahead — "roll them all in" or specific numbers — before writing anything into the actual chapters and logging it in the on-site Tool Watch panel.</p>
+
+    <h4>Master Prompt — Copy This Into a New Conversation</h4>
+    <div class="example strong">
+      <span class="label">Paste This</span>
+      "I'm continuing work on my AI Playbook book/website project. Repo: github.com/ProfDrTan/ai-playbook (public), hosted at profdrtan.github.io/ai-playbook/ via GitHub Pages. It's a single index.html file, blueprint-themed design, 7 chapters covering practical AI tactics for professionals and students. I'll give you the GitHub access token separately. Please pull the current index.html from the repo to see the latest state before making any changes, and follow the standing rule: always fetch the file's current SHA immediately before any update — never reuse a cached SHA."
+    </div>
+
+    <h4>Changelog</h4>
+    <ul class="checklist">
+      <li>Jul 5 — Initial site built, Chapter 1 drafted, GitHub Pages deployment established after Cloudflare issues</li>
+      <li>Jul 5 — Chapters 2–3 drafted (Choosing Your Tool, Delegating Real Work); Tool Watch pill added</li>
+      <li>Jul 5 — Full read-aloud engine added (per-chapter + whole-book, headers included, speed control)</li>
+      <li>Jul 5 — Chapters 4–7 completed; full 7-chapter draft live</li>
+      <li>Jul 5 — First Tool Watch digest run and rolled in across Chapters 1, 2, 4, 5, 6</li>
+      <li>Jul 5 — Project Notes tab added for cross-session continuity</li>
+    </ul>
+  </div>
+  <div class="sheet-titleblock"><span>PROJECT NOTES</span><span>THE AI PLAYBOOK — REV A</span></div>
+</section>
 
 <button class="toolwatch-pill" onclick="document.getElementById('toolwatch-panel').classList.toggle('open')">
   <span class="dot"></span> Tool Watch
