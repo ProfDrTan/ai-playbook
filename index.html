@@ -529,6 +529,32 @@
         <h4>Know When Automation Isn't Worth It</h4>
         <p>Not everything benefits from a template. One-off tasks, highly variable requests, or anything requiring fresh judgment each time are often faster handled directly. Reserve automation effort for things you're confident you'll repeat at least five or six more times.</p>
 
+
+        <h4>When the Repeatable Task Is a Team Sprint</h4>
+        <p>The most powerful application of "automate the repeatable" isn't a document template — it's a weekly delivery cadence. When your team runs the same workflow every seven days — gather data, analyse it, synthesise with AI, apply human judgment, commit the output — that is a machine waiting to be built, not a task waiting to be managed.</p>
+        <p>Agile and Scrum provide the framework. AI provides the execution layer. The combination produces something neither achieves alone: a system that improves its own output sprint by sprint, with humans steering rather than carrying.</p>
+
+        <div class="example strong">
+          <span class="label">The Pattern in Practice</span>
+          <strong>Before (manual):</strong> Team member spends Sunday manually pulling data, pasting into ChatGPT, copying responses, writing a prediction, sending a Discord message.<br><br>
+          <strong>After (automated):</strong> GitHub Actions fetches Friday closes at 22:00. Three agent scripts run in sequence. Two LLM API calls fire with identical prompts. Responses are logged as files. A comparison table is auto-generated. The human lead reviews, applies judgment, and commits the final prediction. Tag cut. Sprint sealed. All before midnight.
+        </div>
+
+        <h4>Scrum Gives Automation a Heartbeat</h4>
+        <p>Automation without a cadence drifts. A scheduled job that nobody monitors becomes technical debt. Scrum solves this by making the cadence non-negotiable — sprint planning, daily check-ins, sprint review, retrospective. Each sprint the team asks: did the automation run? Did the output improve? What breaks next?</p>
+        <p>This is why the most effective AI-augmented teams are not the ones with the cleverest prompts — they are the ones with the most disciplined process. The AI handles the repeatable execution. The Scrum framework handles the continuous improvement.</p>
+
+        <div class="example">
+          <span class="label">Field Note</span>
+          A team of students in a university AI module ran a market intelligence pipeline for eight weeks. By Sprint 6, their GitHub Actions workflow was committing timestamped data files automatically every Friday night — including during a study break when no one was actively working. The pipeline didn't improve because they used better AI models. It improved because every retrospective produced one concrete change to the automation. Scrum compounded what AI started.
+        </div>
+
+        <h4>The Automation Checklist for a Recurring Team Workflow</h4>
+          <li>Is the workflow run at least once a week? If yes, it's a candidate for automation.</li>
+          <li>Is there a GitHub Actions cron (or equivalent) that fires automatically — not manually triggered?</li>
+          <li>Does the output get committed as a file with a timestamp — creating an auditable trail?</li>
+          <li>Is there a sprint retrospective item that asks: "did the automation run, and did the output improve?"</li>
+          <li>Is there one named person (DevOps / pipeline owner) responsible when the automation fails?</li>
         <h4>Quick-Reference Checklist</h4>
         <ul class="checklist">
           <li>Have I done this exact task three or more times without saving a reusable version?</li>
@@ -567,6 +593,36 @@
         <h4>Disagreement Is a Feature, Not a Bug</h4>
         <p>If two team members get different AI outputs on the same question, don't just pick one — that's often a signal the question was ambiguous or the inputs differed. Compare the two outputs directly to find where they diverge before deciding.</p>
 
+
+        <h4>Scrum as the Operating System for AI Teamwork</h4>
+        <p>The three-pass structure above (Gather → Analyse → Synthesise) maps directly onto a Scrum sprint cycle when the team is working with AI. The difference is that Scrum adds two things AI teams often skip: a <strong>Definition of Done</strong> that prevents "mostly done" from becoming the team's default state, and a <strong>retrospective</strong> that turns one sprint's failure into next sprint's improvement.</p>
+        <p>Without Scrum, AI-augmented teams tend to produce good outputs inconsistently — brilliant one week, chaotic the next. The framework is what converts capability into repeatability.</p>
+
+        <div class="example strong">
+          <span class="label">How Scrum Roles Map to AI Team Roles</span>
+          <strong>Product Owner (R1)</strong> → owns the sprint goal and the Definition of Done. The AI cannot define "done" — that requires human judgment about what is valuable.<br><br>
+          <strong>Scrum Master (R2)</strong> → removes blockers and protects the cadence. When an API call fails or a GitHub Action breaks, R2 ensures it surfaces immediately — not quietly absorbed until Sunday.<br><br>
+          <strong>Agent roles (R3–R6)</strong> → the Gather pass. Each agent produces structured output that feeds the synthesis step. Committing before the LLM synthesis runs is the order that matters.<br><br>
+          <strong>LLM Operator (R8)</strong> → the Analyse pass. Calls multiple models with identical prompts. Logs disagreements — disagreement between models is signal, not noise.<br><br>
+          <strong>Human Score lead (R7)</strong> → the Synthesise + Decide pass. The one role AI cannot replace. Applies sourced judgment the models missed. This is the Wild Card.<br><br>
+          <strong>Calibration (R10)</strong> → the retrospective data. Scores last week's output against reality. Feeds the next sprint's planning. Without this, the team is flying blind.
+        </div>
+
+        <h4>When AI Outputs Disagree — Make It a Team Asset</h4>
+        <p>When two LLMs give different predictions on the same prompt, most teams pick one and move on. This is a missed opportunity. Diverging outputs almost always mean one of three things: the prompt was ambiguous, the models have different training cutoffs, or one model has access to information the other doesn't. Investigating the divergence produces a sharper final output than either model alone.</p>
+        <p>This is the Scrum principle of surfacing blockers applied to AI: a divergent output is not a problem to hide — it's a signal to examine before the Human Score lead makes the final call.</p>
+
+        <div class="example">
+          <span class="label">Field Note</span>
+          A team running a weekly AI pipeline found that ChatGPT and DeepSeek diverged on NDX direction three weeks in a row. Rather than averaging the outputs, the Human Score lead investigated why — and discovered that DeepSeek was systematically more bearish on tech when the VIX was above 18. That pattern became an explicit rule in the team's Human Score methodology from Sprint 5 onwards. Disagreement, examined, became intelligence.
+        </div>
+
+        <h4>The Retrospective Is the Compound Interest of AI Teamwork</h4>
+        <p>A single sprint with AI produces output. A sprint with a retrospective produces output <em>and</em> a better process for next sprint. Over eight sprints, the team that runs proper retrospectives — identifying one concrete change each cycle — builds a compounding advantage that no amount of cleverer prompting can replicate.</p>
+        <p>The retrospective question for an AI-augmented team is specific: <em>did the automation run without failure? did the output improve? what broke, and what checklist item prevents it next sprint?</em> These are engineering questions, not feelings — and they are exactly what makes Scrum productive rather than ceremonial.</p>
+
+          <li>Does every AI output going to a stakeholder have one named human reviewer?</li>
+          <li>When two LLM outputs disagree, are we investigating why — not just picking one?</li>
         <h4>Quick-Reference Checklist</h4>
         <ul class="checklist">
           <li>Are we treating gathering, analysis, and decision-making as separate steps?</li>
