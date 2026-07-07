@@ -555,12 +555,40 @@
           <li>Does the output get committed as a file with a timestamp — creating an auditable trail?</li>
           <li>Is there a sprint retrospective item that asks: "did the automation run, and did the output improve?"</li>
           <li>Is there one named person (DevOps / pipeline owner) responsible when the automation fails?</li>
+        <h4>The Silent Monitor — Watching Progress Without Being There</h4>
+        <p>The automation pattern in this chapter has one more use worth its own section: not automating <em>your</em> work, but quietly watching <em>someone else's</em>. Any manager, professor, or team lead overseeing distributed work faces the same problem — you can't be present everywhere, and by the time a weekly check-in surfaces a stalled task, it may have already been stalled for days. The fix is a small scheduled script that reads the trail work already leaves behind, and says nothing at all until something is actually off.</p>
+        <p>Three parts make this work: a <strong>data source</strong> where the work already leaves evidence (commits, ticket updates, a shared doc's edit history), a <strong>scheduler</strong> that runs the check automatically on a timer, and a <strong>notification channel</strong> that reaches you fast without you opening an app. In practice: GitHub Actions as the scheduler, the GitHub API as the data source, and a Telegram bot as the channel.</p>
+
+        <div class="example strong">
+          <span class="label">Why Telegram</span>
+          A Telegram bot is controlled by one secret token and needs no OAuth flow or app review — from any script, a single web request to <code>api.telegram.org/bot&lt;TOKEN&gt;/sendMessage</code> delivers the alert. Store the token and the destination chat ID as encrypted repository secrets, never in the code itself.
+        </div>
+        <div class="example">
+          <span class="label">Field Note</span>
+          Running two automated systems (a course monitor and a separate trading bot) through one shared Telegram bot caused real confusion about which system had sent which alert. The fix: one bot per system, named for what it does. It costs nothing extra to set up and removes the ambiguity entirely.
+        </div>
+
+        <div class="try-this">
+          <span class="label">Setup in Five Steps</span>
+          1. Message @BotFather on Telegram, run <code>/newbot</code>, save the token it returns.<br>
+          2. Send the new bot any message, then call <code>/getUpdates</code> on its API to read back your chat ID.<br>
+          3. Store both as repository secrets (e.g. <code>TELEGRAM_BOT_TOKEN</code>, <code>TELEGRAM_CHAT_ID</code>) — never hard-coded.<br>
+          4. Write a script that checks the data source against what "on track" should look like, and calls the send-message URL only when something's overdue or broken.<br>
+          5. Schedule it with a cron trigger in your automation platform (e.g. GitHub Actions) so it runs unattended.
+        </div>
+
+        <p>The design decision that matters most is deciding what's actually worth an alert. An early version of this kind of monitor that reports everything trains the eye to ignore it. The version people actually keep is one that stays silent by default and speaks only for a missing deadline, an unusually long gap in activity, or a failed automated step. Silence is the feature — you should hear from the monitor only when your attention is genuinely needed.</p>
+
+        <p>The pattern generalises past code. A manager can watch a CRM's activity log for stalled leads; a founder can watch a project-management API for tasks overdue with no comment. The API changes; the shape of the solution — data source, scheduler, notification, defined only by silence until something's wrong — doesn't.</p>
+
         <h4>Quick-Reference Checklist</h4>
         <ul class="checklist">
           <li>Have I done this exact task three or more times without saving a reusable version?</li>
           <li>Have I set up standing instructions for my role, tone, and default output format?</li>
           <li>Am I starting a new conversation for each step of a process that could be chained together?</li>
           <li>Is this task actually repeated enough to be worth automating, or am I over-engineering a one-off?</li>
+          <li>If I'm monitoring other people's work: have I defined exactly what "on track" means in terms a script can check — not just a vague sense of progress?</li>
+          <li>Does my monitor stay silent unless something is genuinely overdue or broken?</li>
         </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 04 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
@@ -749,6 +777,7 @@
       <li>Jul 5 — Full read-aloud engine added (per-chapter + whole-book, headers included, speed control)</li>
       <li>Jul 5 — Chapters 4–7 completed; full 7-chapter draft live</li>
       <li>Jul 5 — First Tool Watch digest run and rolled in across Chapters 1, 2, 4, 5, 6</li>
+      <li>Jul 7 — Chapter 4 extended with "The Silent Monitor" subsection: GitHub Actions + Telegram bot pattern for passively monitoring distributed teams (students, staff, contractors), generalised beyond code</li>
       <li>Jul 5 — Project Notes tab added for cross-session continuity</li>
     </ul>
   </div>
