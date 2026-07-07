@@ -581,6 +581,11 @@
 
         <p>The pattern generalises past code. A manager can watch a CRM's activity log for stalled leads; a founder can watch a project-management API for tasks overdue with no comment. The API changes; the shape of the solution — data source, scheduler, notification, defined only by silence until something's wrong — doesn't.</p>
 
+        <div class="example strong">
+          <span class="label">Field Note — Elegant Isn't the Same as Reliable</span>
+          Across five student teams building the same weekly pipeline, the most technically impressive setup used a modern package manager, a protected environment, and opened a pull request for human review instead of pushing straight to the main branch — genuinely sound engineering. It also went completely silent for over two weeks. Meanwhile, the plainest team's setup — one workflow file, one script, a straight commit with no PR step — kept running every single week without pause. A monitor watching only "does the workflow exist" would have rated the sophisticated team higher right up until the gap appeared. The lesson isn't that simple beats sophisticated; it's that a monitor has to check whether the thing is still running, not just whether it was well-built.
+        </div>
+
         <h4>Quick-Reference Checklist</h4>
         <ul class="checklist">
           <li>Have I done this exact task three or more times without saving a reusable version?</li>
