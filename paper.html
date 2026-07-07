@@ -214,7 +214,7 @@ a { color: var(--teal); text-decoration: none; }
 a:hover { color: var(--gold-lt); }
 
 /* ── Highlight word during TTS ── */
-.tts-word { transition: background .1s; border-radius: 2px; }
+.tts-word { transition: background .1s; border-radius: 2px; cursor: pointer; } .tts-word:hover { background: rgba(201,168,76,.15); border-radius: 3px; }
 .tts-word.speaking {
   background: rgba(201,168,76,.3);
   color: var(--cream);
@@ -403,7 +403,7 @@ footer {
     <option value="1.5">1.5×</option>
   </select>
   <div class="tts-progress"><div class="tts-progress-fill" id="tts-fill"></div></div>
-  <span class="tts-label" id="tts-status">Click ▶ to start reading</span>
+  <span class="tts-label" id="tts-status">Tap any word to jump there, or press ▶ to start</span>
 </div>
 
 <div class="page-wrap" id="paper-content">
@@ -860,7 +860,6 @@ with open(output_file, "w", encoding="utf-8") as f:
 </footer>
 
 <script>
-// ── TTS ENGINE ────────────────────────────────────────────────────────────────
 let synth = window.speechSynthesis;
 let utterances = [];
 let currentIdx = 0;
@@ -868,10 +867,12 @@ let isPlaying = false;
 let allWords = [];
 let wordEls = [];
 let currentWordIdx = 0;
+let wordsWrapped = false;
 
 function wrapWords() {
+  if (wordsWrapped) return;
+  wordsWrapped = true;
   const article = document.getElementById('readable');
-  // Get all text nodes in paragraphs, h2s, h3s, lis — skip code blocks
   const walker = document.createTreeWalker(
     article,
     NodeFilter.SHOW_TEXT,
@@ -887,26 +888,26 @@ function wrapWords() {
       }
     }
   );
-
   const textNodes = [];
   let node;
-  while (node = walker.nextNode()) {
-    textNodes.push(node);
-  }
+  while (node = walker.nextNode()) textNodes.push(node);
 
-  // Wrap each word in a span
   allWords = [];
   wordEls = [];
 
   textNodes.forEach(tn => {
     const text = tn.textContent;
-    const words = text.split(/(\s+)/);
+    const parts = text.split(/(\s+)/);
     const frag = document.createDocumentFragment();
-    words.forEach(w => {
+    parts.forEach(w => {
       if (/\S/.test(w)) {
         const span = document.createElement('span');
         span.className = 'tts-word';
         span.textContent = w;
+        const idx = allWords.length;
+        // CLICK TO JUMP
+        span.addEventListener('click', () => jumpToWord(idx));
+        span.title = 'Click to read from here';
         frag.appendChild(span);
         allWords.push(w);
         wordEls.push(span);
@@ -918,11 +919,10 @@ function wrapWords() {
   });
 }
 
-function buildUtterances() {
-  // Build utterances of ~50 words each for smooth playback
-  const CHUNK = 50;
+function buildUtterancesFrom(startWordIdx) {
   utterances = [];
-  for (let i = 0; i < allWords.length; i += CHUNK) {
+  const CHUNK = 50;
+  for (let i = startWordIdx; i < allWords.length; i += CHUNK) {
     const chunk = allWords.slice(i, i + CHUNK).join(' ');
     const u = new SpeechSynthesisUtterance(chunk);
     u.rate = parseFloat(document.getElementById('tts-speed').value);
@@ -930,7 +930,6 @@ function buildUtterances() {
     const startIdx = i;
     u.onboundary = (e) => {
       if (e.name === 'word') {
-        // Approximate word index
         const wordCount = e.charIndex > 0
           ? chunk.slice(0, e.charIndex).split(/\s+/).filter(Boolean).length
           : 0;
@@ -941,7 +940,7 @@ function buildUtterances() {
       currentIdx++;
       if (currentIdx < utterances.length && isPlaying) {
         synth.speak(utterances[currentIdx]);
-        updateProgress();
+        updateProgress(startWordIdx);
       } else if (currentIdx >= utterances.length) {
         ttsFinish();
       }
@@ -950,30 +949,43 @@ function buildUtterances() {
   }
 }
 
+// JUMP TO WORD — the click-to-seek feature
+function jumpToWord(wordIdx) {
+  synth.cancel();
+  wordEls.forEach(w => w.classList.remove('speaking'));
+  currentWordIdx = wordIdx;
+  currentIdx = 0;
+  buildUtterancesFrom(wordIdx);
+  isPlaying = true;
+  document.getElementById('tts-play').textContent = '⏸ Pause';
+  synth.speak(utterances[0]);
+  updateProgress(wordIdx);
+  // Scroll word into view
+  wordEls[wordIdx].scrollIntoView({behavior: 'smooth', block: 'center'});
+  document.getElementById('tts-status').textContent = 'Jumped to word ' + (wordIdx + 1);
+}
+
 function highlightWord(idx) {
-  // Remove previous highlight
-  if (currentWordIdx < wordEls.length) {
+  if (currentWordIdx < wordEls.length)
     wordEls[currentWordIdx].classList.remove('speaking');
-  }
   currentWordIdx = Math.min(idx, wordEls.length - 1);
   if (currentWordIdx >= 0 && currentWordIdx < wordEls.length) {
     wordEls[currentWordIdx].classList.add('speaking');
-    // Scroll into view smoothly
-    wordEls[currentWordIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    wordEls[currentWordIdx].scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 }
 
-function updateProgress() {
-  const pct = utterances.length > 0 ? (currentIdx / utterances.length) * 100 : 0;
-  document.getElementById('tts-fill').style.width = pct + '%';
+function updateProgress(startOffset) {
+  const offset = startOffset || 0;
+  const done = offset + (currentIdx * 50);
+  const pct = allWords.length > 0 ? (done / allWords.length) * 100 : 0;
+  document.getElementById('tts-fill').style.width = Math.min(pct, 100) + '%';
   document.getElementById('tts-status').textContent =
-    `Word ${Math.min(currentIdx * 50, allWords.length)} of ${allWords.length}`;
+    'Word ' + Math.min(done, allWords.length) + ' of ' + allWords.length;
 }
 
 function ttsToggle() {
-  if (!allWords.length) wrapWords();
-  if (!utterances.length || document.getElementById('tts-speed').dataset.stale) buildUtterances();
-
+  wrapWords();
   if (isPlaying) {
     synth.pause();
     isPlaying = false;
@@ -986,10 +998,10 @@ function ttsToggle() {
     } else {
       currentIdx = 0;
       currentWordIdx = 0;
-      buildUtterances();
+      buildUtterancesFrom(0);
       synth.cancel();
       synth.speak(utterances[0]);
-      updateProgress();
+      updateProgress(0);
     }
   }
 }
@@ -1002,12 +1014,11 @@ function ttsStop() {
   if (wordEls.length) wordEls.forEach(w => w.classList.remove('speaking'));
   document.getElementById('tts-play').textContent = '▶ Read Aloud';
   document.getElementById('tts-fill').style.width = '0%';
-  document.getElementById('tts-status').textContent = 'Stopped';
+  document.getElementById('tts-status').textContent = 'Tap any word to start from there';
 }
 
 function ttsFinish() {
   isPlaying = false;
-  currentIdx = 0;
   if (wordEls.length) wordEls.forEach(w => w.classList.remove('speaking'));
   document.getElementById('tts-play').textContent = '▶ Read Again';
   document.getElementById('tts-fill').style.width = '100%';
@@ -1016,29 +1027,23 @@ function ttsFinish() {
 
 function ttsSetSpeed() {
   const wasPlaying = isPlaying;
-  if (wasPlaying) {
-    synth.cancel();
-    isPlaying = false;
-  }
+  const resumeFrom = currentWordIdx;
+  synth.cancel();
+  isPlaying = false;
   utterances = [];
-  document.getElementById('tts-play').textContent = '▶ Read Aloud';
   if (wasPlaying) {
-    // Rebuild and restart from current word
-    buildUtterances();
-    const restartIdx = Math.floor(currentWordIdx / 50);
-    currentIdx = restartIdx;
+    buildUtterancesFrom(resumeFrom);
+    currentIdx = 0;
     isPlaying = true;
     document.getElementById('tts-play').textContent = '⏸ Pause';
-    synth.speak(utterances[currentIdx]);
-    updateProgress();
+    synth.speak(utterances[0]);
+    updateProgress(resumeFrom);
   }
 }
 
-// Handle page visibility — pause when tab hidden (helps mobile battery)
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden && isPlaying) {
-    // Don't pause — keep reading on phone when screen dims
-  }
+// Show cursor hint when words are wrapped
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('tts-status').textContent = 'Tap any word to start from there, or press ▶';
 });
 </script>
 
