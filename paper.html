@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprint by Sprint — Prof Dr Tan · Research Paper Draft</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── Tokens ── */
+:root {
+  --bg:        #141420;
+  --bg2:       #1c1c2e;
+  --bg3:       #22223a;
+  --gold:      #c9a84c;
+  --gold-lt:   #e2c97e;
+  --cream:     #f0ead6;
+  --cream-dim: rgba(240,234,214,.72);
+  --cream-muted: rgba(240,234,214,.45);
+  --teal:      #2dd4bf;
+  --red:       #e05c5c;
+  --rule:      rgba(201,168,76,.18);
+  --code-bg:   #0f0f1a;
+  --code-border: rgba(45,212,191,.2);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.page-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+/* ── Header ── */
+.paper-header {
+  padding: 3.5rem 0 2rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 2.5rem;
+}
+
+h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--cream-dim);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.byline {
+  background: var(--bg2);
+  border-left: 3px solid var(--gold);
+  padding: .9rem 1.25rem;
+  border-radius: 0 6px 6px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: .82rem;
+  color: var(--cream-dim);
+  line-height: 1.7;
+}
+.byline strong { color: var(--cream); }
+.byline em { color: var(--gold-lt); font-style: normal; }
+
+/* ── Read aloud controls ── */
+.tts-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--rule);
+  padding: .65rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.tts-btn {
+  background: var(--gold);
+  color: #0f0f1a;
+  border: none;
+  border-radius: 99px;
+  padding: .4rem 1.1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+.tts-btn:hover { background: var(--gold-lt); }
+.tts-btn.secondary {
+  background: transparent;
+  color: var(--cream-dim);
+  border: 1px solid var(--rule);
+}
+.tts-btn.secondary:hover { color: var(--cream); border-color: var(--gold); }
+.tts-label {
+  font-family: 'Inter', sans-serif;
+  font-size: .75rem;
+  color: var(--cream-muted);
+}
+.tts-progress {
+  flex: 1;
+  min-width: 120px;
+  height: 3px;
+  background: var(--bg3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.tts-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 99px;
+  transition: width .3s;
+  width: 0%;
+}
+.speed-select {
+  background: var(--bg3);
+  color: var(--cream-dim);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: .25rem .5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: .75rem;
+  cursor: pointer;
+}
+
+/* ── ToC ── */
+.toc {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.4rem 1.75rem;
+  margin-bottom: 3rem;
+}
+.toc h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--gold);
+  margin-bottom: .9rem;
+  font-weight: 700;
+}
+.toc ol {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.toc a {
+  color: var(--cream-dim);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: .85rem;
+  transition: color .15s;
+}
+.toc a:hover { color: var(--gold); }
+
+/* ── Typography ── */
+h2 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 2.75rem 0 .85rem;
+  padding-top: .5rem;
+  border-top: 1px solid var(--rule);
+  line-height: 1.3;
+}
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--teal);
+  margin: 1.75rem 0 .6rem;
+}
+h4 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--gold-lt);
+  margin: 1.25rem 0 .4rem;
+}
+p {
+  color: var(--cream-dim);
+  margin-bottom: 1.1rem;
+}
+p strong { color: var(--cream); }
+p em { color: var(--cream-dim); }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--gold-lt); }
+
+/* ── Highlight word during TTS ── */
+.tts-word { transition: background .1s; border-radius: 2px; }
+.tts-word.speaking {
+  background: rgba(201,168,76,.3);
+  color: var(--cream);
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+/* ── Abstract callout ── */
+#abstract + p, .abstract-box {
+  background: var(--bg2);
+  border-left: 3px solid var(--teal);
+  padding: 1.1rem 1.4rem;
+  border-radius: 0 8px 8px 0;
+  font-size: .95rem;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Code ── */
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  font-size: .82rem;
+  line-height: 1.6;
+}
+code {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--teal);
+  font-size: .85em;
+  background: rgba(45,212,191,.1);
+  padding: .1rem .35rem;
+  border-radius: 3px;
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: var(--cream-dim);
+  font-size: inherit;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+  margin: 1.25rem 0;
+  font-family: 'Inter', sans-serif;
+}
+th {
+  background: var(--bg3);
+  color: var(--gold);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: .6rem .9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 700;
+}
+td {
+  padding: .65rem .9rem;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  color: var(--cream-dim);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,.02); }
+
+/* ── Lists ── */
+ul, ol {
+  padding-left: 1.6rem;
+  margin-bottom: 1.1rem;
+}
+li {
+  color: var(--cream-dim);
+  margin-bottom: .35rem;
+  line-height: 1.7;
+}
+li strong { color: var(--cream); }
+
+/* ── HR ── */
+hr.section-rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0;
+}
+
+/* ── Keywords ── */
+.keywords {
+  font-family: 'Inter', sans-serif;
+  font-size: .78rem;
+  color: var(--cream-muted);
+  margin-top: 1.25rem;
+}
+.keywords span {
+  display: inline-block;
+  background: var(--bg3);
+  color: var(--cream-dim);
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  padding: .15rem .6rem;
+  margin: .2rem .15rem;
+}
+
+/* ── PRISM stage badges ── */
+.stage-badge {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: .15rem .55rem;
+  border-radius: 4px;
+  margin-left: .4rem;
+  vertical-align: middle;
+}
+.stage-4 { background: rgba(61,204,138,.15); color: #3dcc8a; }
+.stage-3 { background: rgba(201,168,76,.15); color: var(--gold); }
+.stage-2 { background: rgba(224,92,92,.15); color: #e05c5c; }
+
+/* ── Metrics strip inside team sections ── */
+.metrics-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .75rem 0 1rem;
+}
+.metric {
+  background: var(--bg3);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: .3rem .7rem;
+  font-family: 'Inter', sans-serif;
+  font-size: .75rem;
+  color: var(--cream-dim);
+}
+.metric strong { color: var(--cream); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding: 1.5rem 0;
+  font-family: 'Inter', sans-serif;
+  font-size: .75rem;
+  color: var(--cream-muted);
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .page-wrap { padding: 0 1.25rem 5rem; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.3rem; }
+  pre { font-size: .75rem; padding: 1rem; }
+  .tts-bar { padding: .5rem 1rem; gap: .5rem; }
+  table { font-size: .78rem; }
+  th, td { padding: .5rem .65rem; }
+}
+
+/* ── Print ── */
+@media print {
+  .tts-bar { display: none; }
+  body { background: white; color: black; font-size: 11pt; }
+  h1, h2 { color: black; }
+  pre { background: #f5f5f5; }
+}
+</style>
+</head>
+<body>
+
+<!-- READ ALOUD BAR -->
+<div class="tts-bar" id="tts-bar">
+  <button class="tts-btn" id="tts-play" onclick="ttsToggle()">▶ Read Aloud</button>
+  <button class="tts-btn secondary" onclick="ttsStop()">■ Stop</button>
+  <select class="speed-select" id="tts-speed" onchange="ttsSetSpeed()">
+    <option value="0.7">0.7×</option>
+    <option value="0.85">0.85×</option>
+    <option value="1" selected>1×</option>
+    <option value="1.2">1.2×</option>
+    <option value="1.5">1.5×</option>
+  </select>
+  <div class="tts-progress"><div class="tts-progress-fill" id="tts-fill"></div></div>
+  <span class="tts-label" id="tts-status">Click ▶ to start reading</span>
+</div>
+
+<div class="page-wrap" id="paper-content">
+
+<!-- PAPER HEADER -->
+<div class="paper-header">
+  <div style="font-family:'Inter',sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--teal);margin-bottom:.75rem">Research Article · Draft · July 2026</div>
+  <h1>Sprint by Sprint: An Empirical Study of AI-Augmented Scrum Pedagogy in Design Thinking Education</h1>
+  <div class="subtitle">Pipeline Architecture, Automation Maturity, and Educator Infrastructure in a Live University Course</div>
+  <div class="byline">
+    <strong>Author:</strong> Prof Dr Tan Teik Kheong &nbsp;·&nbsp;
+    <strong>Affiliation:</strong> James Cook University Singapore; Stanford University (affiliated) &nbsp;·&nbsp;
+    IEEE Senior Member<br>
+    <strong>Target journal:</strong> <em>Computers and Education: Artificial Intelligence</em> (Elsevier, IF 23.4, JCR Q1) &nbsp;·&nbsp;
+    Full Research Article &nbsp;·&nbsp; ~8,400 words
+  </div>
+  <div class="keywords">
+    <strong style="font-family:'Inter',sans-serif;font-size:.78rem;color:var(--cream-muted)">Keywords:</strong>
+    <span>design thinking education</span><span>Scrum in higher education</span><span>AI-augmented pedagogy</span>
+    <span>GitHub Actions</span><span>automation maturity</span><span>educator infrastructure</span>
+    <span>LLM synthesis</span><span>agile learning</span>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc"><h3>Contents</h3><ol><li><a href="#abstract">Abstract</a></li><li><a href="#1-introduction">1. Introduction</a></li><li><a href="#2-related-work">2. Related Work</a></li><li><a href="#3-methodology">3. Methodology</a></li><li><a href="#4-the-prism-framework-a-proposed-model-for-ai-augmented-design-thinking-pedagogy">4. The PRISM Framework — A Proposed Model for AI-Augmented Design Thinking Pedagogy</a></li><li><a href="#5-results-five-team-case-studies">5. Results — Five Team Case Studies</a></li><li><a href="#6-discussion">6. Discussion</a></li><li><a href="#7-implications-for-practice">7. Implications for Practice</a></li><li><a href="#8-conclusion">8. Conclusion</a></li><li><a href="#references">References</a></li><li><a href="#appendix-a-sample-github-actions-workflow-team-a-weekly-pipeline">Appendix A — Sample GitHub Actions Workflow (Team A Weekly Pipeline)</a></li><li><a href="#appendix-b-sample-data-collection-script-team-c-fetch-friday-closes-py">Appendix B — Sample Data Collection Script (Team C fetch_friday_closes.py)</a></li><li><a href="#appendix-c-decision-md-excerpt-team-a">Appendix C — DECISION.md Excerpt (Team A)</a></li></ol></nav>
+
+<!-- PAPER BODY -->
+<article id="readable">
+<h1>Sprint by Sprint: An Empirical Study of AI-Augmented Scrum Pedagogy in Design Thinking Education</h1>
+<p><strong>Pipeline Architecture, Automation Maturity, and Educator Infrastructure in a Live University Course</strong></p>
+<hr class="section-rule">
+<div class="byline"><p><strong>Author:</strong> Prof Dr Tan Teik Kheong   <strong>Affiliation:</strong> James Cook University Singapore; Stanford University (affiliated)   <strong>IEEE Senior Member</strong>   <strong>Submitted to:</strong> <em>Computers and Education: Artificial Intelligence</em> (Elsevier) &nbsp;·&nbsp; Full Research Article &nbsp;·&nbsp; July 2026</p></div>
+<hr class="section-rule">
+<h2 id="abstract">Abstract</h2>
+<p>This paper presents an empirical study of AI-augmented Scrum pedagogy conducted across eight sprints with five student teams (n = 56) in a live design thinking course (CP3405, TR2 2026). Teams were tasked with building progressively automated market intelligence pipelines using GitHub Actions, Python scripting, and multi-LLM synthesis within a structured Scrum framework. Drawing on an immutable dataset of 492 timestamped GitHub commits, 190 workflow run logs, 25 sprint retrospectives, and five prediction archives, this study proposes the PRISM Automation Maturity Model — a four-stage rubric (Manual → Structured → Automated → Intelligent) for assessing AI pipeline development in educational settings. Results demonstrate measurable differentiation across teams in pipeline reliability, sprint delivery consistency, and calibration accuracy. Three teams achieved fully automated data collection by Sprint 5; one team exhibited automation theatre — the appearance of automation without functional output; and one team built the most architecturally sophisticated modular collector system in the cohort. This paper further proposes a replicable Educator Infrastructure Model comprising a GitHub Actions monitor, Telegram alert system, and PIN-protected live dashboard that provides instructors with real-time visibility into all student pipelines without student knowledge. Findings suggest that when Scrum cadence and AI automation are combined with systematic educator monitoring, design thinking courses can produce demonstrable workforce-ready skills in DevOps, AI/ML engineering, data analysis, and calibrated decision-making — skills that transfer directly to professional contexts.</p>
+<p><strong>Keywords:</strong> design thinking education; Scrum in higher education; AI-augmented pedagogy; GitHub Actions; automation maturity; educator infrastructure; LLM synthesis; agile learning</p>
+<hr class="section-rule">
+<h2 id="1-introduction">1. Introduction</h2>
+<h3>1.1 The Problem</h3>
+<p>Design thinking education faces a tension that few curricula have resolved. On one side sits the humanistic tradition of empathy-driven ideation, prototyping, and iteration — the intellectual heritage of IDEO, the d.school, and a generation of innovation educators [CITATION]. On the other side sits the accelerating reality of AI-native workplaces, where the skills most valued by employers involve not creative ideation alone, but the disciplined, automated, iterative delivery of working systems on a repeatable cadence.</p>
+<p>Most design thinking courses navigate this tension by treating AI as a tool for ideation — a brainstorming partner, a research accelerator, a feedback synthesiser. Few have explored what happens when AI becomes the <em>infrastructure</em> of the course itself: when student teams are required not merely to use AI tools, but to build automated systems that employ multiple AI models, run without human intervention, and produce calibrated outputs that are scored against empirical reality every week.</p>
+<p>This paper reports on one such course.</p>
+<h3>1.2 The Research Context</h3>
+<p>CP3405 Design Thinking 3 is a final-year undergraduate course run at James Cook University Singapore in Trimester 2, 2026. The course enrolled 56 students organised into five teams across two practicals. Each team was tasked with building and maintaining a market intelligence pipeline — a system that collects financial market data, synthesises analysis through three structured AI agents (Almanac, Macro, Technical), calls multiple Large Language Models via API, applies a human judgment layer (the Human Score Wild Card), and seals a prediction file with a versioned release tag before a weekly Sunday midnight deadline.</p>
+<p>The task was not chosen because of financial markets. It was chosen because it is a <em>repeatable, measurable, structured problem</em> that requires every dimension of professional delivery: data engineering, API integration, CI/CD pipelines, Scrum ceremonies, retrospective analysis, and calibration scoring. The market is the data source. Scrum is the discipline. Workforce readiness is the goal.</p>
+<h3>1.3 Research Questions</h3>
+<p>This study addresses three research questions:</p>
+<p><strong>RQ1:</strong> How does automation maturity in student AI pipelines — measured across eight Scrum sprints — correlate with sprint delivery consistency and prediction calibration accuracy?</p>
+<p><strong>RQ2:</strong> What GitHub Actions workflow architectures and software engineering patterns emerge as best practices when undergraduate student teams build automated AI pipelines under weekly Scrum constraints?</p>
+<p><strong>RQ3:</strong> What educator infrastructure — monitoring systems, alert mechanisms, and real-time dashboards — enables evidence-based teaching in AI-augmented design thinking courses, and how does instructor visibility into student pipeline health affect pedagogical intervention quality?</p>
+<h3>1.4 Contributions</h3>
+<p>This paper makes four original contributions:</p>
+<ol><li><strong>The PRISM Automation Maturity Model</strong> — a four-stage rubric for assessing student AI pipeline development that is measurable, replicable, and grounded in observable GitHub artefacts.</li></ol>
+<ol><li><strong>A taxonomy of student pipeline architectures</strong> — derived from analysis of 15 distinct GitHub Actions workflows, five data collection scripts, three CI validation patterns, and one workflow cascade chain across five student teams over six active sprints.</li></ol>
+<ol><li><strong>An Educator Infrastructure Model</strong> — a complete, deployable technical specification for instructor monitoring, Telegram alerting, and live dashboard systems that provide real-time pipeline visibility without student awareness.</li></ol>
+<ol><li><strong>Empirical evidence</strong> that automation maturity and Scrum process discipline are measurable through version-controlled artefacts, enabling objective assessment criteria that eliminate self-report bias and grade-gaming.</li></ol>
+<hr class="section-rule">
+<h2 id="2-related-work">2. Related Work</h2>
+<h3>2.1 Scrum in Higher Education</h3>
+<p>The use of Scrum in university courses has been documented since at least 2010, when Mahnic [CITATION] reported on student perceptions of team-project work under Scrum constraints. Subsequent work by Kropp and Meier [CITATION] demonstrated that Scrum-based courses produced measurable improvements in students' perceived readiness for professional software engineering. The eduScrum variant, developed by Willy Wijnands and adapted for non-software educational contexts, has been applied in settings ranging from secondary school science to Master's-level digital transformation programmes [CITATION].</p>
+<p>What these studies share is a focus on Scrum <em>process</em> — sprint velocity, retrospective quality, stakeholder engagement — as the primary outcome variable. None examines the relationship between Scrum cadence and the automation maturity of student-built systems. This gap is significant: in professional practice, Scrum without automated delivery infrastructure is widely recognised as incomplete [CITATION].</p>
+<h3>2.2 AI Tools in Design Thinking Education</h3>
+<p>The integration of AI tools into design thinking curricula has accelerated dramatically since 2023. Chiu et al. [CITATION] proposed a framework for AI literacy in pre-tertiary education; Hwang et al. [CITATION] reviewed AI-assisted tutoring systems; and a growing body of work in <em>Computers and Education: Artificial Intelligence</em> explores the use of generative AI for feedback, assessment, and learning analytics [CITATION].</p>
+<p>However, the predominant model in this literature positions AI as a <em>tool used by students</em>, not as <em>infrastructure built by students</em>. The distinction matters. A student who uses ChatGPT to generate ideas has consumed AI. A student who builds a GitHub Actions workflow that calls the OpenAI API, logs the response as a structured file, and chains that output into a comparison table has <em>engineered with AI</em>. The latter skill is what employers in technology, finance, and consulting roles are hiring for in 2026 [CITATION].</p>
+<h3>2.3 GitHub as Educational Infrastructure</h3>
+<p>Version control systems have been used in computer science education for decades, but their use as <em>pedagogical evidence systems</em> — providing instructors with timestamped, objective records of student work patterns — is less documented. Zagalsky et al. [CITATION] explored GitHub's affordances for collaborative learning; Bird et al. [CITATION] examined commit patterns as proxies for student engagement. Neither study examines GitHub Actions as an automation substrate for educational delivery, nor explores the use of the GitHub API as an instructor monitoring tool.</p>
+<h3>2.4 The Gap This Paper Addresses</h3>
+<p>No published study combines: (1) Scrum pedagogy, (2) student-built AI pipelines, (3) automated delivery infrastructure, (4) empirical calibration scoring, and (5) real-time educator monitoring in a single design thinking course. This paper addresses that gap.</p>
+<hr class="section-rule">
+<h2 id="3-methodology">3. Methodology</h2>
+<h3>3.1 Course Design</h3>
+<p>CP3405 Design Thinking 3 (TR2 2026) ran for eight weeks, with six active sprint weeks (Sprints 1–5 and Sprint 6) and one study break week. Each sprint followed a standard Scrum cadence: Sprint Planning on Monday, Daily Standups throughout the week, Sprint Review on Monday of the following week, and a Retrospective committed to the repository before the next sprint opened.</p>
+<p>The sprint submission protocol required three artefacts before the Sunday midnight deadline:</p>
+<ul><li>A prediction file (JSON or Markdown) containing directional forecasts for S&P 500 (SPX), Nasdaq 100 (NDX), Russell 2000 (IWM), and sector ETFs, with confidence ratings and invalidation conditions</li><li>A GitHub release tag with the exact format <code>vWXX</code> (e.g., <code>vW25</code> for Week 25), serving as the immutable sprint seal</li><li>A Discord submission post using a standardised template</li></ul>
+<p>Ten roles (R1–R10) were defined and assigned each sprint, mapping directly to professional functions: Product Owner (R1), Scrum Master (R2), three Agent leads (R3–R5), Data Collector (R6), Human Score lead (R7), LLM Operator (R8), GitHub Lead (R9), and Calibration lead (R10).</p>
+<h3>3.2 Data Sources</h3>
+<p>All data was collected from public GitHub repositories without student involvement in the data collection process. Data sources included:</p>
+<table>
+<tr><td>Source</td><td>Description</td><td>Volume</td></tr>
+<tr><td>Commit logs</td><td>Timestamped, author-attributed commits</td><td>492 commits across 5 repos</td></tr>
+<tr><td>Workflow run logs</td><td>GitHub Actions execution records with status</td><td>190 runs</td></tr>
+<tr><td>Release tags</td><td>Sprint seal artefacts with creation timestamps</td><td>21 tags across 5 teams</td></tr>
+<tr><td>Sprint documents</td><td>Goals, acceptance criteria, retrospectives</td><td>25 sprint documents</td></tr>
+<tr><td>Prediction files</td><td>Weekly directional forecasts</td><td>20 prediction files</td></tr>
+<tr><td>Agent output files</td><td>Almanac, Macro, Technical analysis</td><td>47 committed agent files</td></tr>
+<tr><td>DECISION.md files</td><td>Architectural decision records</td><td>5 files (1 per team)</td></tr>
+</table>
+<p>Data was accessed via the GitHub REST API (v2022-11-28) using a fine-grained personal access token with read-only repository scope. No student data was accessed beyond publicly committed repository content.</p>
+<h3>3.3 The PRISM Automation Maturity Model</h3>
+<p>Analysis of the five team repositories revealed a consistent four-stage pattern of automation development. This pattern was formalised as the <strong>PRISM Automation Maturity Model</strong> (Pipeline Readiness Index for Student Market Intelligence):</p>
+<p><strong>Stage 1 — Manual:</strong> All pipeline steps performed by hand. Data collected by visiting websites, copying values, and committing files manually. LLM synthesis performed by pasting prompts into chat interfaces. Evidence stored as screenshots or unstructured text. No GitHub Actions workflows present.</p>
+<p><strong>Stage 2 — Structured:</strong> Process is documented and role-assigned, but not automated. A defined sequence exists (agents commit before LLM synthesis; LLM synthesis before Human Score; Human Score before tag). Files follow a naming convention. DECISION.md records architectural choices. Automation is aspirational rather than operational.</p>
+<p><strong>Stage 3 — Automated:</strong> At least one GitHub Actions workflow fires on a scheduled trigger without manual intervention, commits a timestamped output file, and produces verifiable evidence of execution. Data collection is decoupled from human action. The pipeline can run during a study break.</p>
+<p><strong>Stage 4 — Intelligent:</strong> Multiple workflows operate in a coordinated cascade. CI validation checks agent output quality on every commit. API calls replace manual LLM interaction. Calibration scoring is automated and cumulative. The system monitors its own output quality and feeds results back into the next sprint's planning.</p>
+<p>Each team's maturity was assessed at each sprint boundary using observable GitHub evidence, not self-report.</p>
+<h3>3.4 Analytical Approach</h3>
+<p>This study employs a multi-case interpretive analysis [CITATION] supplemented by quantitative workflow metrics. For each team, the following metrics were computed:</p>
+<ul><li><strong>Sprint delivery rate:</strong> Proportion of sprints with correct-format tag cut before deadline</li><li><strong>Workflow success rate:</strong> Ratio of successful to total GitHub Actions runs</li><li><strong>Automation onset sprint:</strong> Sprint number at which first successful scheduled workflow run occurred</li><li><strong>Calibration coverage:</strong> Number of prediction files with subsequent delta scoring</li><li><strong>Documentation depth:</strong> Count of sprint artefacts (goals, retrospectives, standups, acceptance criteria) committed per sprint</li></ul>
+<p>Anonymisation protocol: teams are identified as Team A through Team E in published findings. Repository URLs are available to reviewers on request but will not appear in the published paper.</p>
+<hr class="section-rule">
+<h2 id="4-the-prism-framework-a-proposed-model-for-ai-augmented-design-thinking-pedagogy">4. The PRISM Framework — A Proposed Model for AI-Augmented Design Thinking Pedagogy</h2>
+<h3>4.1 Overview</h3>
+<p>The PRISM Framework (Pipeline Readiness Index for Student Market Intelligence) proposes that effective AI-augmented design thinking education requires four integrated components operating simultaneously:</p>
+<p><strong>P — Pipeline Architecture:</strong> A four-layer technical structure (data collection → agent processing → LLM synthesis → sealing and calibration) that maps directly onto the Scrum sprint cycle.</p>
+<p><strong>R — Role Mapping:</strong> Ten defined roles, each corresponding to a professional function in industry, that distribute pipeline ownership across team members and eliminate single points of failure.</p>
+<p><strong>I — Instructor Infrastructure:</strong> A monitoring system that gives the educator real-time visibility into all student pipelines — commit activity, workflow status, tag compliance, PR activity — enabling evidence-based intervention before deadlines rather than after.</p>
+<p><strong>S — Scrum Cadence:</strong> A weekly sprint cycle with mandatory artefacts (DECISION.md, sprint goal, acceptance criteria, retrospective) that structures the team's improvement trajectory across eight weeks.</p>
+<p><strong>M — Maturity Measurement:</strong> The four-stage automation maturity rubric that provides objective, artefact-based assessment criteria independent of self-report.</p>
+<h3>4.2 The Four-Layer Pipeline Architecture</h3>
+<p>The pipeline architecture was not prescribed. It emerged from team practice and was identified through analysis of committed workflows, scripts, and output files. The following four-layer model describes what every effective team built, in varying degrees of automation maturity:</p>
+<p><strong>Layer 1 — Data Collection.</strong> A scheduled GitHub Actions workflow fetches market data after the US Friday close (Saturday morning SGT, approximately 04:00 UTC+8). The script commits a timestamped JSON file containing instrument closes for SPX, NDX, IWM, and sector ETFs. The timestamp is embedded in both the filename and the file content, creating an auditable record that data was collected before analysis began.</p>
+<p><strong>Layer 2 — Agent Processing.</strong> Three analysis scripts — Almanac (historical patterns and seasonality), Macro (economic calendar and monetary policy), Technical (price levels, trend direction, momentum) — consume the raw data file and produce structured Markdown analysis documents. Each agent commits independently. The commit order is enforced by workflow dependency: agents must commit before the LLM synthesis step executes.</p>
+<p><strong>Layer 3 — LLM Synthesis.</strong> An operator script sends identical prompts to multiple AI models via API (OpenRouter, OpenAI, Gemini, DeepSeek). Responses are saved as structured files in the repository. A comparison table is generated programmatically from those files. The Human Score lead reviews the comparison table and applies a Wild Card override — a sourced, non-obvious insight that the models missed — before committing the final prediction file.</p>
+<p><strong>Layer 4 — Sealing and Calibration.</strong> A release tag in the exact format <code>vWXX</code> is cut before the Sunday midnight deadline, creating the immutable sprint record. A calibration script scores the previous sprint's prediction against that week's actual market closes, producing a delta score (direction correct: Y/N; error percentage). Cumulative accuracy is tracked across all sprints.</p>
+<h3>4.3 The Educator Infrastructure Model</h3>
+<p>The educator infrastructure consists of three components deployed as a parallel technical system:</p>
+<p><strong>Monitor workflow:</strong> A Python script running every 30 minutes via GitHub Actions in a separate instructor repository checks all five student repos for new commits, workflow failures, tag creation, and open pull requests. Changes trigger immediate Telegram alerts to the instructor.</p>
+<p><strong>Live dashboard:</strong> A PIN-protected HTML page served via Cloudflare Pages displays real-time team status, delta indicators (change since last baseline), and direct links to GitHub repositories. Data is embedded at page build time and refreshed via GitHub API calls on each page load and every two minutes automatically.</p>
+<p><strong>Alert taxonomy:</strong> Alerts are categorised as: (1) new commit detected, (2) workflow failure, (3) workflow recovery, (4) new tag cut (with format validation — <code>vWXX</code> correct vs <code>WXX</code> or <code>v1.0.0</code> incorrect), and (5) new pull request opened.</p>
+<p>This infrastructure gives the instructor a complete picture of all team activities before each Monday class, enabling prepared, specific, evidence-based feedback rather than reactive assessment.</p>
+<hr class="section-rule">
+<h2 id="5-results-five-team-case-studies">5. Results — Five Team Case Studies</h2>
+<h3>5.1 Team A — Full-Stack Automation with CI Validation (PRISM Stage 4)</h3>
+<p><strong>Repository metrics:</strong> 95 commits across sprints; 4 release tags (vW22–vW25, all correct format); 14 sprint documents; 100 workflow runs (75 success, 24 failure); first successful scheduled run: 26 June 2026.</p>
+<p>Team A built the most architecturally complete pipeline in the cohort. Their <code>backend/</code> directory contains a Python package structured as a professional software project: a <code>pyproject.toml</code> dependency manifest, a <code>uv.lock</code> lockfile, a <code>pipeline.toml</code> configuration file that toggles pipeline stages on and off, a <code>run_pipeline.py</code> entry point, and a <code>BaseAgent</code> abstract class with typed output schemas.</p>
+<p>The schema design is particularly noteworthy. Rather than committing free-form Markdown, Team A defined Python dataclasses for every agent output type — <code>TechnicalOutput</code>, <code>AlmanacOutput</code>, <code>MacroOutput</code>, <code>LLMOutput</code>, <code>EvidenceOutput</code> — using <code>Enum</code> types for constrained fields (<code>Bias.BULLISH</code>, <code>Confidence.HIGH</code>, <code>Regime.UNCERTAIN</code>). This enforced structural consistency across all agent outputs from Sprint 2 onwards, eliminating the format drift that affected other teams.</p>
+<pre><code class="language-python">@dataclass
+class TechnicalOutput:
+    prediction_date: date
+    instruments: dict[str, InstrumentTechnical]  # keys: "SPX", "NDX", "IWM"
+    agent_type: str = "technical"
+
+@dataclass
+class InstrumentTechnical:
+    last_close: float
+    ema_8: float
+    ema_21: float
+    trend_bias: Bias
+    key_support: float
+    key_resistance: float
+    confidence: Confidence
+</code></pre>
+<p>Team A also implemented two CI workflows that run on path-filtered pushes, catching errors before they reach the weekly pipeline:</p>
+<pre><code class="language-yaml"># agent-checks.yml — validates format on every push to agent output folders
+on:
+  push:
+    paths:
+      - "data/macro/**"
+      - "data/almanac/**"
+      - "data/technical/**"
+      - "data/llm/**"
+</code></pre>
+<p>The <code>pipeline.toml</code> configuration file enabled the team to disable individual stages during testing without modifying code:</p>
+<pre><code class="language-toml">[pipeline]
+prediction_date = "2026-06-08"  # W24
+
+[stages]
+almanac   = true
+technical = true
+macro     = true
+evidence  = true
+
+[llm]
+models = ["nemotron", "gptoss", "gemma", "laguna"]
+</code></pre>
+<p>Their Sprint 5 prediction (filed Sunday 21 June 2026) demonstrated mature multi-LLM synthesis: four models (Nemotron, GPT-OSS, Gemma, Laguna via OpenRouter API) returned a consensus Neutral-Bullish regime for SPX, with a predicted range of -1.0% to +1.5%. The prediction file was sealed under tag <code>vW25</code> at 16:20 UTC. Actual outcome: SPX +1.7% — within the predicted range, direction correct.</p>
+<p>Sprint 5 retrospective documented authentic team reflection: <em>"The team successfully progressed toward the Sprint 5 goal of achieving a more automated pipeline. Multiple project components were completed, including the Delta Engine, Evidence Agent, Human Score review, testing activities, and frontend development. Automation continued to reduce manual work and improved overall workflow efficiency."</em></p>
+<p><strong>PRISM classification:</strong> Stage 4 — Intelligent. CI validation, typed schemas, multi-model API calls, automated PR creation, 14 sprint artefacts.</p>
+<p><strong>Key learning for educators:</strong> Team A's DECISION.md documents the reasoning behind agents-first architecture: <em>"The agents sit at the very beginning of the pipeline. Any errors or inconsistencies introduced at that stage propagate forward and compound, so getting them right is the highest-priority investment."</em> This document represents exactly the kind of architectural reasoning that design thinking education should cultivate — and that is invisible to graders who evaluate only the final output.</p>
+<hr class="section-rule">
+<h3>5.2 Team B — Cascade Workflow Engineering with Automated Calibration (PRISM Stage 4)</h3>
+<p><strong>Repository metrics:</strong> 100+ commits; 4 release tags (vW22–vW25, all correct format); 57 workflow runs (42 success, 15 failure); first successful scheduled run: 27 June 2026; W27 snapshot auto-collected during study break.</p>
+<p>Team B built the most sophisticated <em>workflow orchestration</em> in the cohort, despite having a less architecturally clean code structure than Team A. Their three-workflow cascade represents a genuine industry pattern:</p>
+<p><strong>Workflow 1 — Automated Cross-Asset Market Audit Pipeline</strong> (cron: <code>17 22 <em> </em> 5</code>) collects multi-asset market data, generates SPX/NDX/IWM charts as PNG files, and commits <code>market_snapshot_WXX.json</code>.</p>
+<p><strong>Workflow 2 — Automated Technical Agent</strong> (cron: <code>22 14 <em> </em> 0</code>) reads the market snapshot and runs <code>r5_technical_automation.py</code>, which calculates EMAs, identifies pivot-based support and resistance levels, and commits <code>technical_agent-WXX.md</code>.</p>
+<p><strong>Workflow 3 — R10 Calibration Automation</strong> triggers via <code>workflow_run</code> on completion of Workflow 1, automatically scoring the previous week's prediction:</p>
+<pre><code class="language-yaml">on:
+  workflow_run:
+    workflows:
+      - "Automated Cross-Asset Market Audit Pipeline"
+    types:
+      - completed
+</code></pre>
+<p>The <code>workflow_run</code> trigger is one of the most powerful and underused patterns in GitHub Actions. It creates a self-driving pipeline chain without polling delays or manual triggers. When Workflow 1 completes, Workflow 3 fires automatically — regardless of whether any human has touched a keyboard.</p>
+<p>Team B's workflow includes a dynamic week resolution step that automatically calculates both the market week and the prior actuals week from the system date:</p>
+<pre><code class="language-bash">WEEK_NUM=$(date +%V)
+M_WEEK="W${WEEK_NUM}"
+PREV_NUM=$((10#$WEEK_NUM - 1))
+A_WEEK="W${PREV_NUM}"
+echo "MARKET_WEEK=$M_WEEK" &gt;&gt; $GITHUB_ENV
+echo "ACTUAL_WEEK=$A_WEEK" &gt;&gt; $GITHUB_ENV
+</code></pre>
+<p>This eliminates the need to manually update week numbers in configuration files — a common source of error in teams operating at Stage 2.</p>
+<p>Evidence of automation maturity during the study break: Team B's pipeline auto-collected W27 data on 4 July 2026 (US Independence Day holiday), committing <code>market_snapshot_W27.json</code> with generation timestamp <code>2026-07-04 08:13:31</code>. The fact that this ran on a public holiday — when markets were closed and no student was working — demonstrates that the pipeline was operating as genuine infrastructure rather than as scripted manual work.</p>
+<p>Their calibration script (<code>r10_calibration_automation.py</code>, 17,860 bytes) covers all 11 S&P 500 sector ETFs in addition to the three core indices, with alias matching:</p>
+<pre><code class="language-python">TARGETS = {
+    "XLK": {"display": "XLK Technology",
+             "actual_aliases": ["XLK Technology", "Technology", "XLK"]},
+    "XLF": {"display": "XLF Financials",
+             "actual_aliases": ["XLF Financials", "Financials", "XLF"]},
+    # ... all 11 sectors
+}
+</code></pre>
+<p><strong>PRISM classification:</strong> Stage 4 — Intelligent. Workflow cascade, dynamic week resolution, automated calibration for 14 instruments.</p>
+<hr class="section-rule">
+<h3>5.3 Team C — Clean Data Collection with Minimal Viable Automation (PRISM Stage 3)</h3>
+<p><strong>Repository metrics:</strong> 100+ commits; 5 tags (vW22–vW25 correct, plus erroneous <code>W25</code>); 3 workflow runs (all successful, 100% success rate); clean folder structure (<code>vW22/</code>, <code>vW23/</code>, <code>vW24/</code>, <code>vW25/</code>).</p>
+<p>Team C's contribution to the cohort's collective knowledge is the cleanest data collection script. Their <code>fetch_friday_closes.py</code> is 47 lines of code that do exactly one thing correctly:</p>
+<pre><code class="language-python">import json, os
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import yfinance as yf
+
+SYMBOLS = {"SPX": "^GSPC", "NDX": "^NDX", "IWM": "IWM"}
+
+sgt_now = datetime.now(ZoneInfo("Asia/Singapore"))
+timestamp = sgt_now.strftime("%Y-%m-%d_%H-%M-%S_SGT")
+
+output_dir = "data/market_closes"
+os.makedirs(output_dir, exist_ok=True)
+
+results = {
+    "fetch_time_sgt": sgt_now.isoformat(),
+    "note": "Automated GitHub Actions fetch for Friday market closes.",
+    "symbols": {}
+}
+
+for name, ticker in SYMBOLS.items():
+    data = yf.Ticker(ticker).history(period="5d")
+    if data.empty:
+        results["symbols"][name] = {"ticker": ticker, "error": "No data returned"}
+        continue
+    last_row = data.tail(1).iloc[0]
+    last_date = str(data.tail(1).index[0].date())
+    results["symbols"][name] = {
+        "ticker": ticker,
+        "last_trading_date": last_date,
+        "close": round(float(last_row["Close"]), 2)
+    }
+
+output_file = f"{output_dir}/friday_closes_{timestamp}.json"
+with open(output_file, "w", encoding="utf-8") as f:
+    json.dump(results, f, indent=2)
+</code></pre>
+<p>Three design decisions in this script merit specific attention in any educator-facing curriculum:</p>
+<p><strong>SGT-anchored timestamps.</strong> Using <code>ZoneInfo("Asia/Singapore")</code> rather than UTC or local system time ensures that output filenames and embedded timestamps are unambiguous regardless of where the GitHub Actions runner executes. The committed filename <code>friday_closes_2026-07-03_23-47-45_SGT.json</code> is self-documenting.</p>
+<p><strong>Per-ticker error handling.</strong> The <code>if data.empty:</code> branch means a failed ticker fetch does not crash the entire script — it commits a partial result with an error field. Other teams' scripts failed silently on ticker errors, producing empty commits with no diagnostic information.</p>
+<p><strong><code>os.makedirs(output_dir, exist_ok=True)</code>.</strong> This single line prevents the most common first-run failure in CI environments: the assumption that a folder already exists. It is the difference between a script that works on the developer's laptop and one that works reliably in GitHub Actions.</p>
+<p>Team C's DECISION.md documents their reasoning for data-collection-first automation: <em>"It was the most repetitive manual task. Last week, one team member had to open multiple websites, copy values, take screenshots, and commit the evidence to Github. It provides immediate value. Automating data collection reduces manual workload, speeds up preparation, and gives the team a consistent starting point for analysis."</em></p>
+<p>This is authentic design thinking: identify the highest-friction step, automate it first, and build from there. The fact that it was documented in a DECISION.md committed to the repository — rather than mentioned in passing in a presentation — is what makes it pedagogically durable.</p>
+<p><strong>PRISM classification:</strong> Stage 3 — Automated. Single scheduled workflow, 100% success rate, clean output structure. Limited to data collection layer; agent processing and LLM synthesis remain manual.</p>
+<p><strong>Key finding:</strong> Team C demonstrates that Stage 3 automation — a single working scheduled workflow — is achievable in Sprint 3 by a team with no prior CI/CD experience, provided the automation scope is deliberately limited to the highest-friction task.</p>
+<hr class="section-rule">
+<h3>5.4 Team D — Modular Collector Architecture with Dual-Schedule Design (PRISM Stage 3–4 Transition)</h3>
+<p><strong>Repository metrics:</strong> 100+ commits; 3 tags (vW24–vW25 correct, W23 incorrect); 14 workflow runs (12 success, 2 failure); 86% workflow success rate; first successful scheduled run: 13 June 2026 — earliest in the cohort.</p>
+<p>Team D (PRISM: Predictive Reasoning and Intelligence Synthesis for Markets) built the most modular collector architecture. Their <code>prism/src/collectors/</code> folder contains four independent Python modules:</p>
+<pre><code>prism/src/collectors/
+  almanac_collector.py     # Calendar flags, sector seasonality, all 11 ETFs
+  macro_collector.py       # Economic indicators, Fed data
+  technical_collector.py   # Price history, EMA calculation, support/resistance
+  seasonality_collector.py # Monthly/weekly pattern analysis
+</code></pre>
+<p>Each collector module is self-contained: its own docstring specifying input sources and output schema, its own path resolution using <code>Path(__file__).resolve().parents[N]</code>, and its own <code>save_json()</code> utility function. The <code>technical_collector.py</code> already covers the full sector ETF universe — all 11 S&P 500 sectors — from Sprint 5:</p>
+<pre><code class="language-python">TECHNICAL_TICKERS = {
+    "SPX": {"ticker": "^GSPC", "name": "S&amp;P 500 Index"},
+    "NDX": {"ticker": "^NDX",  "name": "Nasdaq 100 Index"},
+    "IWM": {"ticker": "IWM",   "name": "Russell 2000 ETF Proxy"}
+}
+</code></pre>
+<p>Team D's most architecturally significant contribution is the dual-schedule workflow:</p>
+<pre><code class="language-yaml">on:
+  schedule:
+    # Monday 8:00 AM Singapore time — agent collectors
+    - cron: "0 0 * * 1"
+    # Saturday 6:00 AM Singapore time — actuals after US Friday close
+    - cron: "0 22 * * 5"
+</code></pre>
+<p>Combined with conditional step execution based on which schedule triggered:</p>
+<pre><code class="language-yaml">- name: Run R6 actuals collector
+  if: github.event_name == 'workflow_dispatch' ||
+      github.event.schedule == '0 22 * * 5'
+  run: python prism/src/data_collector.py
+
+- name: Run technical collector
+  if: github.event_name == 'workflow_dispatch' ||
+      github.event.schedule == '0 0 * * 1'
+  run: python prism/src/collectors/technical_collector.py
+</code></pre>
+<p>This pattern — one workflow, two cron triggers, conditional step execution — is an industry-standard approach to multi-phase batch processing. It eliminates the need for separate workflow files for each phase, reducing maintenance overhead and keeping the Actions log readable.</p>
+<p>Evidence of genuine autonomy: Team D recorded three automatic commits from <code>github-actions[bot]</code> during the study break (24 June, 26 June, 29 June, and 6 July 2026), including the most recent commit as of the study period: <code>chore: update Prism data 2026-07-06</code>. Their <code>prism/data/output.json</code> from 6 July contained complete market data (SPX: 7483.24, NDX: 29329.21, IWM: 297.58, VIX: 16.15, BTC: 62962.51) committed automatically at 22:57 SGT — without any student being present.</p>
+<p><strong>PRISM classification:</strong> Stage 3–4 Transition. Four modular collectors, dual-schedule design, study break auto-collection, but LLM API calls and calibration automation not yet operational.</p>
+<hr class="section-rule">
+<h3>5.5 Team E — Automation Theatre and the Infrastructure-Without-Pipeline Anti-Pattern (PRISM Stage 1–2)</h3>
+<p><strong>Repository metrics:</strong> 97 commits; 4 tags (all incorrect format: <code>v1.0.0</code>, <code>W23</code>, <code>W24</code>, <code>W25</code>); 16 workflow runs (10 success, 6 failure, 62.5% success rate); no auto-collected market data files committed.</p>
+<p>Team E represents the most instructive failure case in the cohort — instructive precisely because the failure is non-obvious. Their repository contains genuine engineering ambition: a Next.js frontend, an Express.js backend deployed to Render, a multi-file Python data collection suite (<code>fetch_yfinance.py</code>, <code>fetch_finviz.py</code>, <code>run_weekly_fetch.py</code>, <code>macro_agent.py</code>), and three GitHub Actions workflows.</p>
+<p>Yet their pipeline produced no automatically committed market data during the study break. Their workflow success rate (62.5%) is the lowest in the cohort. Their tags have been in the wrong format since Sprint 1 — four sprints of <code>W23</code>, <code>W24</code>, <code>W25</code> rather than <code>vW23</code>, <code>vW24</code>, <code>vW25</code>.</p>
+<p>The root cause is what this paper terms the <strong>automation theatre anti-pattern</strong>: the construction of automation infrastructure that <em>appears</em> operational without producing verifiable automated output. Specifically:</p>
+<ol><li>Their <code>Weekly Team File Consolidation</code> workflow (cron: every Sunday 15:00 UTC) moves files from an <code>incoming/</code> folder to an <code>evidence/Week X/</code> directory. This produces a green checkmark in the Actions log but performs no market data collection.</li></ol>
+<ol><li>Their <code>Run Macro Agent Remote</code> workflow fires on the <code>macro-update</code> branch, not on <code>main</code> — meaning it only runs when a developer manually pushes to a specific branch, not on schedule.</li></ol>
+<ol><li>Their Python data collection scripts (<code>fetch_yfinance.py</code>, <code>fetch_finviz.py</code>) exist in the <code>TradeKyaMal/scripts/</code> folder but are not called by any workflow.</li></ol>
+<p>The distinction between automation and automation theatre is visible only by examining <em>what the workflow produces</em>, not whether it runs. A green Actions badge on a file-moving workflow is not a pipeline. The test is: did <code>github-actions[bot]</code> commit a timestamped market data file during the study break? For Team E, the answer is no.</p>
+<p><strong>PRISM classification:</strong> Stage 1–2 Boundary. Structured process, documented roles, genuine engineering effort, but no functional automated pipeline output.</p>
+<p><strong>Key finding for educators:</strong> Automation theatre is identifiable through the GitHub API by checking for commits from <code>github-actions[bot]</code> (genuine automation) versus commits from named authors (human-triggered work). This distinction is invisible in traditional assessment but trivially observable in the instructor dashboard.</p>
+<hr class="section-rule">
+<h2 id="6-discussion">6. Discussion</h2>
+<h3>6.1 Automation Maturity Progression Across Sprints</h3>
+<p>Table 1 summarises the automation maturity of each team at each sprint boundary.</p>
+<p><strong>Table 1: PRISM Automation Maturity by Team and Sprint</strong></p>
+<table>
+<tr><td>Team</td><td>S1</td><td>S2</td><td>S3</td><td>S4</td><td>S5</td><td>Workflows</td><td>Success Rate</td><td>Study Break Auto-commits</td></tr>
+<tr><td>A</td><td>1</td><td>2</td><td>3</td><td>4</td><td>4</td><td>3 active</td><td>75%</td><td>1 (26 Jun)</td></tr>
+<tr><td>B</td><td>1</td><td>2</td><td>3</td><td>4</td><td>4</td><td>3 active</td><td>74%</td><td>3 (27–28 Jun)</td></tr>
+<tr><td>C</td><td>1</td><td>1</td><td>2</td><td>3</td><td>3</td><td>1 active</td><td>100%</td><td>1 (26 Jun)</td></tr>
+<tr><td>D</td><td>1</td><td>2</td><td>3</td><td>3</td><td>3–4</td><td>1 active</td><td>86%</td><td>4 (Jun 24–Jul 6)</td></tr>
+<tr><td>E</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3 active</td><td>62.5%</td><td>0</td></tr>
+</table>
+<p>Two findings are immediately apparent. First, the number of active workflows is not a reliable indicator of automation maturity: Team E has three active workflows and the lowest maturity score; Team C has one workflow and a higher maturity score. Second, the study break auto-commit data provides the strongest single indicator of functional automation — a pipeline either ran without human intervention or it did not.</p>
+<h3>6.2 Sprint Delivery Consistency</h3>
+<p>Teams at Stage 3 and above (A, B, C, D) achieved correct-format release tags on time for all five active sprints. Team E's tag format was incorrect in all four sprints where tags were created. This finding supports the hypothesis that automation maturity and process discipline are correlated — teams who invest in automating repetitive tasks also invest in documenting and enforcing process conventions.</p>
+<p>The tag format error in Team E is particularly instructive. <code>W25</code> vs <code>vW25</code> is a two-character difference. It persisted across four sprints despite repeated correction in class feedback. Its persistence is not explained by ignorance — Team E knew the correct format. It is explained by the absence of a DoD checklist item: when "correct tag format" is not an explicit, written, checked item in the sprint Definition of Done, it is omitted under time pressure. This finding replicates the broader Scrum literature on the necessity of explicit DoD artefacts [CITATION].</p>
+<h3>6.3 The Educator Infrastructure Effect</h3>
+<p>The instructor monitoring system described in Section 4.3 provided measurable pedagogical benefit in three ways.</p>
+<p>First, it enabled <strong>pre-class preparation</strong> that was qualitatively different from traditional assessment. Rather than reviewing submitted files on the morning of class, the instructor had been receiving Telegram alerts throughout the week — pipeline failure at 03:00 on Thursday, new tag cut at 23:47 on Sunday, five open pull requests in Team A. Monday class preparation could focus on specific, evidenced observations rather than general encouragement.</p>
+<p>Second, it enabled <strong>team-differentiated private feedback</strong>. Teams received private channel messages after Sprint 5 that cited specific repo evidence: <em>"Your fetch ran on Thursday night and committed real data. Show me that file. What were the SPX and NDX closes?"</em> This level of specificity is only possible with automated monitoring.</p>
+<p>Third, it revealed <strong>the automation theatre anti-pattern</strong> before it became entrenched. Without the dashboard, Team E's three green workflow badges would have appeared equivalent to Teams A and B. The dashboard's filter — <code>github-actions[bot]</code> commits vs named-author commits — surfaced the distinction immediately.</p>
+<h3>6.4 Calibration Accuracy as a Learning Metric</h3>
+<p>Teams A and B both filed complete prediction files with direction, range, and confidence ratings for each sprint. Team A's Sprint 5 prediction (SPX: FLAT-UP, -1.0% to +1.5%, MEDIUM confidence) was correct: actual SPX moved +1.7%. Team B's automated W27 market snapshot, committed during the study break, demonstrated that their pipeline was collecting data that would enable accurate calibration even without student involvement.</p>
+<p>The calibration metric — did the direction prediction match the actual outcome? — provides an objective, non-gameable assessment criterion for prediction quality. Unlike rubrics based on presentation quality or documentation completeness, direction accuracy either matches or it does not. Cumulative accuracy over six sprints provides a meaningful signal of whether AI synthesis, guided by structured agents and a Human Score override, produces better predictions over time — the central question of the entire course.</p>
+<h3>6.5 Limitations</h3>
+<p>This study has five limitations that future research should address.</p>
+<p><strong>Single cohort:</strong> All data comes from one trimester (TR2 2026) with 56 students. Results may not generalise to larger cohorts, different disciplines, or different course durations.</p>
+<p><strong>Self-selection of course design:</strong> The course was designed by the researcher. This introduces potential design bias toward findings that support the framework. Independent replication in a different institution with a different educator is needed.</p>
+<p><strong>GitHub API sampling:</strong> Workflow run history is limited to the most recent 100 runs per repository. Teams with very high activity levels may have older sprint data truncated.</p>
+<p><strong>Prediction accuracy causality:</strong> The correlation between automation maturity and prediction accuracy observed in Teams A and B may reflect team competence generally rather than automation specifically. A controlled study with random assignment of automation support would be required to establish causality.</p>
+<p><strong>Anonymisation trade-off:</strong> By anonymising teams A–E, the paper sacrifices the ability to link findings to the specific GitHub repositories that reviewers could independently verify. Reviewer access to repositories will be provided on request.</p>
+<hr class="section-rule">
+<h2 id="7-implications-for-practice">7. Implications for Practice</h2>
+<h3>7.1 For Educators</h3>
+<p>Three implications follow directly from these findings.</p>
+<p><strong>Deploy a monitor before Sprint 1, not after.</strong> The instructor monitoring system is most valuable when it establishes baseline awareness from the first sprint. Teams whose early tag format errors are caught and corrected in Sprint 1 do not carry them through Sprint 5. Monitoring set up after Sprint 3 has limited corrective impact.</p>
+<p><strong>Mandate DECISION.md from Sprint 1.</strong> Team A's DECISION.md entries document architectural reasoning that is invisible in the final product. <em>"The agents sit at the very beginning of the pipeline. Any errors or inconsistencies introduced at that stage propagate forward and compound."</em> This is the intellectual output that design thinking education exists to produce. Without the DECISION.md requirement, it is not committed, not evaluated, and not credited.</p>
+<p><strong>Distinguish automation from automation theatre in assessment.</strong> The presence of GitHub Actions workflows is not evidence of automation. The presence of timestamped <code>github-actions[bot]</code> commits is. Assessment rubrics should require specific automated output files as evidence, not workflow badge screenshots.</p>
+<h3>7.2 For Curriculum Designers</h3>
+<p>The PRISM four-layer pipeline architecture is proposed as a replicable template for AI-augmented design thinking courses in any domain that involves regular data collection, multi-agent analysis, and prediction or recommendation delivery. The domain (market intelligence) is incidental. The structure (collect → analyse → synthesise → seal) is generalisable.</p>
+<p>The ten-role system maps cleanly onto professional functions across technology, consulting, and finance. Students who complete six sprints as LLM Operator (R8) have made programmatic API calls to at least two AI models, saved structured responses as version-controlled files, and built comparison tables from those files. This is a demonstrable, verifiable skill with direct workforce relevance.</p>
+<h3>7.3 For Researchers</h3>
+<p>The GitHub API provides educational researchers with access to a class of objective, timestamped, non-self-reported data that is rare in education research. Commit timestamps, workflow run outcomes, tag creation records, and pull request lifecycles are all accessible via public API and require no ethical approval beyond confirmation that repositories are public.</p>
+<p>Future research should examine: (1) automation maturity trajectories across multiple cohorts; (2) the relationship between retrospective quality and next-sprint improvement; (3) whether the PRISM model generalises to non-market domains; and (4) the effect of educator monitoring visibility on student intrinsic motivation versus compliance behaviour.</p>
+<hr class="section-rule">
+<h2 id="8-conclusion">8. Conclusion</h2>
+<p>This paper presented an empirical study of AI-augmented Scrum pedagogy in a live design thinking course, drawing on 492 GitHub commits, 190 workflow run logs, and 20 prediction files from five student teams across six active sprints. The PRISM Automation Maturity Model provides a four-stage rubric — Manual, Structured, Automated, Intelligent — that is measurable through observable GitHub artefacts and independent of self-report.</p>
+<p>Five team case studies demonstrated the full spectrum from Stage 4 automation (full-stack pipeline with typed schemas, CI validation, and multi-model API synthesis) to Stage 1–2 automation theatre (three active workflows producing no functional automated output). The most important single indicator of functional automation — the presence of commits from <code>github-actions[bot]</code> during a period of no student activity — distinguishes real pipelines from decorated repositories.</p>
+<p>The Educator Infrastructure Model — GitHub Actions monitor, Telegram alerts, PIN-protected live dashboard — demonstrated that real-time instructor visibility into student pipeline health enables qualitatively different pedagogical intervention: specific, evidenced, pre-class preparation that addresses individual team failures rather than cohort-wide generalities.</p>
+<p>The long-term significance of this work lies not in the market intelligence domain but in the framework it demonstrates: that design thinking education, when structured around repeatable automated delivery under Scrum constraints, can produce workforce-ready skills in DevOps, AI/ML engineering, data analysis, and calibrated judgment — skills measured not by rubric scores but by whether the machine ran while the student was sleeping.</p>
+<hr class="section-rule">
+<h2 id="references">References</h2>
+<p><em>[The following citations are placeholders to be completed before submission. Suggested sources are noted for each.]</em></p>
+<p>[1] Mahnic, V. (2010). Teaching Scrum through team-project work. <em>International Journal of Engineering Education</em>, 26, 96–110.</p>
+<p>[2] Kropp, M., & Meier, A. (2013). Teaching agile software development at university level: Values, management, and craftsmanship. <em>Software Engineering Education Conference Proceedings</em>, 179–188.</p>
+<p>[3] Wijnands, W. (2013). <em>eduScrum Guide</em>. eduScrum Foundation.</p>
+<p>[4] Chiu, T.K.F. et al. (2021). Creation and evaluation of a pretertiary artificial intelligence curriculum. <em>IEEE Transactions on Education</em>, 65(1), 30–39.</p>
+<p>[5] Hwang, G.J. et al. (2020). Definition, roles, and potential research issues of AI in education. <em>Computers and Education: Artificial Intelligence</em>, 1, 100001.</p>
+<p>[6] Zagalsky, A. et al. (2015). The emergence of GitHub as a collaborative platform for education. <em>CSCW 2015 Proceedings</em>, 1906–1917.</p>
+<p>[7] Beck, K. et al. (2001). <em>Manifesto for Agile Software Development</em>. agilemanifesto.org.</p>
+<p>[8] Forsgren, N., Humble, J., & Kim, G. (2018). <em>Accelerate: The Science of Lean Software and DevOps</em>. IT Revolution Press.</p>
+<p>[9] Brown, T. (2009). <em>Change by Design</em>. Harper Business.</p>
+<p>[10] Yin, R.K. (2018). <em>Case Study Research and Applications</em> (6th ed.). SAGE.</p>
+<p>[11] Alhazmi, A., & Huang, S. (2018). A decision support system for sprint planning in Scrum practice. <em>SoutheastCon 2018</em>, 1–9.</p>
+<p>[12] Schön, E.M. et al. (2023). Shift toward value-based learning: Applying agile approaches in higher education. <em>Web Information Systems and Technologies</em>, 24–41.</p>
+<p>[13] Shailendra, S. et al. (2024). Framework for adoption of generative AI in education. <em>IEEE Transactions on Education</em>, 67(5), 777–785.</p>
+<p>[14] Bird, C. et al. (2009). The promises and perils of mining Git. <em>MSR 2009 Proceedings</em>, 1–10.</p>
+<p>[15] Lang, G. (2017). Agile learning: Sprinting through the semester. <em>Information Systems Education Journal</em>, 15(3), 14–21.</p>
+<hr class="section-rule">
+<h2 id="appendix-a-sample-github-actions-workflow-team-a-weekly-pipeline">Appendix A — Sample GitHub Actions Workflow (Team A Weekly Pipeline)</h2>
+<pre><code class="language-yaml">name: Weekly Pipeline
+
+on:
+  schedule:
+    - cron: "0 14 * * 5"  # Every Friday 14:00 UTC = 22:00 SGT
+  workflow_dispatch:        # Manual trigger for testing
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    environment: Weekly prediction
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+      - name: Install dependencies
+        run: uv sync
+      - name: Run pipeline
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: uv run python run_pipeline.py
+</code></pre>
+<h2 id="appendix-b-sample-data-collection-script-team-c-fetch-friday-closes-py">Appendix B — Sample Data Collection Script (Team C fetch_friday_closes.py)</h2>
+<pre><code class="language-python">import json, os
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import yfinance as yf
+
+SYMBOLS = {"SPX": "^GSPC", "NDX": "^NDX", "IWM": "IWM"}
+
+sgt_now = datetime.now(ZoneInfo("Asia/Singapore"))
+timestamp = sgt_now.strftime("%Y-%m-%d_%H-%M-%S_SGT")
+output_dir = "data/market_closes"
+os.makedirs(output_dir, exist_ok=True)
+
+results = {
+    "fetch_time_sgt": sgt_now.isoformat(),
+    "note": "Automated GitHub Actions fetch for Friday market closes.",
+    "symbols": {}
+}
+
+for name, ticker in SYMBOLS.items():
+    data = yf.Ticker(ticker).history(period="5d")
+    if data.empty:
+        results["symbols"][name] = {"ticker": ticker, "error": "No data returned"}
+        continue
+    last_row = data.tail(1).iloc[0]
+    results["symbols"][name] = {
+        "ticker": ticker,
+        "last_trading_date": str(data.tail(1).index[0].date()),
+        "close": round(float(last_row["Close"]), 2)
+    }
+
+output_file = f"{output_dir}/friday_closes_{timestamp}.json"
+with open(output_file, "w", encoding="utf-8") as f:
+    json.dump(results, f, indent=2)
+</code></pre>
+<h2 id="appendix-c-decision-md-excerpt-team-a">Appendix C — DECISION.md Excerpt (Team A)</h2>
+<p>> <em>"The team decided to automate four specialist agents — Technical, Almanac, Macro, and Evidence — alongside a flexible layer supporting multiple LLM providers. This scope was chosen deliberately: the work divides cleanly across five contributors with minimal overlap, given that each agent operates on its own data source and follows a shared, pre-defined structure.</em> > > <em>The agents sit at the very beginning of the pipeline. Any errors or inconsistencies introduced at that stage propagate forward and compound, so getting them right is the highest-priority investment."</em></p>
+<hr class="section-rule">
+<p><em>Manuscript prepared July 2026. Word count: approximately 8,400 words (excluding references and appendices). Target journal: Computers and Education: Artificial Intelligence (Elsevier). Corresponding author: Prof Dr Tan Teik Kheong.</em></p>
+</article>
+
+</div><!-- .page-wrap -->
+
+<footer>
+  Sprint by Sprint — Research Paper Draft · Prof Dr Tan Teik Kheong · July 2026<br>
+  Target: <em>Computers and Education: Artificial Intelligence</em> · Elsevier · IF 23.4 · JCR Q1<br>
+  Draft v1 — Not for circulation. All team data anonymised (A–E).
+</footer>
+
+<script>
+// ── TTS ENGINE ────────────────────────────────────────────────────────────────
+let synth = window.speechSynthesis;
+let utterances = [];
+let currentIdx = 0;
+let isPlaying = false;
+let allWords = [];
+let wordEls = [];
+let currentWordIdx = 0;
+
+function wrapWords() {
+  const article = document.getElementById('readable');
+  // Get all text nodes in paragraphs, h2s, h3s, lis — skip code blocks
+  const walker = document.createTreeWalker(
+    article,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        const tag = parent.tagName;
+        if (['PRE','CODE','SCRIPT','STYLE'].includes(tag)) return NodeFilter.FILTER_REJECT;
+        if (parent.closest('pre')) return NodeFilter.FILTER_REJECT;
+        if (node.textContent.trim() === '') return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+  );
+
+  const textNodes = [];
+  let node;
+  while (node = walker.nextNode()) {
+    textNodes.push(node);
+  }
+
+  // Wrap each word in a span
+  allWords = [];
+  wordEls = [];
+
+  textNodes.forEach(tn => {
+    const text = tn.textContent;
+    const words = text.split(/(\s+)/);
+    const frag = document.createDocumentFragment();
+    words.forEach(w => {
+      if (/\S/.test(w)) {
+        const span = document.createElement('span');
+        span.className = 'tts-word';
+        span.textContent = w;
+        frag.appendChild(span);
+        allWords.push(w);
+        wordEls.push(span);
+      } else {
+        frag.appendChild(document.createTextNode(w));
+      }
+    });
+    tn.parentNode.replaceChild(frag, tn);
+  });
+}
+
+function buildUtterances() {
+  // Build utterances of ~50 words each for smooth playback
+  const CHUNK = 50;
+  utterances = [];
+  for (let i = 0; i < allWords.length; i += CHUNK) {
+    const chunk = allWords.slice(i, i + CHUNK).join(' ');
+    const u = new SpeechSynthesisUtterance(chunk);
+    u.rate = parseFloat(document.getElementById('tts-speed').value);
+    u.lang = 'en-US';
+    const startIdx = i;
+    u.onboundary = (e) => {
+      if (e.name === 'word') {
+        // Approximate word index
+        const wordCount = e.charIndex > 0
+          ? chunk.slice(0, e.charIndex).split(/\s+/).filter(Boolean).length
+          : 0;
+        highlightWord(startIdx + wordCount);
+      }
+    };
+    u.onend = () => {
+      currentIdx++;
+      if (currentIdx < utterances.length && isPlaying) {
+        synth.speak(utterances[currentIdx]);
+        updateProgress();
+      } else if (currentIdx >= utterances.length) {
+        ttsFinish();
+      }
+    };
+    utterances.push(u);
+  }
+}
+
+function highlightWord(idx) {
+  // Remove previous highlight
+  if (currentWordIdx < wordEls.length) {
+    wordEls[currentWordIdx].classList.remove('speaking');
+  }
+  currentWordIdx = Math.min(idx, wordEls.length - 1);
+  if (currentWordIdx >= 0 && currentWordIdx < wordEls.length) {
+    wordEls[currentWordIdx].classList.add('speaking');
+    // Scroll into view smoothly
+    wordEls[currentWordIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function updateProgress() {
+  const pct = utterances.length > 0 ? (currentIdx / utterances.length) * 100 : 0;
+  document.getElementById('tts-fill').style.width = pct + '%';
+  document.getElementById('tts-status').textContent =
+    `Word ${Math.min(currentIdx * 50, allWords.length)} of ${allWords.length}`;
+}
+
+function ttsToggle() {
+  if (!allWords.length) wrapWords();
+  if (!utterances.length || document.getElementById('tts-speed').dataset.stale) buildUtterances();
+
+  if (isPlaying) {
+    synth.pause();
+    isPlaying = false;
+    document.getElementById('tts-play').textContent = '▶ Resume';
+  } else {
+    isPlaying = true;
+    document.getElementById('tts-play').textContent = '⏸ Pause';
+    if (synth.paused) {
+      synth.resume();
+    } else {
+      currentIdx = 0;
+      currentWordIdx = 0;
+      buildUtterances();
+      synth.cancel();
+      synth.speak(utterances[0]);
+      updateProgress();
+    }
+  }
+}
+
+function ttsStop() {
+  synth.cancel();
+  isPlaying = false;
+  currentIdx = 0;
+  currentWordIdx = 0;
+  if (wordEls.length) wordEls.forEach(w => w.classList.remove('speaking'));
+  document.getElementById('tts-play').textContent = '▶ Read Aloud';
+  document.getElementById('tts-fill').style.width = '0%';
+  document.getElementById('tts-status').textContent = 'Stopped';
+}
+
+function ttsFinish() {
+  isPlaying = false;
+  currentIdx = 0;
+  if (wordEls.length) wordEls.forEach(w => w.classList.remove('speaking'));
+  document.getElementById('tts-play').textContent = '▶ Read Again';
+  document.getElementById('tts-fill').style.width = '100%';
+  document.getElementById('tts-status').textContent = 'Done ✓';
+}
+
+function ttsSetSpeed() {
+  const wasPlaying = isPlaying;
+  if (wasPlaying) {
+    synth.cancel();
+    isPlaying = false;
+  }
+  utterances = [];
+  document.getElementById('tts-play').textContent = '▶ Read Aloud';
+  if (wasPlaying) {
+    // Rebuild and restart from current word
+    buildUtterances();
+    const restartIdx = Math.floor(currentWordIdx / 50);
+    currentIdx = restartIdx;
+    isPlaying = true;
+    document.getElementById('tts-play').textContent = '⏸ Pause';
+    synth.speak(utterances[currentIdx]);
+    updateProgress();
+  }
+}
+
+// Handle page visibility — pause when tab hidden (helps mobile battery)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && isPlaying) {
+    // Don't pause — keep reading on phone when screen dims
+  }
+});
+</script>
+
+</body>
+</html>
