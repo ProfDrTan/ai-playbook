@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Log — Market Prediction Engine | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A;
+    --blue-mid:#123C5E;
+    --blue-panel:#163F63;
+    --line-cyan:#8FC7DE;
+    --line-dim:#3E6683;
+    --paper:#EAF3F8;
+    --amber:#E8A63C;
+    --coral:#D9694F;
+    --green:#6FBF8B;
+    --text-body: #CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{display:flex; max-width:1200px; margin:0 auto; min-height:100vh;}
+
+  .sidebar{
+    width:260px; flex-shrink:0;
+    padding:40px 20px;
+    position:sticky; top:0; align-self:flex-start; height:100vh;
+    border-right:1px solid var(--line-dim);
+  }
+  .sidebar .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--amber); margin-bottom:6px;
+  }
+  .sidebar h1{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:20px; line-height:1.3; color:var(--paper);
+    margin-bottom:28px; font-weight:600;
+  }
+  .sidebar nav ul{list-style:none;}
+  .sidebar nav li{margin-bottom:2px;}
+  .sidebar nav a{
+    display:flex; gap:10px; align-items:baseline;
+    text-decoration:none; font-size:13.5px; color:var(--text-body);
+    padding:8px 6px; border-radius:2px;
+  }
+  .sidebar nav a:hover{background:rgba(143,199,222,0.08); color:var(--paper);}
+  .sidebar nav a.active{color:var(--amber);}
+  .sidebar nav .num{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim);
+    width:20px; flex-shrink:0;
+  }
+  .sidebar-divider{height:1px; background:var(--line-dim); margin:16px 0;}
+  .back-link{
+    display:block; margin-top:24px; font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; color:var(--line-dim);
+  }
+  .back-link:hover{color:var(--line-cyan);}
+
+  main{flex:1; padding:60px 60px 120px;}
+  .cover{margin-bottom:56px;}
+  .cover .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px;
+    color:var(--amber); text-transform:uppercase; margin-bottom:16px;
+  }
+  .cover h2{
+    font-family:'IBM Plex Mono', monospace; font-weight:700;
+    font-size:clamp(28px,4.5vw,44px); color:var(--paper); line-height:1.15; margin-bottom:20px;
+    max-width:800px;
+  }
+  .cover p.sub{font-size:16px; color:var(--text-body); max-width:640px; margin-bottom:20px;}
+  .stamp{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    letter-spacing:2px; color:var(--coral); border:2px solid var(--coral);
+    padding:6px 14px; transform:rotate(-2deg); border-radius:3px;
+  }
+
+  .sheet{
+    border:1px solid var(--line-dim);
+    background:rgba(10,40,64,0.35);
+    margin-bottom:44px;
+  }
+  .sheet-body{padding:36px 40px 30px;}
+  .sheet h3.section-title{
+    font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--paper);
+    margin-bottom:8px;
+  }
+  .sheet p.section-dek{color:var(--line-cyan); font-size:13.5px; margin-bottom:22px;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:10px;}
+  th{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--amber); text-align:left;
+    padding:10px 12px; border-bottom:1px solid var(--line-dim);
+  }
+  td{padding:10px 12px; border-bottom:1px solid rgba(62,102,131,0.4); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+
+  .status{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.5px;
+    padding:2px 8px; border-radius:2px; white-space:nowrap;
+  }
+  .status.done{color:var(--green); border:1px solid var(--green);}
+  .status.progress{color:var(--amber); border:1px solid var(--amber);}
+  .status.blocked{color:var(--coral); border:1px solid var(--coral);}
+  .status.planned{color:var(--line-dim); border:1px solid var(--line-dim);}
+  .status.unverified{color:var(--line-cyan); border:1px dashed var(--line-cyan);}
+
+  .note{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan);
+    background:rgba(143,199,222,0.06); border-left:3px solid var(--line-cyan);
+    padding:10px 14px; margin-top:16px;
+  }
+  .note.warn{color:var(--coral); background:rgba(217,105,79,0.08); border-left-color:var(--coral);}
+
+  code{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px;
+    background:rgba(0,0,0,0.25); padding:1px 5px; border-radius:2px; color:var(--paper);
+  }
+
+  .changelog-entry{padding:14px 0; border-bottom:1px solid rgba(62,102,131,0.4);}
+  .changelog-entry:last-child{border-bottom:none;}
+  .changelog-date{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--amber);
+    letter-spacing:1px;
+  }
+
+  footer{
+    text-align:center; padding:40px; font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--line-dim); letter-spacing:1px;
+  }
+
+  @media (max-width:900px){
+    .sidebar{display:none;}
+    main{padding:40px 24px 80px;}
+    .sheet-body{padding:26px 22px 22px;}
+    table{font-size:12.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <aside class="sidebar">
+    <div class="tag">Build Log · Live</div>
+    <h1>Market Prediction Engine</h1>
+    <nav>
+      <ul>
+        <li><a href="#overview" class="active"><span class="num">01</span> Objective</a></li>
+        <li><a href="#timeline"><span class="num">02</span> Phase Timeline</a></li>
+        <li><a href="#components"><span class="num">03</span> Component Status</a></li>
+        <li><a href="#changelog"><span class="num">04</span> Changelog</a></li>
+      </ul>
+    </nav>
+    <a href="index.html" class="back-link">&larr; Back to AI Playbook</a>
+  </aside>
+
+  <main>
+    <div class="cover" id="overview">
+      <div class="eyebrow">Live Development Tracker</div>
+      <h2>Market Prediction Engine — Build Log</h2>
+      <p class="sub">Not a student exercise. This is a commercial-grade, self-learning market signal system, built by extracting and enhancing the architecture proven in CP3405 Team 1's project — modular agents, multi-LLM synthesis, and trust-weighted calibration that actually feeds back into future predictions.</p>
+      <span class="stamp">LIVE — LAST SYNCED 2026-07-08</span>
+      <div class="note" style="max-width:640px; margin-top:20px;">
+        Confirmed directly against <code>ProfDrTan/market-prediction-engine</code>
+        via the GitHub API. All statuses below reflect the actual commit history,
+        not memory or prior session notes.
+      </div>
+    </div>
+
+    <section class="sheet" id="timeline">
+      <div class="sheet-body">
+        <h3 class="section-title">Phase Timeline</h3>
+        <p class="section-dek">From Team 1's architecture to a closer-to-commercial system.</p>
+        <table>
+          <tr><th>Phase</th><th>Focus</th><th>Status</th></tr>
+          <tr>
+            <td>0 — Foundation</td>
+            <td>Fork Team 1's architecture, strip Scrum/pedagogical framing, define shared agent schemas.</td>
+            <td><span class="status done">done</span></td>
+          </tr>
+          <tr>
+            <td>1 — Signal Layer</td>
+            <td>Harden technical / macro / almanac agents; add an evidence agent.</td>
+            <td><span class="status progress">3 of 4 agents built — evidence agent not started</span></td>
+          </tr>
+          <tr>
+            <td>2 — Synthesis Layer</td>
+            <td>Multi-LLM runner (4 models via OpenRouter) + trust-weighted EMA calibration — the core enhancement over Team 1's unweighted comparison.</td>
+            <td><span class="status done">done</span></td>
+          </tr>
+          <tr>
+            <td>3 — Automation</td>
+            <td>GitHub Actions weekly cron for the pipeline; automated scoring against actuals (replacing Team 1's manual QA role).</td>
+            <td><span class="status blocked">blocked — no .github/workflows/ in repo</span></td>
+          </tr>
+          <tr>
+            <td>4 — Scale</td>
+            <td>Extend beyond SPX/NDX/IWM; add a backtesting harness against historical data.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+          <tr>
+            <td>5 — Commercial Hardening</td>
+            <td>Auth, tiered access, reliability SLAs, legal/compliance review before any external users.</td>
+            <td><span class="status planned">planned</span></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="sheet" id="components">
+      <div class="sheet-body">
+        <h3 class="section-title">Component Status</h3>
+        <p class="section-dek">Code-level tracking. Populated from the last confirmed repo read — not yet live-synced.</p>
+        <table>
+          <tr><th>File</th><th>Purpose</th><th>Status</th></tr>
+          <tr><td><code>agents/schemas.py</code></td><td>Shared data structures across all agents.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>agents/technical/technical_agent.py</code></td><td>RSI, trend, moving averages.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>agents/macro/macro_agent.py</code></td><td>Risk-on / risk-off regime classifier.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>agents/almanac/almanac_agent.py</code></td><td>Seasonal bias from historical monthly returns.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>agents/evidence/</code></td><td>Planned fourth agent — not yet started.</td><td><span class="status planned">not started</span></td></tr>
+          <tr><td><code>agents/llm/multi_model_runner.py</code></td><td>Queries 4 free OpenRouter models; trust-weighted synthesis.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>calibration/trust_weights.py</code></td><td>EMA-based trust scoring with a minimum weight floor.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>calibration/score_predictions.py</code></td><td>Automated calibration scoring (replaces Team 1's manual QA).</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>run_pipeline.py</code></td><td>Orchestrates the full weekly run for SPX/NDX/IWM.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>requirements.txt</code></td><td>Python dependencies.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>README.md</code> / <code>DECISION.md</code></td><td>Architecture reasoning; enhancements over Team 1.</td><td><span class="status done">done</span></td></tr>
+          <tr><td><code>.github/workflows/weekly-pipeline.yml</code></td><td>Scheduled pipeline trigger.</td><td><span class="status blocked">not in repo — push failed</span></td></tr>
+          <tr><td><code>.github/workflows/weekly-scoring.yml</code></td><td>Scheduled calibration scoring.</td><td><span class="status blocked">not in repo — push failed</span></td></tr>
+        </table>
+        <div class="note">
+          Confirmed via <code>git/trees/main?recursive=1</code> against the live repo.
+          The two workflow files were never partially written — nothing to recover,
+          they need to be authored fresh once workflow-write permission is confirmed.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="changelog">
+      <div class="sheet-body">
+        <h3 class="section-title">Changelog</h3>
+        <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-07-08</div>
+          <div>Build log page created and synced against the live repo. Confirmed: schemas, all four calibration/synthesis files, and 3 of 4 planned agents are committed. Evidence agent and both GitHub Actions workflow files are not yet in the repo.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<footer>THE AI PLAYBOOK &middot; BUILD LOG &middot; MARKET PREDICTION ENGINE</footer>
+</body>
+</html>
