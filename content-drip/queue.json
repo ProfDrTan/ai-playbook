@@ -1,0 +1,12 @@
+{
+  "source": "index.html",
+  "items": [
+    {"id": "ch1", "title": "Prompting Fundamentals", "status": "pending"},
+    {"id": "ch2", "title": "Choosing Your Tool", "status": "pending"},
+    {"id": "ch3", "title": "Delegating Real Work", "status": "pending"},
+    {"id": "ch4", "title": "Automating the Repeatable", "status": "pending"},
+    {"id": "ch5", "title": "Working With AI on a Team", "status": "pending"},
+    {"id": "ch6", "title": "When AI Gets It Wrong", "status": "pending"},
+    {"id": "ch7", "title": "A Starter Toolkit", "status": "pending"}
+  ]
+}
