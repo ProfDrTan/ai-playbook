@@ -148,6 +148,23 @@
     .sheet-body{padding:26px 22px 22px;}
     table{font-size:12.5px;}
   }
+
+  .glossary-term{
+    margin-bottom:22px; padding-bottom:18px;
+    border-bottom:1px solid rgba(62,102,131,0.4);
+  }
+  .glossary-term:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .glossary-term dt{
+    font-family:'IBM Plex Mono', monospace; font-size:14.5px; font-weight:600;
+    color:var(--paper); margin-bottom:6px;
+  }
+  .glossary-term dt .cat{
+    font-size:10px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--line-dim); font-weight:400; margin-left:8px;
+  }
+  .glossary-term dd{font-size:13.5px; color:var(--text-body); max-width:620px;}
+  .glossary-cols{columns: 1; column-gap:40px;}
+  @media (min-width:1000px){ .glossary-cols{columns:2;} }
 </style>
 </head>
 <body>
@@ -162,6 +179,7 @@
         <li><a href="#timeline"><span class="num">02</span> Phase Timeline</a></li>
         <li><a href="#components"><span class="num">03</span> Component Status</a></li>
         <li><a href="#changelog"><span class="num">04</span> Changelog</a></li>
+        <li><a href="#glossary"><span class="num">05</span> Glossary</a></li>
       </ul>
     </nav>
     <a href="index.html" class="back-link">&larr; Back to AI Playbook</a>
@@ -266,6 +284,93 @@
         </div>
       </div>
     </section>
+    <section class="sheet" id="glossary">
+      <div class="sheet-body">
+        <h3 class="section-title">Glossary</h3>
+        <p class="section-dek">Plain-language definitions for terms that show up in this build log and its commit history.</p>
+        <div class="glossary-cols">
+          <dl>
+            <div class="glossary-term">
+              <dt>OpenRouter <span class="cat">Service</span></dt>
+              <dd>A single API that sits in front of dozens of different AI providers (OpenAI, Google, NVIDIA, Meta, and others). One API key lets the pipeline call several different models without separate accounts for each.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Free-tier model <span class="cat">Concept</span></dt>
+              <dd>A model OpenRouter hosts at zero cost, subsidized by them. In exchange, it's rate-limited &mdash; a capped number of requests per minute/day &mdash; and can be slower or occasionally unavailable compared to a paid model.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Nemotron <span class="cat">Model</span></dt>
+              <dd>An NVIDIA-built open-weight model. The variant used here is a "reasoning" model &mdash; it writes out its thinking before its final answer, which is why it needs a larger token budget than a model that answers directly.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>GPT-OSS <span class="cat">Model</span></dt>
+              <dd>OpenAI's open-weight model (separate from GPT-4/GPT-5 &mdash; "open-weight" means the model file itself is publicly downloadable, not just accessible via API).</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Gemma <span class="cat">Model</span></dt>
+              <dd>Google DeepMind's open-weight model family, distinct from Gemini (Google's flagship, closed model).</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Laguna <span class="cat">Model</span></dt>
+              <dd>An open-weight model from Poolside, a smaller AI lab. Included to match Team 1's original four-model panel; currently the least reliable of the four in testing.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>HTTP 429 <span class="cat">Error code</span></dt>
+              <dd>"Too Many Requests." The server understood the request fine but is refusing it because too many requests arrived too quickly. The fix is slowing down, not fixing a bug in the request itself.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Rate limit <span class="cat">Concept</span></dt>
+              <dd>A cap a service imposes on how many requests you can make in a given time window, to protect their infrastructure. Free tiers almost always have tighter rate limits than paid tiers.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Trust weight <span class="cat">This project</span></dt>
+              <dd>A per-model score (0&ndash;1) representing how accurate that model's predictions have historically been. Models that predict well get weighted more heavily in future synthesis; models that predict poorly get weighted less &mdash; but never to zero.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>EMA (Exponential Moving Average) <span class="cat">Method</span></dt>
+              <dd>A way of updating a running average that weights recent results more heavily than old ones, without needing to store the full history. Used here so a model's trust weight adapts as its recent accuracy changes.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Calibration <span class="cat">This project</span></dt>
+              <dd>Comparing what the models predicted against what actually happened in the market, to score accuracy and update trust weights. This is the automated replacement for Team 1's manual weekly QA step.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Synthesis <span class="cat">This project</span></dt>
+              <dd>Combining all four models' individual predictions into one final trust-weighted prediction, rather than just averaging them equally.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>yfinance <span class="cat">Library</span></dt>
+              <dd>A free Python library that pulls historical stock/index price data from Yahoo Finance. Used by the Technical and Macro agents &mdash; confirmed working reliably in every test run so far.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>RSI (Relative Strength Index) <span class="cat">Indicator</span></dt>
+              <dd>A technical indicator from 0&ndash;100 measuring how fast and how far a price has moved recently. Above 70 is typically read as "overbought," below 30 as "oversold."</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>GitHub Actions <span class="cat">Infrastructure</span></dt>
+              <dd>GitHub's built-in automation runner &mdash; lets code execute on a schedule (like the weekly pipeline) without a server you have to maintain yourself.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>workflow_dispatch <span class="cat">GitHub Actions</span></dt>
+              <dd>A setting that lets a GitHub Actions workflow be triggered manually (via button or API call) in addition to its normal schedule &mdash; used here to test the pipeline without waiting for Monday.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Repo secret <span class="cat">GitHub Actions</span></dt>
+              <dd>An encrypted value (like an API key) stored on a GitHub repo that workflows can use at runtime without the value ever appearing in the code itself.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>Fine-grained PAT <span class="cat">GitHub</span></dt>
+              <dd>A newer style of GitHub access token where permissions are broken into separate categories &mdash; Contents, Workflows, Secrets, Actions, etc. &mdash; each needing to be explicitly enabled, unlike older "classic" tokens which used broader all-or-nothing scopes.</dd>
+            </div>
+            <div class="glossary-term">
+              <dt>SHA (in a Git context) <span class="cat">Git</span></dt>
+              <dd>A unique fingerprint identifying the exact current version of a file. GitHub's API requires fetching this right before any edit, to make sure you're not overwriting someone else's more recent change.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 <footer>THE AI PLAYBOOK &middot; BUILD LOG &middot; MARKET PREDICTION ENGINE</footer>
