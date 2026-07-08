@@ -256,6 +256,10 @@
           <div class="changelog-date">2026-07-08</div>
           <div>Build log page created and synced against the live repo. Confirmed: schemas, all four calibration/synthesis files, and 3 of 4 planned agents are committed. Evidence agent and both GitHub Actions workflow files are not yet in the repo.</div>
         </div>
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-07-08</div>
+          <div>Attempted push of weekly-pipeline.yml and weekly-scoring.yml with new token. Confirmed root cause: fine-grained PAT has Contents write but not Workflows write (these are separate permissions on fine-grained tokens, distinct from classic PAT "workflow" scope). Both workflow files are fully written and ready locally &mdash; push is pending a token with Workflows: Read and write enabled.</div>
+        </div>
       </div>
     </section>
   </main>
