@@ -204,7 +204,7 @@
           <tr>
             <td>3 — Automation</td>
             <td>GitHub Actions weekly cron for the pipeline; automated scoring against actuals (replacing Team 1's manual QA role).</td>
-            <td><span class="status blocked">blocked — token needs Workflows: Read/write permission</span></td>
+            <td><span class="status progress">pushed — awaiting OPENROUTER_API_KEY secret + first manual trigger</span></td>
           </tr>
           <tr>
             <td>4 — Scale</td>
@@ -237,8 +237,8 @@
           <tr><td><code>run_pipeline.py</code></td><td>Orchestrates the full weekly run for SPX/NDX/IWM.</td><td><span class="status done">done</span></td></tr>
           <tr><td><code>requirements.txt</code></td><td>Python dependencies.</td><td><span class="status done">done</span></td></tr>
           <tr><td><code>README.md</code> / <code>DECISION.md</code></td><td>Architecture reasoning; enhancements over Team 1.</td><td><span class="status done">done</span></td></tr>
-          <tr><td><code>.github/workflows/weekly-pipeline.yml</code></td><td>Scheduled pipeline trigger.</td><td><span class="status blocked">written, ready — pending Workflows permission</span></td></tr>
-          <tr><td><code>.github/workflows/weekly-scoring.yml</code></td><td>Scheduled calibration scoring.</td><td><span class="status blocked">written, ready — pending Workflows permission</span></td></tr>
+          <tr><td><code>.github/workflows/weekly-pipeline.yml</code></td><td>Scheduled pipeline trigger.</td><td><span class="status done">done — confirmed in repo tree</span></td></tr>
+          <tr><td><code>.github/workflows/weekly-scoring.yml</code></td><td>Scheduled calibration scoring.</td><td><span class="status done">done — confirmed in repo tree</span></td></tr>
         </table>
         <div class="note">
           Confirmed via <code>git/trees/main?recursive=1</code> against the live repo.
@@ -259,6 +259,10 @@
         <div class="changelog-entry">
           <div class="changelog-date">2026-07-08</div>
           <div>Attempted push of weekly-pipeline.yml and weekly-scoring.yml with new token. Confirmed root cause: fine-grained PAT has Contents write but not Workflows write (these are separate permissions on fine-grained tokens, distinct from classic PAT "workflow" scope). Both workflow files are fully written and ready locally &mdash; push is pending a token with Workflows: Read and write enabled.</div>
+        </div>
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-07-08</div>
+          <div>Token permissions updated (Workflows: Read/write added). Both weekly-pipeline.yml and weekly-scoring.yml pushed and confirmed present in the repo tree via API. Automation phase (Phase 3) is now code-complete. Remaining before the first live run: set OPENROUTER_API_KEY as a repo secret, then trigger weekly-pipeline.yml manually via workflow_dispatch.</div>
         </div>
       </div>
     </section>
