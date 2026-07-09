@@ -126,6 +126,7 @@
   @keyframes ra-pulse{ 0%,100%{opacity:1;} 50%{opacity:0.75;} }
   .readaloud-panel{ padding:14px 16px; }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -140,6 +141,7 @@
         <li><a href="#qa"><span class="num">04</span> Human QA Process</a></li>
         <li><a href="#architecture"><span class="num">05</span> Architecture Decisions</a></li>
         <li><a href="#comparison"><span class="num">06</span> Team 1 vs. MPE, Honestly</a></li>
+        <li><a href="#diagram"><span class="num">07</span> Architecture Diagram</a></li>
       </ul>
     </nav>
     <a href="build-log.html" class="back-link">&larr; Back to Build Log</a>
@@ -272,6 +274,96 @@
         </div>
       </div>
     </section>
+    <section class="sheet" id="diagram">
+      <div class="sheet-body">
+        <h3 class="section-title">Architecture Diagram</h3>
+        <p class="section-dek">Built directly from the repo's real file paths &mdash; not a generic template.</p>
+        <div class="mermaid" style="background:rgba(255,255,255,0.03); border-radius:6px; padding:16px; overflow-x:auto;">
+graph TB
+    subgraph Sources["Data Sources"]
+        YF["Yahoo Finance<br/>yfinance"]
+        MACROFEED["Macro Event Data"]
+        NEWSFEED["News / Evidence Sources"]
+    end
+
+    subgraph SharedFoundation["Shared Foundation"]
+        BASE["base.py"]
+        SCHEMAS["schemas.py"]
+    end
+
+    subgraph SignalAgents["4 Signal Agents"]
+        TECH["Technical Agent"]
+        MACRO["Macro Agent"]
+        ALM["Almanac Agent"]
+        EVID["Evidence Agent"]
+    end
+
+    subgraph PipelineCore["Pipeline Orchestration"]
+        CTX["Pipeline Context<br/>context.py"]
+        STAGES["stages.py"]
+        RUNPIPE["run_pipeline.py"]
+    end
+
+    subgraph LLMLayer["Multi-Model LLM Layer"]
+        RUNNER["multi_model_runner.py"]
+        MODELS["4 models in parallel"]
+    end
+
+    subgraph OutputLayer["Output and Validation"]
+        IO["io.py"]
+        RULES["scripts/rules/*"]
+        VALIDATE["validate_output.py"]
+    end
+
+    subgraph HumanQA["Weekly Human QA Loop"]
+        FINALCALL["Team's Final Call"]
+        ACTUAL["Actual Outcome"]
+        SCORE["Scoring Rubric"]
+        LOG["Learning + Calibration Log"]
+    end
+
+    subgraph CI["CI / CD"]
+        PIPELINE_YML["pipeline.yml"]
+        AGENT_CHECKS["agent-checks.yml"]
+        PY_CHECKS["python-checks.yml"]
+        TESTS["pytest suite"]
+    end
+
+    YF --> TECH
+    MACROFEED --> MACRO
+    NEWSFEED --> EVID
+    BASE -.-> TECH
+    BASE -.-> MACRO
+    BASE -.-> ALM
+    BASE -.-> EVID
+    SCHEMAS -.-> TECH
+    SCHEMAS -.-> MACRO
+    SCHEMAS -.-> ALM
+    SCHEMAS -.-> EVID
+    TECH --> CTX
+    MACRO --> CTX
+    ALM --> CTX
+    EVID --> CTX
+    RUNPIPE -.-> CTX
+    CTX --> STAGES --> RUNNER
+    RUNNER --> MODELS --> FINALCALL
+    RUNPIPE -.-> IO
+    FINALCALL --> IO --> VALIDATE --> RULES
+    FINALCALL --> ACTUAL --> SCORE --> LOG
+    LOG -.-> FINALCALL
+    PIPELINE_YML -.-> RUNPIPE
+    AGENT_CHECKS -.-> SignalAgents
+    PY_CHECKS -.-> PipelineCore
+    TESTS -.-> CTX
+    TESTS -.-> RUNPIPE
+        </div>
+        <div class="note">
+          Every node above maps to a real file in <code>sinder38/Team-1-Prac-A-Project</code>
+          &mdash; nothing here is a generic architecture template.
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 <footer>THE AI PLAYBOOK &middot; TEAM 1 DISSECTION &middot; SOURCE: sinder38/Team-1-Prac-A-Project</footer>
@@ -453,6 +545,21 @@
       speakNext();
     }
   }
+</script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      background: '#0B2E4A',
+      primaryColor: '#163F63',
+      primaryTextColor: '#EAF3F8',
+      primaryBorderColor: '#8FC7DE',
+      lineColor: '#8FC7DE',
+      secondaryColor: '#123C5E',
+      tertiaryColor: '#0B2E4A'
+    }
+  });
 </script>
 </body>
 </html>
