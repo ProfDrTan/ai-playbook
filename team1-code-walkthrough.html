@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team 1 Code Walkthrough | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans', sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{display:flex; max-width:1200px; margin:0 auto; min-height:100vh;}
+  .sidebar{width:270px; flex-shrink:0; padding:40px 20px; position:sticky; top:0; align-self:flex-start; height:100vh; border-right:1px solid var(--line-dim); overflow-y:auto;}
+  .sidebar .tag{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:6px;}
+  .sidebar h1{font-family:'IBM Plex Mono', monospace; font-size:18px; line-height:1.3; color:var(--paper); margin-bottom:28px; font-weight:600;}
+  .sidebar nav ul{list-style:none;}
+  .sidebar nav li{margin-bottom:2px;}
+  .sidebar nav a{display:flex; gap:10px; align-items:baseline; text-decoration:none; font-size:13px; color:var(--text-body); padding:7px 6px; border-radius:2px;}
+  .sidebar nav a:hover{background:rgba(143,199,222,0.08); color:var(--paper);}
+  .sidebar nav .num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); width:20px; flex-shrink:0;}
+  .back-link{display:block; margin-top:24px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--line-dim);}
+  .back-link:hover{color:var(--line-cyan);}
+  main{flex:1; padding:60px 60px 120px;}
+  .cover{margin-bottom:56px;}
+  .cover .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:16px;}
+  .cover h2{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(24px,4vw,38px); color:var(--paper); line-height:1.2; margin-bottom:20px; max-width:800px;}
+  .cover p.sub{font-size:15.5px; color:var(--text-body); max-width:680px; margin-bottom:14px;}
+  .sheet{border:1px solid var(--line-dim); background:rgba(10,40,64,0.35); margin-bottom:40px;}
+  .sheet-body{padding:32px 36px 28px;}
+  .sheet h3.section-title{font-family:'IBM Plex Mono', monospace; font-size:19px; color:var(--paper); margin-bottom:8px;}
+  .sheet p.section-dek{color:var(--line-cyan); font-size:13px; margin-bottom:20px;}
+  .sheet p{font-size:14px; margin-bottom:12px;}
+  code{font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:2px; color:var(--paper); white-space:nowrap;}
+  pre{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; background:rgba(0,0,0,0.4);
+    border:1px solid var(--line-dim); border-left:3px solid var(--line-cyan); border-radius:4px;
+    padding:14px 16px; overflow-x:auto; margin:10px 0 16px; color:var(--paper); line-height:1.55;
+    white-space:pre;
+  }
+  pre .file-label{display:block; font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--amber); margin-bottom:8px; letter-spacing:0.5px;}
+  .callout{
+    background:rgba(232,166,60,0.08); border-left:3px solid var(--amber); border-radius:4px;
+    padding:14px 18px; margin:16px 0; font-size:13.5px;
+  }
+  .callout strong{color:var(--amber);}
+  .note{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan); background:rgba(143,199,222,0.06); border-left:3px solid var(--line-cyan); padding:10px 14px; margin-top:16px;}
+  .note.warn{color:var(--coral); background:rgba(217,105,79,0.08); border-left-color:var(--coral);}
+  .note.action{color:var(--green); background:rgba(111,191,139,0.08); border-left-color:var(--green);}
+  ul.plain{padding-left:20px; font-size:13.5px; margin-bottom:10px;}
+  ul.plain li{margin-bottom:8px;}
+  table{width:100%; border-collapse:collapse; font-size:13px; margin-bottom:10px;}
+  th{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--amber); text-align:left; padding:8px 10px; border-bottom:1px solid var(--line-dim);}
+  td{padding:8px 10px; border-bottom:1px solid rgba(62,102,131,0.4); vertical-align:top;}
+  footer{text-align:center; padding:40px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); letter-spacing:1px;}
+  @media (max-width:900px){
+    .sidebar{display:none;} main{padding:40px 24px 80px;} .sheet-body{padding:24px 20px 20px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="tag">Code-Level Deep Dive</div>
+    <h1>Team 1 Code Walkthrough</h1>
+    <nav>
+      <ul>
+        <li><a href="#tour"><span class="num">01</span> The Call Chain</a></li>
+        <li><a href="#foundation"><span class="num">02</span> The Shared Contract</a></li>
+        <li><a href="#context"><span class="num">03</span> The Pipeline Context</a></li>
+        <li><a href="#stages"><span class="num">04</span> Stage Functions</a></li>
+        <li><a href="#entrypoint"><span class="num">05</span> The Entry Point</a></li>
+        <li><a href="#llmlayer"><span class="num">06</span> The LLM Layer, Split in Two</a></li>
+        <li><a href="#promptformat"><span class="num">07</span> The Prompt Format Decision</a></li>
+        <li><a href="#failures"><span class="num">08</span> Failure Handling Philosophy</a></li>
+        <li><a href="#validation"><span class="num">09</span> The Validation Layer</a></li>
+        <li><a href="#lessons"><span class="num">10</span> What MPE Should Borrow</a></li>
+      </ul>
+    </nav>
+    <a href="team1-dissection.html" class="back-link">&larr; Back to Team 1 Dissection</a>
+  </aside>
+
+  <main>
+    <div class="cover">
+      <div class="eyebrow">Every claim below is read directly from the code</div>
+      <h2>How Team 1's Code Actually Fits Together</h2>
+      <p class="sub">Not the architecture diagram again &mdash; this is a walk through the real function calls, in the order they actually execute, with short excerpts from the real files in <code>sinder38/Team-1-Prac-A-Project</code>. Anyone who can read GitHub should be able to open the same files and follow along.</p>
+    </div>
+
+    <section class="sheet" id="tour">
+      <div class="sheet-body">
+        <h3 class="section-title">The Call Chain, End to End</h3>
+        <p>One weekly run is a single call to <code>run_pipeline.py</code>. Here's what actually happens, in order:</p>
+        <ol style="padding-left:22px; font-size:13.5px;">
+          <li><code>main()</code> reads a TOML config file (which stages are on, which LLM models to run)</li>
+          <li>It creates one empty <code>PipelineContext</code> object for this week</li>
+          <li>It calls <code>run_almanac</code>, <code>run_technical</code>, <code>run_macro</code>, <code>run_evidence</code> in sequence &mdash; each one fills in one field of that same context object</li>
+          <li>It calls <code>run_llm</code> once per configured model &mdash; each call reads the <em>same</em> shared context and builds a fresh prompt from whatever's in it so far</li>
+          <li>It writes a comparison table markdown file summarizing all models side by side</li>
+        </ol>
+        <div class="note">
+          The key design fact that makes this work: agents never talk to each other directly.
+          They only ever read and write the shared <code>PipelineContext</code> object.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="foundation">
+      <div class="sheet-body">
+        <h3 class="section-title">The Shared Contract — base.py + schemas.py</h3>
+        <p>Every agent (technical, macro, almanac, evidence, and every LLM) inherits from one abstract base class:</p>
+        <pre><span class="file-label">backend/agents/base.py</span>class BaseAgent(ABC, Generic[T]):
+    agent_type: str
+
+    @abstractmethod
+    def run(self, prediction_date: date, **kwargs) -> T: ...
+
+    @abstractmethod
+    def render_md(self, output: T, prediction_date: date) -> str: ...</pre>
+        <p>That's the entire contract: every agent must implement <code>run()</code> (do the work, return typed output) and <code>render_md()</code> (turn that output into a human-readable report). Nothing else is required, which is why five very different agents &mdash; a yfinance technical analyzer, a seasonal almanac lookup, and four different LLM wrappers &mdash; can all be called the exact same way by the pipeline.</p>
+        <p>Every agent's output is a typed Python dataclass, not a loose dictionary:</p>
+        <pre><span class="file-label">backend/agents/schemas.py</span>@dataclass
+class TechnicalOutput:
+    prediction_date: date
+    instruments: dict[str, InstrumentTechnical]
+    agent_type: str = "technical"</pre>
+        <div class="callout">
+          <strong>Why this matters:</strong> if a downstream stage tries to read a field that doesn't
+          exist on <code>TechnicalOutput</code>, that's a Python error caught immediately &mdash;
+          not a silent <code>KeyError</code> or a missing value discovered three steps later.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="context">
+      <div class="sheet-body">
+        <h3 class="section-title">The Pipeline Context — the entire object is 6 lines</h3>
+        <p>This is the object every agent reads from and writes to. It's deliberately small:</p>
+        <pre><span class="file-label">backend/agents/pipeline/context.py</span>@dataclass
+class PipelineContext:
+    prediction_date: date
+    almanac: AlmanacOutput | None = None
+    technical: TechnicalOutput | None = None
+    macro: MacroOutput | None = None
+    evidence: EvidenceOutput | None = None
+    llm_outputs: list[LLMOutput] = field(default_factory=list)</pre>
+        <p>Every field starts as <code>None</code>. As each stage function runs, it fills in exactly one field. By the time the LLM stage runs, whatever fields are filled in get assembled into its prompt &mdash; and whatever's still <code>None</code> just gets skipped, no special-casing required.</p>
+        <div class="note">
+          This is the piece MPE doesn't have. Right now MPE's <code>run_pipeline.py</code> passes
+          agent outputs directly as function arguments. It works at 3 tickers and 3 agents, but it's
+          exactly the kind of thing that gets messy fast if a 4th or 5th agent gets added later.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="stages">
+      <div class="sheet-body">
+        <h3 class="section-title">Stage Functions — one per agent, all the same shape</h3>
+        <p>Every data agent's stage function follows an identical 4-line pattern:</p>
+        <pre><span class="file-label">backend/agents/pipeline/stages.py</span>def run_technical(ctx: PipelineContext, config: dict) -> None:
+    agent = TechnicalAgent()
+    output = agent.run(ctx.prediction_date)
+    ctx.technical = output          # &larr; writes into the shared context
+    _save_artifacts(agent, output, ctx.prediction_date, config)</pre>
+        <p><code>almanac</code>, <code>macro</code>, and <code>evidence</code> are the exact same four lines with different class names. The LLM stage is slightly different because it needs to know <em>which</em> model to run:</p>
+        <pre><span class="file-label">backend/agents/pipeline/stages.py</span>LLM_REGISTRY: dict[str, Callable[[], BaseLLMAgent]] = {
+    "nemotron": lambda: _make_openrouter("NVIDIA Nemotron 3 Super", "nvidia/nemotron-3-super-120b-a12b:free"),
+    "gptoss":   lambda: _make_openrouter("OpenAI gpt-oss-120b",     "openai/gpt-oss-120b:free"),
+    "gemma":    lambda: _make_openrouter("Google Gemma 4 31B",       "google/gemma-4-31b-it:free"),
+    "laguna":   lambda: _make_openrouter("Poolside Laguna M.1",      "poolside/laguna-m.1:free"),
+}</pre>
+        <p>Each value is a zero-argument function that <em>builds</em> an agent instance when called &mdash; not the agent itself. That means listing all four models here costs nothing until <code>run_llm</code> actually calls one of these lambdas, which is also why adding a fifth model later is a one-line addition, not a refactor.</p>
+      </div>
+    </section>
+
+    <section class="sheet" id="entrypoint">
+      <div class="sheet-body">
+        <h3 class="section-title">The Entry Point — config-driven, and it stops on the first real error</h3>
+        <p><code>run_pipeline.py</code> reads which stages are enabled from a TOML file, then runs them in a fixed order:</p>
+        <pre><span class="file-label">backend/run_pipeline.py</span>for name, fn in stage_map.items():
+    if not stages.get(name, False):
+        print(f"[pipeline] skipping {name} (disabled in config)")
+        continue
+    try:
+        fn(ctx, config)
+    except Exception as e:
+        print(f"[pipeline] ERROR in {name}: {e}", file=sys.stderr)
+        sys.exit(1)          # &larr; one broken agent stops the whole run</pre>
+        <div class="note warn">
+          Notice this is stricter than the LLM loop later in the same file. A broken
+          <em>data</em> agent (technical/macro/almanac/evidence) kills the entire run immediately
+          &mdash; there's no "skip and continue" here, because every later stage depends on this
+          data being real.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="llmlayer">
+      <div class="sheet-body">
+        <h3 class="section-title">The LLM Layer — Deliberately Split in Two Files</h3>
+        <p><code>base_llm.py</code> and <code>multi_model_runner.py</code> have a strict division of labor, and it's written explicitly as a code comment, not just implied:</p>
+        <pre><span class="file-label">backend/agents/llm/multi_model_runner.py</span>"""
+CONTRACT: we own ONLY query() on the BaseLLMAgent subclass. We do NOT modify any
+other base_llm method (build_prompt / parse_response / run / render_md).
+"""</pre>
+        <p><strong><code>base_llm.py</code> owns:</strong> assembling the prompt from the shared context, and parsing whatever text comes back into a typed <code>LLMOutput</code>. This code is identical no matter which of the four models is being called.</p>
+        <p><strong><code>multi_model_runner.py</code> owns:</strong> only the actual network call &mdash; <code>OpenRouterAgent.query()</code> &mdash; sending the prompt to OpenRouter and returning raw text. It does no parsing at all; that's explicitly not its job.</p>
+        <div class="callout">
+          <strong>Why split it this way:</strong> this was written by two different people on the
+          team (per their sprint docs, a "Dev Lead" role and an "R8 Synthesis" role). The contract
+          comment isn't decoration &mdash; it's how two people can work on the LLM layer
+          simultaneously without their changes colliding.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="promptformat">
+      <div class="sheet-body">
+        <h3 class="section-title">The Prompt Format Decision — and why it matters for MPE specifically</h3>
+        <p>This is the single most useful thing in the whole codebase for MPE right now. Team 1's system prompt to every model is explicit:</p>
+        <pre><span class="file-label">backend/agents/llm/multi_model_runner.py</span>system_instruction = (
+    "You are a strict financial data formatter. "
+    "You MUST output exactly the requested keys in PLAIN TEXT format, separated by colons. "
+    "DO NOT OUTPUT JSON FORMAT. "
+    "For index ranges, you MUST strictly use the word 'to' (e.g., -1.5 to 2.0). "
+    "Do NOT wrap your response in markdown code blocks."
+)</pre>
+        <p>And the parser on the receiving end is deliberately forgiving &mdash; it scans every line for a <code>KEY: value</code> pattern anywhere in the text, tolerating whatever reasoning or extra prose surrounds it:</p>
+        <pre><span class="file-label">backend/agents/llm/base_llm.py</span>lines = {
+    line.split(":", 1)[0].strip(): line.split(":", 1)[1].strip()
+    for line in raw.strip().splitlines()
+    if ":" in line
+}</pre>
+        <div class="note warn">
+          <strong>This directly explains bugs we spent hours debugging in MPE today.</strong>
+          MPE's prompt asks every model to respond with ONLY a JSON object. Reasoning models
+          like Nemotron and Laguna write out their thinking first, and by the time they get to
+          the actual answer, either the token budget is gone or the JSON is buried inside prose
+          that a strict JSON parser rejects outright. Team 1 hit this exact failure mode too,
+          which is presumably <em>why</em> they explicitly banned JSON in the system prompt &mdash;
+          a line-scanning parser degrades gracefully around reasoning text; a JSON parser doesn't.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="failures">
+      <div class="sheet-body">
+        <h3 class="section-title">Failure Handling Philosophy — honest failure over silent failure</h3>
+        <p>Three separate defensive layers in <code>OpenRouterAgent.query()</code>:</p>
+        <pre><span class="file-label">backend/agents/llm/multi_model_runner.py</span>for attempt in range(max_retries):
+    try:
+        response = self.client.chat.completions.create(...)
+        if not response.choices or not response.choices[0].message.content:
+            raise RuntimeError(f"[{self.model_name}] Empty response from provider.")
+        return response.choices[0].message.content
+    except Exception as e:
+        if attempt == max_retries - 1:
+            raise RuntimeError(f"...Exhausted all {max_retries} API retries.") from e
+        time.sleep(2 ** attempt)   # 1s, 2s, 4s</pre>
+        <p>Every exception gets retried with exponential backoff &mdash; not just rate-limit errors specifically. And when a model fails for good, it isn't dropped quietly. It gets a visible marker in the final comparison table:</p>
+        <pre><span class="file-label">backend/agents/llm/multi_model_runner.py</span>def _failed_row(exc: Exception) -> dict:
+    """Every data cell reads FAILED so a reviewer can't mistake it for 'no data'."""
+    marker = f"&#10060; FAIL ({type(exc).__name__})"
+    row = {key: marker for _, key in COMPARISON_DIMENSIONS}
+    return row</pre>
+        <p>And the whole run exits with a non-zero code if <em>any</em> model failed &mdash; which is what makes their CI turn red on a bad run, rather than a red flag getting buried in a log nobody reads.</p>
+        <div class="note">
+          A comment left in their own <code>__main__</code> block admits an unresolved bug in their
+          own system: a path-resolution issue in <code>base_llm.py</code> that the pre-flight check
+          doesn't actually catch. Worth knowing this isn't a polished, bug-free reference &mdash;
+          it's a real, evolving student codebase with its own open issues, same as MPE.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="validation">
+      <div class="sheet-body">
+        <h3 class="section-title">The Validation Layer</h3>
+        <p><code>scripts/rules/</code> defines format rules per agent type, and <code>validate_output.py</code> runs them with three severity levels &mdash; PASS, WARN, FAIL &mdash; against any saved report file:</p>
+        <pre><span class="file-label">scripts/validate_output.py</span>Exit codes:
+  0  all required checks pass (warnings may be present)
+  1  one or more required checks failed
+  2  usage error</pre>
+        <p>This is a separate, standalone script from the pipeline itself &mdash; it's meant to be run in CI against whatever markdown report an agent just wrote, checking things like "does this file actually contain the required fields in the required format," independent of whether the pipeline run itself succeeded.</p>
+      </div>
+    </section>
+
+    <section class="sheet" id="lessons">
+      <div class="sheet-body">
+        <h3 class="section-title">What MPE Should Actually Borrow</h3>
+        <table>
+          <tr><th>Pattern</th><th>Why it's worth taking</th></tr>
+          <tr>
+            <td>Plain-text <code>KEY: value</code> prompt format instead of JSON</td>
+            <td>Directly fixes the exact Nemotron/Laguna parsing failures MPE hit today &mdash; this is the highest-value, lowest-effort change available</td>
+          </tr>
+          <tr>
+            <td>Exponential backoff on <em>any</em> exception, not just 429</td>
+            <td>MPE currently only retries on rate-limit errors specifically; other transient failures get zero retries</td>
+          </tr>
+          <tr>
+            <td>Honest failure markers instead of silent skip</td>
+            <td>MPE currently drops a failed model with no visible trace in the output; a reviewer can't tell "1 model failed" from "we only ever use 1 model"</td>
+          </tr>
+          <tr>
+            <td>Shared <code>PipelineContext</code> object</td>
+            <td>Lower priority at 3 tickers/3 agents, but worth adopting before adding a 4th agent</td>
+          </tr>
+        </table>
+        <div class="note action">
+          The prompt-format change is the one worth doing first &mdash; it's a rewrite of one
+          function (<code>build_prompt</code>) and one system instruction string, and it targets
+          the exact failure mode already confirmed in MPE's own committed logs.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="readaloud-pill" onclick="handlePillClick()">
+  &#128266; Read Aloud
+</button>
+<div class="readaloud-panel" id="readaloud-panel">
+  <button class="close" onclick="document.getElementById('readaloud-panel').classList.remove('open')">&#10005;</button>
+  <h5>Listen to This Page</h5>
+  <div class="ra-controls">
+    <button onclick="readWholePage()" title="Play whole page">&#9654;</button>
+    <button onclick="pauseResumeReading()" title="Pause / Resume">&#9208;</button>
+    <button onclick="stopReading()" title="Stop">&#9209;</button>
+  </div>
+  <div class="ra-speed-row">
+    <label><span>Speed</span><span id="ra-speed-val">1.0x</span></label>
+    <input type="range" id="ra-speed" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed(this.value)">
+  </div>
+  <div class="ra-status" id="ra-status">Ready.</div>
+</div>
+
+<style>
+  .listen-btn{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.5px; background:rgba(143,199,222,0.1); color:var(--line-cyan); border:1px solid var(--line-dim); padding:5px 11px; border-radius:16px; cursor:pointer; margin-left:12px; vertical-align:middle;}
+  .listen-btn:hover{background:rgba(143,199,222,0.18);}
+  .listen-btn.playing{background:var(--amber); color:var(--blue-deep); border-color:var(--amber);}
+  .read-el.reading-active{background:rgba(232,166,60,0.14); outline:1px solid rgba(232,166,60,0.4); border-radius:3px;}
+  .readaloud-pill{position:fixed; bottom:24px; left:24px; z-index:50; background:var(--blue-panel); color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; letter-spacing:0.5px; padding:11px 18px; border-radius:24px; border:1px solid var(--line-cyan); cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.4); display:flex; align-items:center; gap:8px;}
+  .readaloud-pill.playing{background:var(--amber); color:var(--blue-deep); border-color:var(--amber); animation:ra-pulse 1.8s ease-in-out infinite;}
+  @keyframes ra-pulse{ 0%,100%{opacity:1;} 50%{opacity:0.75;} }
+  .readaloud-panel{position:fixed; bottom:76px; left:24px; z-index:50; width:300px; max-width:calc(100vw - 48px); background:var(--blue-mid); border:1px solid var(--line-dim); border-radius:6px; padding:14px 16px; box-shadow:0 8px 30px rgba(0,0,0,0.5); display:none;}
+  .readaloud-panel.open{display:block;}
+  .readaloud-panel h5{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;}
+  .readaloud-panel .close{position:absolute; top:14px; right:16px; background:none; border:none; color:var(--line-dim); cursor:pointer; font-size:14px;}
+  .ra-controls{display:flex; gap:8px; margin-bottom:16px;}
+  .ra-controls button{flex:1; background:rgba(143,199,222,0.1); border:1px solid var(--line-dim); color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:16px; padding:8px 0; border-radius:4px; cursor:pointer;}
+  .ra-controls button:hover{background:rgba(143,199,222,0.2);}
+  .ra-speed-row{margin-bottom:6px;}
+  .ra-speed-row label{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim); display:flex; justify-content:space-between; margin-bottom:6px;}
+  .ra-speed-row input[type=range]{width:100%; accent-color:var(--amber);}
+  .ra-status{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim); margin-top:10px; min-height:14px;}
+</style>
+
+<script>
+  let raQueueEls = [], raIndex = 0, raRate = 1.0, raVoice = null, raPlaying = false;
+  function pickVoice(){
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    let v = voices.find(v => /female/i.test(v.name) && /^en/i.test(v.lang));
+    if (!v) v = voices.find(v => /UK/i.test(v.name) || v.lang === 'en-GB');
+    if (!v) v = voices.find(v => /female/i.test(v.name));
+    if (!v) v = voices.find(v => /^en/i.test(v.lang));
+    return v || voices[0];
+  }
+  window.speechSynthesis.onvoiceschanged = () => { raVoice = pickVoice(); };
+  raVoice = pickVoice();
+  if (!raVoice){
+    let raVoiceTries = 0;
+    const raVoicePoll = setInterval(() => {
+      raVoice = pickVoice();
+      raVoiceTries++;
+      if (raVoice || raVoiceTries > 10) clearInterval(raVoicePoll);
+    }, 300);
+  }
+  function elToText(el){
+    if (el.tagName === 'TR'){
+      return Array.from(el.children).map(c => c.textContent.trim()).filter(Boolean).join(', ');
+    }
+    return el.textContent.trim();
+  }
+  function collectReadEls(scope){
+    const sel = 'h2, h3.section-title, p.sub, p.section-dek, p, li, td, th';
+    return Array.from(scope.querySelectorAll(sel)).filter(el => el.textContent.trim().length > 0 && !el.closest('pre'));
+  }
+  function clearHighlight(){ document.querySelectorAll('.reading-active').forEach(el => el.classList.remove('reading-active')); }
+  function setStatus(msg){ const s = document.getElementById('ra-status'); if (s) s.textContent = msg; }
+  function speakNext(){
+    if (raIndex >= raQueueEls.length){
+      clearHighlight(); raPlaying = false;
+      document.querySelector('.readaloud-pill').classList.remove('playing');
+      setStatus('Finished.'); return;
+    }
+    const el = raQueueEls[raIndex];
+    clearHighlight();
+    el.classList.add('reading-active');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    const utter = new SpeechSynthesisUtterance(elToText(el));
+    utter.rate = raRate;
+    if (raVoice) utter.voice = raVoice;
+    utter.onend = () => { raIndex++; speakNext(); };
+    utter.onerror = () => { raIndex++; speakNext(); };
+    window.speechSynthesis.speak(utter);
+    setStatus('Reading ' + (raIndex+1) + ' / ' + raQueueEls.length + '...');
+  }
+  function readWholePage(){
+    window.speechSynthesis.cancel();
+    raQueueEls = collectReadEls(document.querySelector('main'));
+    raIndex = 0; raPlaying = true;
+    document.getElementById('readaloud-panel').classList.remove('open');
+    document.querySelector('.readaloud-pill').classList.add('playing');
+    setStatus('Starting...');
+    speakNext();
+  }
+  function handlePillClick(){
+    if (raPlaying){ stopReading(); }
+    else { document.getElementById('readaloud-panel').classList.toggle('open'); }
+  }
+  function pauseResumeReading(){
+    if (!raPlaying) return;
+    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused){ window.speechSynthesis.pause(); setStatus('Paused.'); }
+    else if (window.speechSynthesis.paused){ window.speechSynthesis.resume(); setStatus('Resumed.'); }
+  }
+  function stopReading(){
+    window.speechSynthesis.cancel(); raPlaying = false;
+    document.querySelector('.readaloud-pill').classList.remove('playing');
+    clearHighlight(); setStatus('Stopped.');
+  }
+  function updateSpeed(val){
+    raRate = parseFloat(val);
+    document.getElementById('ra-speed-val').textContent = raRate.toFixed(1) + 'x';
+    if (raPlaying && window.speechSynthesis.speaking){ window.speechSynthesis.cancel(); speakNext(); }
+  }
+</script>
+<footer>THE AI PLAYBOOK &middot; TEAM 1 CODE WALKTHROUGH &middot; SOURCE: sinder38/Team-1-Prac-A-Project</footer>
+</body>
+</html>
