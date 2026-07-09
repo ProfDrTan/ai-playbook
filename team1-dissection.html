@@ -142,6 +142,7 @@
         <li><a href="#architecture"><span class="num">05</span> Architecture Decisions</a></li>
         <li><a href="#comparison"><span class="num">06</span> Team 1 vs. MPE, Honestly</a></li>
         <li><a href="#diagram"><span class="num">07</span> Architecture Diagram</a></li>
+        <li><a href="#delta"><span class="num">08</span> MPE Delta vs. Team 1</a></li>
       </ul>
     </nav>
     <a href="build-log.html" class="back-link">&larr; Back to Build Log</a>
@@ -360,6 +361,122 @@ graph TB
         <div class="note">
           Every node above maps to a real file in <code>sinder38/Team-1-Prac-A-Project</code>
           &mdash; nothing here is a generic architecture template.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="delta">
+      <div class="sheet-body">
+        <h3 class="section-title">MPE Delta vs. Team 1</h3>
+        <p class="section-dek">Same architecture skeleton, color-coded against the current, verified state of the market-prediction-engine repo.</p>
+        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:18px; font-size:12.5px;">
+          <div><span style="display:inline-block; width:14px; height:14px; border:2px solid var(--green); border-radius:3px; margin-right:6px; vertical-align:middle;"></span>Kept &mdash; same as Team 1</div>
+          <div><span style="display:inline-block; width:14px; height:14px; border:3px solid var(--amber); border-radius:3px; margin-right:6px; vertical-align:middle;"></span>MPE's real enhancement</div>
+          <div><span style="display:inline-block; width:14px; height:14px; border:2px dashed var(--coral); border-radius:3px; margin-right:6px; vertical-align:middle;"></span>Gap &mdash; Team 1 has it, MPE doesn't yet</div>
+        </div>
+        <div class="mermaid" style="background:rgba(255,255,255,0.03); border-radius:6px; padding:16px; overflow-x:auto;">
+graph TB
+    subgraph Sources["Data Sources"]
+        YF["Yahoo Finance<br/>(yfinance)"]
+        MACROFEED["Macro Event Data"]
+        NEWSFEED["News / Evidence Sources"]
+    end
+
+    subgraph SharedFoundation["Shared Foundation"]
+        BASE["base.py<br/>(Agent base class)"]
+        SCHEMAS["schemas.py"]
+    end
+
+    subgraph SignalAgents["Signal Agents"]
+        TECH["Technical Agent"]
+        MACRO["Macro Agent"]
+        ALM["Almanac Agent"]
+        EVID["Evidence Agent"]
+    end
+
+    subgraph PipelineCore["Pipeline Orchestration"]
+        CTX["Pipeline Context object<br/>(context.py)"]
+        STAGES["stages.py"]
+        RUNPIPE["run_pipeline.py"]
+    end
+
+    subgraph LLMLayer["Multi-Model LLM Layer"]
+        RUNNER["multi_model_runner.py"]
+        MODELS["4 models in parallel"]
+    end
+
+    subgraph OutputLayer["Output & Validation"]
+        IO["io.py<br/>(output writing, separated)"]
+        RULES["scripts/rules/*"]
+        VALIDATE["validate_output.py"]
+    end
+
+    subgraph CalibrationLoop["Weekly Calibration"]
+        FINALCALL["Prediction<br/>(team call OR synthesized)"]
+        ACTUAL["Actual Market Outcome"]
+        HUMANSCORE["Human Scoring Rubric<br/>(+3 to -2, manual)"]
+        EMASCORE["Automated EMA Trust Weights<br/>(per-model, no human step)"]
+        LOG["Log / Trust Weight File"]
+    end
+
+    subgraph CI["CI / CD"]
+        PIPELINE_YML["Weekly pipeline workflow"]
+        AGENT_CHECKS["agent-checks.yml"]
+        PY_CHECKS["python-checks.yml"]
+        TESTS["pytest suite"]
+        RUNLOG["Committed run logs<br/>(data/logs/*.txt)"]
+    end
+
+    YF --> TECH
+    MACROFEED --> MACRO
+    NEWSFEED --> EVID
+    BASE -.-> TECH
+    BASE -.-> MACRO
+    BASE -.-> ALM
+    BASE -.-> EVID
+    SCHEMAS -.-> TECH
+    SCHEMAS -.-> MACRO
+    SCHEMAS -.-> ALM
+    SCHEMAS -.-> EVID
+    TECH --> CTX
+    MACRO --> CTX
+    ALM --> CTX
+    EVID --> CTX
+    RUNPIPE -.-> CTX
+    CTX --> STAGES --> RUNNER
+    RUNNER --> MODELS --> FINALCALL
+    RUNPIPE -.-> IO
+    FINALCALL --> IO --> VALIDATE --> RULES
+    FINALCALL --> ACTUAL
+    ACTUAL --> HUMANSCORE --> LOG
+    ACTUAL --> EMASCORE --> LOG
+    LOG -.-> FINALCALL
+    PIPELINE_YML -.-> RUNPIPE
+    AGENT_CHECKS -.-> SignalAgents
+    PY_CHECKS -.-> PipelineCore
+    TESTS -.-> CTX
+    TESTS -.-> RUNPIPE
+    PIPELINE_YML -.-> RUNLOG
+
+    classDef kept fill:#163F63,stroke:#6FBF8B,stroke-width:2px,color:#EAF3F8
+    classDef enhanced fill:#163F63,stroke:#E8A63C,stroke-width:3px,color:#EAF3F8
+    classDef gap fill:#163F63,stroke:#D9694F,stroke-width:2px,stroke-dasharray:5 5,color:#EAF3F8
+
+    class YF,MACROFEED,TECH,MACRO,ALM,RUNNER,MODELS,FINALCALL,RUNPIPE,ACTUAL,PIPELINE_YML kept
+    class EMASCORE,LOG,RUNLOG enhanced
+    class BASE,SCHEMAS,EVID,CTX,STAGES,IO,RULES,VALIDATE,HUMANSCORE,AGENT_CHECKS,PY_CHECKS,TESTS,NEWSFEED gap
+
+    %% LEGEND
+    %% green solid  = kept, working the same as Team 1
+    %% amber thick  = MPE's real enhancement (automated EMA calibration replacing manual scoring)
+    %% red dashed   = exists in Team 1, not yet built in MPE
+
+        </div>
+        <div class="note warn">
+          Only one node is genuinely amber: automated EMA trust-weighting replacing manual human
+          scoring. Everything marked red (evidence agent, shared base class, pipeline context
+          object, output-writing separation, validation rules, tests, code-quality CI) is a real,
+          unclosed gap &mdash; not something MPE has already surpassed.
         </div>
       </div>
     </section>
