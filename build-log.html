@@ -349,6 +349,49 @@
           <div class="changelog-date">2026-07-08</div>
           <div>Token permissions updated (Workflows: Read/write added). Both weekly-pipeline.yml and weekly-scoring.yml pushed and confirmed present in the repo tree via API. Automation phase (Phase 3) is now code-complete. Remaining before the first live run: set OPENROUTER_API_KEY as a repo secret, then trigger weekly-pipeline.yml manually via workflow_dispatch.</div>
         </div>
+
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-07-09 &mdash; Learning: Prompt Format Root Cause</div>
+          <div>
+            <strong>Problem observed:</strong> across every live run since Phase 3 went live,
+            Nemotron and Laguna failed consistently &mdash; not with API errors, but with
+            <code>no JSON object found in response</code> or <code>empty response content
+            (finish_reason='length')</code>. Both are reasoning models: they write out a full
+            chain-of-thought before their final answer. Asking them for "ONLY a JSON object"
+            meant the JSON either never arrived within the token budget, or arrived buried
+            inside prose that a strict <code>json.loads()</code> call rejected outright.
+            <br><br>
+            <strong>Root cause found by reading Team 1's actual code</strong> (see the
+            <a href="team1-code-walkthrough.html">Code Walkthrough</a>, section 7): their
+            <code>multi_model_runner.py</code> system prompt explicitly states
+            <em>"DO NOT OUTPUT JSON FORMAT"</em> and instructs a plain <code>KEY: value</code>
+            text format instead. Their parser in <code>base_llm.py</code> scans every line for
+            a colon rather than parsing the whole response as one JSON blob &mdash; which
+            degrades gracefully around a reasoning trace instead of breaking on it.
+            <br><br>
+            <strong>Fix applied to <code>agents/llm/multi_model_runner.py</code>:</strong>
+            <ul style="margin:8px 0 8px 20px; font-size:12px;">
+              <li>Prompt changed from "respond with ONLY a JSON object" to a labeled
+                  <code>DIRECTION: / RANGE_LOW: / RANGE_HIGH: / CONFIDENCE: / REASONING:</code>
+                  plain-text format, matching Team 1's field-per-line convention</li>
+              <li>Added an explicit system message banning JSON output, adapted directly from
+                  Team 1's wording</li>
+              <li><code>extract_json()</code> replaced with <code>parse_fields()</code> &mdash;
+                  scans lines for <code>KEY: value</code> pairs, tolerant of surrounding
+                  reasoning text, instead of requiring one parseable JSON object</li>
+              <li>Retry logic changed from "retry only on HTTP 429" to retry on
+                  <em>any</em> exception with exponential backoff, matching Team 1's
+                  <code>2 ** attempt</code> pattern</li>
+            </ul>
+            <strong>Verified result</strong> (run immediately after the fix, log committed at
+            <code>data/logs/pipeline_20260709_164149.txt</code>): Nemotron and Laguna succeeded
+            on every call, zero JSON-parse errors. GPT-OSS and Gemma still hit 429 &mdash; that's
+            the separate, already-diagnosed OpenRouter account rate-limit issue, unrelated to
+            prompt format and not something this fix was meant to address. The new any-exception
+            retry logic also caught a real transient miss live: Laguna missed
+            <code>RANGE_HIGH</code> on IWM's first attempt and succeeded on the automatic retry.
+          </div>
+        </div>
       </div>
     </section>
     <section class="sheet" id="glossary">
