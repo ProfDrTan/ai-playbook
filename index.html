@@ -274,6 +274,13 @@
     .sheet-body{padding:30px 24px 24px;}
     .sheet-titleblock{padding:12px 24px;}
   }
+
+  .readaloud-pill.playing{
+    background:var(--amber); color:var(--blue-deep); border-color:var(--amber);
+    animation:ra-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes ra-pulse{ 0%,100%{opacity:1;} 50%{opacity:0.75;} }
+  .readaloud-panel{ padding:14px 16px; }
 </style>
 </head>
 <body>
@@ -827,7 +834,7 @@
   });
 </script>
 
-<button class="readaloud-pill" onclick="document.getElementById('readaloud-panel').classList.toggle('open')">
+<button class="readaloud-pill" onclick="handlePillClick()">
   &#128266; Read Aloud
 </button>
 <div class="readaloud-panel" id="readaloud-panel">
@@ -857,14 +864,23 @@
   function pickVoice(){
     const voices = window.speechSynthesis.getVoices();
     if (!voices.length) return null;
-    let v = voices.find(v => /UK/i.test(v.name) && /Female/i.test(v.name));
-    if (!v) v = voices.find(v => v.lang === 'en-GB' && /female/i.test(v.name));
-    if (!v) v = voices.find(v => v.lang === 'en-GB');
+    let v = voices.find(v => /female/i.test(v.name) && /^en/i.test(v.lang));
+    if (!v) v = voices.find(v => /UK/i.test(v.name) || v.lang === 'en-GB');
+    if (!v) v = voices.find(v => /female/i.test(v.name));
     if (!v) v = voices.find(v => /^en/i.test(v.lang));
     return v || voices[0];
   }
   window.speechSynthesis.onvoiceschanged = () => { raVoice = pickVoice(); };
   raVoice = pickVoice();
+  // Android Chrome sometimes returns an empty voice list on first call.
+  if (!raVoice){
+    let raVoiceTries = 0;
+    const raVoicePoll = setInterval(() => {
+      raVoice = pickVoice();
+      raVoiceTries++;
+      if (raVoice || raVoiceTries > 10) clearInterval(raVoicePoll);
+    }, 300);
+  }
 
   function elToText(el){
     if (el.tagName === 'TR'){
@@ -899,6 +915,8 @@
     if (raIndex >= raQueueEls.length){
       clearHighlight();
       raPlaying = false;
+      const pillEl = document.querySelector('.readaloud-pill');
+      if (pillEl) pillEl.classList.remove('playing');
       resetChapterButtons();
       setStatus('Finished.');
       return;
@@ -922,6 +940,10 @@
     raQueueEls = elements;
     raIndex = 0;
     raPlaying = true;
+    const panel = document.getElementById('readaloud-panel');
+    if (panel) panel.classList.remove('open');
+    const pill = document.querySelector('.readaloud-pill');
+    if (pill) pill.classList.add('playing');
     setStatus('Starting: ' + label);
     speakNext();
   }
@@ -960,10 +982,20 @@
   function stopReading(){
     window.speechSynthesis.cancel();
     raPlaying = false;
+    const pill = document.querySelector('.readaloud-pill');
+    if (pill) pill.classList.remove('playing');
     clearHighlight();
     resetChapterButtons();
     raCurrentChapterBtn = null;
     setStatus('Stopped.');
+  }
+
+  function handlePillClick(){
+    if (raPlaying){
+      stopReading();
+    } else {
+      document.getElementById('readaloud-panel').classList.toggle('open');
+    }
   }
 
   function updateSpeed(val){
