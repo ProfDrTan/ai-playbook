@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team 1 Dissection | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans', sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{display:flex; max-width:1200px; margin:0 auto; min-height:100vh;}
+  .sidebar{width:260px; flex-shrink:0; padding:40px 20px; position:sticky; top:0; align-self:flex-start; height:100vh; border-right:1px solid var(--line-dim);}
+  .sidebar .tag{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:6px;}
+  .sidebar h1{font-family:'IBM Plex Mono', monospace; font-size:19px; line-height:1.3; color:var(--paper); margin-bottom:28px; font-weight:600;}
+  .sidebar nav ul{list-style:none;}
+  .sidebar nav li{margin-bottom:2px;}
+  .sidebar nav a{display:flex; gap:10px; align-items:baseline; text-decoration:none; font-size:13.5px; color:var(--text-body); padding:8px 6px; border-radius:2px;}
+  .sidebar nav a:hover{background:rgba(143,199,222,0.08); color:var(--paper);}
+  .sidebar nav .num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); width:20px; flex-shrink:0;}
+  .back-link{display:block; margin-top:24px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--line-dim);}
+  .back-link:hover{color:var(--line-cyan);}
+  main{flex:1; padding:60px 60px 120px;}
+  .cover{margin-bottom:56px;}
+  .cover .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:16px;}
+  .cover h2{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(26px,4.2vw,40px); color:var(--paper); line-height:1.15; margin-bottom:20px; max-width:800px;}
+  .cover p.sub{font-size:16px; color:var(--text-body); max-width:680px; margin-bottom:14px;}
+  .sheet{border:1px solid var(--line-dim); background:rgba(10,40,64,0.35); margin-bottom:44px;}
+  .sheet-body{padding:36px 40px 30px;}
+  .sheet h3.section-title{font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--paper); margin-bottom:8px;}
+  .sheet p.section-dek{color:var(--line-cyan); font-size:13.5px; margin-bottom:22px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:10px;}
+  th{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--amber); text-align:left; padding:10px 12px; border-bottom:1px solid var(--line-dim);}
+  td{padding:10px 12px; border-bottom:1px solid rgba(62,102,131,0.4); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  code{font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:rgba(0,0,0,0.25); padding:1px 5px; border-radius:2px; color:var(--paper);}
+  .note{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan); background:rgba(143,199,222,0.06); border-left:3px solid var(--line-cyan); padding:10px 14px; margin-top:16px;}
+  .note.warn{color:var(--coral); background:rgba(217,105,79,0.08); border-left-color:var(--coral);}
+  .status{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.5px; padding:2px 8px; border-radius:2px; white-space:nowrap;}
+  .status.done{color:var(--green); border:1px solid var(--green);}
+  .status.gap{color:var(--coral); border:1px solid var(--coral);}
+  .status.partial{color:var(--amber); border:1px solid var(--amber);}
+  ul.plain{padding-left:20px; font-size:13.5px;}
+  ul.plain li{margin-bottom:6px;}
+  footer{text-align:center; padding:40px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); letter-spacing:1px;}
+  @media (max-width:900px){
+    .sidebar{display:none;} main{padding:40px 24px 80px;} .sheet-body{padding:26px 22px 22px;} table{font-size:12.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="tag">Source Material</div>
+    <h1>Team 1 Dissection</h1>
+    <nav>
+      <ul>
+        <li><a href="#overview"><span class="num">01</span> What Team 1 Actually Built</a></li>
+        <li><a href="#scope"><span class="num">02</span> Scope &amp; Data</a></li>
+        <li><a href="#llm-layer"><span class="num">03</span> The LLM Layer</a></li>
+        <li><a href="#qa"><span class="num">04</span> Human QA Process</a></li>
+        <li><a href="#architecture"><span class="num">05</span> Architecture Decisions</a></li>
+        <li><a href="#comparison"><span class="num">06</span> Team 1 vs. MPE, Honestly</a></li>
+      </ul>
+    </nav>
+    <a href="build-log.html" class="back-link">&larr; Back to Build Log</a>
+  </aside>
+
+  <main>
+    <div class="cover" id="overview">
+      <div class="eyebrow">Real repo, read directly &middot; sinder38/Team-1-Prac-A-Project</div>
+      <h2>What Team 1 Actually Built</h2>
+      <p class="sub">This is not a paraphrase or a memory of the earlier "extracted and enhanced" framing &mdash; every fact on this page was pulled directly from Team 1's public repository: their README, decision log, weekly QA logs, and LLM comparison outputs.</p>
+      <p class="sub">Team 1 ran a 10-week sprint cycle: five specialist agents feed a shared pipeline context, four AI models are queried in parallel with an identical prompt, a human QA role scores the team's own final call against actual outcomes the following week, and the whole thing runs partly through GitHub Actions.</p>
+      <div class="note">
+        Source files read for this page: <code>README.md</code>, <code>DECISION.md</code>,
+        <code>data/qa/calibration_scoring_rule_W22.md</code>, <code>data/qa/learning_log_W24.md</code>,
+        <code>data/llm/llm_comparison_W24.md</code>, <code>sprints/retrospective_w25.md</code>,
+        and the full repo file tree.
+      </div>
+    </div>
+
+    <section class="sheet" id="scope">
+      <div class="sheet-body">
+        <h3 class="section-title">Scope &amp; Data</h3>
+        <p class="section-dek">Team 1 tracks far more than the 3 tickers MPE currently covers.</p>
+        <table>
+          <tr><th>Asset</th><th>Ticker</th><th>Why they track it</th></tr>
+          <tr><td>S&amp;P 500</td><td><code>SPX</code></td><td>The benchmark index</td></tr>
+          <tr><td>Nasdaq 100</td><td><code>NDX</code></td><td>Tech-heavy, fastest-moving</td></tr>
+          <tr><td>Russell 2000</td><td><code>IWM</code></td><td>Small caps, most rate-sensitive</td></tr>
+          <tr><td>Gold</td><td><code>GC</code></td><td>Safe haven / inflation gauge</td></tr>
+          <tr><td>Crude Oil</td><td><code>CL</code></td><td>Inflation driver, geopolitical signal</td></tr>
+          <tr><td>10Y Treasury Yield</td><td><code>ZN</code></td><td>The gravity on all asset valuations</td></tr>
+          <tr><td>US Bonds</td><td><code>TLT</code></td><td>Stocks + bonds both down = fear signal</td></tr>
+          <tr><td>VIX</td><td><code>VIX</code></td><td>Volatility / fear index</td></tr>
+          <tr><td>+1 more asset</td><td>&mdash;</td><td>9 total per their README badge</td></tr>
+        </table>
+        <div class="note">
+          MPE currently covers SPX, NDX, IWM only &mdash; the 3 core equity indices, none of the
+          macro hedge assets Team 1 tracks alongside them.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="llm-layer">
+      <div class="sheet-body">
+        <h3 class="section-title">The LLM Layer — Two Generations</h3>
+        <p class="section-dek">Team 1's model panel changed over the 10-week sprint. MPE's model choice matches their <em>second</em> panel, not their first.</p>
+        <table>
+          <tr><th>Phase</th><th>Models used</th><th>Notes</th></tr>
+          <tr>
+            <td>Original (early weeks)</td>
+            <td>Claude, ChatGPT, Gemini, DeepSeek</td>
+            <td>Paid/consumer-tier commercial models, queried directly through each provider's own interface</td>
+          </tr>
+          <tr>
+            <td>Later (W24&ndash;W25)</td>
+            <td>NVIDIA Nemotron 3 Super, OpenAI gpt-oss-120b, Google Gemma 4 31B, Poolside Laguna M.1</td>
+            <td>Free-tier OpenRouter models &mdash; the exact same four MPE uses</td>
+          </tr>
+        </table>
+        <div class="note">
+          Confirmed from <code>data/llm/llm_comparison_W24.md</code>: Team 1 got real, usable output
+          from all four of these models in their own W24 run. That's independent evidence the model
+          IDs are valid and the approach works &mdash; MPE's current 429/empty-response failures are a
+          pacing and reliability problem on our side, not a sign the models don't exist or don't work.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="qa">
+      <div class="sheet-body">
+        <h3 class="section-title">Human QA Process — What "Manual Calibration" Actually Means</h3>
+        <p class="section-dek">There's a real scoring rubric behind Team 1's manual process, run by a rotating "R10 QA and Learning Log Lead" role.</p>
+        <table>
+          <tr><th>Confidence</th><th>Direction correct?</th><th>Score</th></tr>
+          <tr><td>High</td><td>Correct</td><td>+3</td></tr>
+          <tr><td>Medium</td><td>Correct</td><td>+2</td></tr>
+          <tr><td>Low / Uncertain</td><td>Correct</td><td>+1</td></tr>
+          <tr><td>High</td><td>Wrong</td><td>&minus;2</td></tr>
+          <tr><td>Medium</td><td>Wrong</td><td>0</td></tr>
+          <tr><td>Low / Uncertain</td><td>Wrong</td><td>+1</td></tr>
+        </table>
+        <p style="font-size:13.5px; margin-top:14px;">
+          A real example from their <code>learning_log_W24.md</code>: the team predicted
+          Neutral-Bullish across SPX/NDX/IWM at Medium confidence. All three directions landed
+          correct; two of three ranges hit. Final score: <strong>+7 / +9</strong> &mdash; up from
+          <strong>0 / +9</strong> the week before.
+        </p>
+        <div class="note">
+          This is a genuinely different mechanism from MPE's trust-weighted EMA. Team 1 scores the
+          <em>team's own final human call</em> each week. MPE scores <em>each model individually</em>
+          and lets weights drift automatically. Neither replaces the other outright &mdash; they're
+          scoring different things.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="architecture">
+      <div class="sheet-body">
+        <h3 class="section-title">Architecture Decisions (from their DECISION.md)</h3>
+        <ul class="plain">
+          <li><strong>Agents first:</strong> built before anything downstream, since errors there compound forward.</li>
+          <li><strong>Fetch + process combined</strong> per agent (no separate fetch abstraction layer) &mdash; deliberately kept simple.</li>
+          <li><strong>Output-writing separated from agent logic</strong> &mdash; a dedicated module handles disk writes, so storage format can change without touching agent code. <span class="status gap">MPE doesn't have this separation yet</span></li>
+          <li><strong>Shared pipeline context object</strong> collects all agent outputs before the LLM stage sees any of them, decoupling the LLM stage from agent count/order. <span class="status gap">MPE passes outputs directly, no context object</span></li>
+          <li><strong>Automated tests</strong> at agent/context/prompt-building integration points, plus type checking on every change. <span class="status gap">MPE has zero automated tests currently</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sheet" id="comparison">
+      <div class="sheet-body">
+        <h3 class="section-title">Team 1 vs. MPE — Stated Plainly</h3>
+        <table>
+          <tr><th>Dimension</th><th>Team 1</th><th>MPE (current)</th></tr>
+          <tr><td>Assets tracked</td><td>9 (equities + macro hedges)</td><td><span class="status gap">3 (equities only)</span></td></tr>
+          <tr><td>Evidence agent</td><td><span class="status done">built</span> &mdash; sources, models, reporting</td><td><span class="status gap">not started</span></td></tr>
+          <tr><td>Automated tests</td><td><span class="status done">4 test files, CI-enforced</span></td><td><span class="status gap">none</span></td></tr>
+          <tr><td>CI/CD</td><td><span class="status done">3 workflows: pipeline, agent checks, python checks</span></td><td><span class="status partial">1 pipeline workflow, no code-quality checks</span></td></tr>
+          <tr><td>Output/storage separation</td><td><span class="status done">dedicated module</span></td><td><span class="status gap">inline in run_pipeline.py</span></td></tr>
+          <tr><td>Calibration method</td><td>Manual weekly human scoring rubric</td><td>Automated per-model EMA trust weighting</td></tr>
+          <tr><td>Weekly effort required</td><td>A rotating QA role manually scores and logs each week</td><td>Zero &mdash; runs unattended once automation is stable</td></tr>
+          <tr><td>Chart/visual output</td><td><span class="status done">technical_agent generates charts (PNG)</span></td><td><span class="status gap">none</span></td></tr>
+        </table>
+        <div class="note warn">
+          Honest framing: MPE's real, defensible enhancement is narrower than "more robust, more
+          scalable, closer to commercial" implied &mdash; it's specifically the automated,
+          self-adjusting calibration loop replacing a human QA role. On breadth of assets, testing,
+          and evidence-gathering, Team 1's actual repo is currently more complete than MPE. Closing
+          those gaps is real remaining work, not already-done enhancement.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<footer>THE AI PLAYBOOK &middot; TEAM 1 DISSECTION &middot; SOURCE: sinder38/Team-1-Prac-A-Project</footer>
+</body>
+</html>
