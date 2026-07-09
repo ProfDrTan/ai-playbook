@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Command Center — The AI Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --text-body:#CFE4F0;
+    --live:#7FD99A; --active:#8FC7DE; --blocked:#D9694F; --paused:#E8A63C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans',sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{max-width:1100px;margin:0 auto;padding:44px 24px 70px;}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+  h1{font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--paper);margin-bottom:6px;font-weight:600;}
+  .sub{color:var(--text-body);opacity:.8;font-size:14px;margin-bottom:22px;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-body);opacity:.85;margin-bottom:28px;}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;}
+  .section-title{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin:38px 0 14px;border-bottom:1px solid var(--line-dim);padding-bottom:8px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;}
+  .card{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:4px;padding:18px 18px 16px;}
+  .card h3{font-size:15px;color:var(--paper);display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:600;}
+  .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:.4px;border:1px solid currentColor;}
+  .badge.live{color:var(--live);}
+  .badge.active{color:var(--active);}
+  .badge.blocked{color:var(--blocked);}
+  .badge.paused{color:var(--paused);}
+  .card p{margin:7px 0;font-size:13px;color:var(--text-body);opacity:.9;line-height:1.55;}
+  .card .next{background:rgba(143,199,222,0.06);border-left:2px solid var(--amber);padding:8px 10px;font-size:12.5px;color:var(--paper);margin-top:10px;}
+  .card .links{margin-top:10px;display:flex;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;}
+  .updated{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--line-dim);text-align:right;margin-top:30px;}
+  .back{font-family:'IBM Plex Mono',monospace;font-size:12px;display:inline-block;margin-bottom:18px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to AI Playbook</a>
+  <div class="tag">Prof Dr. Tan &middot; Live Status</div>
+  <h1>Command Center</h1>
+  <p class="sub">Portfolio-level view across every active build — GitHub + Cloudflare/Pages — for resource allocation at a glance.</p>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--live)"></span>LIVE / DEPLOYED</span>
+    <span><span class="dot" style="background:var(--active)"></span>IN PROGRESS</span>
+    <span><span class="dot" style="background:var(--paused)"></span>AWAITING INPUT</span>
+    <span><span class="dot" style="background:var(--blocked)"></span>BLOCKED</span>
+  </div>
+
+  <div class="section-title">Course Infrastructure</div>
+  <div class="grid">
+    <div class="card">
+      <h3>CP3405 DT3 — Sprint Monitor <span class="badge live">Live</span></h3>
+      <p>dt3-monitor polls 5 team repos every 30 min via GitHub Actions, Telegram alerts. Sprint 6 tag vW28 due Sun 12 Jul 23:59 SGT.</p>
+      <p>T1 pipeline crashed 3 Jul (unresolved as of last audit) &middot; T2 strongest, W27 already collected &middot; T3 tag format issue &middot; T4 stalled since 27 Jun &middot; T5 most consistent auto-commits.</p>
+      <div class="next">Next: verify T1 pipeline fix and confirm all 5 teams before 13 Jul presentation.</div>
+      <div class="links"><a href="https://github.com/ProfDrTan/dt3-monitor">GitHub &rarr;</a></div>
+    </div>
+    <div class="card">
+      <h3>CP5640 Participation Tracker <span class="badge blocked">Blocked</span></h3>
+      <p>17 students, W1&ndash;W10 tabs. Currently localStorage-only (single-device) &mdash; caused a live-class failure.</p>
+      <div class="next">Next: build Cloudflare Worker shared backend before next in-class use.</div>
+      <div class="links"><a href="https://profdrtan.github.io/cp5640-participation-tracker">Site &rarr;</a></div>
+    </div>
+    <div class="card">
+      <h3>Research Methods Teaching Site <span class="badge live">Live</span></h3>
+      <p>Built for 27 Jun live class. Quiz bank expanded to 94+ questions across 6 sections. Data store consolidated onto GitHub API only.</p>
+      <div class="next">Stable &mdash; no pending action.</div>
+      <div class="links"><a href="https://profdrtan.github.io/research-methods">Site &rarr;</a></div>
+    </div>
+  </div>
+
+  <div class="section-title">Market Intelligence Systems</div>
+  <div class="grid">
+    <div class="card">
+      <h3>Market Prediction Engine <span class="badge active">In Progress</span></h3>
+      <p>Signal-weighting system on Team 1's foundation. Agent layer (technical/macro/almanac) confirmed against live yfinance data.</p>
+      <p>LLM synthesis: rate-limit pacing, retry logic, JSON extraction, None-content guards all pushed.</p>
+      <div class="next">Next: confirm one full end-to-end run producing a real prediction output.</div>
+      <div class="links"><a href="https://github.com/ProfDrTan/market-prediction-engine">GitHub &rarr;</a></div>
+    </div>
+    <div class="card">
+      <h3>IBKR Options Income System <span class="badge live">Live</span></h3>
+      <p>Automated SPX Bull Put Spread strategy, GitHub Actions scheduler, Telegram alerts, multi-tab dashboard.</p>
+      <div class="next">Feeding live track record into "The 3-Hour Trader" book.</div>
+      <div class="links"><a href="https://profdrtan.github.io/ibkr-options-income">Site &rarr;</a></div>
+    </div>
+    <div class="card">
+      <h3>PRISM / AI Trading Lab <span class="badge live">Live</span></h3>
+      <p>PRISM market intelligence platform on Hugging Face Spaces, synced from GitHub via Actions. Companion book site live.</p>
+      <div class="next">Stable &mdash; no pending action.</div>
+      <div class="links"><a href="https://ai-trading-lab.pages.dev">Site &rarr;</a></div>
+    </div>
+  </div>
+
+  <div class="section-title">Publishing &amp; Content</div>
+  <div class="grid">
+    <div class="card">
+      <h3>AI Playbook Website <span class="badge active">In Progress</span></h3>
+      <p>7 chapters live. Ch.4 + Ch.5 updated. Build log, Team 1 dissection, and this Command Center now live &mdash; all with read-aloud engine.</p>
+      <div class="next">Next: finish glossary page, then wire into content-drip pilot.</div>
+      <div class="links"><a href="index.html">Home &rarr;</a></div>
+    </div>
+    <div class="card">
+      <h3>Content-Drip Automation <span class="badge paused">Awaiting Input</span></h3>
+      <p>Weekly GitHub Actions cron drafts LinkedIn posts from AI Playbook chapters into a drafts folder for manual review.</p>
+      <div class="next">Next: add "workflow" scope to ai-playbook PAT + set ANTHROPIC_API_KEY secret.</div>
+    </div>
+    <div class="card">
+      <h3>AI Power Shift Book + Site <span class="badge live">Live</span></h3>
+      <p>Full 181-page manuscript live, bilingual EN/ZH (435 read-en blocks translated). Signal Watch digest kept current.</p>
+      <div class="next">Standing rule: auto-updates whenever a relevant article is shared.</div>
+      <div class="links"><a href="https://ai-power-shift.pages.dev">Site &rarr;</a></div>
+    </div>
+    <div class="card">
+      <h3>"Sprint by Sprint" Research Paper <span class="badge paused">Held</span></h3>
+      <p>Target: Computers and Education: AI (Elsevier). All 13 citations resolved, references finalized.</p>
+      <div class="next">On hold until TR2 ends (~early Aug 2026) &mdash; then one-pass revision + docx.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Personal Finance</div>
+  <div class="grid">
+    <div class="card">
+      <h3>Wealth Dashboard <span class="badge live">Live</span></h3>
+      <p>Net worth across SG/MY/US. Insurance tab (Great Eastern). Passive income roadmap: S$100K &rarr; S$150K by 2032.</p>
+      <div class="next">Rule in force: index.html updates same-push as any confirmed figure.</div>
+      <div class="links"><a href="https://professor-dr-tan-wealth-dashboard.pages.dev">Site &rarr;</a></div>
+    </div>
+  </div>
+
+  <div class="updated">Last generated 10 Jul 2026 &middot; not a live poll &mdash; ask to refresh anytime.</div>
+</div>
+</body>
+</html>
