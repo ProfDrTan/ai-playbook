@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When to Use What | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans', sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{display:flex; max-width:1200px; margin:0 auto; min-height:100vh;}
+  .sidebar{width:260px; flex-shrink:0; padding:40px 20px; position:sticky; top:0; align-self:flex-start; height:100vh; border-right:1px solid var(--line-dim);}
+  .sidebar .tag{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:6px;}
+  .sidebar h1{font-family:'IBM Plex Mono', monospace; font-size:19px; line-height:1.3; color:var(--paper); margin-bottom:28px; font-weight:600;}
+  .sidebar nav ul{list-style:none;}
+  .sidebar nav li{margin-bottom:2px;}
+  .sidebar nav a{display:flex; gap:10px; align-items:baseline; text-decoration:none; font-size:13.5px; color:var(--text-body); padding:8px 6px; border-radius:2px;}
+  .sidebar nav a:hover{background:rgba(143,199,222,0.08); color:var(--paper);}
+  .sidebar nav .num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); width:20px; flex-shrink:0;}
+  .back-link{display:block; margin-top:24px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--line-dim);}
+  .back-link:hover{color:var(--line-cyan);}
+  main{flex:1; padding:60px 60px 120px;}
+  .cover{margin-bottom:56px;}
+  .cover .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:16px;}
+  .cover h2{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(26px,4.2vw,40px); color:var(--paper); line-height:1.15; margin-bottom:20px; max-width:800px;}
+  .cover p.sub{font-size:16px; color:var(--text-body); max-width:680px; margin-bottom:14px;}
+  .sheet{border:1px solid var(--line-dim); background:rgba(10,40,64,0.35); margin-bottom:44px;}
+  .sheet-body{padding:36px 40px 30px;}
+  .sheet h3.section-title{font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--paper); margin-bottom:8px;}
+  .sheet p.section-dek{color:var(--line-cyan); font-size:13.5px; margin-bottom:22px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:10px;}
+  th{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--amber); text-align:left; padding:10px 12px; border-bottom:1px solid var(--line-dim);}
+  td{padding:10px 12px; border-bottom:1px solid rgba(62,102,131,0.4); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  code{font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:2px; color:var(--paper); white-space:nowrap;}
+  pre{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:rgba(0,0,0,0.35);
+    border:1px solid var(--line-dim); border-radius:4px; padding:14px 16px; overflow-x:auto;
+    margin:10px 0 16px; color:var(--paper); line-height:1.6;
+  }
+  .note{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan); background:rgba(143,199,222,0.06); border-left:3px solid var(--line-cyan); padding:10px 14px; margin-top:16px;}
+  .note.warn{color:var(--coral); background:rgba(217,105,79,0.08); border-left-color:var(--coral);}
+  ol.steps, ul.plain{padding-left:22px; font-size:13.5px;}
+  ol.steps li, ul.plain li{margin-bottom:10px;}
+  .badge{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:10.5px;
+    letter-spacing:0.5px; padding:2px 8px; border-radius:3px; margin-left:8px;
+  }
+  .badge.cheap{color:var(--green); border:1px solid var(--green);}
+  .badge.mid{color:var(--amber); border:1px solid var(--amber);}
+  .badge.premium{color:var(--coral); border:1px solid var(--coral);}
+  footer{text-align:center; padding:40px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); letter-spacing:1px;}
+  @media (max-width:900px){
+    .sidebar{display:none;} main{padding:40px 24px 80px;} .sheet-body{padding:26px 22px 22px;} table{font-size:12.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="tag">Reference</div>
+    <h1>When to Use What</h1>
+    <nav>
+      <ul>
+        <li><a href="#surfaces"><span class="num">01</span> Chat vs. Claude Code</a></li>
+        <li><a href="#install"><span class="num">02</span> Installing Claude Code</a></li>
+        <li><a href="#first-run"><span class="num">03</span> Your First Session</a></li>
+        <li><a href="#models"><span class="num">04</span> Which Model, When</a></li>
+        <li><a href="#cost"><span class="num">05</span> Cost Control Habits</a></li>
+        <li><a href="#applied"><span class="num">06</span> Applied to This Project</a></li>
+      </ul>
+    </nav>
+    <a href="index.html" class="back-link">&larr; Back to AI Playbook</a>
+  </aside>
+
+  <main>
+    <div class="cover">
+      <div class="eyebrow">Reference Guide</div>
+      <h2>When to Use What: Claude, Claude Code, and Fable</h2>
+      <p class="sub">A working reference for choosing between Claude's chat interface, Claude Code (the terminal tool), and the different model tiers &mdash; written after using all of them on the Market Prediction Engine build.</p>
+    </div>
+
+    <section class="sheet" id="surfaces">
+      <div class="sheet-body">
+        <h3 class="section-title">Chat vs. Claude Code — Different Tools, Different Jobs</h3>
+        <table>
+          <tr><th>Surface</th><th>What it's for</th><th>Key limitation</th></tr>
+          <tr>
+            <td>Claude.ai chat (this)</td>
+            <td>Conversation, planning, web research, editing files via the GitHub API one call at a time, generating documents.</td>
+            <td>Runs in a sandboxed environment with a restricted network allowlist &mdash; can't reach every domain (e.g. GitHub's own Actions log storage lives outside it).</td>
+          </tr>
+          <tr>
+            <td>Claude Code</td>
+            <td>Lives in your terminal (or a desktop app, if you'd rather skip the terminal entirely), reads your actual local repo, edits real files, runs real commands, has normal internet access.</td>
+            <td>Requires a Claude Pro/Max subscription or API credits &mdash; not available on the free plan.</td>
+          </tr>
+        </table>
+        <div class="note">
+          Rule of thumb: use this chat for planning, research, and one-off file edits via API.
+          Use Claude Code when you want it working directly inside your project folder,
+          running commands, and iterating across many files in one sitting.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="install">
+      <div class="sheet-body">
+        <h3 class="section-title">Installing Claude Code — Step by Step</h3>
+        <p class="section-dek">Two options: terminal (most flexible) or the desktop app (no terminal at all).</p>
+
+        <p style="font-size:13.5px; margin-bottom:8px;"><strong>Option A — Desktop app (easiest, no terminal):</strong></p>
+        <ol class="steps">
+          <li>Download the Claude Code desktop app for your OS from claude.com</li>
+          <li>Install and open it, sign in with your Claude account</li>
+          <li>Open your project folder from inside the app</li>
+        </ol>
+
+        <p style="font-size:13.5px; margin-bottom:8px; margin-top:20px;"><strong>Option B — Terminal (macOS example):</strong></p>
+        <ol class="steps">
+          <li>Open Terminal: press <code>Cmd + Space</code>, type "Terminal", press Enter</li>
+          <li>Paste this command and press Enter:
+            <pre>curl -fsSL https://claude.ai/install.sh | sh</pre>
+          </li>
+          <li>Wait for "Claude Code successfully installed!"</li>
+          <li>Type <code>claude</code> and press Enter — a browser window opens for login</li>
+          <li>Sign in with the same account you use for claude.ai</li>
+        </ol>
+        <p style="font-size:13.5px; margin-top:14px;"><strong>Windows:</strong> Open PowerShell, and if it says "irm is not recognized," you're in the wrong shell (that's a CMD vs. PowerShell mixup — the install page gives you the exact right line for each).</p>
+        <div class="note">
+          Requires a Claude Pro ($17&ndash;20/month) or Max subscription, or an API account with
+          credits &mdash; the free claude.ai plan doesn't include Claude Code. Check current pricing
+          at claude.com before committing to a tier.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="first-run">
+      <div class="sheet-body">
+        <h3 class="section-title">Your First Session</h3>
+        <ol class="steps">
+          <li>Navigate to your project folder in Terminal (or open it directly in the desktop app), e.g. <code>cd market-prediction-engine</code></li>
+          <li>Run <code>claude</code> — it reads any <code>CLAUDE.md</code> file in that folder automatically, so it already knows the project context</li>
+          <li>Start small: ask it to "explain what this repo does" or "find the entry point" before asking for changes &mdash; watch it read files and reason before trusting it with edits</li>
+          <li>Press <code>Shift+Tab</code> to enter <strong>Plan Mode</strong> &mdash; it proposes a plan without touching any files, you approve, then it executes</li>
+          <li>Type <code>/help</code> anytime to see all available commands</li>
+          <li>Type <code>exit</code> or press <code>Ctrl+D</code> to leave</li>
+        </ol>
+        <div class="note">You don't need to know how to code to use it &mdash; you're directing it in plain English, the same way you'd direct me in this chat.</div>
+      </div>
+    </section>
+
+    <section class="sheet" id="models">
+      <div class="sheet-body">
+        <h3 class="section-title">Which Model, When</h3>
+        <table>
+          <tr><th>Model</th><th>Best for</th><th>Cost tier</th></tr>
+          <tr>
+            <td>Haiku 4.5</td>
+            <td>Lightweight, high-frequency, repetitive tasks &mdash; formatting, simple lookups, grunt work inside a larger workflow</td>
+            <td><span class="badge cheap">cheapest</span></td>
+          </tr>
+          <tr>
+            <td>Sonnet 5</td>
+            <td>Your default for almost everything &mdash; routine development, most of a normal build, day-to-day chat</td>
+            <td><span class="badge cheap">low</span></td>
+          </tr>
+          <tr>
+            <td>Opus 4.8</td>
+            <td>Complex architecture decisions, tricky debugging, system design &mdash; a step up when Sonnet is genuinely stuck</td>
+            <td><span class="badge mid">moderate</span></td>
+          </tr>
+          <tr>
+            <td>Fable 5</td>
+            <td>Frontier-tier &mdash; large ambiguous builds, long-running multi-file work, a bounded end-to-end review pass. Reserve for one specific task, not everyday use.</td>
+            <td><span class="badge premium">highest</span></td>
+          </tr>
+        </table>
+        <div class="note warn">
+          Switching models mid-session makes the new model re-read the entire conversation history
+          &mdash; more expensive than starting fresh. If you're deliberately stepping up to Fable for
+          one big task, start a new session for it.
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="cost">
+      <div class="sheet-body">
+        <h3 class="section-title">Cost Control Habits</h3>
+        <ul class="plain">
+          <li><strong>Set Sonnet as your default</strong> in <code>~/.claude/settings.json</code>: <code>{ "model": "sonnet" }</code> &mdash; so you never accidentally run the expensive model for routine work.</li>
+          <li><strong>Use Plan Mode (<code>Shift+Tab</code>) before big changes</strong> &mdash; see the scope and cost before committing, not after.</li>
+          <li><strong>Break large asks into steps.</strong> "Build a full auth system" is expensive and error-prone in one shot; "create the schema," then "add the endpoint," then "build the form" is cheaper and easier to review.</li>
+          <li><strong>Write a <code>CLAUDE.md</code></strong> in each project so Claude Code has context on day one instead of you re-explaining it every session (token cost, not just your time).</li>
+          <li><strong>Run <code>/clear</code> between unrelated tasks</strong> in the same session to keep the context lean.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sheet" id="applied">
+      <div class="sheet-body">
+        <h3 class="section-title">Applied to This Project</h3>
+        <p style="font-size:13.5px;">The actual plan for the Market Prediction Engine's frontend MVP:</p>
+        <ol class="steps">
+          <li>Install Claude Code, default to Sonnet 5</li>
+          <li>Build the MVP frontend entirely on Sonnet &mdash; a dashboard reading <code>data/predictions/</code>, <code>data/trust/</code>, and <code>data/logs/</code> directly from the repo</li>
+          <li>Use Plan Mode before any multi-file step</li>
+          <li>Once the Sonnet build works, open a <em>fresh session</em> on Fable 5 for exactly one bounded task: a full end-to-end review with test-writing</li>
+        </ol>
+        <p style="font-size:13.5px; margin-top:14px;">
+          See the <a href="build-log.html">Build Log</a> for live status, and the
+          <a href="team1-dissection.html">Team 1 Dissection</a> for what the original student
+          project actually did, sourced directly from its repo.
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="readaloud-pill" onclick="document.getElementById('readaloud-panel').classList.toggle('open')">
+  &#128266; Read Aloud
+</button>
+<div class="readaloud-panel" id="readaloud-panel">
+  <button class="close" onclick="document.getElementById('readaloud-panel').classList.remove('open')">&#10005;</button>
+  <h5>Listen to This Page</h5>
+  <div class="ra-controls">
+    <button onclick="readWholePage()" title="Play whole page">&#9654;</button>
+    <button onclick="pauseResumeReading()" title="Pause / Resume">&#9208;</button>
+    <button onclick="stopReading()" title="Stop">&#9209;</button>
+  </div>
+  <div class="ra-speed-row">
+    <label><span>Speed</span><span id="ra-speed-val">1.0x</span></label>
+    <input type="range" id="ra-speed" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed(this.value)">
+  </div>
+  <div class="ra-status" id="ra-status">Ready.</div>
+</div>
+
+<style>
+  .listen-btn{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.5px; background:rgba(143,199,222,0.1); color:var(--line-cyan); border:1px solid var(--line-dim); padding:5px 11px; border-radius:16px; cursor:pointer; margin-left:12px; vertical-align:middle;}
+  .listen-btn:hover{background:rgba(143,199,222,0.18);}
+  .listen-btn.playing{background:var(--amber); color:var(--blue-deep); border-color:var(--amber);}
+  .read-el.reading-active{background:rgba(232,166,60,0.14); outline:1px solid rgba(232,166,60,0.4); border-radius:3px;}
+  .readaloud-pill{position:fixed; bottom:24px; left:24px; z-index:50; background:var(--blue-panel); color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; letter-spacing:0.5px; padding:11px 18px; border-radius:24px; border:1px solid var(--line-cyan); cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.4); display:flex; align-items:center; gap:8px;}
+  .readaloud-panel{position:fixed; bottom:76px; left:24px; z-index:50; width:300px; max-width:calc(100vw - 48px); background:var(--blue-mid); border:1px solid var(--line-dim); border-radius:6px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,0.5); display:none;}
+  .readaloud-panel.open{display:block;}
+  .readaloud-panel h5{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;}
+  .readaloud-panel .close{position:absolute; top:14px; right:16px; background:none; border:none; color:var(--line-dim); cursor:pointer; font-size:14px;}
+  .ra-controls{display:flex; gap:8px; margin-bottom:16px;}
+  .ra-controls button{flex:1; background:rgba(143,199,222,0.1); border:1px solid var(--line-dim); color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:16px; padding:8px 0; border-radius:4px; cursor:pointer;}
+  .ra-controls button:hover{background:rgba(143,199,222,0.2);}
+  .ra-speed-row{margin-bottom:6px;}
+  .ra-speed-row label{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim); display:flex; justify-content:space-between; margin-bottom:6px;}
+  .ra-speed-row input[type=range]{width:100%; accent-color:var(--amber);}
+  .ra-status{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim); margin-top:10px; min-height:14px;}
+</style>
+
+<script>
+  let raQueueEls = [], raIndex = 0, raRate = 1.0, raVoice = null, raPlaying = false;
+  function pickVoice(){
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    let v = voices.find(v => /UK/i.test(v.name) && /Female/i.test(v.name));
+    if (!v) v = voices.find(v => v.lang === 'en-GB' && /female/i.test(v.name));
+    if (!v) v = voices.find(v => v.lang === 'en-GB');
+    if (!v) v = voices.find(v => /^en/i.test(v.lang));
+    return v || voices[0];
+  }
+  window.speechSynthesis.onvoiceschanged = () => { raVoice = pickVoice(); };
+  raVoice = pickVoice();
+  function elToText(el){
+    if (el.tagName === 'TR'){
+      return Array.from(el.children).map(c => c.textContent.trim()).filter(Boolean).join(', ');
+    }
+    return el.textContent.trim();
+  }
+  function collectReadEls(scope){
+    const sel = 'h2, h3.section-title, p.sub, p.section-dek, p, li, td, th';
+    return Array.from(scope.querySelectorAll(sel)).filter(el => el.textContent.trim().length > 0);
+  }
+  function clearHighlight(){ document.querySelectorAll('.reading-active').forEach(el => el.classList.remove('reading-active')); }
+  function setStatus(msg){ const s = document.getElementById('ra-status'); if (s) s.textContent = msg; }
+  function speakNext(){
+    if (raIndex >= raQueueEls.length){ clearHighlight(); raPlaying = false; setStatus('Finished.'); return; }
+    const el = raQueueEls[raIndex];
+    clearHighlight();
+    el.classList.add('reading-active');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    const utter = new SpeechSynthesisUtterance(elToText(el));
+    utter.rate = raRate;
+    if (raVoice) utter.voice = raVoice;
+    utter.onend = () => { raIndex++; speakNext(); };
+    utter.onerror = () => { raIndex++; speakNext(); };
+    window.speechSynthesis.speak(utter);
+    setStatus('Reading ' + (raIndex+1) + ' / ' + raQueueEls.length + '...');
+  }
+  function readWholePage(){
+    window.speechSynthesis.cancel();
+    raQueueEls = collectReadEls(document.querySelector('main'));
+    raIndex = 0; raPlaying = true;
+    setStatus('Starting...');
+    speakNext();
+  }
+  function pauseResumeReading(){
+    if (!raPlaying) return;
+    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused){ window.speechSynthesis.pause(); setStatus('Paused.'); }
+    else if (window.speechSynthesis.paused){ window.speechSynthesis.resume(); setStatus('Resumed.'); }
+  }
+  function stopReading(){
+    window.speechSynthesis.cancel(); raPlaying = false; clearHighlight(); setStatus('Stopped.');
+  }
+  function updateSpeed(val){
+    raRate = parseFloat(val);
+    document.getElementById('ra-speed-val').textContent = raRate.toFixed(1) + 'x';
+    if (raPlaying && window.speechSynthesis.speaking){ window.speechSynthesis.cancel(); speakNext(); }
+  }
+</script>
+<footer>THE AI PLAYBOOK &middot; WHEN TO USE WHAT</footer>
+</body>
+</html>
