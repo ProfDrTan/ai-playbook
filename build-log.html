@@ -165,6 +165,65 @@
   .glossary-term dd{font-size:13.5px; color:var(--text-body); max-width:620px;}
   .glossary-cols{columns: 1; column-gap:40px;}
   @media (min-width:1000px){ .glossary-cols{columns:2;} }
+
+  /* Read Aloud (retrofitted to match index.html's engine) */
+  .listen-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.5px;
+    background:rgba(143,199,222,0.1); color:var(--line-cyan);
+    border:1px solid var(--line-dim); padding:5px 11px; border-radius:16px;
+    cursor:pointer; margin-left:12px; vertical-align:middle;
+  }
+  .listen-btn:hover{background:rgba(143,199,222,0.18);}
+  .listen-btn.playing{background:var(--amber); color:var(--blue-deep); border-color:var(--amber);}
+  .section-head-row{display:flex; align-items:center; flex-wrap:wrap; gap:4px; margin-bottom:8px;}
+  .read-el.reading-active{
+    background:rgba(232,166,60,0.14);
+    outline:1px solid rgba(232,166,60,0.4);
+    border-radius:3px;
+  }
+  .readaloud-pill{
+    position:fixed; bottom:24px; left:24px; z-index:50;
+    background:var(--blue-panel); color:var(--paper);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
+    letter-spacing:0.5px; padding:11px 18px; border-radius:24px;
+    border:1px solid var(--line-cyan); cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .readaloud-panel{
+    position:fixed; bottom:76px; left:24px; z-index:50;
+    width:300px; max-width:calc(100vw - 48px);
+    background:var(--blue-mid); border:1px solid var(--line-dim);
+    border-radius:6px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,0.5);
+    display:none;
+  }
+  .readaloud-panel.open{display:block;}
+  .readaloud-panel h5{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan);
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;
+  }
+  .readaloud-panel .close{
+    position:absolute; top:14px; right:16px; background:none; border:none;
+    color:var(--line-dim); cursor:pointer; font-size:14px;
+  }
+  .ra-controls{display:flex; gap:8px; margin-bottom:16px;}
+  .ra-controls button{
+    flex:1; background:rgba(143,199,222,0.1); border:1px solid var(--line-dim);
+    color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:16px;
+    padding:8px 0; border-radius:4px; cursor:pointer;
+  }
+  .ra-controls button:hover{background:rgba(143,199,222,0.2);}
+  .ra-speed-row{margin-bottom:6px;}
+  .ra-speed-row label{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim);
+    display:flex; justify-content:space-between; margin-bottom:6px;
+  }
+  .ra-speed-row input[type=range]{width:100%; accent-color:var(--amber);}
+  .ra-status{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line-dim);
+    margin-top:10px; min-height:14px;
+  }
 </style>
 </head>
 <body>
@@ -375,5 +434,159 @@
   </main>
 </div>
 <footer>THE AI PLAYBOOK &middot; BUILD LOG &middot; MARKET PREDICTION ENGINE</footer>
+
+<button class="readaloud-pill" onclick="document.getElementById('readaloud-panel').classList.toggle('open')">
+  &#128266; Read Aloud
+</button>
+<div class="readaloud-panel" id="readaloud-panel">
+  <button class="close" onclick="document.getElementById('readaloud-panel').classList.remove('open')">&#10005;</button>
+  <h5>Listen to This Page</h5>
+  <div class="ra-controls">
+    <button onclick="readWholePage()" title="Play whole page">&#9654;</button>
+    <button onclick="pauseResumeReading()" title="Pause / Resume">&#9208;</button>
+    <button onclick="stopReading()" title="Stop">&#9209;</button>
+  </div>
+  <div class="ra-speed-row">
+    <label><span>Speed</span><span id="ra-speed-val">1.0x</span></label>
+    <input type="range" id="ra-speed" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed(this.value)">
+  </div>
+  <div class="ra-status" id="ra-status">Ready.</div>
+</div>
+
+<script>
+  // ===== READ ALOUD ENGINE (same engine as index.html, adapted selectors) =====
+  let raQueueEls = [];
+  let raIndex = 0;
+  let raRate = 1.0;
+  let raVoice = null;
+  let raPlaying = false;
+  let raCurrentSectionBtn = null;
+
+  function pickVoice(){
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    let v = voices.find(v => /UK/i.test(v.name) && /Female/i.test(v.name));
+    if (!v) v = voices.find(v => v.lang === 'en-GB' && /female/i.test(v.name));
+    if (!v) v = voices.find(v => v.lang === 'en-GB');
+    if (!v) v = voices.find(v => /^en/i.test(v.lang));
+    return v || voices[0];
+  }
+  window.speechSynthesis.onvoiceschanged = () => { raVoice = pickVoice(); };
+  raVoice = pickVoice();
+
+  function elToText(el){
+    if (el.tagName === 'TR'){
+      const cells = Array.from(el.children).map(c => c.textContent.trim()).filter(Boolean);
+      return cells.join(', ');
+    }
+    if (el.tagName === 'DT' || el.tagName === 'DD'){
+      return el.textContent.trim();
+    }
+    return el.textContent.trim();
+  }
+
+  function collectReadEls(scope){
+    const sel = 'h2, h3.section-title, p.sub, p.section-dek, p, li, td, th, dt, dd, .note';
+    return Array.from(scope.querySelectorAll(sel))
+      .filter(el => el.textContent.trim().length > 0)
+      .map(el => { el.classList.add('read-el'); return el; });
+  }
+
+  function clearHighlight(){
+    document.querySelectorAll('.reading-active').forEach(el => el.classList.remove('reading-active'));
+  }
+
+  function setStatus(msg){
+    const s = document.getElementById('ra-status');
+    if (s) s.textContent = msg;
+  }
+
+  function resetSectionButtons(){
+    document.querySelectorAll('.listen-btn').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '&#128266; Listen';
+    });
+  }
+
+  function speakNext(){
+    if (raIndex >= raQueueEls.length){
+      clearHighlight();
+      raPlaying = false;
+      resetSectionButtons();
+      setStatus('Finished.');
+      return;
+    }
+    const el = raQueueEls[raIndex];
+    clearHighlight();
+    el.classList.add('reading-active');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    const text = elToText(el);
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.rate = raRate;
+    if (raVoice) utter.voice = raVoice;
+    utter.onend = () => { raIndex++; speakNext(); };
+    utter.onerror = () => { raIndex++; speakNext(); };
+    window.speechSynthesis.speak(utter);
+    setStatus('Reading ' + (raIndex+1) + ' / ' + raQueueEls.length + '...');
+  }
+
+  function startReading(elements, label){
+    window.speechSynthesis.cancel();
+    raQueueEls = elements;
+    raIndex = 0;
+    raPlaying = true;
+    setStatus('Starting: ' + label);
+    speakNext();
+  }
+
+  function readWholePage(){
+    resetSectionButtons();
+    raCurrentSectionBtn = null;
+    const scope = document.querySelector('main');
+    startReading(collectReadEls(scope), 'Whole Page');
+  }
+
+  function toggleSectionListen(sectionId, btn){
+    if (raPlaying && raCurrentSectionBtn === btn){
+      stopReading();
+      return;
+    }
+    resetSectionButtons();
+    raCurrentSectionBtn = btn;
+    btn.classList.add('playing');
+    btn.innerHTML = '&#9209; Stop';
+    const scope = document.getElementById(sectionId);
+    startReading(collectReadEls(scope), sectionId);
+  }
+
+  function pauseResumeReading(){
+    if (!raPlaying) return;
+    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+      window.speechSynthesis.pause();
+      setStatus('Paused.');
+    } else if (window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setStatus('Resumed.');
+    }
+  }
+
+  function stopReading(){
+    window.speechSynthesis.cancel();
+    raPlaying = false;
+    clearHighlight();
+    resetSectionButtons();
+    raCurrentSectionBtn = null;
+    setStatus('Stopped.');
+  }
+
+  function updateSpeed(val){
+    raRate = parseFloat(val);
+    document.getElementById('ra-speed-val').textContent = raRate.toFixed(1) + 'x';
+    if (raPlaying && window.speechSynthesis.speaking){
+      window.speechSynthesis.cancel();
+      speakNext();
+    }
+  }
+</script>
 </body>
 </html>
