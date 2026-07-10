@@ -339,6 +339,35 @@
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
 
         <div class="changelog-entry">
+          <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT #3</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt check token scope before touching a workflow file &mdash; not after the 404.</strong>
+            <br><br>
+            Lost real time twice in one evening to the same category of failure: a PAT with
+            plenty of repo access still can't touch anything under <code>.github/workflows/</code>
+            unless it carries one specific extra permission &mdash; and GitHub doesn't say so
+            clearly when it fails. It just returns a bare <code>404 Not Found</code>, which looks
+            identical to "wrong path" or "file doesn't exist," not "wrong permission."
+            <br><br>
+            <strong>The two separate flavors of this, so neither gets mistaken for the other again:</strong>
+            <ul style="margin:8px 0 8px 20px; font-size:12px;">
+              <li><strong>Classic tokens</strong> need the <code>workflow</code> scope checked
+                  explicitly &mdash; <code>repo</code> alone is not enough, no matter how broad
+                  <code>repo</code> looks.</li>
+              <li><strong>Fine-grained tokens</strong> need <strong>Workflows: Read and write</strong>
+                  granted as its own separate permission &mdash; distinct from <strong>Contents:
+                  Read and write</strong>, which does not cover it.</li>
+            </ul>
+            <strong>Going forward:</strong> any time a PAT is being generated for a task that will
+            touch a <code>.github/workflows/*.yml</code> file &mdash; creating one, editing one,
+            adding a step &mdash; request the workflow permission <em>up front</em>, at token-creation
+            time, before the first push attempt. If a content push to a normal file 404s but the repo
+            and path are confirmed correct, check scope/permissions first, before assuming the path
+            or SHA is wrong.
+          </div>
+        </div>
+
+        <div class="changelog-entry">
           <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT</div>
           <div class="note warn" style="margin-top:8px;">
             <strong>Thou shalt verify the display layer, not just the collector.</strong>
