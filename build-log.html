@@ -341,6 +341,41 @@
         <div class="changelog-entry">
           <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT</div>
           <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt verify the display layer, not just the collector.</strong>
+            <br><br>
+            The CP3405 Team Pipeline Dashboard sat frozen for 3 days showing 07-07 data
+            while the underlying <code>dt3-monitor</code> collector kept running perfectly
+            every 30 minutes &mdash; because the dashboard's "live refresh" call was an
+            unauthenticated browser fetch against a <em>private</em> repo's API, which
+            silently 404'd every single time and was caught in a bare <code>try/catch</code>
+            that swallowed the failure. The countdown timer and "Refresh Now" button both
+            kept working &mdash; they just had nothing new to fetch. A green "LIVE" badge and
+            a healthy collector are not proof the thing a human is actually looking at is current.
+            <br><br>
+            <strong>Root cause:</strong> a client-side page cannot authenticate to a private
+            GitHub repo without exposing a token in public JS &mdash; so that design can never
+            work, no matter how it's retried or how often it polls.
+            <br><br>
+            <strong>The fix, going forward on every dashboard built against monitor data:</strong>
+            <ul style="margin:8px 0 8px 20px; font-size:12px;">
+              <li>The collector (private repo, scheduled Action) also publishes its output JSON
+                  to a <em>public</em> path in the public-facing site's own repo every run</li>
+              <li>The dashboard fetches that public path directly &mdash; no auth, no cross-repo
+                  private API calls from the browser, ever</li>
+              <li>Failed fetches render a visible warning banner with the data's actual age,
+                  never a silent no-op</li>
+            </ul>
+            Applied immediately to the CP3405 dashboard: <code>dt3-monitor</code> now pushes
+            <code>dashboard/data.json</code> into the public <code>dt3-tr2-26-course-website</code>
+            repo after every run; the dashboard reads from there with a visible staleness warning
+            if data is &gt;90 min old or a fetch fails. One piece is still manual pending a
+            workflow-scope token: the auto-publish step itself needs the classic PAT's
+            <code>workflow</code> scope enabled to edit <code>monitor.yml</code>.
+          </div>
+        </div>
+
+        
+          <div class="note warn" style="margin-top:8px;">
             <strong>Thou shalt not build a Cloudflare Worker for the CP5640 Participation Tracker. Ever again.</strong>
             <br><br>
             It has already failed twice on this exact problem &mdash; once on the CP5640 tracker itself
