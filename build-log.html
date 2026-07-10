@@ -337,6 +337,25 @@
       <div class="sheet-body">
         <h3 class="section-title">Changelog</h3>
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
+
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt not build a Cloudflare Worker for the CP5640 Participation Tracker. Ever again.</strong>
+            <br><br>
+            It has already failed twice on this exact problem &mdash; once on the CP5640 tracker itself
+            (~2 hours and significant token spend lost), and once before that on the
+            <code>research-methods</code> site, for the identical reason. A Worker is new infrastructure
+            with its own auth, deployment, and debugging surface, and it is not needed here.
+            <br><br>
+            <strong>The proven fix:</strong> use the GitHub API as the sole shared data store &mdash;
+            read/write student participation data directly to a JSON file in the tracker repo via the
+            GitHub API, fetching a fresh SHA immediately before every <code>PUT</code>. No Worker, no proxy,
+            no new infrastructure. Test in sandbox first, verified across multiple devices, before it ever
+            touches the live tracker again.
+          </div>
+        </div>
+
         <div class="changelog-entry">
           <div class="changelog-date">2026-07-08</div>
           <div>Build log page created and synced against the live repo. Confirmed: schemas, all four calibration/synthesis files, and 3 of 4 planned agents are committed. Evidence agent and both GitHub Actions workflow files are not yet in the repo.</div>
