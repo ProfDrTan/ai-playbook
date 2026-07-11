@@ -339,7 +339,44 @@
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
 
         <div class="changelog-entry">
-          <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT #4</div>
+          <div class="changelog-date">2026-07-11 &mdash; COMMANDMENT #5</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt never let automation hardcode its push target, and never let it overwrite instead of version.</strong>
+            <br><br>
+            Team 5 lost what looked like a full day of automated agent output. Traced via their own
+            Discord discussion (surfaced automatically by our new blocker-flagging monitor): their
+            pipeline script always ran <code>git push origin main</code> regardless of which branch
+            was actually checked out, so a manual test run &mdash; even one a student believed was
+            isolated on a separate branch &mdash; pushed straight to <code>main</code> anyway. Combined
+            with the pipeline writing its output to one fixed, overwriting file path rather than a
+            timestamped one, the next run (manual or automated, whichever came second) simply erased
+            the previous run's data with no merge conflict and no warning, because git doesn't complain
+            about one commit fully replacing a file's contents.
+            <br><br>
+            <strong>The reassuring part, worth telling any team in this position:</strong> if the "lost"
+            data was ever committed &mdash; even by an earlier automated run &mdash; it is <em>not gone</em>.
+            Git keeps every historical version of a tracked file forever. <code>git log -- path/to/file</code>
+            finds the commit before it was overwritten; <code>git show &lt;sha&gt;:path/to/file</code> recovers
+            the exact old content. Only genuinely uncommitted, unstashed changes can truly vanish.
+            <br><br>
+            <strong>The pattern to apply everywhere we build automation, including our own:</strong>
+            <ul style="margin:8px 0 8px 20px; font-size:12px;">
+              <li>Push to whatever branch is actually checked out (or an explicitly named branch) &mdash;
+                  never hardcode the target branch in a script multiple people or processes might run</li>
+              <li>Write dated/versioned output files for anything meant to persist run-over-run, not a single
+                  fixed filename that silently overwrites &mdash; reserve overwriting for genuinely disposable
+                  "latest" pointers only</li>
+              <li>Keep manual/test runs off the branch the automation writes to, by convention or by the
+                  script refusing to push from a dirty/ad-hoc environment</li>
+            </ul>
+            Side benefit of tonight's build: the Discord monitor now flags blocker/problem-keyword messages
+            with a direct jump link to the exact message, across all 5 teams, surfaced right on the main
+            dashboard &mdash; this incident was caught by that new feature within hours of it being built,
+            not by someone screenshotting a conversation after the fact.
+          </div>
+        </div>
+
+        
           <div class="note warn" style="margin-top:8px;">
             <strong>Thou shalt remember GitHub Pages needs a public repo (or a paid plan) &mdash; before building the front-end, not after.</strong>
             <br><br>
