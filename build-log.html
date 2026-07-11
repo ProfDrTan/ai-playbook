@@ -339,7 +339,31 @@
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
 
         <div class="changelog-entry">
-          <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT #3</div>
+          <div class="changelog-date">2026-07-10 &mdash; COMMANDMENT #4</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt remember GitHub Pages needs a public repo (or a paid plan) &mdash; before building the front-end, not after.</strong>
+            <br><br>
+            Built a full front-end for the enhanced Market Prediction Engine, went to switch on GitHub Pages
+            in <code>market-prediction-engine</code>, and hit a wall that had nothing to do with tokens or
+            scopes this time: GitHub Pages on a <em>private</em> repo is a paid-plan-only feature. Free accounts
+            can only serve Pages from a public repo. The Settings &rarr; Pages screen doesn't even show the
+            normal branch/folder picker in this case &mdash; it just shows "Upgrade or make this repository public."
+            <br><br>
+            <strong>Why this repo was private in the first place:</strong> it holds the actual enhancement layer
+            over the student baseline &mdash; prediction logic, agent prompts, calibration weighting &mdash; which
+            is exactly the kind of thing that should <em>stay</em> private from the class.
+            <br><br>
+            <strong>The fix, and the pattern for next time:</strong> the front-end doesn't have to live inside
+            the private repo it reads insight from. It only needs read access to whatever public data source
+            it's displaying. So: build the private engine's real logic in the private repo as always, but deploy
+            any public-facing dashboard for it in an already-public, already-Pages-enabled home (here: a new page
+            on the AI Playbook site) that fetches the public data it needs at runtime. Before starting any front-end
+            build for something living in a private repo, check the repo's visibility and Pages eligibility first
+            &mdash; not after the page is already built.
+          </div>
+        </div>
+
+        
           <div class="note warn" style="margin-top:8px;">
             <strong>Thou shalt check token scope before touching a workflow file &mdash; not after the 404.</strong>
             <br><br>
