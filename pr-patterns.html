@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Understanding Pull Request Patterns — The AI Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --text-body:#CFE4F0;
+    --live:#7FD99A; --active:#8FC7DE; --blocked:#D9694F; --paused:#E8A63C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans',sans-serif; line-height:1.7;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{max-width:820px;margin:0 auto;padding:44px 24px 80px;}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+  h1{font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--paper);margin-bottom:10px;font-weight:600;}
+  .sub{color:var(--text-body);opacity:.85;font-size:14px;margin-bottom:30px;}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--paper);margin:38px 0 12px;font-weight:600;border-bottom:1px solid var(--line-dim);padding-bottom:8px;}
+  h3{font-size:15px;color:var(--paper);margin:22px 0 8px;font-weight:600;}
+  p{margin-bottom:14px;font-size:14.5px;}
+  .back{font-family:'IBM Plex Mono',monospace;font-size:12px;display:inline-block;margin-bottom:18px;}
+  .card{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:6px;padding:16px 18px;margin:16px 0;}
+  .card .stat-row{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .card .stat-row span{opacity:.85;}
+  .stat-merged{color:#7FD99A;}
+  .stat-open{color:var(--amber);}
+  .stat-abandoned{color:var(--coral);}
+  ul{margin:0 0 14px 20px;}
+  li{margin-bottom:6px;font-size:14.5px;}
+  .callout{background:rgba(232,166,60,.08);border-left:2px solid var(--amber);padding:12px 16px;margin:16px 0;font-size:13.5px;}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.9em;background:rgba(143,199,222,.08);padding:1px 5px;border-radius:3px;}
+  .updated{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--line-dim);text-align:right;margin-top:40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to AI Playbook</a>
+  <div class="tag">Field notes &middot; CP3405 DT3, TR2 2026</div>
+  <h1>Understanding pull request patterns</h1>
+  <p class="sub">Written for the next cohort as much as this one. Every example here is a real, currently-public repo from this trimester's five teams &mdash; not a hypothetical.</p>
+
+  <p>Every pull request a team ever opens ends up in exactly one of three states. Understanding
+  why each one happens &mdash; and what it costs a team when it happens too often &mdash; is one
+  of the more useful things you can take from a group software project, independent of whatever
+  you're actually building.</p>
+
+  <h2>The three fates of a pull request</h2>
+
+  <h3>1. Merged</h3>
+  <p>The work was reviewed (or at least accepted) and folded into <code>main</code>. This is the
+  goal state. A PR that merges quickly after being opened is usually a sign the work was scoped
+  well &mdash; small enough to review, clear enough to approve without back-and-forth.</p>
+
+  <h3>2. Still open</h3>
+  <p>The branch exists, the PR was opened, and it's sitting there unresolved. This isn't automatically
+  a problem &mdash; a PR that opened yesterday and is still open today is completely normal, review
+  takes time. It becomes a real signal when a PR sits open for weeks with no activity: usually it
+  means one of three things happened &mdash; the reviewer never got to it, the author moved on to
+  other work and forgot it existed, or the work genuinely isn't finished and shouldn't have been
+  opened as a PR yet.</p>
+
+  <h3>3. Closed without merging</h3>
+  <p>The PR was closed, but its changes never made it into <code>main</code>. This is the state
+  worth paying the most attention to, because it has several very different causes that all look
+  identical from the outside:</p>
+  <ul>
+    <li><strong>Superseded</strong> &mdash; someone else's PR did the same thing and merged first, so this one was closed as redundant. Healthy, if a little wasteful.</li>
+    <li><strong>Duplicate submission</strong> &mdash; the same person (or two people who didn't coordinate) opened near-identical PRs by accident. A sign of unclear ownership, not bad work.</li>
+    <li><strong>Abandoned experiment</strong> &mdash; the approach didn't pan out and was deliberately dropped. Perfectly fine, arguably good judgment.</li>
+    <li><strong>Just forgotten</strong> &mdash; nobody closed the loop, and it got swept up in a later cleanup. This is the one worth avoiding: it usually means the branch existed for so long that nobody remembered what it was for.</li>
+  </ul>
+
+  <h2>Three real patterns from this trimester</h2>
+  <p>All five teams in this course had access to the same tools, the same deadlines, and the same
+  grading rubric. What they did with pull requests varied enormously &mdash; and the differences
+  are instructive.</p>
+
+  <div class="card">
+    <strong>Pattern A &mdash; no PR workflow at all</strong>
+    <div class="stat-row"><span>Two of five teams this term</span></div>
+    <p>Some teams pushed every change directly to <code>main</code>, start to finish, and never opened
+    a single pull request. This isn't automatically wrong for a small team moving fast &mdash; but it
+    means no code review ever happened, and if two people edit the same file at the same time, one of
+    them silently overwrites the other with no warning. (This is close to the root cause behind a
+    separate incident this term where a team's automated pipeline output got overwritten by a manual
+    run &mdash; direct-to-main pushes with no branch isolation is exactly the condition that makes
+    that kind of accident possible.)</p>
+  </div>
+
+  <div class="card">
+    <strong>Pattern B &mdash; high PR volume, high abandonment</strong>
+    <div class="stat-row">
+      <span class="stat-merged">45 merged</span>
+      <span class="stat-open">10 still open</span>
+      <span class="stat-abandoned">17 closed without merging</span>
+    </div>
+    <p>One team generated <strong>72 pull requests</strong> over the trimester &mdash; by far the
+    most of any team &mdash; but nearly a quarter of them (17) closed without ever merging. Looking
+    at the real history, a big chunk of that came from one specific week where <strong>three
+    near-identical PRs</strong> were opened for the same piece of work (a synthesis operator), all
+    but one closed unused, alongside a string of small "renaming" PRs that were opened, abandoned,
+    then redone. High PR volume looks productive on a graph. It isn't the same thing as clean
+    history &mdash; a team should ask itself whether repeated near-duplicate PRs mean two people
+    didn't know the other was already working on the same thing.</p>
+  </div>
+
+  <div class="card">
+    <strong>Pattern C &mdash; small, clean, low waste</strong>
+    <div class="stat-row">
+      <span class="stat-merged">13 merged</span>
+      <span class="stat-open">0 still open</span>
+      <span class="stat-abandoned">2 closed without merging</span>
+    </div>
+    <p>Another team ran <strong>15 total pull requests</strong> across the same period, with 13
+    merged and only 2 that didn't land. Far fewer PRs overall, but almost all of them counted. This
+    is closer to what "healthy" looks like: PRs opened, reviewed, merged, done &mdash; no pile-up,
+    no duplicate confusion.</p>
+  </div>
+
+  <h2>What this means for your own team</h2>
+  <ul>
+    <li>Opening a PR and forgetting about it is worse than not opening one at all &mdash; it clutters the repo and hides which work is actually active.</li>
+    <li>If you and a teammate might be touching the same file, say so in your team chat before either of you starts &mdash; it's the cheapest way to avoid duplicate PRs.</li>
+    <li>Closing a PR without merging is not a failure by itself. Leaving 17 of them to accumulate silently, with no note on why, is the actual problem &mdash; it becomes work for whoever tries to understand the repo's history later, including you, three weeks from now.</li>
+    <li>If your team pushes straight to <code>main</code> with no PRs at all, that's a deliberate tradeoff to make consciously, not a default to fall into by not knowing PRs were an option.</li>
+  </ul>
+
+  <div class="callout">
+    Want to see your own team's live numbers in the same format? The
+    <a href="https://dt3-tr2-26-course-website.pages.dev/dashboard/" target="_blank">Team Pipeline Dashboard</a>
+    tracks merged / open / abandoned PRs by week for every team, all trimester, updated automatically.
+  </div>
+
+  <div class="updated">Written 12 Jul 2026 from live GitHub data across all 5 CP3405 DT3 teams.</div>
+</div>
+</body>
+</html>
