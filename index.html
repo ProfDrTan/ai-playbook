@@ -298,6 +298,7 @@
         <li><a href="#ch5"><span class="num">05</span> Working With AI on a Team</a></li>
         <li><a href="#ch6"><span class="num">06</span> When AI Gets It Wrong</a></li>
         <li><a href="#ch7"><span class="num">07</span> A Starter Toolkit</a></li>
+        <li><a href="#ch8"><span class="num">08</span> The Educator's Pipeline</a></li>
       </ul>
       <div class="sidebar-divider"></div>
       <ul>
@@ -754,7 +755,50 @@
         <h4>Where to Go From Here</h4>
         <p>This book is deliberately short because the real learning happens in your own repeated use, not in reading about it once. Pick one template above, use it on your very next task today, and adjust it to your own voice. That's the whole method.</p>
       </div>
-      <div class="sheet-titleblock"><span>SHEET 07 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
+      <div class="sheet-titleblock"><span>SHEET 07 / 08</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet" id="ch8">
+      <div class="sheet-body">
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 08</div><button class="listen-btn" data-chapter="ch8" onclick="toggleChapterListen('ch8', this)">&#128266; Listen</button></div>
+        <h3 class="chapter-title">The Educator's Pipeline</h3>
+        <p class="chapter-dek">Real best-practice patterns harvested from a live 56-student, 5-team Scrum course — not hypotheticals, pulled from actual repos on actual deadlines.</p>
+
+        <h4>Automate the Gate, Don't Just Announce It</h4>
+        <p>This course runs a mandatory mid-sprint checkpoint: every team must commit a structured standup report by Wednesday 23:59, accounting for every role's status. In Sprint 7 (deadline Wed 15 July 2026), only 2 of 5 teams delivered it at all. The gap between the two who did is the real lesson.</p>
+        <div class="example strong">
+          <span class="label">Pattern Worth Copying — The Self-Reporting Pipeline</span>
+          One team's Wednesday report didn't just narrate status — it cited the actual evidence: "R3 (Almanac): Commit Status — Automated via GitHub Actions"; "R4 (Macro): Committed Tuesday July 14 via Pull Request #1." Every claim pointed at a verifiable artifact (a workflow run, a PR number, a timestamp), not a teammate's word. Anyone auditing the report later can check every line in under a minute.
+        </div>
+        <div class="example">
+          <span class="label">Pattern to Watch For — The Narrated Gap</span>
+          A second team's same-deadline report was honest but manual: two of three research roles were still "in progress" as of Wednesday evening, the product-owner role had gone unfilled and been absorbed by the Scrum Master, and the file itself was accidentally saved with a duplicated extension. None of this is a character failure — it's what happens when the checkpoint relies on a person remembering to write a status update rather than a pipeline that already knows the status. The fix isn't "try harder Wednesday" — it's wiring the report to pull from CI logs automatically, the way the first team did.
+        </div>
+        <div class="try-this">
+          <span class="label">Try This</span>
+          For any recurring status report — sprint standups, weekly ops updates, client check-ins — ask whether the underlying facts (a commit, a ticket state, a deployment) already exist somewhere machine-readable. If they do, have the report pull from that source instead of asking a human to retype what a log already knows.
+        </div>
+
+        <h4>Engineering Discipline Beats Cleverness</h4>
+        <p>Across five teams building nearly identical market-intelligence pipelines this trimester, the strongest technical differentiator wasn't model choice or clever prompting — it was whether a team built a validation gate at all.</p>
+        <div class="example strong">
+          <span class="label">Pattern Worth Copying — Validate Before You Trust</span>
+          One team maintains a standalone <code>validate_output.py</code> script in their repo that checks pipeline outputs against expected structure before anything downstream consumes them. It's unglamorous — no one demos a validation script — but it's the difference between catching a broken data file in CI and catching it three weeks later when a report looks subtly wrong.
+        </div>
+        <div class="example">
+          <span class="label">Pattern Worth Copying — Close the Feedback Loop</span>
+          Another team built a GitHub Actions workflow (<code>r10_calibration.yml</code>) that automatically scores each week's prediction against the actual outcome once it's known, logging the result. Most teams file a prediction and move on; this team's pipeline forces them to confront whether their process is actually getting better — the calibration-over-accuracy philosophy the whole course is built on, enforced by code instead of good intentions.
+        </div>
+
+        <h4>Quick-Reference Checklist</h4>
+        <ul class="checklist">
+          <li>Does my recurring report pull from a verifiable source, or from someone's memory of what happened?</li>
+          <li>Do I have a validation step that runs before output reaches anyone downstream?</li>
+          <li>Does my process check itself against real outcomes, or just move forward optimistically?</li>
+          <li>Am I citing evidence (a commit, a run, a timestamp) or just asserting status?</li>
+        </ul>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 08 / 08</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
 
     <footer>© 2026 Professor Dr. Tan · Working Draft, Not For Distribution</footer>
@@ -769,7 +813,7 @@
 
     <h4>Status Snapshot</h4>
     <ul class="checklist">
-      <li>All 7 chapters drafted: Prompting Fundamentals, Choosing Your Tool, Delegating Real Work, Automating the Repeatable, Working With AI on a Team, When AI Gets It Wrong, A Starter Toolkit</li>
+      <li>All 8 chapters drafted: Prompting Fundamentals, Choosing Your Tool, Delegating Real Work, Automating the Repeatable, Working With AI on a Team, When AI Gets It Wrong, A Starter Toolkit, The Educator's Pipeline</li>
       <li>Repo: github.com/ProfDrTan/ai-playbook (public) — live site hosted via GitHub Pages at profdrtan.github.io/ai-playbook/</li>
       <li>Cloudflare Pages hosting attempted but hit an unresolved connection issue — GitHub Pages used instead and works reliably</li>
       <li>Read-aloud engine live: per-chapter + whole-book, headers included, speed control, UK female voice where available</li>
@@ -803,6 +847,7 @@
       <li>Jul 7 — Chapter 4 extended with "The Silent Monitor" subsection: GitHub Actions + Telegram bot pattern for passively monitoring distributed teams (students, staff, contractors), generalised beyond code</li>
       <li>Jul 5 — Project Notes tab added for cross-session continuity</li>
       <li>Jul 15 — Tool Watch digest run; Chapter 2 and panel updated with the July 9 model-launch wave (GPT-5.6, Grok 4.5, Muse Spark 1.1, Fable 5 restored)</li>
+      <li>Jul 16 — Chapter 8 "The Educator's Pipeline" added: best-practice patterns harvested from live CP3405 team repos, including the Sprint 7 Wednesday-gate compliance comparison (2/5 teams delivered) and standing CI/CD patterns from Teams 1 and 2</li>
     </ul>
   </div>
   <div class="sheet-titleblock"><span>PROJECT NOTES</span><span>THE AI PLAYBOOK — REV A</span></div>
