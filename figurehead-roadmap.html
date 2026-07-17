@@ -12,6 +12,7 @@
     --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
     --amber:#E8A63C; --coral:#D9694F; --text-body:#CFE4F0;
     --live:#7FD99A; --active:#8FC7DE; --blocked:#D9694F; --paused:#E8A63C;
+    --advise:#8FC7DE; --teach:#7FD99A; --publish:#E8A63C; --ops:#D9694F;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
@@ -22,11 +23,15 @@
     color:var(--text-body); font-family:'IBM Plex Sans',sans-serif; line-height:1.65;
   }
   a{color:var(--line-cyan);}
-  .wrap{max-width:1000px;margin:0 auto;padding:44px 24px 80px;}
+  .wrap{max-width:1040px;margin:0 auto;padding:44px 24px 80px;}
   .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
   h1{font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--paper);margin-bottom:6px;font-weight:600;}
-  .sub{color:var(--text-body);opacity:.8;font-size:14px;margin-bottom:30px;max-width:700px;}
+  .sub{color:var(--text-body);opacity:.8;font-size:14px;margin-bottom:20px;max-width:720px;}
   .back{font-family:'IBM Plex Mono',monospace;font-size:12px;display:inline-block;margin-bottom:18px;}
+  .jumpnav{display:flex;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;margin-bottom:10px;}
+  .jumpnav a{background:var(--blue-panel);border:1px solid var(--line-dim);padding:6px 12px;border-radius:3px;text-decoration:none;}
+  .honesty{background:rgba(217,105,79,0.08);border:1px solid var(--coral);border-radius:4px;padding:12px 14px;font-size:12.5px;color:var(--paper);margin:18px 0 8px;}
+  .honesty b{color:var(--coral);}
   .section-title{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin:44px 0 14px;border-bottom:1px solid var(--line-dim);padding-bottom:8px;}
   .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:6px;}
   .pillar{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:4px;padding:18px;}
@@ -36,15 +41,35 @@
   .sitemap{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:4px;padding:20px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--text-body);white-space:pre;overflow-x:auto;line-height:1.7;}
   .sitemap .path{color:var(--line-cyan);}
   .sitemap .note{color:var(--amber);}
-  .phase{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:4px;padding:20px 20px 18px;margin-bottom:16px;}
-  .phase-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
-  .phase-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:1px;}
-  .phase h3{font-size:16px;color:var(--paper);font-weight:600;}
-  .phase .window{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--line-dim);}
-  .phase .goal{font-size:13px;font-style:italic;opacity:.85;margin-bottom:10px;}
-  .phase ul{margin-left:18px;margin-bottom:10px;}
-  .phase li{font-size:13px;opacity:.92;margin-bottom:5px;}
-  .milestone{background:rgba(143,199,222,0.06);border-left:2px solid var(--amber);padding:8px 10px;font-size:12.5px;color:var(--paper);margin-top:8px;}
+
+  .checkpoint{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:6px;padding:22px 22px 18px;margin-bottom:22px;}
+  .checkpoint-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px;}
+  .checkpoint-num{font-family:'IBM Plex Mono',monospace;font-size:22px;color:var(--amber);font-weight:700;}
+  .checkpoint h2{font-size:19px;color:var(--paper);font-weight:600;}
+  .checkpoint .window{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--line-dim);}
+  .checkpoint .theme{font-size:13.5px;font-style:italic;opacity:.9;margin-bottom:16px;}
+
+  .track{border-left:3px solid var(--line-dim);padding:4px 0 4px 16px;margin-bottom:16px;}
+  .track.advise{border-color:var(--advise);}
+  .track.teach{border-color:var(--teach);}
+  .track.publish{border-color:var(--publish);}
+  .track.ops{border-color:var(--ops);}
+  .track h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+  .track.advise h4{color:var(--advise);}
+  .track.teach h4{color:var(--teach);}
+  .track.publish h4{color:var(--publish);}
+  .track.ops h4{color:var(--ops);}
+  .track ul{margin-left:16px;margin-bottom:8px;}
+  .track li{font-size:13px;opacity:.92;margin-bottom:5px;}
+  .track li b{color:var(--paper);font-weight:600;}
+
+  .target{background:rgba(143,199,222,0.06);border-radius:3px;padding:10px 12px;font-size:12.5px;color:var(--paper);margin-top:8px;}
+  .target .label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber);letter-spacing:.5px;margin-bottom:3px;}
+
+  .checkpoint-gate{background:rgba(232,166,60,0.08);border:1px solid var(--amber);border-radius:4px;padding:12px 14px;margin-top:14px;}
+  .checkpoint-gate .label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:1px;margin-bottom:4px;}
+  .checkpoint-gate p{font-size:13px;color:var(--paper);}
+
   .backup{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:4px;padding:14px 16px;margin-bottom:10px;}
   .backup .trigger{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--coral);margin-bottom:4px;}
   .backup p{font-size:13px;opacity:.9;}
@@ -60,7 +85,13 @@
   <a class="back" href="command-center.html">&larr; Back to Command Center</a>
   <div class="tag">Prof Dr. Tan &middot; Strategy Roadmap</div>
   <h1>AI Figurehead Roadmap</h1>
-  <p class="sub">18&ndash;24 month plan: Advise &middot; Teach &middot; Publish. One persona, three pillars, mutually reinforcing. Draft v1 &mdash; 17 Jul 2026.</p>
+  <p class="sub">18&ndash;24 month plan across three tracks &mdash; Advise, Teach, Publish &mdash; plus entity/ops, checkpointed at 6/12/18/24 months. v2 (expanded) &mdash; 17 Jul 2026.</p>
+
+  <div class="jumpnav">
+    <a href="#m6">6 Months</a><a href="#m12">12 Months</a><a href="#m18">18 Months</a><a href="#m24">24 Months</a><a href="#backup">Off-Ramps</a>
+  </div>
+
+  <div class="honesty"><b>Honesty flag:</b> Every number below (client counts, revenue figures, conversion rates) is a planning target I've set for structure, not a data-backed forecast &mdash; I have no verified benchmark for SME AI-consulting demand or academic hiring conversion rates in this region. Treat targets as things to track against and revise, not commitments. Dates assume the plan starts execution in Aug 2026.</div>
 
   <div class="section-title">The Core Idea</div>
   <div class="pillars">
@@ -84,100 +115,237 @@
   <div class="section-title">Site / Brand Architecture</div>
   <div class="sitemap">[yourbrand].com
 
-<span class="path">/</span> (home)
-   &mdash; Single figurehead bio: Stanford affiliation, IEEE Senior Member,
-     JCU faculty, Accenture CTOaaS credential <span class="note">(factual mention only)</span>,
-     Q1 publication
+<span class="path">/</span> (home) &mdash; figurehead bio: Stanford, IEEE Senior Member, JCU, Accenture
+   CTOaaS credential <span class="note">(factual mention only, no branding reuse)</span>, Q1 publication
 
-<span class="path">/advise</span>
-   &mdash; Service tiers: Diagnostic &rarr; Retainer &rarr; Embedded
-   &mdash; Case studies &middot; Regional footprint &middot; Contact / intake
+<span class="path">/advise</span>  &mdash; tiers, case studies, regional footprint, intake form
+<span class="path">/teach</span>   &mdash; philosophy, sample modules, guest-lecture reel, Scholar link
+<span class="path">/publish</span> &mdash; AI Power Shift, Sprint by Sprint, AI Playbook, Signal Watch
+<span class="path">/about</span>   &mdash; full CV-style stack, downloadable PDF bio</div>
 
-<span class="path">/teach</span>
-   &mdash; Teaching philosophy + sample syllabus modules (from AI Playbook)
-   &mdash; Guest lecture reel &middot; "Available for visiting faculty" CTA
-   &mdash; Link to Google Scholar profile
-
-<span class="path">/publish</span>
-   &mdash; AI Power Shift &middot; Sprint by Sprint &middot; AI Playbook &middot; Signal Watch
-
-<span class="path">/about</span>
-   &mdash; Full CV-style credibility stack, downloadable PDF bio</div>
-
-  <div class="section-title">Phased Roadmap</div>
-
-  <div class="phase">
-    <div class="phase-head">
-      <span class="phase-num">PHASE 1</span>
-      <h3>Foundation</h3>
-      <span class="window">Months 1&ndash;3 &middot; Aug&ndash;Oct 2026</span>
+  <!-- ============ 6 MONTHS ============ -->
+  <div class="section-title" id="m6">Checkpoint: 6 Months (by ~Jan 2027)</div>
+  <div class="checkpoint">
+    <div class="checkpoint-head">
+      <span class="checkpoint-num">01</span>
+      <h2>Foundation &amp; Soft Launch</h2>
+      <span class="window">Aug 2026 &ndash; Jan 2027</span>
     </div>
-    <div class="goal">Legal + brand scaffolding in place, no public launch yet.</div>
-    <ul>
-      <li>Finalize brand name &rarr; ACRA BizFile name check</li>
-      <li>Register Pte Ltd (~S$315 ACRA fee, 1&ndash;3 business days once docs ready)</li>
-      <li>Draft service-tier pricing (Diagnostic / Retainer / Embedded)</li>
-      <li>Sprint by Sprint: revise Results/Discussion early Aug, convert to docx, submit</li>
-      <li>Set up / clean up Google Scholar profile</li>
-      <li>Quiet check with JCU on outside-activity disclosure norms</li>
-    </ul>
-    <div class="milestone">Milestone: Legal entity exists. Paper submitted. No public brand yet.</div>
+    <div class="theme">Entity exists, brand is live, first real signals (not yet real revenue) start coming in.</div>
+
+    <div class="track advise">
+      <h4>Advise</h4>
+      <ul>
+        <li><b>Weeks 1&ndash;2:</b> Shortlist 4 brand names &rarr; ACRA BizFile availability check &rarr; pick final name</li>
+        <li><b>Weeks 2&ndash;4:</b> Register Pte Ltd (S$315 ACRA fee; nominee/local director sorted if needed; company secretary appointed within 6 months)</li>
+        <li><b>Month 2:</b> Open corporate bank account, set up basic invoicing/accounting (even a simple spreadsheet + Xero/QuickBooks is fine at this stage)</li>
+        <li><b>Month 2&ndash;3:</b> Write and price the 3-tier service menu (Diagnostic / Retainer / Embedded) &mdash; Diagnostic tier should be the cheapest, most templated, easiest to say yes to</li>
+        <li><b>Month 3&ndash;4:</b> Build the Diagnostic-tier intake form + report template (reusable engine, not bespoke per client)</li>
+        <li><b>Month 4&ndash;6:</b> Approach 8&ndash;12 SMEs in your existing network (not cold market) for the Diagnostic offer &mdash; existing relationships convert faster than strangers</li>
+      </ul>
+      <div class="target"><div class="label">TARGET (unverified planning estimate)</div>1&ndash;3 Diagnostic-tier engagements delivered by month 6. This is a floor, not a ceiling &mdash; treat zero as a signal to revisit outreach channel, not the offer itself, this early.</div>
+    </div>
+
+    <div class="track teach">
+      <h4>Teach</h4>
+      <ul>
+        <li><b>Month 1:</b> Clean up and fully populate Google Scholar profile (this is the single highest-leverage low-effort action for academic discoverability)</li>
+        <li><b>Month 2&ndash;3:</b> Repackage 1 AI Playbook chapter into a standalone "sample syllabus module" PDF &mdash; concrete leave-behind for any conversation with a dean or program head</li>
+        <li><b>Month 3&ndash;4:</b> Identify 5&ndash;8 target universities across Vietnam, Thailand, Indonesia, Cambodia (mix of established + emerging AI programs) &mdash; research their guest-lecture/visiting-faculty intake process</li>
+        <li><b>Month 4&ndash;6:</b> Reach out for 2&ndash;3 unpaid/low-key guest lecture slots &mdash; treat these as portfolio-building, not income</li>
+        <li>Quiet confirmation with JCU dept head on outside-activity disclosure norms (low priority per your read, but do it before, not after, the site goes public)</li>
+      </ul>
+      <div class="target"><div class="label">TARGET</div>1 guest lecture delivered by month 6; 2&ndash;3 more in the pipeline for the next window.</div>
+    </div>
+
+    <div class="track publish">
+      <h4>Publish</h4>
+      <ul>
+        <li><b>Early Aug (per existing hold):</b> Revise Sprint by Sprint Results/Discussion, convert to docx, submit to <i>Computers and Education: AI</i> (Elsevier)</li>
+        <li><b>Month 2&ndash;5:</b> Keep AI Power Shift Signal Watch updated per standing rule (auto-update on relevant articles)</li>
+        <li><b>Month 3&ndash;6:</b> Begin monthly-cadence LinkedIn/content-drip output tied to the AI Playbook &mdash; this is the visibility engine and should not go quiet during entity setup</li>
+        <li><b>Month 5&ndash;6:</b> Launch the single-domain site (home + /advise + /teach + /publish + /about) once brand name and Pte Ltd are confirmed</li>
+      </ul>
+      <div class="target"><div class="label">TARGET</div>Paper under review by month 6 (review timelines are outside your control &mdash; don't plan around a specific decision date). Site live by month 6.</div>
+    </div>
+
+    <div class="track ops">
+      <h4>Entity &amp; Ops</h4>
+      <ul>
+        <li>Domain registration + basic hosting once name is locked</li>
+        <li>Simple CRM or even a spreadsheet to track: outreach sent, responses, conversions &mdash; you'll want this data at the 12-month checkpoint</li>
+        <li>Decide bookkeeping approach now (self-managed vs. outsourced) &mdash; cheaper to set up correctly at month 1 than to untangle at month 12</li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-gate">
+      <div class="label">GATE TO PASS BEFORE MONTH 12</div>
+      <p>Entity legally exists. Site is live and indexable. At least one Diagnostic client OR one guest lecture delivered &mdash; i.e., proof the offer works in the real world, not just on paper.</p>
+    </div>
   </div>
 
-  <div class="phase">
-    <div class="phase-head">
-      <span class="phase-num">PHASE 2</span>
-      <h3>Soft Launch</h3>
-      <span class="window">Months 4&ndash;9 &middot; Nov 2026&ndash;Apr 2027</span>
+  <!-- ============ 12 MONTHS ============ -->
+  <div class="section-title" id="m12">Checkpoint: 12 Months (by ~Jul 2027)</div>
+  <div class="checkpoint">
+    <div class="checkpoint-head">
+      <span class="checkpoint-num">02</span>
+      <h2>Traction &amp; First Revenue</h2>
+      <span class="window">Feb &ndash; Jul 2027</span>
     </div>
-    <div class="goal">The three-pillar site is live, first paid engagements, first guest lecture.</div>
-    <ul>
-      <li>Launch single-domain site (home + 3 pillar sections)</li>
-      <li>Repackage 1&ndash;2 AI Playbook chapters as sample syllabus modules</li>
-      <li>1&ndash;2 unpaid/low-key guest lectures at target-region universities</li>
-      <li>Launch Diagnostic-tier consulting offer to first SME clients</li>
-      <li>Begin regional conference submissions (AI-in-education tracks)</li>
-    </ul>
-    <div class="milestone">Milestone: First paying advisory client. First guest lecture delivered. Site live and indexable.</div>
+    <div class="theme">Move from "does this work" to "does this work repeatably" &mdash; first real case studies, first Retainer-tier client.</div>
+
+    <div class="track advise">
+      <h4>Advise</h4>
+      <ul>
+        <li>Convert 1&ndash;2 successful Diagnostic clients into Retainer-tier relationships &mdash; this is the real test of the funnel design</li>
+        <li>Write up 2&ndash;3 case studies (with client permission) for the /advise page &mdash; anonymize if needed, specificity matters more than volume</li>
+        <li>Expand outreach beyond existing network &mdash; first genuinely cold or referral-based leads</li>
+        <li>Begin exploring first Embedded-tier conversation (even if it doesn't close this window) &mdash; useful to know what objections come up at the top tier</li>
+      </ul>
+      <div class="target"><div class="label">TARGET</div>3&ndash;6 total Diagnostic engagements cumulative; 1&ndash;2 active Retainer clients; first Embedded-tier conversation held.</div>
+    </div>
+
+    <div class="track teach">
+      <h4>Teach</h4>
+      <ul>
+        <li>Deliver 2&ndash;3 more guest lectures across the 5&ndash;8 target universities identified in Phase 1</li>
+        <li>Submit to 1&ndash;2 regional academic conferences (AI-in-education / digital transformation tracks) &mdash; these are where informal faculty-recruitment conversations happen</li>
+        <li>Gauge which university(s) show genuine repeat interest &mdash; don't spread effort evenly, follow where there's real signal</li>
+        <li>If Sprint by Sprint paper has published or is in late review by this point, use it actively in teaching-credibility conversations</li>
+      </ul>
+      <div class="target"><div class="label">TARGET</div>Total of 3&ndash;5 guest lectures delivered since launch; at least 1 university showing interest in a repeat/ongoing arrangement.</div>
+    </div>
+
+    <div class="track publish">
+      <h4>Publish</h4>
+      <ul>
+        <li>Sprint by Sprint: respond to reviewer feedback if received; this is unpredictable in timing &mdash; don't block other work waiting on it</li>
+        <li>Maintain monthly content cadence (non-negotiable &mdash; this is what keeps the visibility flywheel turning)</li>
+        <li>Consider a second AI Playbook chapter repackaged as a syllabus module, based on which topics got the best response in Phase 1 guest lectures</li>
+        <li>Begin tracking basic site analytics &mdash; are people actually finding /advise and /teach organically, or only via direct outreach?</li>
+      </ul>
+    </div>
+
+    <div class="track ops">
+      <h4>Entity &amp; Ops</h4>
+      <ul>
+        <li>First-year accounts/tax filing prep (Singapore Pte Ltd has annual filing obligations &mdash; confirm exact deadlines with your accountant/corporate secretary rather than assuming)</li>
+        <li>Review whether solo-operator capacity is the bottleneck yet (usually too early, but worth a checkpoint question)</li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-gate">
+      <div class="label">GATE TO PASS BEFORE MONTH 18</div>
+      <p>At least one repeat/referral client (proof the model isn't purely you cold-pitching). At least one university relationship showing real momentum. Content cadence has not lapsed.</p>
+    </div>
   </div>
 
-  <div class="phase">
-    <div class="phase-head">
-      <span class="phase-num">PHASE 3</span>
-      <h3>Regional Activation</h3>
-      <span class="window">Months 10&ndash;18 &middot; May 2027&ndash;Jan 2028</span>
+  <!-- ============ 18 MONTHS ============ -->
+  <div class="section-title" id="m18">Checkpoint: 18 Months (by ~Jan 2028)</div>
+  <div class="checkpoint">
+    <div class="checkpoint-head">
+      <span class="checkpoint-num">03</span>
+      <h2>Regional Activation</h2>
+      <span class="window">Aug 2027 &ndash; Jan 2028</span>
     </div>
-    <div class="goal">Recognizable regional presence, inbound requests start appearing.</div>
-    <ul>
-      <li>Formalize 2&ndash;3 case studies into public content</li>
-      <li>Expand travel-based consulting into Vietnam/Bangkok; explore China/Japan/Korea entry</li>
-      <li>Target 1&ndash;2 more substantive guest-faculty engagements</li>
-      <li>Retainer-tier clients should start appearing if Diagnostic tier is converting</li>
-      <li>Checkpoint: is inbound actually happening, or still outbound?</li>
-    </ul>
-    <div class="milestone">Milestone: At least one genuinely inbound approach citing your published work or a referral.</div>
+    <div class="theme">This is the real test: is anyone approaching you first? If not yet, that's the signal to invest more in Publish before pushing Advise/Teach harder.</div>
+
+    <div class="track advise">
+      <h4>Advise</h4>
+      <ul>
+        <li>Physical travel-based consulting begins in earnest: Vietnam and/or Bangkok trips tied to actual client work (not exploratory travel)</li>
+        <li>Begin scoping China/Japan/Korea market entry &mdash; expect this to be slower due to language and relationship-building norms; treat this window as research/relationship-seeding, not close-the-deal</li>
+        <li>Formalize the Embedded tier if a client is ready &mdash; this is your highest-value, most hands-on offering</li>
+        <li><b>Key decision point:</b> is demand outpacing solo capacity? If yes, start scoping what an associate/contractor model would look like &mdash; don't hire reactively under pressure</li>
+      </ul>
+      <div class="target"><div class="label">TARGET</div>6&ndash;10 cumulative Diagnostic engagements; 2&ndash;4 active Retainer clients; at least 1 Embedded-tier engagement closed.</div>
+    </div>
+
+    <div class="track teach">
+      <h4>Teach</h4>
+      <ul>
+        <li>Pursue formalizing a relationship with the university that showed strongest interest at month 12 &mdash; semi-regular guest slots, or an actual visiting-faculty conversation</li>
+        <li>By this point you should have enough material for a genuine "portfolio" page: lecture topics, institutions, testimonials if available</li>
+        <li>Reassess the JCU relationship from a position of strength &mdash; you now have external options, which was part of the original motivation</li>
+      </ul>
+      <div class="target"><div class="label">TARGET</div>1 formal or semi-formal visiting-faculty arrangement in place, or a clear, specific reason why not (e.g., still building trust, institutional calendar timing).</div>
+    </div>
+
+    <div class="track publish">
+      <h4>Publish</h4>
+      <ul>
+        <li>By month 18, you should be able to answer: is inbound traffic to the site actually converting to Advise/Teach leads? If not, this is where to double down &mdash; more content, more speaking, possibly paid promotion of the Signal Watch content</li>
+        <li>Consider whether a second research paper or a more journalistic piece (op-ed, syndicated column) would extend reach beyond the academic Q1 journal audience</li>
+      </ul>
+    </div>
+
+    <div class="track ops">
+      <h4>Entity &amp; Ops</h4>
+      <ul>
+        <li>Second-year filing cycle</li>
+        <li>If associate/contractor hiring is being considered, get a basic understanding of Singapore employment vs. contractor obligations before committing &mdash; worth a real conversation with a corporate services firm, not a guess</li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-gate">
+      <div class="label">GATE TO PASS BEFORE MONTH 24</div>
+      <p>At least one genuinely inbound approach &mdash; university or SME &mdash; that cited your published work or a referral, not a cold pitch from you. This is the checkpoint that tells you whether the "figurehead" positioning is actually working.</p>
+    </div>
   </div>
 
-  <div class="phase">
-    <div class="phase-head">
-      <span class="phase-num">PHASE 4</span>
-      <h3>Scale &amp; Diversify</h3>
-      <span class="window">Months 18&ndash;24 &middot; Feb&ndash;Jul 2028</span>
+  <!-- ============ 24 MONTHS ============ -->
+  <div class="section-title" id="m24">Checkpoint: 24 Months (by ~Jul 2028)</div>
+  <div class="checkpoint">
+    <div class="checkpoint-head">
+      <span class="checkpoint-num">04</span>
+      <h2>Scale &amp; Diversify</h2>
+      <span class="window">Feb &ndash; Jul 2028</span>
     </div>
-    <div class="goal">Pick where to double down based on what actually worked.</div>
-    <ul>
-      <li>Decide: Advise or Teach shows stronger inbound pull?</li>
-      <li>Consider formal visiting-faculty / exchange agreement with 1 university</li>
-      <li>Consider whether Embedded-tier consulting justifies associate help</li>
-      <li>Revisit AI Power Shift as a paid Signal Watch subscription tier</li>
-    </ul>
-    <div class="milestone">Milestone: Clear-eyed decision on which pillar to weight for years 3+, backed by real traction data.</div>
+    <div class="theme">Not a default "grow everything" phase &mdash; a decision point, made with 18 months of real data instead of assumptions.</div>
+
+    <div class="track advise">
+      <h4>Advise</h4>
+      <ul>
+        <li>Decide, using actual data from months 1&ndash;18: does Advise justify bringing on associate help, or stay solo/boutique by design?</li>
+        <li>If scaling: define what stays yours (strategy, figurehead-level relationships) vs. what an associate could deliver (Diagnostic-tier execution)</li>
+        <li>If not scaling: that's a legitimate outcome &mdash; a smaller, higher-margin solo practice may suit the "not zero effort, but not full-time" goal better than growth for its own sake</li>
+      </ul>
+    </div>
+
+    <div class="track teach">
+      <h4>Teach</h4>
+      <ul>
+        <li>By now you'll know whether Teach or Advise shows the stronger inbound pull (per the month-18 gate) &mdash; weight your calendar accordingly rather than splitting evenly by default</li>
+        <li>If a formal visiting-faculty role has materialized, decide how it sits alongside (or replaces) the JCU part-time arrangement</li>
+      </ul>
+    </div>
+
+    <div class="track publish">
+      <h4>Publish</h4>
+      <ul>
+        <li>Revisit AI Power Shift as a paid Signal Watch subscription tier &mdash; only if audience size actually supports it (check analytics, don't assume)</li>
+        <li>Consider whether a second book or major publication is warranted based on how much the first Sprint by Sprint paper actually moved credibility/inbound &mdash; measure before committing another 12+ months to a second one</li>
+      </ul>
+    </div>
+
+    <div class="track ops">
+      <h4>Entity &amp; Ops</h4>
+      <ul>
+        <li>Full review of entity structure &mdash; is Pte Ltd still the right vehicle, or does growth (or lack of it) suggest a different structure?</li>
+        <li>Formal year-2 financial review: revenue vs. cost of running the entity (accounting, filing, travel) &mdash; sanity-check that the venture is net-positive before extending further</li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-gate">
+      <div class="label">END-OF-WINDOW DECISION</div>
+      <p>A clear-eyed choice on which pillar to weight for years 3+, backed by 24 months of real traction data &mdash; not the assumptions this document started with. This document should be revised, not archived, once you're here.</p>
+    </div>
   </div>
 
-  <div class="section-title">Backup / Off-Ramps</div>
+  <div class="section-title" id="backup">Backup / Off-Ramps</div>
   <div class="backup">
     <div class="trigger">IF consulting inbound is slow</div>
-    <p>Lean harder into published content before assuming the service needs repositioning &mdash; visibility usually lags content investment by months.</p>
+    <p>Lean harder into published content before assuming the service needs repositioning &mdash; visibility usually lags content investment by months, not weeks.</p>
   </div>
   <div class="backup">
     <div class="trigger">IF guest lectures don't convert to repeat/paid teaching</div>
@@ -195,8 +363,12 @@
     <div class="trigger">IF the Pte Ltd creates friction with JCU's outside-activity policy</div>
     <p>Teach and Publish pillars could stand alone without the Advise entity attached, though this weakens the "practitioner who teaches" positioning.</p>
   </div>
+  <div class="backup">
+    <div class="trigger">IF solo capacity becomes the bottleneck before month 18</div>
+    <p>Resist hiring reactively under client pressure &mdash; raise Diagnostic-tier pricing first to filter demand, then consider associate help only once the higher price point still clears.</p>
+  </div>
 
-  <div class="section-title">Immediate Next Actions</div>
+  <div class="section-title">Immediate Next Actions (this month)</div>
   <div class="actions">
     <ol>
       <li>Shortlist 3&ndash;4 brand names &rarr; ACRA availability check</li>
@@ -205,7 +377,7 @@
     </ol>
   </div>
 
-  <div class="disclaimer">This is a planning document, not a legal or financial commitment. Timelines &mdash; especially journal review and university hiring cycles &mdash; are outside direct control and should be treated as estimates, not deadlines.</div>
+  <div class="disclaimer">This is a planning document, not a legal, financial, or immigration commitment. Timelines &mdash; especially journal review, university hiring cycles, and client conversion &mdash; are outside direct control. All client/revenue/lecture counts are planning targets to track against, not forecasts or guarantees. Revisit and rewrite this document at each checkpoint rather than treating it as fixed.</div>
   <div class="updated">Last generated 17 Jul 2026 &middot; static snapshot &mdash; ask to update anytime.</div>
 </div>
 </body>
