@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprint 8 Planning — Prof Dr Tan (Private)</title>
+<style>
+:root{--navy:#0a1628;--navy-2:#0d1f3c;--navy-3:#112244;--gold:#c9a84c;--gold-lt:#e2c97e;--teal:#2dd4bf;--white:#f0f4fa;--muted:#8fa3bf;--danger:#e05c5c;--success:#3dcc8a;--warn:#f0a500;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.7;}
+header{background:linear-gradient(135deg,#070e1c,var(--navy-3));border-bottom:2px solid var(--gold);padding:2rem;text-align:center;}
+.eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--danger);margin-bottom:.5rem;}
+h1{font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--gold);font-weight:700;}
+.private-badge{display:inline-block;margin-top:.75rem;background:rgba(224,92,92,.2);color:var(--danger);border:1px solid rgba(224,92,92,.4);border-radius:99px;padding:.25rem .9rem;font-size:.78rem;font-weight:700;letter-spacing:.08em;}
+main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+section{margin-bottom:2.75rem;}
+.section-title{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);border-bottom:1px solid rgba(45,212,191,.25);padding-bottom:.5rem;margin-bottom:1.25rem;}
+p{color:rgba(240,244,250,.82);margin-bottom:1rem;}
+strong{color:var(--white);}
+code{background:rgba(45,212,191,.12);color:var(--teal);padding:.1rem .4rem;border-radius:4px;font-size:.88em;}
+.callout{border-left:3px solid var(--gold);background:rgba(201,168,76,.07);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1.25rem;}
+.callout.teal{border-color:var(--teal);background:rgba(45,212,191,.07);}
+.callout.danger{border-color:var(--danger);background:rgba(224,92,92,.07);}
+.callout.success{border-color:var(--success);background:rgba(61,204,138,.07);}
+.callout-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;}
+.callout-title.gold{color:var(--gold);}
+.callout-title.teal{color:var(--teal);}
+.callout-title.danger{color:var(--danger);}
+.callout-title.success{color:var(--success);}
+.callout p{margin-bottom:0;font-size:.92rem;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem;}
+.team-card{background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.1rem 1.25rem;}
+.team-card.warning{border-color:rgba(240,165,0,.3);}
+.team-card.danger{border-color:rgba(224,92,92,.3);}
+.team-card.success{border-color:rgba(61,204,138,.2);}
+.team-name{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:.35rem;}
+.team-stat{font-size:.82rem;color:var(--muted);margin-bottom:.2rem;}
+.team-stat strong{color:var(--white);}
+.team-stat .ok{color:var(--success);}
+.team-stat .fail{color:var(--danger);}
+.team-stat .warn{color:var(--warn);}
+ul{padding-left:1.4rem;margin-bottom:1rem;}
+li{color:rgba(240,244,250,.8);margin-bottom:.4rem;line-height:1.6;}
+li strong{color:var(--white);}
+.script-block{background:var(--navy-2);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:1.25rem;margin-bottom:1rem;}
+.script-who{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.5rem;}
+.script-say{font-size:.95rem;color:var(--white);font-style:italic;line-height:1.7;border-left:3px solid rgba(201,168,76,.3);padding-left:.9rem;}
+.script-note{font-size:.78rem;color:var(--muted);margin-top:.5rem;}
+footer{border-top:1px solid rgba(201,168,76,.15);padding:1.25rem;text-align:center;font-size:.75rem;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">🔒 Private — Prof Dr Tan Eyes Only</p>
+  <h1>Sprint 8 Planning + Monday Script</h1>
+  <div class="private-badge">NOT FOR STUDENTS · AI Playbook Only</div>
+</header>
+
+<main>
+
+<!-- CURRENT SPRINT STATUS -->
+<section>
+  <div class="section-title">Sprint 7 Status — Saturday 18 July 2026</div>
+  <p>Sprint 7 deadline is <strong>Sunday 19 July 23:59 SGT</strong>. No team has cut <code>vW29</code> yet as of this morning. Here is where each team stands:</p>
+
+  <div class="team-grid">
+    <div class="team-card danger">
+      <div class="team-name">Team 1</div>
+      <div class="team-stat"><strong>Pipeline:</strong> <span class="fail">❌ FAILED Fri 17 Jul</span></div>
+      <div class="team-stat"><strong>Reason:</strong> Rate-limited on LLM API calls</div>
+      <div class="team-stat"><strong>PR #82:</strong> 8 files committed by github-actions[bot] — agents ran, LLM synthesis incomplete</div>
+      <div class="team-stat"><strong>vW29:</strong> <span class="fail">❌ Not yet</span></div>
+      <div class="team-stat"><strong>Georgii's plan:</strong> Push results manually to same PR tomorrow, no pipeline rerun</div>
+    </div>
+    <div class="team-card success">
+      <div class="team-name">Team 2</div>
+      <div class="team-stat"><strong>Pipeline:</strong> <span class="ok">✅ R10 Calibration auto-ran</span></div>
+      <div class="team-stat"><strong>Latest:</strong> W28 calibration automated 18 Jul 02:05</div>
+      <div class="team-stat"><strong>vW29:</strong> <span class="fail">❌ Not yet</span></div>
+      <div class="team-stat"><strong>Active:</strong> 5 commits since Friday</div>
+    </div>
+    <div class="team-card warning">
+      <div class="team-name">Team 3</div>
+      <div class="team-stat"><strong>Pipeline:</strong> <span class="ok">✅ Fetch ran Fri</span></div>
+      <div class="team-stat"><strong>Latest:</strong> Vince-1206 added W29 Technical Agent + evidence manually</div>
+      <div class="team-stat"><strong>vW29:</strong> <span class="fail">❌ Not yet</span></div>
+      <div class="team-stat"><strong>Note:</strong> Manual commits, partial automation</div>
+    </div>
+    <div class="team-card warning">
+      <div class="team-name">Team 4</div>
+      <div class="team-stat"><strong>Pipeline:</strong> <span class="ok">✅ Auto Prediction ran</span></div>
+      <div class="team-stat"><strong>Latest:</strong> github-actions[bot] "Pipeline execution Week 8"</div>
+      <div class="team-stat"><strong>vW29:</strong> <span class="fail">❌ Not yet</span></div>
+      <div class="team-stat"><strong>Tags:</strong> <span class="warn">Still wrong format historically</span></div>
+    </div>
+    <div class="team-card success">
+      <div class="team-name">Team 5</div>
+      <div class="team-stat"><strong>Pipeline:</strong> <span class="ok">✅ Update Market Data ran</span></div>
+      <div class="team-stat"><strong>Latest:</strong> github-actions[bot] "update Prism data 2026-07-17"</div>
+      <div class="team-stat"><strong>vW29:</strong> <span class="fail">❌ Not yet</span></div>
+      <div class="team-stat"><strong>Most active team this sprint</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- RATE LIMIT PROBLEM -->
+<section>
+  <div class="section-title">The Rate Limit Problem — What It Is and What to Do</div>
+
+  <div class="callout danger">
+    <div class="callout-title danger">What happened to Team 1</div>
+    <p>Their automated pipeline ran on Friday 17 July and successfully committed 8 files — Almanac, Macro, Technical agents all ran correctly. But the LLM synthesis step (R8) hit an API rate limit mid-run. The pipeline didn't crash — it got throttled. Georgii's response is correct: push the LLM results manually to the same PR rather than rerunning the whole pipeline (which would burn more rate limit quota).</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title gold">Why this is not an excuse — and what to say Monday</div>
+    <p>The rate limit problem is real. But the response to it is exactly what separates a Stage 3 team from a Stage 4 team. A Stage 3 team panics on Sunday. A Stage 4 team has already built a fallback: either a different API provider as backup, or a manual synthesis path that produces the same structured output. Team 1 (Georgii) is handling it correctly — pushing manually to the existing PR. That is the right call.</p>
+  </div>
+
+  <div class="callout teal">
+    <div class="callout-title teal">The Sprint 8 solution — build the resilience layer</div>
+    <p>Sprint 8 should require every team to implement at minimum <strong>two LLM API providers</strong> — primary and fallback. When the primary rate-limits, the workflow automatically switches to the secondary. This is a one-sprint engineering task that eliminates the entire category of "we got rate-limited" as an excuse for incomplete synthesis. Teams already using OpenRouter, Groq, and Gemini Flash have this available for free.</p>
+  </div>
+</section>
+
+<!-- SPRINT 8 PLANNING -->
+<section>
+  <div class="section-title">Sprint 8 — Final Demo Day · Planning Notes (Private)</div>
+
+  <div class="callout">
+    <div class="callout-title gold">Sprint 8 dates (from calendar)</div>
+    <p><strong>Opens:</strong> Monday 20 July (immediately after Sprint 7 presentation)<br>
+    <strong>Final Demo Day:</strong> Monday 3 August 2026<br>
+    <strong>Tag:</strong> <code>vW30</code> or <code>vFinal</code> — decide Monday<br>
+    <strong>Theme:</strong> The Intelligent Pipeline — full Stage 4, resilient, self-healing, cumulative calibration</p>
+  </div>
+
+  <p>Sprint 8 is the final sprint. It should not introduce new features — it should make everything that exists work properly, reliably, and demonstrably. The three things every team must show on Demo Day:</p>
+
+  <ul>
+    <li><strong>The pipeline ran automatically</strong> without any human trigger — show the github-actions[bot] commit timestamp</li>
+    <li><strong>Two LLM providers</strong> — primary and fallback. Show the fallback actually works by triggering the rate limit scenario deliberately</li>
+    <li><strong>Cumulative calibration dashboard</strong> — W22 through W29, direction accuracy across all sprints, trend visible. R10 owns this.</li>
+  </ul>
+
+  <div class="callout teal">
+    <div class="callout-title teal">What distinguishes a distinction from a pass on Demo Day</div>
+    <p>Any team can show a pipeline that ran once. A distinction team shows a pipeline that has been running reliably for 8 sprints, has handled failures gracefully, has improved its accuracy over time based on calibration data, and can be demonstrated live in the room with the run log as evidence. The cumulative calibration table is the single most differentiating artefact — it shows whether the system actually learned.</p>
+  </div>
+
+  <p><strong>Note for Monday:</strong> Do NOT announce Sprint 8 details in class yet. Just open it as "the final sprint" and tell teams the Sprint 8 brief will be published on the website after class. Keep planning private on this page until ready to publish.</p>
+</section>
+
+<!-- MONDAY SCRIPT -->
+<section>
+  <div class="section-title">Monday 20 July — Teaching Script</div>
+
+  <div class="script-block">
+    <div class="script-who">Opening (R2 presentations done — address the cohort)</div>
+    <div class="script-say">"I've been watching your pipelines all week. Not just on Sunday — all week. Some of you know that. Some of you are about to find out."</div>
+    <div class="script-note">Pause. Let it land. Then go team by team.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On the rate limit issue (Team 1 and any others affected)</div>
+    <div class="script-say">"Several teams hit API rate limits this week. Let me be direct about this: rate limits are a real constraint, not an excuse. The question is not whether you got rate-limited. The question is what your system does when it gets rate-limited. A resilient pipeline has a fallback. If you don't have one yet — Sprint 8 is your chance to build it."</div>
+    <div class="script-note">Point to the free LLM options on the Sprint 7 page. Gemini Flash and Groq don't rate-limit on a weekly pipeline cadence.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On the mid-week check-in (only Teams 4 and 5 filed on time)</div>
+    <div class="script-say">"Two teams filed their mid-week check-in on time. Two. I'm not going to name them — but R2s know who they are, and their teams know who they are. The check-in was not optional. It was not a suggestion. It was on the Definition of Done. If it wasn't on your DoD checklist — that is also a failure of R1 and R2 working together."</div>
+    <div class="script-note">This applies pressure without public shaming. The teams who didn't file will feel it.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On the dependency chain (addressing Sprint 6 retrospective)</div>
+    <div class="script-say">"Last sprint several teams told me they were blocked because someone didn't deliver. This sprint I asked R2 to surface those blockers by Wednesday. Did it work? R2s — when did your first blocker surface this sprint? Wednesday or Sunday? That answer tells me everything about how your Scrum cycle is maturing."</div>
+    <div class="script-note">Go around the room. Each R2 answers. Do not accept "we didn't have blockers" — probe it.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On Sprint 8 — Final Demo Day</div>
+    <div class="script-say">"Sprint 8 is the last one. Demo Day is Monday 3 August. I'm not going to tell you what Sprint 8 looks like right now — the brief will go up on the website this week. What I will tell you is this: Sprint 8 is not about adding features. It is about making everything you've built work reliably, demonstrably, and in front of me in this room. If your pipeline has been running automatically every week — show me eight sprints of run logs. That is your case for a distinction."</div>
+    <div class="script-note">Do not say more about Sprint 8 yet. Brief goes up mid-week privately, published to students later.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On vW29 tag format (for any team that got it wrong)</div>
+    <div class="script-say">"The tag format has been in the brief since Sprint 1. Lowercase v, capital W, two digits. If your tag is wrong this sprint — I don't want to hear about it on Monday. Fix it before Sunday midnight. You have the time."</div>
+    <div class="script-note">This applies specifically to Team 4 whose tags have been wrong since Sprint 1.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">Closing</div>
+    <div class="script-say">"You have one sprint left. Eight weeks of work. The teams that finish strongly are not the ones who built the most impressive thing in Sprint 1. They are the ones who kept improving sprint over sprint, documented their decisions, and showed up every Wednesday — not just every Sunday. Sprint 8 brief goes up this week. Read it carefully."</div>
+  </div>
+
+</section>
+
+<!-- PRIVATE NOTES -->
+<section>
+  <div class="section-title">Private Observations — Not for Monday</div>
+
+  <ul>
+    <li><strong>Team 1 (Georgii):</strong> Still the strongest technical team. Rate limit handled correctly. 16 days of silence in Sprint 6 is the concern — Sprint 7 shows recovery. Watch Sprint 8 consistency.</li>
+    <li><strong>Team 2 (The Bao / LuJunwen):</strong> Best-run team by Scrum metrics. R10 calibration fully automated. standup_midweek_W29.md not in main branch — The Bao announced it but didn't push. Address privately.</li>
+    <li><strong>Team 3:</strong> Manual commits from Vince-1206. Partial automation. Committed technical agent and evidence on Friday afternoon — good sign. No SM check-in.</li>
+    <li><strong>Team 4:</strong> Most improved this sprint. Auto Prediction pipeline ran. DoD documented. But tag format still wrong — four sprints in a row. R9 needs a direct conversation.</li>
+    <li><strong>Team 5:</strong> Most consistent auto-commits. github-actions[bot] commits every week including study break. Quiet on Discord but the pipeline speaks for itself.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>Sprint 8 Planning + Monday Script · Prof Dr Tan · 18 July 2026 · Private · AI Playbook only — not on DT3 website</footer>
+
+</body>
+</html>
