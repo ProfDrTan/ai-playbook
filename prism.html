@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRISM Journey Map + Team Ultra · Prof Dr Tan</title>
+<style>
+:root{
+  --navy:#0a1628;--navy-2:#0d1f3c;--navy-3:#112244;
+  --gold:#c9a84c;--gold-lt:#e2c97e;--teal:#2dd4bf;
+  --white:#f0f4fa;--muted:#8fa3bf;
+  --danger:#e05c5c;--success:#3dcc8a;--warn:#f0a500;
+  --t1:#7c3aed;--t2:#0ea5e9;--t3:#10b981;--t4:#f59e0b;--t5:#ec4899;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.65;}
+header{background:linear-gradient(135deg,#070e1c,var(--navy-3));border-bottom:2px solid var(--gold);padding:2rem;text-align:center;}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
+h1{font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--gold);font-weight:700;margin-bottom:.4rem;}
+.sub{font-size:.9rem;color:var(--muted);}
+main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+.section-title{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);border-bottom:1px solid rgba(45,212,191,.2);padding-bottom:.45rem;margin-bottom:1.5rem;}
+
+/* ── JOURNEY MAP ── */
+.journey-wrap{overflow-x:auto;margin-bottom:3rem;}
+.journey{min-width:820px;position:relative;}
+.sprint-cols{display:grid;grid-template-columns:120px repeat(6,1fr);gap:0;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;}
+.col-header{background:var(--navy-3);padding:.6rem .5rem;text-align:center;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);border-right:1px solid rgba(255,255,255,.06);}
+.team-label{background:var(--navy-2);padding:.6rem .75rem;display:flex;align-items:center;gap:.5rem;border-right:1px solid rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.06);}
+.team-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.t1-c{background:var(--t1);}
+.t2-c{background:var(--t2);}
+.t3-c{background:var(--t3);}
+.t4-c{background:var(--t4);}
+.t5-c{background:var(--t5);}
+.team-label-txt{font-size:.8rem;font-weight:600;color:var(--white);}
+.cell{padding:.5rem;border-right:1px solid rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.06);text-align:center;position:relative;}
+.stage-pill{display:inline-block;padding:.2rem .55rem;border-radius:5px;font-size:.72rem;font-weight:700;margin-bottom:.3rem;}
+.s1{background:rgba(224,92,92,.2);color:var(--danger);}
+.s2{background:rgba(240,165,0,.2);color:var(--warn);}
+.s3{background:rgba(45,212,191,.2);color:var(--teal);}
+.s4{background:rgba(61,204,138,.2);color:var(--success);}
+.cell-note{font-size:.68rem;color:var(--muted);line-height:1.4;}
+.cell-tag{font-size:.67rem;margin-top:.25rem;}
+.tag-ok{color:var(--success);}
+.tag-bad{color:var(--danger);}
+.tag-warn{color:var(--warn);}
+.highlight{background:rgba(201,168,76,.05);}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center;}
+.leg{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted);}
+.leg-pill{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-size:.7rem;font-weight:700;}
+
+/* ── WHAT EACH TEAM PIONEERED ── */
+.pioneer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-bottom:2.5rem;}
+.pioneer-card{background:var(--navy-2);border-radius:10px;padding:1.1rem 1.25rem;border-top:3px solid #555;}
+.pioneer-card.t1{border-color:var(--t1);}
+.pioneer-card.t2{border-color:var(--t2);}
+.pioneer-card.t3{border-color:var(--t3);}
+.pioneer-card.t4{border-color:var(--t4);}
+.pioneer-card.t5{border-color:var(--t5);}
+.pioneer-team{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem;}
+.t1 .pioneer-team{color:var(--t1);}
+.t2 .pioneer-team{color:var(--t2);}
+.t3 .pioneer-team{color:var(--t3);}
+.t4 .pioneer-team{color:var(--t4);}
+.t5 .pioneer-team{color:var(--t5);}
+.pioneer-title{font-size:.92rem;font-weight:700;color:var(--white);margin-bottom:.4rem;}
+.pioneer-body{font-size:.82rem;color:var(--muted);line-height:1.55;}
+.pioneer-body strong{color:var(--white);}
+code{background:rgba(45,212,191,.1);color:var(--teal);padding:.08rem .35rem;border-radius:3px;font-size:.82em;}
+
+/* ── TEAM ULTRA ── */
+.ultra-header{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(45,212,191,.08));border:2px solid var(--gold);border-radius:14px;padding:1.75rem;margin-bottom:1.5rem;text-align:center;}
+.ultra-header h2{color:var(--gold);font-size:1.4rem;font-weight:700;margin-bottom:.4rem;}
+.ultra-header p{color:var(--muted);font-size:.88rem;}
+.layer-stack{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.layer{background:var(--navy-2);border-radius:10px;padding:1.1rem 1.4rem;border-left:4px solid #555;display:grid;grid-template-columns:200px 1fr;gap:1.25rem;align-items:start;}
+.layer.l1{border-color:var(--teal);}
+.layer.l2{border-color:var(--t3);}
+.layer.l3{border-color:var(--gold);}
+.layer.l4{border-color:var(--t1);}
+.layer.l5{border-color:var(--t5);}
+.layer.l6{border-color:var(--t2);}
+.layer-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.2rem;}
+.layer-name{font-size:.95rem;font-weight:700;color:var(--white);}
+.layer-from{font-size:.72rem;margin-top:.35rem;}
+.layer-body{font-size:.85rem;color:var(--muted);line-height:1.6;}
+.layer-body strong{color:var(--white);}
+.source-tag{display:inline-block;font-size:.68rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;margin:.1rem;}
+.src-t1{background:rgba(124,58,237,.2);color:var(--t1);}
+.src-t2{background:rgba(14,165,233,.2);color:var(--t2);}
+.src-t3{background:rgba(16,185,129,.2);color:var(--t3);}
+.src-t4{background:rgba(245,158,11,.2);color:var(--t4);}
+.src-t5{background:rgba(236,72,153,.2);color:var(--t5);}
+.src-new{background:rgba(201,168,76,.2);color:var(--gold);}
+
+/* ── CODE BLOCK ── */
+pre{background:#071426;border:1px solid rgba(45,212,191,.15);border-radius:8px;padding:1.1rem 1.25rem;overflow-x:auto;font-size:.8rem;line-height:1.65;color:#e2e8f0;margin:1rem 0;}
+
+/* ── CALIBRATION INSIGHT ── */
+.insight-box{background:var(--navy-2);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;}
+.insight-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.5rem;}
+.insight-body{font-size:.88rem;color:rgba(240,244,250,.8);line-height:1.65;}
+
+footer{border-top:1px solid rgba(201,168,76,.12);padding:1.25rem;text-align:center;font-size:.75rem;color:var(--muted);}
+@media(max-width:700px){.layer{grid-template-columns:1fr;}.pioneer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">CP3405 DT3 TR2 2026 · Research Artefact</p>
+  <h1>PRISM Journey Map + Team Ultra</h1>
+  <p class="sub">Automation maturity across 5 teams · 6 sprints · What each team pioneered · The composite ideal pipeline</p>
+</header>
+
+<main>
+
+<!-- JOURNEY MAP -->
+<section style="margin-bottom:3rem;">
+  <div class="section-title">Sprint-by-Sprint Maturity Journey — All 5 Teams</div>
+
+  <div class="legend">
+    <span class="leg"><span class="leg-pill s1">Stage 1</span> Manual</span>
+    <span class="leg"><span class="leg-pill s2">Stage 2</span> Structured</span>
+    <span class="leg"><span class="leg-pill s3">Stage 3</span> Automated</span>
+    <span class="leg"><span class="leg-pill s4">Stage 4</span> Intelligent</span>
+    <span class="leg" style="color:var(--success)">✅ Tag correct</span>
+    <span class="leg" style="color:var(--danger)">❌ Tag wrong/missing</span>
+    <span class="leg" style="color:var(--success)">⚡ Auto-commit</span>
+  </div>
+
+  <div class="journey-wrap">
+  <div class="journey">
+  <div class="sprint-cols">
+    <!-- Headers -->
+    <div class="col-header">Team</div>
+    <div class="col-header">S1 · W22</div>
+    <div class="col-header">S2 · W23</div>
+    <div class="col-header">S3 · W24</div>
+    <div class="col-header">S4 · W25</div>
+    <div class="col-header">S5 · W26<br><small style="color:var(--muted)">Study Wk</small></div>
+    <div class="col-header">S6 · W28</div>
+
+    <!-- Team 1 -->
+    <div class="team-label"><div class="team-dot t1-c"></div><div class="team-label-txt">Team 1<br><span style="color:var(--muted);font-size:.68rem">Georgii · sinder38</span></div></div>
+    <div class="cell"><span class="stage-pill s2">Stage 2</span><div class="cell-note">DECISION.md. Abstract base agent. Typed schemas.</div><div class="cell-tag tag-ok">✅ vW22</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">CI validation on push. pipeline.toml config.</div><div class="cell-tag tag-ok">✅ vW23</div></div>
+    <div class="cell"><span class="stage-pill s4">Stage 4</span><div class="cell-note">4 LLM models via API. environment gate. PR auto-created.</div><div class="cell-tag tag-ok">✅ vW24</div></div>
+    <div class="cell highlight"><span class="stage-pill s4">Stage 4</span><div class="cell-note">All agents automated. OpenRouter multi-model. Study break auto-ran.</div><div class="cell-tag tag-ok">✅ vW25</div></div>
+    <div class="cell"><span class="stage-pill s4">Stage 4</span><div class="cell-note">⚡ Auto-commit 26 Jun during break. Zero human involvement.</div><div class="cell-tag tag-warn">Silent 16 days</div></div>
+    <div class="cell"><span class="stage-pill s4">Stage 4*</span><div class="cell-note">Pipeline ran. 2/4 LLMs succeeded. Rate-limited on gemma+laguna. PR #82 open.</div><div class="cell-tag tag-bad">❌ vW29 pending</div></div>
+
+    <!-- Team 2 -->
+    <div class="team-label"><div class="team-dot t2-c"></div><div class="team-label-txt">Team 2<br><span style="color:var(--muted);font-size:.68rem">LuJunwen · The Bao</span></div></div>
+    <div class="cell"><span class="stage-pill s2">Stage 2</span><div class="cell-note">Structured process. Roles assigned. Discord active.</div><div class="cell-tag tag-ok">✅ vW22</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">Cross-asset audit pipeline. Market snapshot automated.</div><div class="cell-tag tag-ok">✅ vW23</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">Technical agent automated. R10 calibration started.</div><div class="cell-tag tag-ok">✅ vW24</div></div>
+    <div class="cell highlight"><span class="stage-pill s4">Stage 4</span><div class="cell-note">workflow_run cascade. 3 workflows chain automatically. Dynamic week resolution.</div><div class="cell-tag tag-ok">✅ vW25</div></div>
+    <div class="cell"><span class="stage-pill s4">Stage 4</span><div class="cell-note">⚡ W27 snapshot auto-collected 4 Jul (US holiday). Proved genuine infra.</div><div class="cell-tag tag-ok">Study break ✅</div></div>
+    <div class="cell"><span class="stage-pill s4">Stage 4</span><div class="cell-note">5 workflows ran Fri-Sat. R10 calibration fully automated. 11 sectors covered.</div><div class="cell-tag tag-bad">❌ vW29 pending</div></div>
+
+    <!-- Team 3 -->
+    <div class="team-label"><div class="team-dot t3-c"></div><div class="team-label-txt">Team 3<br><span style="color:var(--muted);font-size:.68rem">Vince · 141242-l</span></div></div>
+    <div class="cell"><span class="stage-pill s1">Stage 1</span><div class="cell-note">Manual data collection. Basic structure.</div><div class="cell-tag tag-ok">✅ vW22</div></div>
+    <div class="cell"><span class="stage-pill s1">Stage 1</span><div class="cell-note">Process documented, not yet automated.</div><div class="cell-tag tag-ok">✅ vW23</div></div>
+    <div class="cell"><span class="stage-pill s2">Stage 2</span><div class="cell-note">DECISION.md committed. Data-first automation decided.</div><div class="cell-tag tag-ok">✅ vW24</div></div>
+    <div class="cell highlight"><span class="stage-pill s3">Stage 3</span><div class="cell-note">fetch_friday_closes.py. Cleanest fetch script in cohort. SGT timestamps. Per-ticker error handling.</div><div class="cell-tag tag-bad">⚠️ W25 (wrong fmt)</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">⚡ Fetch ran 26 Jun during study break. 100% workflow success rate.</div><div class="cell-tag tag-ok">Study break ✅</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">Fetch automated. Technical agent committed manually by Vince-1206. LLM: not yet.</div><div class="cell-tag tag-bad">❌ vW29 pending</div></div>
+
+    <!-- Team 4 -->
+    <div class="team-label"><div class="team-dot t4-c"></div><div class="team-label-txt">Team 4<br><span style="color:var(--muted);font-size:.68rem">Arisa · wintwah</span></div></div>
+    <div class="cell"><span class="stage-pill s1">Stage 1</span><div class="cell-note">Manual. Scripts exist but not wired to workflows.</div><div class="cell-tag tag-bad">❌ W22 (wrong fmt)</div></div>
+    <div class="cell"><span class="stage-pill s1">Stage 1</span><div class="cell-note">Automation theatre. 3 workflows run, produce no substantive output.</div><div class="cell-tag tag-bad">❌ W23 (wrong fmt)</div></div>
+    <div class="cell"><span class="stage-pill s1">Stage 1</span><div class="cell-note">File consolidation workflow runs. Moves files between folders. Not data automation.</div><div class="cell-tag tag-bad">❌ W24 (wrong fmt)</div></div>
+    <div class="cell"><span class="stage-pill s2">Stage 2</span><div class="cell-note">DoD documented. Sprint goal structured. Arisa carrying most commits (48).</div><div class="cell-tag tag-bad">❌ W25 (wrong fmt)</div></div>
+    <div class="cell"><span class="stage-pill s2">Stage 2</span><div class="cell-note">github-actions[bot] commits appearing — first real automation signs.</div><div class="cell-tag tag-bad">Wrong fmt</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">⚡ Auto Prediction pipeline ran. Sector charts generated. Almanac committed. Most improved sprint.</div><div class="cell-tag tag-bad">❌ vW29 pending</div></div>
+
+    <!-- Team 5 -->
+    <div class="team-label"><div class="team-dot t5-c"></div><div class="team-label-txt">Team 5<br><span style="color:var(--muted);font-size:.68rem">ToHoangGia · Gong</span></div></div>
+    <div class="cell"><span class="stage-pill s1">Stage 1</span><div class="cell-note">Basic structure. Early commits.</div><div class="cell-tag tag-ok">✅ vW22</div></div>
+    <div class="cell"><span class="stage-pill s2">Stage 2</span><div class="cell-note">PRISM architecture designed. 4 collector modules.</div><div class="cell-tag tag-ok">✅ vW23</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">Dual-cron scheduler. Monday agents + Saturday actuals. First scheduled run 13 Jun — earliest in cohort.</div><div class="cell-tag tag-bad">⚠️ W23 (wrong fmt)</div></div>
+    <div class="cell highlight"><span class="stage-pill s3">Stage 3</span><div class="cell-note">4 modular collectors. All 11 sector ETFs. Conditional step execution on cron trigger.</div><div class="cell-tag tag-ok">✅ vW24/vW25</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">⚡ 4 auto-commits during study break. Most consistent infra in cohort.</div><div class="cell-tag tag-ok">Study break ✅✅✅✅</div></div>
+    <div class="cell"><span class="stage-pill s3">Stage 3</span><div class="cell-note">⚡ Market data + calibration auto-updated. accuracy_history.md maintained. No LLM yet.</div><div class="cell-tag tag-bad">❌ vW29 pending</div></div>
+
+  </div>
+  </div>
+  </div>
+</section>
+
+<!-- WHAT EACH TEAM PIONEERED -->
+<section style="margin-bottom:3rem;">
+  <div class="section-title">What Each Team Contributed to the Collective Knowledge</div>
+  <p style="color:var(--muted);margin-bottom:1.25rem;">Every team produced something the others didn't. This is what gets folded into Team Ultra.</p>
+
+  <div class="pioneer-grid">
+    <div class="pioneer-card t1">
+      <div class="pioneer-team">Team 1 · Georgii (sinder38)</div>
+      <div class="pioneer-title">Professional Software Architecture</div>
+      <div class="pioneer-body">
+        Abstract base class <code>BaseAgent</code> with typed output schemas using Python dataclasses and Enums (<code>Bias.BULLISH</code>, <code>Confidence.HIGH</code>). <code>pipeline.toml</code> config toggles stages on/off without code changes. CI validation on every push to agent output folders. GitHub Actions <code>environment gate</code> requires human approval before production run.<br><br>
+        <strong>Key insight:</strong> Typed schemas eliminate format drift across agents. Once defined in Sprint 2, every subsequent agent output is structurally consistent.
+      </div>
+    </div>
+
+    <div class="pioneer-card t2">
+      <div class="pioneer-team">Team 2 · LuJunwen + The Bao</div>
+      <div class="pioneer-title">Workflow Cascade + SM Discipline</div>
+      <div class="pioneer-body">
+        <code>workflow_run</code> trigger chains three workflows automatically — audit → technical → calibration — without polling or manual triggers. Dynamic week resolution (<code>WEEK_NUM=$(date +%V)</code>) eliminates manual config updates. R10 calibration covers all 11 S&P sectors with alias matching.<br><br>
+        <strong>Key insight:</strong> The Bao's individual Wednesday DMs with per-role DoD checklists is the only documented mid-week check-in that matches the Scrum Master spec. This is the SM reference pattern.
+      </div>
+    </div>
+
+    <div class="pioneer-card t3">
+      <div class="pioneer-team">Team 3 · Vince-1206</div>
+      <div class="pioneer-title">The Minimal Correct Fetch Script</div>
+      <div class="pioneer-body">
+        47 lines. SGT-anchored timestamps via <code>ZoneInfo("Asia/Singapore")</code>. Per-ticker error handling that commits partial results rather than crashing. <code>os.makedirs(exist_ok=True)</code> for first-run safety. Self-documenting JSON with a <code>"note"</code> field explaining automation context. 100% workflow success rate across all sprints.<br><br>
+        <strong>Key insight:</strong> Simplicity and correctness beat complexity and fragility. Teams 1 and 2 have more impressive pipelines — Team 3 has the most reliable data collection.
+      </div>
+    </div>
+
+    <div class="pioneer-card t4">
+      <div class="pioneer-team">Team 4 · Arisa (wintwah)</div>
+      <div class="pioneer-title">The Automation Theatre Anti-Pattern</div>
+      <div class="pioneer-body">
+        Four sprints of workflows that ran with green checkmarks but produced no substantive automated output. File consolidation masquerading as data automation. Scripts that existed but were never called by any workflow. Tag format wrong in every sprint.<br><br>
+        <strong>Key insight:</strong> The most valuable teaching contribution in the cohort. Distinguishing a green Actions badge from a functioning pipeline is the single most important diagnostic skill for future students. Team 4 is the reference case for what not to do — and for what recovery looks like (Sprint 6: first genuine auto-commit).
+      </div>
+    </div>
+
+    <div class="pioneer-card t5">
+      <div class="pioneer-team">Team 5 · ToHoangGia + Gong</div>
+      <div class="pioneer-title">Dual-Schedule Design + Modular Collectors</div>
+      <div class="pioneer-body">
+        One workflow, two cron triggers, conditional step execution: <code>if: github.event.schedule == '0 22 * * 5'</code>. Monday fires agent collectors; Saturday fires actuals fetch. Four independent collector modules each with their own docstring, path resolution, and output spec. Most consistent auto-commits in cohort — 4 during study break, none missing.<br><br>
+        <strong>Key insight:</strong> Separating the Monday agent cycle from the Saturday actuals fetch in one workflow is elegant infra design. No other team did this.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM ULTRA -->
+<section>
+  <div class="section-title">Team Ultra — The Composite Reference Pipeline</div>
+
+  <div class="ultra-header">
+    <h2>🏆 Team Ultra</h2>
+    <p>The pipeline that no single team built — assembled from the best architectural decision of each team.<br>This is the benchmark for future cohorts.</p>
+  </div>
+
+  <div class="layer-stack">
+
+    <div class="layer l1">
+      <div>
+        <div class="layer-label">Layer 1 — Data Collection</div>
+        <div class="layer-name">Team 3's fetch script</div>
+        <div class="layer-from"><span class="source-tag src-t3">Team 3</span></div>
+      </div>
+      <div class="layer-body">
+        SGT-anchored timestamps. Per-ticker error handling. Self-documenting JSON. <code>os.makedirs(exist_ok=True)</code>. Runs on Team 5's dual-cron Saturday trigger. <strong>One function, one responsibility, 100% reliability.</strong>
+        <pre>sgt_now = datetime.now(ZoneInfo("Asia/Singapore"))
+results = {
+    "fetch_time_sgt": sgt_now.isoformat(),
+    "note": "Automated GitHub Actions fetch — Friday closes.",
+    "symbols": {}
+}
+for name, ticker in SYMBOLS.items():
+    data = yf.Ticker(ticker).history(period="5d")
+    if data.empty:
+        results["symbols"][name] = {"error": "No data returned"}
+        continue
+    results["symbols"][name] = {"close": round(float(data.tail(1).iloc[0]["Close"]), 2)}</pre>
+      </div>
+    </div>
+
+    <div class="layer l2">
+      <div>
+        <div class="layer-label">Layer 2 — Scheduler</div>
+        <div class="layer-name">Team 5's dual-cron</div>
+        <div class="layer-from"><span class="source-tag src-t5">Team 5</span></div>
+      </div>
+      <div class="layer-body">
+        One workflow, two triggers, conditional execution. Monday fires agents. Saturday fires actuals. No separate workflow files to maintain.
+        <pre>on:
+  schedule:
+    - cron: "0 0 * * 1"   # Mon 8am SGT — agent collectors
+    - cron: "0 22 * * 5"  # Sat 6am SGT — actuals after US Friday close
+
+steps:
+  - name: Run agent collectors
+    if: github.event.schedule == '0 0 * * 1'
+    run: python collectors/run_all.py
+
+  - name: Run actuals fetch
+    if: github.event.schedule == '0 22 * * 5'
+    run: python collectors/fetch_closes.py</pre>
+      </div>
+    </div>
+
+    <div class="layer l3">
+      <div>
+        <div class="layer-label">Layer 3 — Agent Architecture</div>
+        <div class="layer-name">Team 1's typed schemas</div>
+        <div class="layer-from"><span class="source-tag src-t1">Team 1</span></div>
+      </div>
+      <div class="layer-body">
+        Abstract base class enforces consistent output structure. Enums prevent free-text drift. <code>pipeline.toml</code> toggles stages without code changes.
+        <pre>@dataclass
+class AgentOutput:
+    prediction_date: date
+    bias: Bias           # BULLISH / BEARISH / NEUTRAL
+    confidence: Confidence  # HIGH / MEDIUM / LOW
+    regime: Regime       # RISK_ON / RISK_OFF / UNCERTAIN
+    key_levels: dict[str, float]
+    reasoning: str</pre>
+      </div>
+    </div>
+
+    <div class="layer l4">
+      <div>
+        <div class="layer-label">Layer 4 — LLM Synthesis</div>
+        <div class="layer-name">Team 1's multi-model + resilience layer</div>
+        <div class="layer-from"><span class="source-tag src-t1">Team 1</span><span class="source-tag src-new">New — Sprint 8</span></div>
+      </div>
+      <div class="layer-body">
+        Two providers minimum. Primary rate-limits → automatic fallback. No team has built this yet — it is the Sprint 8 gap and the single most important resilience improvement.
+        <pre>PROVIDERS = [
+    {"name": "openrouter", "key": os.environ["OPENROUTER_API_KEY"],
+     "models": ["nvidia/nemotron-3-super-120b-a12b:free"]},
+    {"name": "groq",       "key": os.environ["GROQ_API_KEY"],
+     "models": ["llama-3.1-70b-versatile"]},      # fallback
+    {"name": "gemini",     "key": os.environ["GEMINI_API_KEY"],
+     "models": ["gemini-1.5-flash"]},              # second fallback
+]
+
+for provider in PROVIDERS:
+    try:
+        result = call_llm(provider, prompt)
+        break   # success — stop trying
+    except RateLimitError:
+        continue  # try next provider</pre>
+      </div>
+    </div>
+
+    <div class="layer l5">
+      <div>
+        <div class="layer-label">Layer 5 — Workflow Cascade</div>
+        <div class="layer-name">Team 2's workflow_run chain</div>
+        <div class="layer-from"><span class="source-tag src-t2">Team 2</span></div>
+      </div>
+      <div class="layer-body">
+        Data pipeline completes → calibration fires automatically. No polling. No manual triggers. The system drives itself.
+        <pre>on:
+  workflow_run:
+    workflows:
+      - "Weekly Data Pipeline"
+    types:
+      - completed
+
+jobs:
+  calibrate:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: python calibration/score_prediction.py</pre>
+      </div>
+    </div>
+
+    <div class="layer l6">
+      <div>
+        <div class="layer-label">Layer 6 — SM Process</div>
+        <div class="layer-name">Team 2's Wednesday check-in</div>
+        <div class="layer-from"><span class="source-tag src-t2">Team 2</span></div>
+      </div>
+      <div class="layer-body">
+        R2 contacts every role member individually by Wednesday. Uses each role's DoD as the checklist. Documents blockers and response actions in <code>standup_midweek_W29.md</code>. Committed to repo before Wednesday midnight. <strong>The only SM pattern in this cohort that matches the Scrum Master specification.</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INSIGHTS FOR FUTURE CLASSES -->
+  <div class="section-title" style="margin-top:2rem;">Key Insights for Future Trimesters</div>
+
+  <div class="insight-box">
+    <div class="insight-title">The Green Badge Fallacy</div>
+    <div class="insight-body">A GitHub Actions workflow with a green checkmark is not evidence of a working pipeline. It is evidence that the workflow ran without crashing. The diagnostic question is: <strong>did <code>github-actions[bot]</code> commit a timestamped output file?</strong> If yes — automation. If no — the workflow moved files, ran tests, or did something cosmetic. Team 4 spent four sprints with green badges and no functional output. Teach this distinction in Sprint 1.</div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-title">A Failed Pipeline That Tried More Is More Advanced Than a Successful Pipeline That Did Less</div>
+    <div class="insight-body">Team 1's pipeline "failed" in Sprint 7 because it attempted to call four LLM models simultaneously. Two succeeded. Two were rate-limited. Teams 3, 4, and 5 had "successful" pipelines that never made an LLM call at all. The failure revealed the ambition. The success concealed the absence of it. Assessment should reward what the pipeline attempted, not just whether the workflow returned exit code 0.</div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-title">The Compounding Retrospective</div>
+    <div class="insight-body">Team 2's R10 calibration accuracy improved sprint-over-sprint because every retrospective produced one concrete change to the calibration script. By Sprint 7, their calibration covered all 11 S&P sectors automatically and fired via <code>workflow_run</code> without any human trigger. No single sprint decision was dramatic. The compound effect of 6 small improvements was. <strong>This is the core pedagogical argument for Scrum in an AI course.</strong></div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>PRISM Journey Map + Team Ultra · Prof Dr Tan · CP3405 TR2 2026 · Research artefact for future cohorts · profdrtan.github.io/ai-playbook/prism.html</footer>
+
+</body>
+</html>
