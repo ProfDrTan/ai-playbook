@@ -281,6 +281,24 @@
   }
   @keyframes ra-pulse{ 0%,100%{opacity:1;} 50%{opacity:0.75;} }
   .readaloud-panel{ padding:14px 16px; }
+  /* Quick Access grid — big clickable cards to every page on the site */
+  .quicklinks{margin-bottom:60px;}
+  .quicklinks h3{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:2px;
+    text-transform:uppercase; color:var(--amber); margin-bottom:16px;
+  }
+  .qgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;}
+  .qcard{
+    display:flex; flex-direction:column; gap:6px;
+    background:var(--blue-panel); border:1px solid var(--line-dim); border-radius:8px;
+    padding:18px 18px 16px; text-decoration:none; transition:border-color .15s, transform .15s;
+  }
+  .qcard:hover{border-color:var(--amber); transform:translateY(-2px);}
+  .qcard .qicon{font-size:26px; line-height:1;}
+  .qcard .qtitle{font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:14.5px; color:var(--paper);}
+  .qcard .qdesc{font-size:12.5px; color:var(--text-body); line-height:1.4;}
+  .qcard.private{border-color:rgba(217,105,79,0.4);}
+  .qcard.private .qtitle{color:var(--coral);}
 </style>
 </head>
 <body>
@@ -299,6 +317,7 @@
         <li><a href="#ch6"><span class="num">06</span> When AI Gets It Wrong</a></li>
         <li><a href="#ch7"><span class="num">07</span> A Starter Toolkit</a></li>
         <li><a href="#ch8"><span class="num">08</span> The Educator's Pipeline</a></li>
+        <li><a href="#ch9"><span class="num">09</span> Protecting What's Private</a></li>
       </ul>
       <div class="sidebar-divider"></div>
       <ul>
@@ -320,7 +339,34 @@
       <div class="eyebrow">A Practical Guide — Not a Strategy Book</div>
       <h2>Tactics for using AI to actually get your work done.</h2>
       <p class="sub">Short chapters. Concrete prompt templates. No jargon. Built for professionals and students who want to use AI as a working tool, not a novelty.</p>
-      <span class="stamp">DRAFT COMPLETE — ALL 7 CHAPTERS — REVIEW COPY</span>
+      <span class="stamp">DRAFT — 9 CHAPTERS — REVIEW COPY</span>
+    </div>
+
+    <div class="quicklinks">
+      <h3>Quick Access — Chapters</h3>
+      <div class="qgrid">
+        <a class="qcard" href="#ch1"><div class="qicon">🗣️</div><div class="qtitle">01 · Prompting Fundamentals</div><div class="qdesc">From asking questions to delegating work.</div></a>
+        <a class="qcard" href="#ch2"><div class="qicon">🧰</div><div class="qtitle">02 · Choosing Your Tool</div><div class="qdesc">Which AI surface fits which job.</div></a>
+        <a class="qcard" href="#ch3"><div class="qicon">📦</div><div class="qtitle">03 · Delegating Real Work</div><div class="qdesc">Handing off actual tasks, not toy prompts.</div></a>
+        <a class="qcard" href="#ch4"><div class="qicon">⚙️</div><div class="qtitle">04 · Automating the Repeatable</div><div class="qdesc">Turning one-off work into pipelines.</div></a>
+        <a class="qcard" href="#ch5"><div class="qicon">🤝</div><div class="qtitle">05 · Working With AI on a Team</div><div class="qdesc">Scrum + AI, shared workflows.</div></a>
+        <a class="qcard" href="#ch6"><div class="qicon">🧯</div><div class="qtitle">06 · When AI Gets It Wrong</div><div class="qdesc">Failure modes and how to catch them.</div></a>
+        <a class="qcard" href="#ch7"><div class="qicon">🧭</div><div class="qtitle">07 · A Starter Toolkit</div><div class="qdesc">Where to actually begin.</div></a>
+        <a class="qcard" href="#ch8"><div class="qicon">🎓</div><div class="qtitle">08 · The Educator's Pipeline</div><div class="qdesc">How this whole course infrastructure was built.</div></a>
+        <a class="qcard" href="#ch9"><div class="qicon">🛡️</div><div class="qtitle">09 · Protecting What's Private</div><div class="qdesc">Locking down, moving, and monitoring private pages.</div></a>
+      </div>
+
+      <h3 style="margin-top:28px;">Quick Access — Tools &amp; References</h3>
+      <div class="qgrid">
+        <a class="qcard" href="build-log.html"><div class="qicon">🔧</div><div class="qtitle">Build Log</div><div class="qdesc">Market Prediction Engine, step by step.</div></a>
+        <a class="qcard" href="team1-dissection.html"><div class="qicon">🔍</div><div class="qtitle">Team 1 Dissection</div><div class="qdesc">What a strong student pipeline looks like.</div></a>
+        <a class="qcard" href="team1-code-walkthrough.html"><div class="qicon">💻</div><div class="qtitle">Team 1 Code Walkthrough</div><div class="qdesc">Line-by-line read of their actual code.</div></a>
+        <a class="qcard" href="when-to-use-what.html"><div class="qicon">💡</div><div class="qtitle">When to Use What</div><div class="qdesc">Decision guide across AI tools.</div></a>
+        <a class="qcard" href="command-center.html"><div class="qicon">📊</div><div class="qtitle">Command Center</div><div class="qdesc">Every project link, one tappable page.</div></a>
+        <a class="qcard" href="almanac.html"><div class="qicon">📰</div><div class="qtitle">The Weekly Almanac</div><div class="qdesc">Market intelligence pipeline output.</div></a>
+        <a class="qcard" href="pr-patterns.html"><div class="qicon">🔗</div><div class="qtitle">PR Patterns</div><div class="qdesc">Field notes on how teams actually merge code.</div></a>
+        <a class="qcard private" href="dashboard.html"><div class="qicon">🔒</div><div class="qtitle">Instructor Dashboard</div><div class="qdesc">Private — live team pipeline monitor.</div></a>
+      </div>
     </div>
 
     <section class="sheet" id="ch1">
@@ -799,7 +845,62 @@
           <li>Am I citing evidence (a commit, a run, a timestamp) or just asserting status?</li>
         </ul>
       </div>
-      <div class="sheet-titleblock"><span>SHEET 08 / 08</span><span>THE AI PLAYBOOK — REV A</span></div>
+      <div class="sheet-titleblock"><span>SHEET 08 / 09</span><span>THE AI PLAYBOOK — REV A</span></div>
+    </section>
+
+    <section class="sheet" id="ch9">
+      <div class="sheet-body">
+        <div class="chapter-head-row"><div class="chapter-eyebrow">CHAPTER 09</div><button class="listen-btn" data-chapter="ch9" onclick="toggleChapterListen('ch9', this)">&#128266; Listen</button></div>
+        <h3 class="chapter-title">Protecting What's Private</h3>
+        <p class="chapter-dek">A real instructor dashboard ended up on the wrong domain, its lock screen silently broken, and its whole script dead from a stray brace. Here's the actual fix, and the checklist it turned into.</p>
+
+        <h4>Separate Domains for Separate Audiences</h4>
+        <p>An instructor-only pipeline dashboard — commit histories, contributor breakdowns, per-team verdicts — was originally deployed under the same domain as the student-facing course site. Same repo, same Cloudflare Pages project, just a PIN on one sub-path. That's not real separation: one misconfigured link, one shared cache, one copy-paste error, and private commentary about specific students is one click from a student browser.</p>
+        <div class="example strong">
+          <span class="label">Pattern Worth Copying — Different Repo, Different Domain</span>
+          The dashboard was moved entirely off the student-facing repo and into a separate, personal site (the same one hosting this Playbook). No shared domain, no shared deploy pipeline. If the student site is ever fully public and linked everywhere, the instructor content simply isn't there to find.
+        </div>
+
+        <h4>A Broken Lock Is Worse Than No Lock</h4>
+        <p>The original PIN gate looked complete — password field, error message, "Unlock" button — but the JavaScript function it called didn't exist. It had presumably been deleted in a prior edit and never noticed, because a broken lock <em>looks</em> exactly like a working one until someone actually tries the door.</p>
+        <div class="example">
+          <span class="label">Pattern to Watch For — Untested Security UI</span>
+          Nobody had tried entering the PIN since whatever edit removed the unlock function. A lock screen that renders correctly is not evidence that it works — only actually typing the PIN and confirming the transition is.
+        </div>
+        <div class="try-this">
+          <span class="label">Try This</span>
+          After any access-control change — a PIN gate, a login form, an auth check — actually attempt to get in and get denied, in that order, before considering it deployed. Don't infer "it works" from "it renders."
+        </div>
+
+        <h4>One Stray Character Can Kill an Entire Script</h4>
+        <p>Separately, and for longer than anyone realized, a single extra closing brace <code>}</code> at the very end of the dashboard's script tag caused the entire script to fail silently — meaning none of the team data, summaries, or verdicts had ever rendered, PIN or no PIN. The static HTML around it still looked fine, which hid the failure.</p>
+        <div class="example strong">
+          <span class="label">Pattern Worth Copying — Syntax-Check Before You Trust a Fix</span>
+          Rather than eyeballing the script and assuming a fix worked, the JS was extracted and run through <code>node --check</code> — a real parser — before pushing. That caught the stray brace immediately, instead of after another round of "it's still not working."
+        </div>
+
+        <h4>Layered, Honest Privacy — Not a Single Point of Failure</h4>
+        <p>Once the dashboard lived on its own site, three independent layers were added, each cheap and each covering a different failure mode:</p>
+        <ul class="checklist">
+          <li><strong>robots.txt</strong> — <code>Disallow: /</code> site-wide, so crawlers are told not to index anything.</li>
+          <li><strong><code>&lt;meta name="robots" content="noindex, nofollow"&gt;</code></strong> — a second, page-level instruction in case a crawler ignores robots.txt or a link appears somewhere unexpected.</li>
+          <li><strong>Visit logging (GoatCounter)</strong> — a lightweight, cookie-free analytics snippet added so any unexpected visit shows up as a timestamp, referrer, and rough location/device — not a name, but enough to flag "this doesn't look like me."</li>
+        </ul>
+        <div class="example">
+          <span class="label">Pattern to Watch For — Confusing Obscurity With Security</span>
+          Before any of this, the only thing protecting the page was that nobody had the URL. That's not nothing, but it's fragile — one shared link, one browser-history slip, one indexed backlink, and it's gone. Obscurity is a starting point, not a control.
+        </div>
+
+        <h4>Quick-Reference Checklist</h4>
+        <ul class="checklist">
+          <li>Does private content live on a genuinely separate domain/repo from anything student- or public-facing?</li>
+          <li>Has the access control actually been tested by trying to get in and get denied — not just visually reviewed?</li>
+          <li>Was any JS fix verified with a real parser (e.g. <code>node --check</code>) before being called done?</li>
+          <li>Is there more than one layer of protection (crawler rules + noindex + monitoring), so no single missed step exposes everything?</li>
+          <li>Is there a way to know if someone unexpected visits — even just timestamp/location/device, not identity?</li>
+        </ul>
+      </div>
+      <div class="sheet-titleblock"><span>SHEET 09 / 09</span><span>THE AI PLAYBOOK — REV A</span></div>
     </section>
 
     <footer>© 2026 Professor Dr. Tan · Working Draft, Not For Distribution</footer>
