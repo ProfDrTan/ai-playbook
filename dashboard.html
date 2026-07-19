@@ -94,18 +94,7 @@ svg.spark{display:block;}
 </head>
 <body>
 
-<div id="pin-gate" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;background:var(--navy);">
-  <div style="background:var(--navy-2);border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:2.5rem;text-align:center;max-width:340px;width:100%;">
-    <h2 style="color:var(--gold);font-size:1.3rem;margin-bottom:.5rem;">🔒 Instructor Dashboard</h2>
-    <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.5rem;">CP3405 DT3 TR2 2026 · Prof Dr Tan only</p>
-    <input type="password" id="pin-input" placeholder="PIN" maxlength="8"
-           style="background:var(--navy-3);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-size:1.4rem;letter-spacing:.4em;padding:.75rem 1rem;text-align:center;width:100%;margin-bottom:1rem;outline:none;"
-           onkeydown="if(event.key==='Enter')checkPin()">
-    <button onclick="checkPin()" style="background:var(--gold);color:#071426;font-weight:900;padding:.75rem;border-radius:99px;border:none;cursor:pointer;width:100%;font-size:.95rem;">Unlock</button>
-    <div id="pin-error" style="color:var(--danger);font-size:.82rem;margin-top:.5rem;display:none;">Incorrect PIN.</div>
-  </div>
-</div>
-<div id="main-content" style="display:none;">
+<div id="main-content" style="display:block;">
 <header>
   <div><div class="h1">Team Pipeline Dashboard</div><div class="hsub">CP3405 DT3 TR2 2026 · Sprint 6 · vW28 · Prof Dr Tan</div></div>
   <span class="live">● LIVE</span>
@@ -132,37 +121,6 @@ svg.spark{display:block;}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ── PIN GATE ─────────────────────────────────────────────────────────────────
-const CORRECT_PIN = '3405';
-
-function checkPin() {
-  const val = document.getElementById('pin-input').value.trim();
-  if (val === CORRECT_PIN) {
-    unlock();
-  } else {
-    const err = document.getElementById('pin-error');
-    if (err) err.style.display = 'block';
-    const inp = document.getElementById('pin-input');
-    if (inp) { inp.value = ''; inp.focus(); }
-  }
-}
-
-function unlock() {
-  const gate = document.getElementById('pin-gate');
-  const main = document.getElementById('main-content');
-  if (gate) gate.style.display = 'none';
-  if (main) main.style.display = 'block';
-}
-
-// Auto-unlock if ?pin=3405 is in the URL
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('pin') === CORRECT_PIN) {
-    document.addEventListener('DOMContentLoaded', unlock);
-  }
-})();
-// ── END PIN GATE ─────────────────────────────────────────────────────────────
-
 let SPRINT = 'vW28'; // fallback only — overwritten by data.sprint_tag once live data loads
 let SPRINT_DEADLINE_UTC = '2026-07-12T15:59:00Z'; // fallback only — overwritten by data.sprint_deadline_utc
 const BL_KEY = 'dt3bl';
