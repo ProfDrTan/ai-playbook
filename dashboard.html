@@ -116,6 +116,18 @@ svg.spark{display:block;}
   <div id="forcereminder" style="display:none;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.25);color:var(--teal);padding:8px 14px;border-radius:8px;margin-bottom:10px;font-size:12.5px;"></div>
   <div class="weekend-note" id="weekendnote" style="display:none;"></div>
   <div class="summary" id="summary"></div>
+
+  <!-- COHORT COMPARISON — all teams, one chart -->
+  <div style="background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px 10px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
+      <div style="font-weight:800;font-size:.95rem;">📊 Cohort Comparison — Weekly Commits, All 5 Teams</div>
+      <div style="font-size:.68rem;color:var(--muted);">Computed 19 Jul 2026 · not auto-refreshing, ask Claude to recompute</div>
+    </div>
+    <div style="position:relative;width:100%;height:220px;">
+      <canvas id="cohortChart"></canvas>
+    </div>
+  </div>
+
   <div id="stalewarn" style="display:none;background:#7a1f1f;color:#fff;padding:10px 16px;border-radius:8px;margin:10px 0;font-weight:700;font-size:.85rem"></div>
   <div class="grid" id="grid"></div>
   <div class="monday" id="monday"></div>
@@ -383,6 +395,48 @@ function prHistoryHtml(t) {
     </div>
     <div style="margin-top:.3rem;">${recentHtml}</div>`;
 }
+const COHORT_WEEKS = ["5/25","6/1","6/8","6/15","6/22","6/29","7/6","7/13"];
+const COHORT_DATA = {
+  "Team 1": [47,17,21,10,0,0,2,18],
+  "Team 2": [90,78,153,72,6,3,101,188],
+  "Team 3": [60,137,209,25,13,2,37,48],
+  "Team 4": [4,56,9,19,5,0,33,18],
+  "Team 5": [50,24,63,70,13,2,135,51]
+};
+const COHORT_COLORS = {
+  "Team 1": "#e8a63c", "Team 2": "#2dd4bf", "Team 3": "#a78bfa",
+  "Team 4": "#e05c5c", "Team 5": "#6fbf8b"
+};
+function renderCohortChart() {
+  const el = document.getElementById('cohortChart');
+  if (!el || typeof Chart === 'undefined') return;
+  if (el._chart) el._chart.destroy();
+  el._chart = new Chart(el, {
+    type: 'line',
+    data: {
+      labels: COHORT_WEEKS,
+      datasets: Object.keys(COHORT_DATA).map(team => ({
+        label: team,
+        data: COHORT_DATA[team],
+        borderColor: COHORT_COLORS[team],
+        backgroundColor: COHORT_COLORS[team],
+        borderWidth: 2,
+        tension: 0.25,
+        pointRadius: 3,
+        fill: false
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: '#cfe4f0', boxWidth: 12, font: { size: 10.5 } } } },
+      scales: {
+        x: { ticks: { color: '#8fa3bf', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+        y: { beginAtZero: true, title: { display: true, text: 'commits/week', color: '#8fa3bf', font: { size: 10 } },
+             ticks: { color: '#8fa3bf', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    }
+  });
+}
 function renderPRCharts(data) {
   (data.teams||[]).forEach(t => {
     const ph = t.pr_history;
@@ -644,6 +698,7 @@ function render(data) {
   document.getElementById('monday').innerHTML = mondayHtml;
   renderPRCharts(data);
   renderTrendCharts(data);
+  renderCohortChart();
 }
 
 (async function(){
