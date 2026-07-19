@@ -128,6 +128,19 @@ svg.spark{display:block;}
     </div>
   </div>
 
+  <!-- COHORT COMPARISON — PR discipline, all teams -->
+  <div style="background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px 10px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
+      <div style="font-weight:800;font-size:.95rem;">🔀 Cohort Comparison — Merged PRs/Week, All 5 Teams</div>
+      <div style="font-size:.68rem;color:var(--muted);">Computed 19 Jul 2026 · not auto-refreshing, ask Claude to recompute</div>
+    </div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;">This is the more definitive benchmark — commits measure activity, this measures whether work was reviewed and integrated through a real PR workflow, not just pushed to main.</div>
+    <div style="position:relative;width:100%;height:220px;">
+      <canvas id="cohortPRChart"></canvas>
+    </div>
+    <div style="font-size:.68rem;color:var(--danger);margin-top:6px;">Teams 3 and 5 show at or near zero for almost the entire term — not because they weren't working (see the commits chart above), but because neither team used a PR/branch/review workflow until this week. That gap is the finding.</div>
+  </div>
+
   <div id="stalewarn" style="display:none;background:#7a1f1f;color:#fff;padding:10px 16px;border-radius:8px;margin:10px 0;font-weight:700;font-size:.85rem"></div>
   <div class="grid" id="grid"></div>
   <div class="monday" id="monday"></div>
@@ -437,6 +450,43 @@ function renderCohortChart() {
     }
   });
 }
+const COHORT_PR_DATA = {
+  "Team 1": [10,13,13,8,0,0,2,14],
+  "Team 2": [2,2,4,5,0,0,1,5],
+  "Team 3": [0,0,0,0,0,0,0,0],
+  "Team 4": [0,0,0,0,0,0,0,1],
+  "Team 5": [0,0,0,0,0,0,0,2]
+};
+function renderCohortPRChart() {
+  const el = document.getElementById('cohortPRChart');
+  if (!el || typeof Chart === 'undefined') return;
+  if (el._chart) el._chart.destroy();
+  el._chart = new Chart(el, {
+    type: 'line',
+    data: {
+      labels: COHORT_WEEKS,
+      datasets: Object.keys(COHORT_PR_DATA).map(team => ({
+        label: team,
+        data: COHORT_PR_DATA[team],
+        borderColor: COHORT_COLORS[team],
+        backgroundColor: COHORT_COLORS[team],
+        borderWidth: 2,
+        tension: 0.25,
+        pointRadius: 3,
+        fill: false
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: '#cfe4f0', boxWidth: 12, font: { size: 10.5 } } } },
+      scales: {
+        x: { ticks: { color: '#8fa3bf', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+        y: { beginAtZero: true, title: { display: true, text: 'merged PRs/week', color: '#8fa3bf', font: { size: 10 } },
+             ticks: { color: '#8fa3bf', font: { size: 10 }, stepSize: 1 }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    }
+  });
+}
 function renderPRCharts(data) {
   (data.teams||[]).forEach(t => {
     const ph = t.pr_history;
@@ -699,6 +749,7 @@ function render(data) {
   renderPRCharts(data);
   renderTrendCharts(data);
   renderCohortChart();
+  renderCohortPRChart();
 }
 
 (async function(){
