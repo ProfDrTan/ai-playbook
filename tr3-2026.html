@@ -82,6 +82,47 @@
 
   <div class="note">9 sprints total, tags <code>vW1</code> through <code>vW9</code>, sequential and simple. Nothing here requires calendar-week math, so a mismatch like TR2's <code>vW29</code> vs <code>vW30</code> confusion structurally can't happen again — the tag number and the sprint number are defined to always be the same number.</div>
 
+  <h2>Sprint Page Dates: Day N, Not Hand-Typed Calendar Dates</h2>
+  <p style="margin-bottom:16px; font-size:15px;">This is the fix for the entire class of bug from TR2 — dates and tags drifting out of sync across pages because each date was typed by hand, separately, dozens of times per page. The rule: <b>a human types exactly one date per sprint. Every other date on the page is computed from it, automatically, never retyped.</b></p>
+
+  <div class="rule"><b>Day 1 = the Monday the sprint opens.</b> Day 2 = Tuesday, Day 3 = Wednesday (mid-week check-in, if required), Day 4 = Thursday, Day 5 = Friday, Day 6 = Saturday, Day 7 = Sunday (tag due 23:59 SGT). This numbering is identical for every sprint — Day 3 is always "mid-week," regardless of which actual calendar week it falls in.</div>
+
+  <div class="rule"><b>Artefact filenames reference the sprint number directly</b> — <code>standup_midweek_sprint8.md</code>, not <code>standup_midweek_W30.md</code>. Since Sprint N = Week N is now the only numbering system, there's no separate week-tag to keep in sync with the sprint number — one less thing that can drift.</div>
+
+  <h2>The Actual Mechanism — One Seed Date, Everything Else Computed</h2>
+  <p style="margin-bottom:16px; font-size:15px;">Every TR3 sprint page carries one seed value — the sprint's Monday — and a small script that fills in every other date on the page from it. No date is ever hand-typed a second time on the same page.</p>
+
+<pre style="background:rgba(0,0,0,0.3); border-radius:8px; padding:16px 18px; font-size:13px; overflow-x:auto; margin-bottom:16px; color:var(--text-body); font-family:'IBM Plex Mono',monospace; line-height:1.6;">&lt;body data-sprint-monday="2026-09-14" data-sprint-number="1"&gt;
+
+  &lt;!-- Anywhere a date is needed, mark the day offset — never type the date itself --&gt;
+  &lt;span class="day-date" data-day="0"&gt;&lt;/span&gt;   &lt;!-- auto-fills "Mon 14 Sep" --&gt;
+  &lt;span class="day-date" data-day="2"&gt;&lt;/span&gt;   &lt;!-- auto-fills "Wed 16 Sep" --&gt;
+  &lt;span class="day-date" data-day="6"&gt;&lt;/span&gt;   &lt;!-- auto-fills "Sun 20 Sep" --&gt;
+
+&lt;script&gt;
+(function(){
+  const body = document.body;
+  const monday = new Date(body.dataset.sprintMonday + 'T00:00:00');
+  const sprintN = body.dataset.sprintNumber;
+  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  document.querySelectorAll('[data-day]').forEach(el =&gt; {
+    const offset = parseInt(el.dataset.day, 10);
+    const d = new Date(monday);
+    d.setDate(d.getDate() + offset);
+    el.textContent = `${dayNames[offset]} ${d.getDate()} ${d.toLocaleString('en-US',{month:'short'})}`;
+  });
+  // Tag and artefact names derive from the sprint number too — never typed separately
+  document.querySelectorAll('[data-tag]').forEach(el =&gt; { el.textContent = `vW${sprintN}`; });
+  document.querySelectorAll('[data-artefact]').forEach(el =&gt; {
+    el.textContent = `${el.dataset.artefact}_sprint${sprintN}.md`;
+  });
+})();
+&lt;/script&gt;
+&lt;/body&gt;</pre>
+
+  <div class="note">To build next week's sprint page: copy the previous one, change <code>data-sprint-monday</code> and <code>data-sprint-number</code> on the <code>&lt;body&gt;</code> tag — that's it. Every date, every tag, every artefact filename on the entire page updates itself. There is no third place to remember to fix, because there's only one place a date or tag number is ever typed at all.</div>
+
+
   <h2>Still To Be Decided</h2>
   <div class="rule">Everything else — team size, assessment structure, pipeline architecture requirements, mid-trimester milestone details — is intentionally left open. Revisit once TR2's remaining weeks (Sprint 8, Sprint 9, Demo Day) surface more lessons worth folding in.</div>
 
