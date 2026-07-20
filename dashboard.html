@@ -141,6 +141,19 @@ svg.spark{display:block;}
     <div style="font-size:.68rem;color:var(--danger);margin-top:6px;">Teams 3 and 5 show at or near zero for almost the entire term — not because they weren't working (see the commits chart above), but because neither team used a PR/branch/review workflow until this week. That gap is the finding.</div>
   </div>
 
+  <!-- CONTRIBUTION BALANCE — private, instructor eyes only -->
+  <div style="background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px 10px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
+      <div style="font-weight:800;font-size:.95rem;">⚖️ Contribution Balance — Top Contributor's Share of Team Commits</div>
+      <div style="font-size:.68rem;color:var(--muted);">Computed 20 Jul 2026 · private, not auto-refreshing</div>
+    </div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;">One person carrying most of a team's commits is a Scrum failure, not a strength — it means the rest of the team isn't delivering, and it usually surfaces as burnout and frustration in whoever's absorbing it.</div>
+    <div style="position:relative;width:100%;height:200px;">
+      <canvas id="balanceChart"></canvas>
+    </div>
+    <div style="font-size:.68rem;color:var(--danger);margin-top:6px;"><b>Team 1 and Team 4 are the concern</b> — sinder38 (Team 1) and wintwah-lwin (Team 4) each carry roughly half their team's total commits, and Team 1 additionally has the lowest total commit volume of any team. Discord shows sinder38 explicitly managing a struggling teammate's work rather than the teammate delivering independently — this is a delegation/accountability issue, not a Team 1 capability issue.</div>
+  </div>
+
   <div id="stalewarn" style="display:none;background:#7a1f1f;color:#fff;padding:10px 16px;border-radius:8px;margin:10px 0;font-weight:700;font-size:.85rem"></div>
   <div class="grid" id="grid"></div>
   <div class="monday" id="monday"></div>
@@ -487,6 +500,40 @@ function renderCohortPRChart() {
     }
   });
 }
+const BALANCE_DATA = {
+  labels: ["Team 1","Team 2","Team 3","Team 4","Team 5"],
+  pct: [51, 22, 26, 50, 38],
+  topName: ["sinder38", "Guanyu-Lu", "141242-l", "wintwah-lwin", "ToHoangGia"]
+};
+function renderBalanceChart() {
+  const el = document.getElementById('balanceChart');
+  if (!el || typeof Chart === 'undefined') return;
+  if (el._chart) el._chart.destroy();
+  el._chart = new Chart(el, {
+    type: 'bar',
+    data: {
+      labels: BALANCE_DATA.labels,
+      datasets: [{
+        label: "Top contributor's % of team commits",
+        data: BALANCE_DATA.pct,
+        backgroundColor: BALANCE_DATA.pct.map(p => p >= 45 ? '#e05c5c' : (p >= 30 ? '#e8a63c' : '#6fbf8b')),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (ctx) => `${BALANCE_DATA.topName[ctx.dataIndex]}: ${ctx.raw}% of team's commits` } }
+      },
+      scales: {
+        x: { ticks: { color: '#8fa3bf', font: { size: 10.5 } }, grid: { display: false } },
+        y: { beginAtZero: true, max: 60, title: { display: true, text: '% of team commits', color: '#8fa3bf', font: { size: 10 } },
+             ticks: { color: '#8fa3bf', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    }
+  });
+}
 function renderPRCharts(data) {
   (data.teams||[]).forEach(t => {
     const ph = t.pr_history;
@@ -750,6 +797,7 @@ function render(data) {
   renderTrendCharts(data);
   renderCohortChart();
   renderCohortPRChart();
+  renderBalanceChart();
 }
 
 (async function(){
