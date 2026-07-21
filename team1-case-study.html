@@ -69,6 +69,7 @@
     <a href="#timeline">Timeline of Events</a>
     <a href="#principles">Mapped to the 13 Scrum Principles</a>
     <a href="#profiles">Individual Evidence Profiles</a>
+    <a href="#skillgap">The Skill Heterogeneity Problem</a>
     <a href="#tensions">Open Tensions Worth Keeping</a>
     <a href="#changelog">Changelog</a>
     <a href="#ethics">Publication Note</a>
@@ -172,12 +173,24 @@
     <h3>Zaw Latt — the clean counter-example</h3>
     <p>Where Shary's case is about a measurement gap, Zaw Latt's is a real, undisputed performance gap — and worth keeping in the case study precisely because he didn't contest it. His letter disputed zero citations, named the cause honestly, and set concrete forward commitments. Pedagogically, this is the "this is what accountability actually looks like, and it doesn't erase the record, it changes what happens next" example.</p>
 
+    <h2 id="skillgap">The Structural Problem Underneath All of This: Skill Heterogeneity vs. a Single Visibility Channel</h2>
+    <p>Every specific incident in this case — Shary's invisible Figma work, the "I don't know" gap, Georgii's bottleneck — is a symptom of one underlying structural condition, and it's worth naming directly because it will recur in every mixed-skill team, not just this one.</p>
+    <p>Teams like this one are not skill-uniform. Some members arrive strong in programming and GitHub-native workflows; others don't, and both the team and those members know it early. What happens next is rational and, on its face, generous: the weaker coder self-selects — or is reassigned — toward work that won't create a bottleneck for people relying on their output. Documentation, presentation, design, coordination, testing by hand instead of by script. This is often exactly the right call for the team's velocity. Shary explicitly describes this happening to her by Week 4–5, and it is very likely happening quietly in every other team in the cohort too.</p>
+    <p>The problem is not the reassignment. The problem is that <b>the tracking apparatus every team defaults to — commit graphs, PR counts, tag cadence — was built to see code, and code only.</b> The moment a member's contribution shifts into a different medium, they don't just do different work; they become statistically invisible to every automated signal the Scrum Master, the instructor, and the dashboard all rely on by default. A student can be fully engaged, on-task, and delivering real value every week, and the only artifact of that work visible to the standard tooling is a near-zero commit count that looks identical to someone who simply stopped showing up.</p>
+    <div class="card evidence">
+      <div class="principle-title">Why this matters more than it looks like it does</div>
+      <p>This isn't a measurement inconvenience — it actively punishes the team's own good decision-making. A team that wisely routes a weaker coder toward documentation or design is rewarded, under a commits-only lens, with what looks like a slacker on the roster. The incentive this creates is perverse: it tells students that the safe move is to keep grinding on code they're bad at, badly, rather than move to work they're good at, well — because only the first path is legible to the grading process. Left unaddressed, the tracking gap doesn't just misjudge one sprint. It teaches students the wrong lesson about where their effort is worth spending.</p>
+    </div>
+    <p>Georgii's own words are the clearest possible statement of the mechanism: <i>"I write 'I don't know,' because all your work is outside of GitHub and I have no way to track it."</i> That is not a complaint about Shary. It's an honest admission that the tool he had — his own eyes on a commit graph — was the wrong instrument for the work being measured, and he had no other instrument standing in reserve.</p>
+    <p>The fix is not "check Figma too." Figma has a version history precisely because design tools anticipated this problem; the same is true of most non-code collaboration tools (Google Docs revision history, Notion's page history, Miro's board activity log). The fix is a <b>documented individual check-in that is medium-agnostic</b> — Principle 13's actual point — where "what did you deliver" is asked and recorded the same way regardless of whether the answer is a commit hash or a board link. A Scrum Master's job was never actually "watch the commit graph." It was always "know, individually, what every person on the team did this week" — GitHub just happened to make that easy for one kind of work and effortful for every other kind.</p>
+
     <h2 id="tensions">Open Tensions Worth Keeping in the Write-Up</h2>
     <div class="card tension"><p><b>Discouragement vs. non-contribution look identical from the outside.</b> Shary stopped doing PR reviews after her comments were repeatedly overridden. From a pure activity count, that's indistinguishable from someone who simply stopped trying. Only her direct account — and Georgii's validation of it afterward — separates the two.</p></div>
     <div class="card tension"><p><b>A Scrum Master's honest "I don't know" reads as a negative signal even when it isn't one.</b> The original report's ambiguity around Shary was more damaging to her than an actual negative citation would have been, because ambiguity invites the worst assumption by default.</p></div>
     <div class="card tension"><p><b>The report's author is also a subject of it.</b> Georgii wrote most of the original report and scores highest in it. Both can be true and fair at once — his high score rests on externally-checkable metrics (commit count, review count), not his own narrative — but it's a structural conflict of interest worth naming every time this case is taught.</p></div>
 
     <h2 id="changelog">Changelog</h2>
+    <div class="changelog-entry"><span class="changelog-date">20 Jul 2026, evening —</span> Added "The Structural Problem Underneath All of This: Skill Heterogeneity vs. a Single Visibility Channel" — the general pattern behind Shary's specific case, framed as something that will recur in every mixed-skill team.</div>
     <div class="changelog-entry"><span class="changelog-date">20 Jul 2026, evening —</span> Initial case study created. Timeline, 9 of 13 principles mapped, Shary and Zaw Latt profiles written up. Awaiting responses from Henry, Aeron, Saiko, Naing, Ming Hao.</div>
 
     <h2 id="ethics">Publication Note</h2>
