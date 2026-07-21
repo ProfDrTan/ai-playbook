@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roadmap · CP3405 DT3</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7fb;font-family:Inter,Segoe UI,Arial,sans-serif;color:#102033;line-height:1.6}
+a{color:#0f6fbd;text-decoration:none;font-weight:700}
+.top{background:#071426;color:#fff;border-bottom:4px solid #12c7b7;padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center;font-weight:900;font-size:1.2rem}
+.badge{background:#12c7b7;color:#071426;padding:8px 12px;border-radius:8px;font-family:monospace;font-weight:900}
+.prof{color:#12c7b7;font-family:monospace;font-size:.9rem}
+.ticker{background:#173b6a;color:#f5b942;font-weight:900;padding:12px 22px;font-size:.9rem}
+.nav{display:flex;overflow:auto;background:#132747;border-bottom:1px solid #0f2040}
+.nav a{padding:13px 18px;color:#dbeafe;white-space:nowrap;font-weight:700;font-size:.88rem;transition:background .2s}
+.nav a:hover{background:#1e3a6e}
+.nav a.active{background:#f5b942;color:#071426}
+.nav a.new{background:rgba(18,199,183,.15);color:#12c7b7;border-bottom:3px solid #12c7b7}
+.hero{background:linear-gradient(135deg,#071426,#0e2a52,#1a0552);color:#fff;padding:52px 22px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(124,58,237,.15) 0%,transparent 60%)}
+.hero-eyebrow{display:inline-block;background:rgba(129,140,248,.2);border:1px solid #818cf8;color:#a5b4fc;padding:6px 18px;border-radius:999px;font-size:.82rem;font-weight:900;letter-spacing:.1em;margin-bottom:16px;position:relative}
+.hero h1{font-size:clamp(1.8rem,4vw,3rem);margin:10px 0;position:relative}
+.hero p{max-width:760px;margin:12px auto 0;color:#dbeafe;font-size:1.05rem;position:relative}
+.main{max-width:1100px;margin:0 auto;padding:24px 22px}
+.panel{background:#fff;border:1px solid #dbe3ef;border-radius:20px;padding:28px;margin:20px 0;box-shadow:0 6px 24px rgba(15,23,42,.06)}
+.panel h2{margin:0 0 8px;color:#071426;font-size:1.3rem;font-weight:900}
+.label{font-size:.75rem;text-transform:uppercase;letter-spacing:.09em;font-weight:900;color:#64748b;margin-bottom:6px}
+.small{color:#64748b;font-size:.88rem}
+code{background:#eef2ff;padding:2px 7px;border-radius:5px;font-family:monospace;font-size:.9em}
+
+/* ROADMAP */
+.roadmap{position:relative;padding:0 0 24px}
+.roadmap::before{content:'';position:absolute;left:90px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#12c7b7 0%,#12c7b7 30%,#f5b942 30%,#818cf8 60%,#f472b6 80%,#7c3aed 100%);border-radius:999px}
+.sprint-row{display:flex;gap:0;margin:0 0 14px;position:relative}
+.sprint-meta{width:90px;flex-shrink:0;text-align:right;padding-right:22px;padding-top:16px}
+.sprint-dot{position:absolute;left:82px;top:20px;width:18px;height:18px;border-radius:50%;border:3px solid #fff;z-index:2}
+.sprint-card{flex:1;border-radius:16px;padding:16px 20px;margin-left:34px;border:2px solid;transition:box-shadow .2s}
+.sprint-card:hover{box-shadow:0 6px 20px rgba(15,23,42,.1)}
+.s-done{border-color:#0d9488;background:#f0fdfa}
+.s-now{border-color:#f5b942;background:#fffbeb;box-shadow:0 0 0 3px rgba(245,185,66,.15)}
+.s-next{border-color:#12c7b7;background:#f0fdfa}
+.s-planned{border-color:#e2e8f0;background:#f8fafc}
+.s-study{border-color:#94a3b8;background:#f1f5f9;opacity:.75}
+.s-milestone{border-color:#7c3aed;background:linear-gradient(135deg,#f5f3ff,#fff)}
+.s-final{border-color:#7c3aed;background:linear-gradient(135deg,#1a0552,#0e2a52);color:#fff}
+.s-final .sprint-title{color:#c4b5fd}
+.s-final .small{color:#a5b4fc}
+.s-final .item-core{color:#dbeafe}
+.s-final .item-bonus{color:#fcd34d}
+.dot-done{background:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.2)}
+.dot-now{background:#f5b942;box-shadow:0 0 0 3px rgba(245,185,66,.3);animation:glow 2s infinite}
+.dot-next{background:#12c7b7;box-shadow:0 0 0 3px rgba(18,199,183,.2)}
+.dot-planned{background:#94a3b8}
+.dot-study{background:#cbd5e1}
+.dot-milestone{background:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.25)}
+.dot-final{background:#7c3aed;box-shadow:0 0 0 4px rgba(124,58,237,.4)}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:.5}}
+.sprint-wk{font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8}
+.sprint-dt{font-size:.85rem;font-weight:700;color:#475569}
+.sprint-title{font-weight:900;font-size:1rem;color:#071426;margin-bottom:6px}
+.sprint-sub{font-size:.78rem;color:#64748b;margin-bottom:8px}
+.sprint-hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.pill{border-radius:999px;padding:3px 11px;font-size:.74rem;font-weight:900;white-space:nowrap;flex-shrink:0}
+.items{display:flex;flex-direction:column;gap:3px}
+.item{font-size:.85rem;padding:2px 0;display:flex;gap:7px;align-items:flex-start}
+.item-core{color:#374151}
+.item-bonus{color:#6d28d9;font-style:italic}
+.study-label{text-align:center;padding:14px;color:#94a3b8;font-weight:700;font-size:.9rem}
+
+/* LEVEL TRACK */
+.level-track{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.lc{border-radius:14px;padding:16px;border:2px solid}
+.lc1{border-color:#ef4444;background:#fef2f2}.lc2{border-color:#f59e0b;background:#fffbeb}
+.lc3{border-color:#12c7b7;background:#f0fdfa}.lc4{border-color:#7c3aed;background:#f5f3ff}
+.lct{font-weight:900;font-size:.9rem;margin-bottom:2px}
+.lcs{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;opacity:.65}
+.lci{font-size:.8rem;color:#374151;padding:2px 0;border-bottom:1px solid rgba(0,0,0,.07)}
+.lci:last-child{border:none}
+.lc1 .lct{color:#991b1b}.lc2 .lct{color:#92400e}.lc3 .lct{color:#0f766e}.lc4 .lct{color:#6d28d9}
+
+/* SECTORS */
+.sector-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}
+.sec{border-radius:9px;padding:10px;text-align:center;border:1px solid}
+.sec-name{font-weight:900;font-size:.8rem;margin-bottom:1px}
+.sec-sig{font-size:.7rem;opacity:.65}
+
+.btn{display:inline-block;background:#12c7b7;color:#071426;font-weight:900;padding:11px 22px;border-radius:999px;margin:6px 6px 0 0;transition:opacity .2s}
+.btn:hover{opacity:.85}.btn.gold{background:#f5b942}.btn.dark{background:#071426;color:#12c7b7}
+footer{text-align:center;color:#64748b;padding:36px 22px;border-top:1px solid #dbe3ef;margin-top:24px;font-size:.88rem}
+@media(max-width:900px){.roadmap::before{left:44px}.sprint-meta{width:44px;padding-right:10px;font-size:.72rem}.sprint-dot{left:36px}.sprint-card{margin-left:18px}.level-track{grid-template-columns:1fr 1fr}.sector-grid{grid-template-columns:repeat(2,1fr)}.main{padding:14px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="badge">CP3405</span><span>DT3 · Market Intelligence Platform</span></div>
+  <div class="prof">Prof. Dr. Tan · TR2 '26</div>
+</header>
+<div class="ticker">ROADMAP · 8 Jun → 3 Aug 2026 · W4–W9 · Study Week 29 Jun blanked · Sprint 8 + Sprint 9 · Final Demo Day 3 Aug</div>
+<nav class="nav">
+  <a href="../index.html">Home</a>
+  <a class="new" href="../sprint4/index.html">Sprint 4 Announcement</a>
+  <a class="active" href="index.html">Roadmap</a>
+  <a href="../system/index.html">System Architecture</a>
+  <a href="../architecture/index.html">Animation</a>
+  <a href="../roles/index.html">Roles</a>
+  
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">TR2 2026 · W4–W9 + Sprint 8 & 9 · 8 Jun → 3 Aug</div>
+  <h1>From Manual Pipeline<br>to Intelligent System</h1>
+  <p>Nine weeks. One study break. One final demo. The sprint rhythm does not change — only what the increment is.</p>
+</section>
+
+<main class="main">
+
+<section class="panel">
+  <div class="label">Capability Progression</div>
+  <h2>Level 1 → Level 4 Across the Trimester</h2>
+  <div class="level-track">
+    <div class="lc lc1"><div class="lct">Level 1 — Manual</div><div class="lcs">Where you started</div>
+      <div class="lci">Everything by hand</div><div class="lci">No code, no scripts</div>
+      <div class="lci">W1–W3 baseline</div></div>
+    <div class="lc lc2"><div class="lct">Level 2 → 3</div><div class="lcs">Minimum by W5</div>
+      <div class="lci">One automated step</div><div class="lci">GitHub Actions</div>
+      <div class="lci">Structured outputs</div></div>
+    <div class="lc lc3"><div class="lct">Level 3</div><div class="lcs">Expected by W8</div>
+      <div class="lci">Multi-agent pipeline</div><div class="lci">LLM API calls</div>
+      <div class="lci">Delta Engine live</div></div>
+    <div class="lc lc4"><div class="lct">Level 4</div><div class="lcs">Distinction — W10</div>
+      <div class="lci">Full pipeline auto</div><div class="lci">Prescriptive Rx output</div>
+      <div class="lci">UI + 11 sectors</div></div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="label">Sprint-by-Sprint Roadmap — Exact Dates</div>
+  <h2>W3 (8 Jun) → W10 (3 Aug) · Study Week 29 Jun Blanked</h2>
+  <p class="small" style="margin-bottom:20px">Each sprint requires a market prediction + release tag (Sunday midnight SGT) plus the software increment for that sprint. The gold dot is where we are now.</p>
+
+  <div class="roadmap">
+
+    <!-- W3 DONE -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W3</div><div class="sprint-dt">8 Jun</div></div>
+      <div class="sprint-dot dot-done"></div>
+      <div class="sprint-card s-done">
+        <div class="sprint-hdr">
+          <div class="sprint-title">W3 — Manual Pipeline Complete</div>
+          <span class="pill" style="background:#dcfce7;color:#166534">✓ Done</span>
+        </div>
+        <div class="items">
+          <div class="item"><span>✓</span><span class="item-core">SPX, NDX, IWM prediction locked · tag vW23 · presented Mon 8 Jun</span></div>
+          <div class="item"><span>✓</span><span class="item-core">Full manual pipeline: Sources → Agents → 4 LLMs → Human Score → GitHub</span></div>
+          <div class="item"><span>✓</span><span class="item-core">Scrum ceremonies completed · Sprint 4 software development announced</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W4 NOW -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W4</div><div class="sprint-dt">15 Jun</div></div>
+      <div class="sprint-dot dot-done"></div>
+      <div class="sprint-card s-done">
+        <div class="sprint-hdr">
+          <div class="sprint-title">W4 — First Software Increment + Sector Expansion</div>
+          <span class="pill" style="background:#ccfbf1;color:#0f766e">✓ Done · tag vW24</span>
+        </div>
+        <div class="sprint-sub">Choose your capability tier. Ship something that runs. Expand prediction to cover at least 3 S&P sectors.</div>
+        <div class="items">
+          <div class="item"><span>📌</span><span class="item-core">Prediction: SPX + NDX + IWM + minimum 3 S&P 500 sectors · tag <code>vW24</code></span></div>
+          <div class="item"><span>📌</span><span class="item-core">Software increment: at minimum one automated data fetch script committed to GitHub</span></div>
+          <div class="item"><span>📌</span><span class="item-core">DECISION.md: what did you choose to automate first and why?</span></div>
+          <div class="item"><span>📌</span><span class="item-core">W3 delta report: how accurate was your W3 prediction? Direction correct? Error size?</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Level 3+: one LLM API call with logged prompt + response in repo</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Level 4: Delta Engine script computing W3 accuracy automatically</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W5 -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W5</div><div class="sprint-dt">22 Jun</div></div>
+      <div class="sprint-dot dot-done"></div>
+      <div class="sprint-card s-done">
+        <div class="sprint-hdr">
+          <div class="sprint-title">W5 — Agent Automation + Delta Engine</div>
+          <span class="pill" style="background:#ccfbf1;color:#0f766e">✓ Done · tag vW25</span>
+        </div>
+        <div class="items">
+          <div class="item"><span>→</span><span class="item-core">Prediction: SPX + NDX + IWM + minimum 5 S&P sectors · tag <code>vW25</code></span></div>
+          <div class="item"><span>→</span><span class="item-core">At least 2 agents producing structured output files automatically (JSON or CSV)</span></div>
+          <div class="item"><span>→</span><span class="item-core">Delta Engine: W4 predicted vs actual calculated in code, output as file</span></div>
+          <div class="item"><span>→</span><span class="item-core">GitHub Actions workflow: pipeline runs on push or schedule, no manual trigger needed</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Level 4: multi-LLM comparison table generated programmatically from API responses</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Level 4: FinBERT sentiment on one macro data source (earnings transcript or Fed minutes)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W6 STUDY WEEK -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W6</div><div class="sprint-dt">29 Jun</div></div>
+      <div class="sprint-dot dot-study"></div>
+      <div class="sprint-card s-study">
+        <div class="study-label">📚 STUDY WEEK — 29 June · No session · No prediction · No sprint tag · Rest and prepare for exams</div>
+      </div>
+    </div>
+
+    <!-- W7 -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W7</div><div class="sprint-dt">6 Jul</div></div>
+      <div class="sprint-dot dot-done"></div>
+      <div class="sprint-card s-done">
+        <div class="sprint-hdr">
+          <div class="sprint-title">W7 — LLM Integration + Calibration Suite</div>
+          <span class="pill" style="background:#ccfbf1;color:#0f766e">✓ Done · tag vW27</span>
+        </div>
+        <div class="sprint-sub">Back from study week. Two-week gap — resume with sharpened focus. Pipeline should be running automatically by now.</div>
+        <div class="items">
+          <div class="item"><span>→</span><span class="item-core">Prediction: SPX + NDX + IWM + all 11 S&P sectors · tag <code>vW27</code></span></div>
+          <div class="item"><span>→</span><span class="item-core">At least 2 LLMs called via API with identical prompts, responses logged and compared</span></div>
+          <div class="item"><span>→</span><span class="item-core">Calibration suite: accuracy tracked across W3–W5, directional accuracy per model in code</span></div>
+          <div class="item"><span>→</span><span class="item-core">Human Score interface: structured form or guided template replacing unstructured notes</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Level 4: agreement matrix auto-generated, disagreement zones flagged automatically</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W8 MILESTONE -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W8</div><div class="sprint-dt">13 Jul</div></div>
+      <div class="sprint-dot dot-milestone"></div>
+      <div class="sprint-card s-milestone">
+        <div class="sprint-hdr">
+          <div class="sprint-title">W8 — Prescriptive Engine · Mid-Trimester Milestone</div>
+          <span class="pill" style="background:#ede9fe;color:#6d28d9">🎯 Milestone · tag vW28 due Sun 12 Jul</span>
+        </div>
+        <div class="sprint-sub" style="color:#6d28d9;font-weight:700">Checkpoint: every team must have an end-to-end running pipeline by this session. If a team is still at Level 1, intervention occurs here.</div>
+        <div class="items">
+          <div class="item"><span>🎯</span><span class="item-core">Prescriptive output: system generates at least one specific agent weight adjustment from delta history</span></div>
+          <div class="item"><span>🎯</span><span class="item-core">Mid-trimester demo: full pipeline runs live, no manual data entry steps visible</span></div>
+          <div class="item"><span>🎯</span><span class="item-core">Architecture document updated: what was planned vs what was actually built and why it differs</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Level 4: simple web UI showing pipeline state, latest prediction, and calibration scores</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Bonus: two-week prediction horizon (Almanac + Macro dominant, wider range)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W9 -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">W9</div><div class="sprint-dt">20 Jul</div></div>
+      <div class="sprint-dot dot-done"></div>
+      <div class="sprint-card s-done">
+        <div class="sprint-hdr">
+          <div class="sprint-title">W9 — System Integration + Sector Depth</div>
+          <span class="pill" style="background:#ccfbf1;color:#0f766e">✓ Done · tag vW29</span>
+        </div>
+        <div class="items">
+          <div class="item"><span>→</span><span class="item-core">Full pipeline runs from one command or one GitHub Actions trigger, no exceptions</span></div>
+          <div class="item"><span>→</span><span class="item-core">All 11 S&P sectors covered with at least one automated signal per sector</span></div>
+          <div class="item"><span>→</span><span class="item-core">Calibration history: W3–W8 accuracy tracked, which model has best directional record?</span></div>
+          <div class="item"><span>→</span><span class="item-core">Pipeline hardening: error handling for missing data, API failures, malformed responses</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Bonus: one-month prediction horizon using Almanac + FinBERT + Macro agents</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPRINT 8 -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">Spr. 8</div><div class="sprint-dt">27 Jul</div></div>
+      <div class="sprint-dot dot-now"></div>
+      <div class="sprint-card s-now">
+        <div class="sprint-hdr">
+          <div class="sprint-title">Sprint 8 — System Hardening + Demo Prep</div>
+          <span class="pill" style="background:#fef3c7;color:#92400e">▶ NOW · tag vW30</span>
+        </div>
+        <div class="sprint-sub">One sprint before the true final sprint. System should produce the prediction with minimal human input. Begin assigning demo roles — full rehearsal happens next sprint.</div>
+        <div class="items">
+          <div class="item"><span>→</span><span class="item-core">Prediction sprint: system does the heavy lifting, team reviews and approves</span></div>
+          <div class="item"><span>→</span><span class="item-core">Demo role assignment: decide who presents which pipeline segment</span></div>
+          <div class="item"><span>→</span><span class="item-core">System story drafted: Level 1 in W1 → current level, what changed and what was learned</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPRINT 9 — FINAL SPRINT -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">Spr. 9</div><div class="sprint-dt">3 Aug</div></div>
+      <div class="sprint-dot dot-next"></div>
+      <div class="sprint-card s-next">
+        <div class="sprint-hdr">
+          <div class="sprint-title">Sprint 9 — Final Sprint + Demo Rehearsal</div>
+          <span class="pill" style="background:#ccfbf1;color:#0f766e">tag vW31</span>
+        </div>
+        <div class="sprint-sub">Last prediction sprint before Demo Day. Rehearse every role's two-minute demo segment — full run-through, not just role assignment.</div>
+        <div class="items">
+          <div class="item"><span>→</span><span class="item-core">Final prediction sprint: system does the heavy lifting, team reviews and approves</span></div>
+          <div class="item"><span>→</span><span class="item-core">Full demo rehearsal: every role presents their pipeline segment in under two minutes</span></div>
+          <div class="item"><span>→</span><span class="item-core">System story finalized: Level 1 in W1 → Level 3–4 now, ready to present</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL DEMO DAY -->
+    <div class="sprint-row">
+      <div class="sprint-meta"><div class="sprint-wk">Final</div><div class="sprint-dt">3 Aug</div></div>
+      <div class="sprint-dot dot-final"></div>
+      <div class="sprint-card s-final">
+        <div class="sprint-hdr">
+          <div class="sprint-title">FINAL DEMO DAY — Mon 3 August 2026</div>
+          <span class="pill" style="background:#4c1d95;color:#e9d5ff">🏁 End of Trimester</span>
+        </div>
+        <div class="sprint-sub">No new prediction this week. You demo the system you built. Every role speaks. The pipeline runs live.</div>
+        <div class="items">
+          <div class="item"><span>🏁</span><span class="item-core">Live demo: pipeline runs from data fetch to prediction output in real time, no slides replacing it</span></div>
+          <div class="item"><span>🏁</span><span class="item-core">Calibration story: W3–W11 accuracy shown — what improved, what the system learned to prescribe</span></div>
+          <div class="item"><span>🏁</span><span class="item-core">Scrum story: how did the team mature from Level 1 manual to the system running today?</span></div>
+          <div class="item"><span>🏁</span><span class="item-core">Architecture diagram: from the manual pipeline you specified to the code you shipped</span></div>
+          <div class="item"><span>★</span><span class="item-bonus">Distinction: system demonstrates self-improvement across sprints — calibration loop visibly tightens prediction accuracy week by week</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end roadmap -->
+</section>
+
+<!-- 11 SECTORS -->
+<section class="panel">
+  <div class="label">Core Requirement — All 11 S&P 500 Sectors</div>
+  <h2>Full Sector Coverage Expected by W9 (20 July)</h2>
+  <p class="small" style="margin-bottom:12px">Start with the sectors most relevant to the week's macro theme. Build coverage progressively: 3 sectors by W4, 5 by W5, all 11 by W9.</p>
+  <div class="sector-grid">
+    <div class="sec" style="border-color:#f97316;background:#fff7ed"><div class="sec-name" style="color:#c2410c">Energy</div><div class="sec-sig">Oil · USD strength</div></div>
+    <div class="sec" style="border-color:#84cc16;background:#f7fee7"><div class="sec-name" style="color:#3f6212">Materials</div><div class="sec-sig">Global commodities</div></div>
+    <div class="sec" style="border-color:#22d3ee;background:#ecfeff"><div class="sec-name" style="color:#164e63">Industrials</div><div class="sec-sig">GDP · PMI · ISM</div></div>
+    <div class="sec" style="border-color:#f472b6;background:#fdf2f8"><div class="sec-name" style="color:#9d174d">Cons. Disc.</div><div class="sec-sig">Consumer confidence</div></div>
+    <div class="sec" style="border-color:#a3e635;background:#f7fee7"><div class="sec-name" style="color:#3f6212">Cons. Staples</div><div class="sec-sig">Defensive · Inflation</div></div>
+    <div class="sec" style="border-color:#4ade80;background:#f0fdf4"><div class="sec-name" style="color:#166534">Healthcare</div><div class="sec-sig">Defensive · Policy risk</div></div>
+    <div class="sec" style="border-color:#60a5fa;background:#eff6ff"><div class="sec-name" style="color:#1e40af">Financials</div><div class="sec-sig">Rates · Yield curve</div></div>
+    <div class="sec" style="border-color:#c084fc;background:#faf5ff"><div class="sec-name" style="color:#6b21a8">Info Tech</div><div class="sec-sig">Rate sensitive · Earnings</div></div>
+    <div class="sec" style="border-color:#818cf8;background:#eef2ff"><div class="sec-name" style="color:#3730a3">Comm. Svcs</div><div class="sec-sig">Ad spend · Streaming</div></div>
+    <div class="sec" style="border-color:#fde68a;background:#fffbeb"><div class="sec-name" style="color:#92400e">Utilities</div><div class="sec-sig">Bond proxy · Rates</div></div>
+    <div class="sec" style="border-color:#fb7185;background:#fff1f2"><div class="sec-name" style="color:#9f1239">Real Estate</div><div class="sec-sig">REITs · Mortgage rates</div></div>
+  </div>
+</section>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin:20px 0">
+  <a class="btn gold" href="../sprint4/index.html">Sprint 4 Announcement</a>
+  <a class="btn" href="../architecture/index.html">System Architecture</a>
+  <a class="btn dark" href="../index.html">← Home</a>
+</div>
+
+</main>
+<footer></footer>
+</body>
+</html>
