@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Case Study: Team 1, Sprint 7 | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script data-goatcounter="https://profdrtktan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans', sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  .wrap{display:flex; max-width:1300px; margin:0 auto; min-height:100vh;}
+  .sidebar{width:250px; flex-shrink:0; padding:40px 20px; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; border-right:1px solid var(--line-dim);}
+  .sidebar .tag{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:16px;}
+  .sidebar a{display:block; font-size:13px; color:var(--text-body); text-decoration:none; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04);}
+  .sidebar a:hover{color:var(--paper);}
+  main{flex:1; padding:50px 50px 100px; max-width:900px;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--line-cyan); text-decoration:none; display:inline-block; margin-bottom:24px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:14px;}
+  h1{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(26px,4vw,38px); color:var(--paper); line-height:1.2; margin-bottom:16px;}
+  p.sub{font-size:15.5px; color:var(--text-body); max-width:700px; margin-bottom:20px;}
+  .status-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;}
+  .status{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; border-radius:99px; padding:5px 12px;}
+  .status.live{color:var(--coral); border:1px solid var(--coral);}
+  .status.growing{color:var(--green); border:1px solid var(--green);}
+  h2{font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--paper); margin:44px 0 16px; padding-bottom:10px; border-bottom:1px solid var(--line-dim); scroll-margin-top:20px;}
+  h3{font-family:'IBM Plex Mono', monospace; font-size:15px; color:var(--amber); margin:28px 0 10px;}
+  p{margin-bottom:14px; font-size:15px;}
+  .card{background:var(--blue-panel); border:1px solid var(--line-dim); border-radius:8px; padding:18px 20px; margin-bottom:16px;}
+  .card.principle{border-left:3px solid var(--purple);}
+  .card.evidence{border-left:3px solid var(--green);}
+  .card.tension{border-left:3px solid var(--coral);}
+  .principle-num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--purple); letter-spacing:1px; margin-bottom:4px;}
+  .principle-title{font-weight:700; color:var(--paper); margin-bottom:8px; font-size:15px;}
+  code{background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:3px; color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:0.9em;}
+  blockquote{border-left:3px solid var(--line-cyan); padding:8px 16px; margin:14px 0; color:var(--text-body); font-style:italic; font-size:14.5px;}
+  .timeline-item{display:flex; gap:14px; margin-bottom:16px;}
+  .timeline-date{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber); flex-shrink:0; width:90px; padding-top:2px;}
+  .timeline-body{flex:1; font-size:14.5px;}
+  .changelog-entry{border-bottom:1px solid var(--line-dim); padding:12px 0; font-size:13.5px;}
+  .changelog-date{font-family:'IBM Plex Mono', monospace; color:var(--amber); font-size:12px;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:13.5px;}
+  th{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--amber); text-align:left; padding:8px 10px; border-bottom:2px solid var(--line-dim);}
+  td{padding:8px 10px; border-bottom:1px solid rgba(255,255,255,0.06);}
+  .note{background:rgba(217,105,79,0.08); border-left:3px solid var(--coral); border-radius:0 8px 8px 0; padding:14px 18px; margin:20px 0; font-size:14px;}
+  footer{margin-top:60px; padding-top:20px; border-top:1px solid var(--line-dim); font-size:12.5px; color:var(--line-dim); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sidebar">
+    <div class="tag">On This Page</div>
+    <a href="#purpose">Why This Case Study</a>
+    <a href="#timeline">Timeline of Events</a>
+    <a href="#principles">Mapped to the 13 Scrum Principles</a>
+    <a href="#profiles">Individual Evidence Profiles</a>
+    <a href="#tensions">Open Tensions Worth Keeping</a>
+    <a href="#changelog">Changelog</a>
+    <a href="#ethics">Publication Note</a>
+    <a href="index.html" style="margin-top:20px; color:var(--line-cyan);">&larr; Back to AI Playbook</a>
+  </div>
+  <main>
+    <a class="back-link" href="index.html">&larr; Back to AI Playbook</a>
+    <div class="eyebrow">Case Study · Living Document · Private</div>
+    <h1>Team 1, Sprint 7 — A Contribution Report Case Study</h1>
+    <p class="sub">A real, evidence-heavy account of what happens when a peer accountability report meets independent verification. Built for future DT3 cohorts, the Sprint by Sprint paper, and the AI Playbook — updated as more team members respond.</p>
+    <div class="status-row">
+      <span class="status live">🔴 LIVE — awaiting responses from 5 more members</span>
+      <span class="status growing">📈 GROWING — add entries as evidence arrives</span>
+    </div>
+
+    <h2 id="purpose">Why This Case Study</h2>
+    <p>Most contribution-report exercises produce a document, a grade, and nothing anyone remembers a month later. This one is different because almost every step was independently checked against a different source — GitHub, Discord, FigJam's own author metadata — rather than taken on anyone's word, including the report author's. What emerged wasn't a simple story of good students and bad ones. It was a case study in exactly the failure modes Scrum is designed to catch: an invisible-work tracking gap, a single-reviewer bottleneck, a discouraged team member who stopped contributing to a process rather than the team, and a student who quietly gamed a validation check. Every one of those has a name and a number in the 10 Scrum Principles reference — this document is where the theory meets a real, messy, still-unfolding case.</p>
+    <p>The goal stated explicitly by the instructor: this is not "gotcha" material. It's raw material for teaching the next cohort what these principles actually look like when they succeed and fail in a live team, plus source evidence for the Sprint by Sprint paper and the AI Playbook.</p>
+
+    <h2 id="timeline">Timeline of Events</h2>
+    <div class="timeline-item"><div class="timeline-date">18 Jul</div><div class="timeline-body">Team 1 submits a comprehensive Week 7 contribution report, naming all 11 members, copied to the full team at the instructor's request for transparency.</div></div>
+    <div class="timeline-item"><div class="timeline-date">20 Jul</div><div class="timeline-body">Instructor requests an evidence-based rubric. Report cross-checked against live GitHub (commits, PRs, tags) and Discord. 11-person ranking built, 4 criteria (Output, Completion &amp; Quality, Responsiveness, Communication).</div></div>
+    <div class="timeline-item"><div class="timeline-date">20 Jul</div><div class="timeline-body">A 12th contributor, <code>virusxix</code>, discovered in GitHub's graph with no name in the report. Traced to a feature branch (<code>week-5/frontend</code>, 18 June). Confirmed directly with Oakkar — his account, folded into his score.</div></div>
+    <div class="timeline-item"><div class="timeline-date">20 Jul</div><div class="timeline-body">Zaw Latt sends an unprompted accountability letter, disputing none of the citations against him. Reply sent tying his commitments to Scrum Principles 2 and 4.</div></div>
+    <div class="timeline-item"><div class="timeline-date">20 Jul</div><div class="timeline-body">Shary responds with a detailed week-by-week account, contesting the "unclear" framing with specifics. FigJam's own author metadata independently checked — confirms her account almost exactly, including the precise week her role changed and the lighter pattern in the most recent sprint.</div></div>
+    <div class="timeline-item"><div class="timeline-date">19–20 Jul</div><div class="timeline-body">Full Discord exchange between Shary and Georgii surfaces. Georgii confirms his "Bad work" label applied only to her first week, not the weeks in question, and admits the tracking gap was his own tooling blind spot, not a judgment of her effort.</div></div>
+    <div class="timeline-item"><div class="timeline-date">20 Jul</div><div class="timeline-body">Team-wide deadline set (Wed 22 Jul) for the remaining 5 members who haven't responded. Case study opened to capture whatever comes next.</div></div>
+
+    <h2 id="principles">Mapped to the 13 Scrum Principles</h2>
+    <p>The course's own reference lists 10 core principles plus 3 additional ones specific to the Scrum Master role. This case touches nearly all of them, with a real citation behind each — not a forced fit.</p>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 02</div>
+      <div class="principle-title">Done means done. Not mostly done.</div>
+      <p>Zaw Latt was stuck on the identical PR for three consecutive weeks without incorporating feedback — a task that should have been returned to the backlog in Week 5, not carried silently for two more. Ming Hao's Week 6 presentation never happened at all, which is the same failure in a different medium: a not-done item quietly absorbed into the sprint as if it were.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 04 &amp; 11</div>
+      <div class="principle-title">A blocker surfaced Wednesday can be resolved. Sunday cannot.</div>
+      <p>Zaw Latt went silent instead of flagging he was struggling, and named this himself as the core failure in his own accountability letter. The same principle explains the report's biggest blind spot in reverse: Georgii had no Wednesday-equivalent check for Figma work at all — his only methods were "check who places notes on Figma" and "check if presentation is done," both end-of-week, both Sunday-shaped. The Scrum Master's tooling never caught up to the team's actual work distribution.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 06</div>
+      <div class="principle-title">Velocity is an outcome — you can't optimise for it without gaming it</div>
+      <p>Zaw Latt validated his own agent output against itself — "testing agent output with agent output, of course it succeeds" — a textbook case of gaming a check to manufacture the appearance of progress rather than doing the work the check exists to verify.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 07</div>
+      <div class="principle-title">The demo either runs or it doesn't</div>
+      <p>Ming Hao's Week 6: no presentation took place, because the underlying tracked work was incomplete. Per the principle, that's not a partial credit situation — an incomplete item goes back to the backlog, not onto the stage as "nearly done."</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 08</div>
+      <div class="principle-title">The retrospective is where the team gets better — not the pipeline</div>
+      <p>The Discord exchange between Shary and Georgii is, functionally, an unscheduled retrospective — and it produced exactly what a good one should: Georgii stating plainly "I appreciate you coming up with this, I will add the things I missed," a concrete admission of what broke (his tracking method), and a specific fix offered (adding her context to the report). The principle's own line — "every team member speaks, not just the loudest voices" — describes precisely what had been missing for six weeks.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 10</div>
+      <div class="principle-title">Sustainable pace — the sprint that breaks you helps no one</div>
+      <p>Georgii is reviewing or authoring nearly all 90 of the team's pull requests, carries 51% of total commits, and the team still has the lowest overall commit volume of any of the five teams. That's not a strength metric — it's the exact pattern the principle warns about, and it's already showing in the data independent of anyone's individual score.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 12</div>
+      <div class="principle-title">Dependency collapse is a Scrum Master failure — not a team member failure</div>
+      <p>The instinct throughout the original report is to name the person who didn't deliver. The principle reframes it: when Shary's work went untracked for six weeks, the correct diagnosis isn't "Shary's work is invisible," it's "the Scrum Master had no individual, documented check-in method for work that doesn't touch GitHub." Georgii's own words confirm this reading — he frames it as his tracking gap, not her failure, once asked directly.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 13</div>
+      <div class="principle-title">The mid-week check-in is individual, documented, and acted upon</div>
+      <p>This is the single clearest root cause in the entire case. A group "how's everyone doing" in the team channel doesn't count, per the principle — and that's effectively all that existed for non-GitHub work. The fix Georgii proposes (adding what he missed to the report) is a reactive patch; the actual principle-level fix is an individual, documented check-in that covers Figma/presentation work the same way standups cover code.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 05</div>
+      <div class="principle-title">The daily standup is the heartbeat of Scrum</div>
+      <p>Whitley is the one running the weekly reporting thread this entire case study is built from — the best-documented Scrum discipline of anyone on the team, even though her own commit volume is low. Output volume is the wrong lens for this role; consistency of cadence is the right one, and by that measure she's the strongest performer in the team on this specific principle.</p>
+    </div>
+
+    <div class="card principle">
+      <div class="principle-num">PRINCIPLE 01</div>
+      <div class="principle-title">A sprint goal is a commitment, not a description</div>
+      <p>The team's own retrospective note names Week 6 as "our weakest week" with little work landing in GitHub and the presentation not raised early enough — a symptom of a sprint goal that was never concrete enough to know, mid-week, whether it was on track. Worth checking with R1 what that week's written sprint goal actually said.</p>
+    </div>
+
+    <div class="note">Principles 03 and 09 (timeboxes, mid-sprint interruptions) don't yet have direct evidence in this case — worth watching for as more responses come in, rather than forcing a citation that isn't really there.</div>
+
+    <h2 id="profiles">Individual Evidence Profiles</h2>
+    <p>Full rubric with all 11 members, weighted scoring, and per-person evidence lives in <code>Team1_Contribution_Rubric_Sprint7.docx</code> (kept as a separate working document, updated as responses arrive). Summary of the two fully-resolved cases so far:</p>
+
+    <h3>Shary — from "flagged, unscored" to independently verified</h3>
+    <p>The strongest illustration in the whole case of why verification matters more than either self-report or peer-report alone. Three independent layers ended up agreeing: her own detailed account, FigJam's author metadata (which she did not control and could not have faked after the fact), and Georgii's own confirmation that his negative label applied to one week only. The case for teaching this: a "the report says I don't know" verdict is not evidence of low contribution — it's evidence of a measurement gap, and the two look identical until someone checks.</p>
+    <blockquote>"I write 'Bad work' in red if person has definitively not done enough. You have that only on your first [week]." — Georgii, Discord, 19 July</blockquote>
+
+    <h3>Zaw Latt — the clean counter-example</h3>
+    <p>Where Shary's case is about a measurement gap, Zaw Latt's is a real, undisputed performance gap — and worth keeping in the case study precisely because he didn't contest it. His letter disputed zero citations, named the cause honestly, and set concrete forward commitments. Pedagogically, this is the "this is what accountability actually looks like, and it doesn't erase the record, it changes what happens next" example.</p>
+
+    <h2 id="tensions">Open Tensions Worth Keeping in the Write-Up</h2>
+    <div class="card tension"><p><b>Discouragement vs. non-contribution look identical from the outside.</b> Shary stopped doing PR reviews after her comments were repeatedly overridden. From a pure activity count, that's indistinguishable from someone who simply stopped trying. Only her direct account — and Georgii's validation of it afterward — separates the two.</p></div>
+    <div class="card tension"><p><b>A Scrum Master's honest "I don't know" reads as a negative signal even when it isn't one.</b> The original report's ambiguity around Shary was more damaging to her than an actual negative citation would have been, because ambiguity invites the worst assumption by default.</p></div>
+    <div class="card tension"><p><b>The report's author is also a subject of it.</b> Georgii wrote most of the original report and scores highest in it. Both can be true and fair at once — his high score rests on externally-checkable metrics (commit count, review count), not his own narrative — but it's a structural conflict of interest worth naming every time this case is taught.</p></div>
+
+    <h2 id="changelog">Changelog</h2>
+    <div class="changelog-entry"><span class="changelog-date">20 Jul 2026, evening —</span> Initial case study created. Timeline, 9 of 13 principles mapped, Shary and Zaw Latt profiles written up. Awaiting responses from Henry, Aeron, Saiko, Naing, Ming Hao.</div>
+
+    <h2 id="ethics">Publication Note</h2>
+    <p>Before any of this goes into the paper or the book: every name here needs to become a pseudonym, and any detail specific enough to re-identify a real person (exact repo names, exact Discord handles) needs to be generalized. The evidentiary rigor is exactly what makes this valuable pedagogically — none of that rigor requires keeping real names attached in a published version.</p>
+
+    <footer>Team 1 Case Study · Private working document · Not for distribution in current form · Prof Dr Tan</footer>
+  </main>
+</div>
+</body>
+</html>
