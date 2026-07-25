@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Scrum Reference</title>
+<title>Scrum Reference — Live Lessons | The AI Playbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script data-goatcounter="https://profdrtktan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -95,9 +95,9 @@ const PRINCIPLES = [
     scenario: "\u201cThis was our weakest week. Very little work landed, and the presentation issue wasn't raised early enough.\u201d By their own account, nobody could have said on Wednesday whether that sprint was on track — because the goal was never concrete enough to check against.",
     outcome: "A vague goal doesn't fail loudly. It just quietly produces a week where nobody can say what went wrong, because nobody could have said what \u201cright\u201d looked like either." },
   { n: 2, title: "Done means done. Not mostly done.", quote: "A task that is almost finished is not a sprint increment. It goes back to the backlog.",
-    label: "Two versions of the same failure, three weeks apart:",
-    scenario: "Developer A was stuck on the identical pull request for three consecutive weeks without incorporating feedback — including testing an agent's output against itself, calling the result a pass. Separately, Developer B's file needed real rework, and a specific requested change from a teammate went unanswered entirely.",
-    outcome: "Neither task was \u201calmost there.\u201d Both were open loops wearing the appearance of progress — and both cost the team more the longer they stayed open." },
+    label: "Seen independently on two separate teams:",
+    scenario: "Team A: Developer A was stuck on the identical pull request for three consecutive weeks without incorporating feedback — including testing an agent's output against itself, calling the result a pass. Separately, Developer B's file needed real rework, and a specific requested change from a teammate went unanswered entirely. Team B: that team's own lead has a pull request sitting open for over two weeks — zero comments, zero review, zero activity of any kind.",
+    outcome: "Neither task was \u201calmost there.\u201d Both were open loops wearing the appearance of progress — and this isn't a one-team problem. It showed up, independently, on a completely different team's own lead." },
   { n: 3, title: "Agree on timeboxes early — enforce them even if they feel wrong", quote: "An incorrect timebox you enforce teaches you more than no timebox at all.",
     label: "The Sunday 23:59 deadline, applied without exception:",
     scenario: "Developer A did not respond to requested changes by the Sunday deadline and committed the fix the following day — after the cutoff. The tag for that sprint was cut on time regardless. The lateness wasn't waived because the work was real; the timebox held.",
@@ -107,9 +107,9 @@ const PRINCIPLES = [
     scenario: "\u201cI should have communicated earlier that I was struggling rather than going silent.\u201d Every single student who wrote in this week, independently, named some version of this. Not a skill gap. Not workload. Silence, surfaced too late.",
     outcome: "This is the single most fixable failure mode in the entire course — and the only one that requires no new skill, just one message, sent two days earlier." },
   { n: 5, title: "The daily standup is the heartbeat of Scrum", quote: "Short, sharp, every day. If it's running 30 minutes, someone is problem-solving instead of flagging.",
-    label: "The one role that got this right, consistently:",
-    scenario: "One Scrum Master ran a weekly check-in thread every single sprint without exception — asking each member directly, cross-checking GitHub when someone didn't self-report, and documenting it every time. Her own commit count was among the lowest on the team. Her cadence discipline was the best.",
-    outcome: "Output volume is the wrong lens for this role. Consistency of cadence is the right one — and it's the rarest thing on most teams." },
+    label: "Two teams, two different kinds of consistency worth noticing:",
+    scenario: "Team A: one Scrum Master ran a weekly check-in thread every single sprint without exception — asking each member directly, cross-checking GitHub when someone didn't self-report. Her own commit count was among the lowest on the team; her cadence discipline was the best. Team D, separately: their automated pipeline ran successfully multiple times a week without a single failure, including straight through the study break when most teams went quiet.",
+    outcome: "Output volume is the wrong lens for either of these. Consistency of cadence — whether it's a person checking in or a pipeline running on schedule — is the right one, and it's the rarest thing on most teams." },
   { n: 6, title: "Velocity is an outcome — you can't optimise for it without gaming it", quote: "Focus on the goal. Velocity follows from honest work.",
     label: "A validation check that validated nothing:",
     scenario: "Developer A tested an agent's output by comparing it against the same agent's output — \u201cof course it succeeds.\u201d The check passed. The work it was supposed to verify was never actually verified.",
@@ -119,9 +119,9 @@ const PRINCIPLES = [
     scenario: "About half of one team did not attend their own Sprint Review. Separately, in an earlier sprint, a presentation for an entire week simply never happened — the underlying work wasn't done, so there was nothing to demo.",
     outcome: "A sprint review isn't optional viewing of finished work. It's the one moment the work has to prove it's real — and the only thing worse than a bad demo is no demo at all." },
   { n: 8, title: "The retrospective is where the team gets better — not the pipeline", quote: "Every team member speaks — not just the loudest voices.",
-    label: "An unscheduled retrospective that actually worked:",
-    scenario: "A team member raised, directly and specifically, why a report about them felt incomplete. The response: \u201cI appreciate you coming up with this, I will add the things I missed.\u201d No defensiveness, one concrete admission, one fix offered — in real time, outside any scheduled ceremony.",
-    outcome: "The principle doesn't require a calendar slot. It requires someone speaking up and someone else actually listening." },
+    label: "Two different teams, two different ways this principle got skipped:",
+    scenario: "Team A: an unscheduled retrospective that actually worked — a team member raised, directly and specifically, why a report about them felt incomplete, and got a real answer back: \u201cI appreciate you coming up with this, I will add the things I missed.\u201d Team C, by contrast: every pull request across the entire project's history was merged by its own author, instantly, with zero reviews from anyone else — a review process that exists in name but never actually runs.",
+    outcome: "The principle doesn't require a calendar slot, but it does require someone other than the author actually looking. A process that technically exists but never gets used is functionally the same as no process at all." },
   { n: 9, title: "Mid-sprint interruptions are a tax on velocity", quote: "Protect the sprint goal. Everything else is backlog.",
     label: "The cost of being everyone's safety net:",
     scenario: "One team's lead reviews or authors nearly every pull request the team produces — 88 of 90 — while also carrying the largest individual share of commits. Every unplanned review request is time not spent on his own committed work.",
