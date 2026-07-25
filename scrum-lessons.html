@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Scrum Reference — Live Lessons | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script data-goatcounter="https://profdrtktan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+  :root{
+    --navy:#0B2E4A; --navy2:#123C5E; --panel:#163F63;
+    --cyan:#8FC7DE; --dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --muted:#5B7690;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--navy); color:var(--paper); font-family:'IBM Plex Sans', sans-serif; line-height:1.6;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.05) 0px, rgba(143,199,222,0.05) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.05) 0px, rgba(143,199,222,0.05) 1px, transparent 1px, transparent 32px);
+  }
+  a{color:var(--cyan);}
+  main{max-width:980px; margin:0 auto; padding:50px 24px 100px;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--cyan); text-decoration:none; display:inline-block; margin-bottom:24px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:14px;}
+  h1{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(28px,4.5vw,40px); color:var(--paper); line-height:1.2; margin-bottom:16px;}
+  p.sub{font-size:16px; color:#CFE4F0; max-width:680px; margin-bottom:14px;}
+  .hint{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--amber); background:rgba(232,166,60,0.1); border:1px solid rgba(232,166,60,0.3); border-radius:99px; padding:6px 16px; display:inline-block; margin-bottom:36px;}
+
+  .principle{
+    background:var(--panel); border:1px solid var(--dim); border-radius:10px;
+    margin-bottom:14px; overflow:hidden; transition:border-color .2s;
+  }
+  .principle.open{border-color:var(--amber);}
+  .principle-head{
+    display:flex; align-items:center; gap:18px; padding:18px 22px; cursor:pointer; user-select:none;
+  }
+  .principle-num{
+    font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:22px; color:var(--dim);
+    width:44px; flex-shrink:0;
+  }
+  .principle.open .principle-num{color:var(--amber);}
+  .principle-title{flex:1;}
+  .principle-title h3{font-family:'IBM Plex Mono', monospace; font-size:16px; color:var(--paper); font-weight:600; margin-bottom:4px;}
+  .principle-title .quote{font-size:13px; color:#9FB6C9; font-style:italic;}
+  .chevron{font-size:20px; color:var(--cyan); transition:transform .25s; flex-shrink:0;}
+  .principle.open .chevron{transform:rotate(180deg); color:var(--amber);}
+
+  .lesson{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+  }
+  .principle.open .lesson{max-height:600px;}
+  .lesson-inner{padding:0 22px 24px; border-top:1px solid var(--dim);}
+  .lesson-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--coral); margin:18px 0 8px;
+  }
+  .lesson-scenario{
+    background:rgba(0,0,0,0.2); border-left:3px solid var(--coral); border-radius:0 6px 6px 0;
+    padding:14px 16px; margin-bottom:14px; font-size:14px; color:#DCEAF2;
+  }
+  .lesson-scenario b{color:var(--coral); display:block; margin-bottom:6px;}
+  .lesson-outcome{font-size:13.5px; color:#9FB6C9; font-style:italic; line-height:1.55;}
+
+  .searchbar{
+    width:100%; background:var(--panel); border:1px solid var(--dim); border-radius:8px;
+    padding:12px 16px; color:var(--paper); font-family:'IBM Plex Sans'; font-size:14px; margin-bottom:24px;
+  }
+  .searchbar::placeholder{color:var(--muted);}
+
+  footer{margin-top:50px; padding-top:20px; border-top:1px solid var(--dim); font-size:12px; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+<main>
+  <a class="back-link" href="team1-case-study.html">&larr; Back to Case Study</a>
+  <div class="eyebrow">Live Lecture Tool &middot; Click Any Principle</div>
+  <h1>The 13 Scrum Principles</h1>
+  <p class="sub">Same reference, same quotes as the real course page — except every principle here expands into what it actually looked like on a real team this trimester. Click through them live.</p>
+  <div class="hint">🎤 Presenter mode — click a principle to reveal its lesson, click again to close</div>
+
+  <input class="searchbar" id="search" placeholder="Filter principles… (try 'blocker', 'demo', 'pace')">
+
+  <div id="list"></div>
+
+  <footer>Private presenter tool &middot; Not the live student-facing Scrum Reference page &middot; Prof Dr Tan</footer>
+</main>
+
+<script>
+const PRINCIPLES = [
+  { n: 1, title: "A sprint goal is a commitment, not a description", quote: "If you can't tell at midnight Sunday whether you met it — it's not a goal.",
+    label: "One team's Week 6 retrospective, in their own words:",
+    scenario: "\u201cThis was our weakest week. Very little work landed, and the presentation issue wasn't raised early enough.\u201d By their own account, nobody could have said on Wednesday whether that sprint was on track — because the goal was never concrete enough to check against.",
+    outcome: "A vague goal doesn't fail loudly. It just quietly produces a week where nobody can say what went wrong, because nobody could have said what \u201cright\u201d looked like either." },
+  { n: 2, title: "Done means done. Not mostly done.", quote: "A task that is almost finished is not a sprint increment. It goes back to the backlog.",
+    label: "Two versions of the same failure, three weeks apart:",
+    scenario: "Developer A was stuck on the identical pull request for three consecutive weeks without incorporating feedback — including testing an agent's output against itself, calling the result a pass. Separately, Developer B's file needed real rework, and a specific requested change from a teammate went unanswered entirely.",
+    outcome: "Neither task was \u201calmost there.\u201d Both were open loops wearing the appearance of progress — and both cost the team more the longer they stayed open." },
+  { n: 3, title: "Agree on timeboxes early — enforce them even if they feel wrong", quote: "An incorrect timebox you enforce teaches you more than no timebox at all.",
+    label: "The Sunday 23:59 deadline, applied without exception:",
+    scenario: "Developer A did not respond to requested changes by the Sunday deadline and committed the fix the following day — after the cutoff. The tag for that sprint was cut on time regardless. The lateness wasn't waived because the work was real; the timebox held.",
+    outcome: "The deadline being firm is what makes it worth anything. The moment it bends for a good excuse, it stops being a deadline for anyone." },
+  { n: 4, title: "A blocker surfaced Wednesday can be resolved. Sunday cannot.", quote: "Hiding a blocker is not Scrum.",
+    label: "Cited in 5 of 5 written responses this sprint — the most unanimous finding of the whole case:",
+    scenario: "\u201cI should have communicated earlier that I was struggling rather than going silent.\u201d Every single student who wrote in this week, independently, named some version of this. Not a skill gap. Not workload. Silence, surfaced too late.",
+    outcome: "This is the single most fixable failure mode in the entire course — and the only one that requires no new skill, just one message, sent two days earlier." },
+  { n: 5, title: "The daily standup is the heartbeat of Scrum", quote: "Short, sharp, every day. If it's running 30 minutes, someone is problem-solving instead of flagging.",
+    label: "The one role that got this right, consistently:",
+    scenario: "One Scrum Master ran a weekly check-in thread every single sprint without exception — asking each member directly, cross-checking GitHub when someone didn't self-report, and documenting it every time. Her own commit count was among the lowest on the team. Her cadence discipline was the best.",
+    outcome: "Output volume is the wrong lens for this role. Consistency of cadence is the right one — and it's the rarest thing on most teams." },
+  { n: 6, title: "Velocity is an outcome — you can't optimise for it without gaming it", quote: "Focus on the goal. Velocity follows from honest work.",
+    label: "A validation check that validated nothing:",
+    scenario: "Developer A tested an agent's output by comparing it against the same agent's output — \u201cof course it succeeds.\u201d The check passed. The work it was supposed to verify was never actually verified.",
+    outcome: "A metric that can be gamed, will be — not always with bad intent, sometimes just under deadline pressure. The fix isn't a stricter check. It's a reviewer who asks what the check is actually proving." },
+  { n: 7, title: "The demo either runs or it doesn't", quote: "If it doesn't run in the room, it doesn't count. There is no 'we were close.'",
+    label: "This one just happened, this week, to this class:",
+    scenario: "About half of one team did not attend their own Sprint Review. Separately, in an earlier sprint, a presentation for an entire week simply never happened — the underlying work wasn't done, so there was nothing to demo.",
+    outcome: "A sprint review isn't optional viewing of finished work. It's the one moment the work has to prove it's real — and the only thing worse than a bad demo is no demo at all." },
+  { n: 8, title: "The retrospective is where the team gets better — not the pipeline", quote: "Every team member speaks — not just the loudest voices.",
+    label: "An unscheduled retrospective that actually worked:",
+    scenario: "A team member raised, directly and specifically, why a report about them felt incomplete. The response: \u201cI appreciate you coming up with this, I will add the things I missed.\u201d No defensiveness, one concrete admission, one fix offered — in real time, outside any scheduled ceremony.",
+    outcome: "The principle doesn't require a calendar slot. It requires someone speaking up and someone else actually listening." },
+  { n: 9, title: "Mid-sprint interruptions are a tax on velocity", quote: "Protect the sprint goal. Everything else is backlog.",
+    label: "The cost of being everyone's safety net:",
+    scenario: "One team's lead reviews or authors nearly every pull request the team produces — 88 of 90 — while also carrying the largest individual share of commits. Every unplanned review request is time not spent on his own committed work.",
+    outcome: "An interruption doesn't stop being a tax just because the person absorbing it doesn't complain. It shows up later — usually as the team's own output, not just his." },
+  { n: 10, title: "Sustainable pace — the sprint that breaks you helps no one", quote: "The team that lasts eight sprints beats the one that burns out at four.",
+    label: "A Product Owner describing his own week, unprompted:",
+    scenario: "\u201cI am busy and tired... What went well this sprint? Basically nothing.\u201d Written in his own retrospective, about his own week — while also carrying 51% of the team's total commits.",
+    outcome: "This is the clearest first-person evidence in the entire dataset that a pace can be unsustainable even when the person carrying it never once asks for help." },
+  { n: 11, title: "The Scrum Master's value is proportional to how early they surface what isn't working", quote: "Wednesday discovery = solvable. Sunday discovery = damage control.",
+    label: "The Wednesday Test, failed by omission rather than negligence:",
+    scenario: "A Scrum Master honestly reported \u201cI don't know\u201d about a teammate's contribution for three straight weeks — not from negligence, but because his only two check methods were both end-of-week signals. There was no Wednesday-equivalent check for that kind of work at all.",
+    outcome: "The Wednesday Test assumes a check-in method exists to run on Wednesday. If it only exists for one kind of work, the SM can be doing their job perfectly and still fail this test for everyone else." },
+  { n: 12, title: "Dependency collapse is a Scrum Master failure — not a team member failure", quote: "The SM does not wait for the standup to find out what people are doing.",
+    label: "The instinct to blame the visible person, corrected — three separate times this sprint:",
+    scenario: "When a team member's contribution looked invisible, the first read was always \u201cthis person isn't contributing.\u201d The actual, verified answer was different each time: real work, done in a different tool or a private call, simply never checked.",
+    outcome: "An invisible contribution and a missing one produce the exact same chart. Only checking tells you which one you're looking at." },
+  { n: 13, title: "The mid-week check-in is individual, documented, and acted upon", quote: "A check-in that produces no documentation helped no one.",
+    label: "The fix that actually closed the gap, twice, this sprint:",
+    scenario: "A group message asking \u201chow's everyone doing\u201d caught nothing for weeks. The moment someone was asked directly, individually, specifically — the full picture came back within a day, and was independently confirmed within another.",
+    outcome: "This principle is not paperwork. It is the entire difference between a report that says \u201cI don't know\u201d for six weeks and one that says \u201cconfirmed\u201d after a single real conversation." },
+];
+
+const list = document.getElementById('list');
+
+function render(items) {
+  list.innerHTML = items.map(p => `
+    <div class="principle" data-n="${p.n}">
+      <div class="principle-head" onclick="toggle(${p.n})">
+        <div class="principle-num">${String(p.n).padStart(2,'0')}</div>
+        <div class="principle-title">
+          <h3>${p.title}</h3>
+          <div class="quote">"${p.quote}"</div>
+        </div>
+        <div class="chevron">&#9660;</div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-inner">
+          <div class="lesson-label">${p.label}</div>
+          <div class="lesson-scenario">${p.scenario}</div>
+          <div class="lesson-outcome">${p.outcome}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggle(n) {
+  const el = document.querySelector(`.principle[data-n="${n}"]`);
+  el.classList.toggle('open');
+}
+
+document.getElementById('search').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase();
+  const filtered = PRINCIPLES.filter(p =>
+    p.title.toLowerCase().includes(q) || p.quote.toLowerCase().includes(q) || p.scenario.toLowerCase().includes(q)
+  );
+  render(filtered);
+});
+
+render(PRINCIPLES);
+</script>
+</body>
+</html>
