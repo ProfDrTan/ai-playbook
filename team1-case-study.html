@@ -71,6 +71,7 @@
     <a href="#profiles">Individual Evidence Profiles</a>
     <a href="#skillgap">The Skill Heterogeneity Problem</a>
     <a href="#tensions">Open Tensions Worth Keeping</a>
+    <a href="#crossteam">Cross-Team Evidence</a>
     <a href="#changelog">Changelog</a>
     <a href="#ethics">Publication Note</a>
     <a href="index.html" style="margin-top:20px; color:var(--line-cyan);">&larr; Back to AI Playbook</a>
@@ -204,7 +205,35 @@
     <div class="card tension"><p><b>A Scrum Master's honest "I don't know" reads as a negative signal even when it isn't one.</b> The original report's ambiguity around Shary was more damaging to her than an actual negative citation would have been, because ambiguity invites the worst assumption by default.</p></div>
     <div class="card tension"><p><b>The report's author is also a subject of it.</b> Georgii wrote most of the original report and scores highest in it. Both can be true and fair at once — his high score rests on externally-checkable metrics (commit count, review count), not his own narrative — but it's a structural conflict of interest worth naming every time this case is taught.</p></div>
 
+    <h2 id="crossteam">Cross-Team Evidence — Real Names, Real Links (Private)</h2>
+    <p>Checked all four other teams' GitHub activity and Discord signals directly, specifically to see whether Team 1's patterns are unique to Team 1 or systemic across the cohort. They are not unique. Real team numbers and direct evidence links below — this section stays fully private, never goes into the student-facing tool.</p>
+
+    <div class="card evidence">
+      <div class="principle-title">Team 2 — every PR self-merged by its own author, zero real reviews, ever</div>
+      <p>Checked all 20 of Team 2's merged PRs directly. Every single one shows the exact same pattern: <code>merged_by</code> is identical to the PR's own author, and merge timestamps are effectively instant (0.0–0.5 hours from open to merge). Team 2 looked like the cohort's most disciplined team on the PR-count chart — this shows the process exists on paper but nobody is actually reviewing anyone else's work.</p>
+      <p>Evidence: <a href="https://github.com/LuJunwen212/CP3405-Project/pull/24" target="_blank">PR #24</a>, <a href="https://github.com/LuJunwen212/CP3405-Project/pull/23" target="_blank">PR #23</a>, <a href="https://github.com/LuJunwen212/CP3405-Project/pull/20" target="_blank">PR #20</a> — check <code>merged_by</code> against <code>user.login</code> on any of these directly via the GitHub API or UI.</p>
+    </div>
+
+    <div class="card evidence">
+      <div class="principle-title">Team 4 — the team's own lead has a PR stuck open 17+ days, zero comments</div>
+      <p>PR #1, "Macro update," opened 6 July by wintwah-lwin (the team lead per the repo name/ownership) — still open as of 23 July, zero comments, zero review activity, zero body/description. This is Zaw Latt's exact failure mode (Principle 2), on a different team, done by the person nominally in charge of the team.</p>
+      <p>Evidence: <a href="https://github.com/wintwah-lwin/CP3405_Group_4/pull/1" target="_blank">PR #1 "Macro update"</a></p>
+    </div>
+
+    <div class="card evidence">
+      <div class="principle-title">Team 3 — confirmed zero pull requests across the entire project</div>
+      <p>Already known from earlier cohort analysis, reconfirmed directly: Team 3 has never opened a single PR. Every commit goes straight to <code>main</code>. No review process exists at all, by design or by drift — worth asking them directly which it is.</p>
+      <p>Evidence: <a href="https://github.com/juninho4/Team-3-Practical-A-CP3405/commits/main" target="_blank">full commit history, all direct to main</a></p>
+    </div>
+
+    <div class="card evidence" style="border-left-color: var(--green);">
+      <div class="principle-title">Team 5 — the one genuine positive example worth including</div>
+      <p>Automated data pipeline has run successfully, multiple times a week, without a single failed run in the checked history — including through the study break, when most teams went quiet. Worth crediting explicitly on Monday so the lecture isn't wall-to-wall failure cases.</p>
+      <p>Evidence: <a href="https://github.com/Gong-yinxuan/CP3405/actions" target="_blank">Actions run history</a></p>
+    </div>
+
     <h2 id="changelog">Changelog</h2>
+    <div class="changelog-entry"><span class="changelog-date">24 Jul 2026 —</span> Added Cross-Team Evidence section — checked all 4 other teams directly against GitHub/Discord. Team 2's PR discipline turned out to be self-merges with no real review (new finding, not previously flagged). Team 4 has an independent, near-identical instance of Zaw Latt's stuck-PR pattern. Team 3's zero-PR status reconfirmed. Team 5 credited as the one clean positive example. Anonymized versions of all four folded into the student-facing click-through tool and lecture deck, using generic Team A/B/C/D labels rather than real team numbers, so no team is identifiable even by number.</div>
     <div class="changelog-entry"><span class="changelog-date">23 Jul 2026 —</span> Ming Hao responded. Confirmed via GitHub: a report illustration placed under Jason's written POV was actually Ming Hao's own self-review comment on his own PR #50 — a genuine misattribution in the original report, now corrected, unrelated to any individual's contribution level. He does not dispute his Week 6 "no presentation" failure — explicitly declines to treat his own context as an excuse — but supplies dated evidence that his role (Presentation Coordinator) is structurally downstream of the Human Score role, and Discord shows him messaging at 08:43 on the 20 July presentation morning that Human Score and Delta sections were still missing. Same dependency-chain failure mode as Principle 12, recurring, not unique to him. Rubric updated (2.28 → 2.48) — a small, deliberately modest adjustment, matching his own request not to be excused.</div>
     <div class="changelog-entry"><span class="changelog-date">23 Jul 2026 —</span> Saiko independently submitted his own defense package (screenshots, not seen by Henry beforehand) confirming the same 21 June voice call from the other side — timestamps resolve exactly once the Singapore/Myanmar 1.5-hour timezone gap is accounted for. Three of his PRs (#49, #66, #89) verified against GitHub; the "Week 4: no output" and "ignored feedback" framings did not survive the check. Rubric updated (1.73 → 3.00, rank 8 → 7).</div>
     <div class="changelog-entry"><span class="changelog-date">22 Jul 2026 —</span> Henry submitted a defense package (own compilation, treated as testimony). Verified a 4-hour voice-call mentoring session with Saiko against a matching GitHub PR timestamp — second confirmed instance of invisible contribution, this time via synchronous/voice mode rather than a different tool. Also recovered Georgii's own Week 5/6 retrospectives — first-person evidence for the sustainable-pace principle, and Georgii's own naming of the DM-visibility gap. Henry's rubric score updated (1.13 → 2.13, rank 11 → 8). Zaw Latt's profile updated with a minor proactive-communication data point (15 June sick-day handoff).</div>
