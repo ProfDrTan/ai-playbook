@@ -176,6 +176,18 @@ footer{border-top:1px solid rgba(201,168,76,.15);padding:1.25rem;text-align:cent
     <p>Any team can show a pipeline that ran once. A distinction team shows a pipeline that has been running reliably for 9 sprints, has handled failures gracefully, has improved its accuracy over time based on calibration data, and can be demonstrated live in the room with the run log as evidence. The cumulative calibration table is the single most differentiating artefact — it shows whether the system actually learned.</p>
   </div>
 
+  <div class="callout" style="border-left:3px solid var(--gold);">
+    <div class="callout-title gold">Live risk snapshot going into Sprint 9 (pulled 26 Jul, 12:34 UTC — Sprint 8 deadline day)</div>
+    <p>Pulled directly from the dashboard collector JSON, not from memory — this reflects git tags and PR state at the moment of Sprint 8's deadline, so treat "not yet tagged" as still-fixable rather than a final verdict:</p>
+    <ul>
+      <li><strong>Team 1:</strong> vW30 tag not yet present; 7 PRs still open at deadline. Going into the final sprint with an open-PR backlog this size is itself a risk — a distinction case is undermined if the reviewer has to dig through unmerged branches to find the working pipeline.</li>
+      <li><strong>Team 3:</strong> highest-priority watch. Tags stop at vW25 — no vW26 through vW30 tag has landed. That's three-plus sprints without the tagging discipline the brief requires. This doesn't necessarily mean no work happened (I have not verified the actual pipeline functionality, only the git tag record), but it means Team 3 cannot currently point to a tagged run history — which is exactly the artefact Demo Day rewards.</li>
+      <li><strong>Team 4:</strong> tags stop at vW29 (vW30 missing at time of pull); one long-stale open PR ("Macro update", #1) from early in the term still unmerged.</li>
+      <li><strong>Team 2 &amp; Team 5:</strong> both show vW30 tagged and zero open PRs as of this pull — currently the two teams with the cleanest tag/PR hygiene heading into the final sprint.</li>
+    </ul>
+    <p>This is a snapshot, not a grade — teams have until the Sprint 8 deadline (15:59 UTC today) to close the gap before Sprint 9 opens tomorrow.</p>
+  </div>
+
   <p><strong>Note for Monday:</strong> Do NOT announce Sprint 9 details in class yet. Sprint 8 brief goes up this week; Sprint 9 brief follows the week after. Keep this page private until ready to publish.</p>
 </section>
 
@@ -226,6 +238,41 @@ footer{border-top:1px solid rgba(201,168,76,.15);padding:1.25rem;text-align:cent
 
 </section>
 
+<!-- MONDAY 27 JULY SCRIPT -->
+<section>
+  <div class="section-title">Monday 27 July — Sprint 9 Kickoff Script (Final Sprint)</div>
+
+  <div class="script-block">
+    <div class="script-who">Opening (Sprint 8 presentations done — address the cohort)</div>
+    <div class="script-say">"This is it. Sprint 9 is the last one. Sunday 2 August is your last commit. Monday 3 August, right here, is Demo Day — the last time I see you as a team. Everything from today forward is in service of that one room, that one morning."</div>
+    <div class="script-note">Let it sit. This framing matters more than any technical note today.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On scope — the single most important instruction of the sprint</div>
+    <div class="script-say">"I want to be completely clear: Sprint 9 is not for new features. If you're tempted to add one more agent, one more data source, one more model — don't. Every hour this week goes into reliability, rehearsal, and making what already exists demonstrably work. A team that polishes eight working things beats a team that half-finishes a ninth."</div>
+    <div class="script-note">This is the line to repeat if any team pushes back with "but we wanted to add X."</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On the three things I'm looking for on Demo Day</div>
+    <div class="script-say">"Three things, and I've said them before: your pipeline runs on its own, on a schedule, with no one touching a keyboard — show me the bot commit. Your pipeline survives a rate limit or an API failure — show me the fallback firing. And your calibration table goes back to Week 22, not just this week — show me the system got better over nine sprints, not just that it ran once."</div>
+    <div class="script-note">Point to the cumulative calibration table specifically — it's the hardest thing to fake and the easiest thing to verify live.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">On rehearsal and roles</div>
+    <div class="script-say">"Every one of you presents on Demo Day, not just your R2. Two minutes each, your role, your evidence. This week, actually run that two minutes out loud with your team at least once before Monday. The teams that stumble on Demo Day are almost always the ones who never once said it out loud beforehand."</div>
+    <div class="script-note">Do not name specific teams here even if concentration/PR data suggests some teams are more exposed — keep it universal.</div>
+  </div>
+
+  <div class="script-block">
+    <div class="script-who">Closing</div>
+    <div class="script-say">"Nine sprints. I've watched every one of them. Whatever happens Monday, that work is real and it's yours. Finish this one clean."</div>
+  </div>
+
+</section>
+
 <!-- PRIVATE NOTES -->
 <section>
   <div class="section-title">Private Observations — Not for Monday</div>
@@ -237,18 +284,23 @@ footer{border-top:1px solid rgba(201,168,76,.15);padding:1.25rem;text-align:cent
 
 
 
+  <div class="callout" style="border-left:3px solid var(--teal);">
+    <div class="callout-title teal">Refresh (26 Jul, 12:34 UTC pull) — going into Sprint 9</div>
+    <p>The entries below replace the 20 Jul notes with what the collector shows at Sprint 8's deadline. Contribution % here is each person's share of that repo's total human commits for the term, not just this sprint — treat it as a trend indicator, not a Sprint 8 grade.</p>
+  </div>
+
   <ul>
-    <li><strong>Team 1 (Georgii/sinder38):</strong> Still the strongest technical team. Rate limit handled correctly. 16 days of silence in Sprint 6 is the concern — Sprint 7 shows recovery. Watch Sprint 8 consistency. <strong style="color:var(--danger)">New concern (20 Jul): Georgii is carrying 51% of the team's total commits (58 of 113) — highest concentration of any team, combined with the lowest total output of any team.</strong> Discord confirms this isn't just volume — he's explicitly managing a struggling teammate's work ("can you please help &lt;member&gt; complete his human score review... I merged your feature branch into main so he can work directly with it") rather than that teammate delivering independently. This is heading toward burnout for Georgii and needs a direct conversation before Sprint 9, not just praise for carrying the team.</li>
-    <li><strong>Team 2 (The Bao / LuJunwen):</strong> Best-run team by Scrum metrics. R10 calibration fully automated. standup_midweek_W29.md not in main branch — The Bao announced it but didn't push. Address privately. Contribution spread is healthy — top contributor (Guanyu-Lu) only 22% of team commits, most balanced of all 5 teams.</li>
-    <li><strong>Team 3:</strong> Manual commits from Vince-1206. Partial automation. Committed technical agent and evidence on Friday afternoon — good sign. No SM check-in. Zero merged PRs all term (see dashboard) — everything pushed straight to main, no review step exists.</li>
-    <li><strong>Team 4:</strong> Most improved this sprint. Auto Prediction pipeline ran. DoD documented. But tag format still wrong — four sprints in a row. R9 needs a direct conversation. <strong style="color:var(--danger)">Same pattern as Team 1: wintwah-lwin carries 50% of team commits.</strong> Worth checking whether this is genuine lead-driven quality (like Team 1) or a smaller team simply not participating.</li>
-    <li><strong>Team 5:</strong> Most consistent auto-commits. github-actions[bot] commits every week including study break. Quiet on Discord but the pipeline speaks for itself. Contribution concentration moderate (38%, ToHoangGia) — not currently a concern but worth a glance next sprint.</li>
+    <li><strong>Team 1 (sinder38):</strong> sinder38 still at 50% of team commits (16/32) — the concentration pattern flagged 20 Jul hasn't eased. Pipeline itself is healthy (python-checks passing same day as last commit). <strong style="color:var(--danger)">7 open PRs at Sprint 8's deadline</strong> — Scrum master week 9, an LLM refactor, regression tests, all still unmerged. Going into the final sprint with this much unmerged work is the bigger near-term risk than the concentration itself: get these reviewed and merged before Sprint 9 gets going, or Demo Day evidence ends up scattered across branches instead of on main.</li>
+    <li><strong>Team 2 (LuJunwen212):</strong> Cleanest team in the pull — vW30 already tagged, zero open PRs, R10 Calibration Automation ran successfully same day. Contribution spread is the most balanced of all five (29% / 26% / 26% top three, no single lead carrying the team). Best positioned to spend Sprint 9 purely on rehearsal rather than catch-up.</li>
+    <li><strong>Team 3:</strong> <strong style="color:var(--danger)">Highest-priority team for Sprint 9.</strong> No tag since vW25 — three-plus sprints without a tagged release, which is the single artefact Demo Day leans on hardest. Commits are still happening (README/retrospective updates today), so the team isn't inactive, but there's no visible tagged run history to show. 141242-l carries 47% of commits, next-highest 24% — worth a direct conversation about whether tagging discipline, not effort, is the actual gap.</li>
+    <li><strong>Team 4:</strong> vW30 not yet tagged (stops at vW29) and tag format irregularities persist (v1.0.0, bare "W29" alongside the correct format) — same issue flagged for four sprints running. wintwah-lwin still at 49% of commits, essentially unchanged from 20 Jul. One long-open PR ("Macro update", #1) dating back early in the term is still sitting unmerged.</li>
+    <li><strong>Team 5 (Gong-yinxuan):</strong> vW30 tagged, zero open PRs — good hygiene like Team 2. One thing worth a glance: the last automated pipeline run ("Update Market Data") shows 23 Jul, three days before the most recent commits, which are retrospective/doc updates rather than pipeline runs — worth confirming the weekly automation actually fired this week rather than assuming it did from the commit activity alone.</li>
   </ul>
 </section>
 
 </main>
 
-<footer>Sprint 8 Planning + Monday Script · Prof Dr Tan · 18 July 2026 · Private · AI Playbook only — not on DT3 website</footer>
+<footer>Sprint 8 & 9 Planning + Monday Scripts · Prof Dr Tan · updated 26 July 2026 · Private · AI Playbook only — not on DT3 website</footer>
 
 </body>
 </html>
