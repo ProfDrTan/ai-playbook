@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprint 9 — Final Sprint: Demo Day Rehearsal · CP3405 DT3 TR2 2026</title>
+<style>
+    :root {
+      --navy:#0a1628;--navy-2:#0d1f3c;--navy-3:#112244;
+      --gold:#9d7de8;--gold-lt:#c4b5fd;--teal:#2dd4bf;--teal-dk:#1fa89a;
+      --white:#f0f4fa;--muted:#8fa3bf;--danger:#e05c5c;--success:#3dcc8a;--warn:#f0a500;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.65;}
+    header{background:linear-gradient(135deg,#070e1c 0%,var(--navy-3) 60%,#0b2040 100%);border-bottom:2px solid var(--gold);padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
+    header::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none;}
+    .eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
+    header h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--gold);letter-spacing:-.01em;line-height:1.15;}
+    header h1 span{color:var(--white);font-weight:300;}
+    .header-meta{margin-top:1rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem .75rem;}
+    .badge{display:inline-block;padding:.25rem .75rem;border-radius:99px;font-size:.78rem;font-weight:600;letter-spacing:.05em;}
+    .badge-gold{background:rgba(201,168,76,.18);color:var(--gold);border:1px solid rgba(201,168,76,.4);}
+    .badge-teal{background:rgba(45,212,191,.15);color:var(--teal);border:1px solid rgba(45,212,191,.35);}
+    .badge-white{background:rgba(240,244,250,.08);color:var(--white);border:1px solid rgba(240,244,250,.2);}
+    .badge-danger{background:rgba(224,92,92,.15);color:var(--danger);border:1px solid rgba(224,92,92,.35);}
+    nav{background:var(--navy-2);border-bottom:1px solid rgba(201,168,76,.2);padding:.75rem 2rem;display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;}
+    nav a{color:var(--muted);text-decoration:none;font-size:.85rem;}
+    nav a:hover{color:var(--gold);}
+    nav a.active{color:var(--gold);font-weight:600;}
+    .nav-sep{color:rgba(255,255,255,.15);}
+    main{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .countdown-strip{background:linear-gradient(90deg,rgba(201,168,76,.1) 0%,rgba(45,212,191,.08) 100%);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:1.1rem 1.5rem;margin-bottom:2.5rem;display:flex;flex-wrap:wrap;gap:.75rem 2rem;align-items:center;}
+    .cd-item{display:flex;flex-direction:column;}
+    .countdown-strip .label{color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;}
+    .countdown-strip .value{color:var(--gold);font-size:1.05rem;font-weight:700;}
+    .countdown-strip .value.teal{color:var(--teal);}
+    section{margin-bottom:2.75rem;}
+    .section-title{font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);border-bottom:1px solid rgba(45,212,191,.25);padding-bottom:.5rem;margin-bottom:1.25rem;}
+    p{color:rgba(240,244,250,.82);margin-bottom:1rem;}
+    strong{color:var(--white);}
+    code{background:rgba(45,212,191,.12);color:var(--teal);padding:.1rem .4rem;border-radius:4px;font-size:.88em;}
+    .callout{border-left:3px solid var(--gold);background:rgba(201,168,76,.07);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1.25rem;}
+    .callout.teal{border-color:var(--teal);background:rgba(45,212,191,.07);}
+    .callout.danger{border-color:var(--danger);background:rgba(224,92,92,.07);}
+    .callout.success{border-color:var(--success);background:rgba(61,204,138,.07);}
+    .callout.soft{border-color:var(--muted);background:rgba(143,163,191,.05);}
+    .callout .callout-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;}
+    .callout .callout-title.gold{color:var(--gold);}
+    .callout .callout-title.teal{color:var(--teal);}
+    .callout .callout-title.danger{color:var(--danger);}
+    .callout .callout-title.success{color:var(--success);}
+    .callout p{margin-bottom:0;font-size:.92rem;}
+    .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+    .card{background:var(--navy-2);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:1.1rem 1.25rem;}
+    .card .big{font-size:2rem;font-weight:800;color:rgba(45,212,191,.25);line-height:1;margin-bottom:.4rem;}
+    .wf-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+    .wf-table th{background:var(--navy-3);color:var(--gold);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;padding:.65rem 1rem;text-align:left;border-bottom:1px solid rgba(201,168,76,.3);}
+    .wf-table td{padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);color:rgba(240,244,250,.8);vertical-align:top;}
+    .wf-table tr:last-child td{border-bottom:none;}
+    .wf-table tr:hover td{background:rgba(255,255,255,.03);}
+    .wf-table .day{color:var(--teal);font-weight:700;white-space:nowrap;}
+    .wf-table .scrum-tag{display:inline-block;background:rgba(45,212,191,.1);color:var(--teal);border-radius:4px;padding:.1rem .45rem;font-size:.72rem;font-weight:700;margin-bottom:.3rem;}
+    .wf-table .hl td{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);}
+
+    /* Final sprint spotlight */
+    .sm-spotlight{background:linear-gradient(135deg,rgba(224,92,92,.08),rgba(201,168,76,.05));border:2px solid rgba(224,92,92,.3);border-radius:14px;padding:2rem;margin-bottom:2rem;}
+    .sm-spotlight h2{color:var(--danger);font-size:1.3rem;font-weight:700;margin-bottom:.75rem;}
+    .sm-spotlight p{color:rgba(240,234,214,.85);margin-bottom:.9rem;}
+    .sm-spotlight .quote{font-size:1.05rem;font-style:italic;color:var(--white);border-left:3px solid var(--danger);padding-left:1rem;margin:1.25rem 0;line-height:1.7;}
+
+    /* Obligations */
+    .obligation-list{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem;}
+    .ob{display:flex;gap:1rem;align-items:flex-start;background:var(--navy-2);border-radius:8px;padding:.9rem 1.1rem;border:1px solid rgba(255,255,255,.07);}
+    .ob-day{color:var(--teal);font-weight:700;font-size:.82rem;white-space:nowrap;min-width:60px;padding-top:.1rem;}
+    .ob-text{font-size:.88rem;color:rgba(240,244,250,.8);line-height:1.55;}
+    .ob-text strong{color:var(--white);}
+    .ob.critical{border-color:rgba(201,168,76,.3);}
+    .ob.critical .ob-day{color:var(--gold);}
+
+    /* Evidence required box */
+    .evidence-box{background:var(--navy-3);border:1px solid rgba(45,212,191,.2);border-radius:8px;padding:1rem 1.25rem;margin-top:.75rem;font-size:.82rem;color:var(--muted);}
+    .evidence-box strong{color:var(--teal);}
+
+    .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.75rem;}
+    .role-card{background:var(--navy-2);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:.85rem 1rem;}
+    .role-card.spotlight{border-color:rgba(224,92,92,.4);background:rgba(224,92,92,.06);}
+    .role-card.gold-spot{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);}
+    .role-id{font-size:.7rem;color:var(--teal);font-weight:700;letter-spacing:.08em;margin-bottom:.25rem;}
+    .role-card.spotlight .role-id{color:var(--danger);}
+    .role-card.gold-spot .role-id{color:var(--gold);}
+    .role-name{font-size:.88rem;font-weight:600;color:var(--white);margin-bottom:.3rem;}
+    .role-real{font-size:.73rem;color:var(--gold);font-style:italic;margin-bottom:.3rem;}
+    .role-focus{font-size:.78rem;color:var(--muted);line-height:1.45;}
+    .scrum-principle{display:inline-block;background:rgba(201,168,76,.1);color:var(--gold-lt);border-radius:4px;padding:.1rem .45rem;font-size:.7rem;font-weight:600;margin-top:.4rem;}
+
+    .timeline{position:relative;padding-left:1.5rem;}
+    .timeline::before{content:'';position:absolute;left:.45rem;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--teal) 0%,var(--gold) 100%);border-radius:2px;}
+    .tl-item{position:relative;margin-bottom:1.25rem;}
+    .tl-item::before{content:'';position:absolute;left:-1.06rem;top:.35rem;width:9px;height:9px;background:var(--navy);border:2px solid var(--teal);border-radius:50%;}
+    .tl-item.deadline::before{border-color:var(--gold);background:var(--gold);}
+    .tl-item.critical::before{border-color:var(--danger);background:var(--danger);}
+    .tl-date{font-size:.78rem;color:var(--teal);font-weight:700;letter-spacing:.06em;margin-bottom:.15rem;}
+    .tl-item.deadline .tl-date{color:var(--gold);}
+    .tl-item.critical .tl-date{color:var(--danger);}
+    .tl-event{font-size:.92rem;color:var(--white);font-weight:600;}
+    .tl-detail{font-size:.82rem;color:var(--muted);margin-top:.1rem;}
+
+    pre{white-space:pre-wrap;background:#071426;color:#e2e8f0;border-radius:14px;padding:18px;overflow:auto;font-size:.88rem;line-height:1.7;border:1px solid rgba(45,212,191,.15);}
+    footer{border-top:1px solid rgba(201,168,76,.15);padding:1.5rem 2rem;text-align:center;font-size:.8rem;color:var(--muted);}
+    @media(max-width:600px){.countdown-strip{flex-direction:column;gap:.6rem;}.grid3{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div style="background:#7c3aed;color:#fff;text-align:center;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.5px;">
+  🔧 DRAFT — NOT LIVE — Preview only, not published to the course website
+</div>
+
+<header>
+  <p class="eyebrow">CP3405 Design Thinking 3 · TR2 2026 · The Final Sprint</p>
+  <h1>Sprint 9 <span>— Final Sprint: Demo Day Rehearsal</span></h1>
+  <div class="header-meta">
+    <span class="badge badge-gold">vW31 · Due Sun 2 Aug 2026 · 23:59 SGT</span>
+    <span class="badge badge-teal">Final Demo Day · Mon 3 Aug 2026</span>
+    <span class="badge badge-danger">No new features — everyone presents</span>
+    <span class="badge badge-white">Scrum · Agile · AI Tools · TR2 2026</span>
+  </div>
+</header>
+
+<nav>
+  <a href="/">Home</a><span class="nav-sep">·</span>
+  <a href="/sprint8/">Sprint 8</a><span class="nav-sep">·</span>
+  <a href="/sprint9/" class="active">Sprint 9</a><span class="nav-sep">·</span>
+  <a href="/sprint7/">Sprint 7</a><span class="nav-sep">·</span>
+  <a href="/scrum/">Scrum Reference</a><span class="nav-sep">·</span>
+  <a href="/roadmap/">Roadmap</a><span class="nav-sep">·</span>
+  <a href="/system/">System</a>
+</nav>
+
+<main>
+
+<div class="countdown-strip">
+  <div class="cd-item"><span class="label">Sprint</span><span class="value">9 · Final</span></div>
+  <div class="cd-item"><span class="label">Tag Required</span><span class="value">vW31</span></div>
+  <div class="cd-item"><span class="label">Deadline</span><span class="value">Sun 2 Aug · 23:59 SGT</span></div>
+  <div class="cd-item"><span class="label">Demo Day</span><span class="value teal">Mon 3 Aug</span></div>
+  <div class="cd-item"><span class="label">Sprint focus</span><span class="value teal">Every role · Rehearsal</span></div>
+</div>
+
+<!-- FINAL SPRINT SPOTLIGHT -->
+<section id="final-spotlight">
+  <div class="sm-spotlight">
+    <h2>🏁 The Final Sprint Problem</h2>
+
+    <p class="quote">"Sprint 9 is not the sprint where you finish building. It's the sprint where you prove, in front of me, that what you built actually works — and has worked for nine sprints, not just this one."</p>
+
+    <p>Sprint 8 was about hardening — making the pipeline survive without you. Sprint 9 is about something different: making sure every one of you can stand in this room on 3 August and show it. That is a rehearsal problem as much as a technical one.</p>
+
+    <p><strong>The single most important rule this sprint: no new features.</strong> If your team is tempted to add one more agent, one more data source, one more model this week — don't. Every hour goes into reliability, evidence, and rehearsal. A team that polishes eight things that already work beats a team that half-finishes a ninth two days before Demo Day.</p>
+
+    <p>Sprint 9 exists to answer one question for every team: <strong>can you prove, live, that this system has been running and improving for nine sprints — and can every member of your team explain their part of it?</strong></p>
+  </div>
+</section>
+
+<!-- WHAT DEMO DAY EVIDENCE LOOKS LIKE -->
+<section id="demo-evidence">
+  <div class="section-title">What Demo Day Evidence Looks Like — And Why "It Ran Once" Isn't Enough</div>
+
+  <p>Any team can point to a pipeline that produced output this week. That is not what separates a pass from a distinction on 3 August. The question is: <strong>what's the proof this has been a real system, not a one-off?</strong></p>
+
+  <div class="callout danger">
+    <div class="callout-title danger">The Single-Run Trap — a Demo Day failure pattern</div>
+    <p>A team opens Demo Day by running the pipeline live, it produces a prediction, and they treat that as the whole story.<br><br>
+    <strong>One successful run proves the code works today. It does not prove the system learned anything, survived any failure, or was ever running without someone watching it.</strong> That proof lives in your commit history, your tags, and your calibration table — not in a single live execution.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title gold">The Demo Day Evidence Test — what every team must be able to show</div>
+    <p>By Demo Day, your team should be able to answer yes to each of these, with a screen open to prove it:<br><br>
+    • Can you show a github-actions[bot] commit from at least one week where no human touched the pipeline?<br>
+    • Can you show a moment where an API call failed or was rate-limited, and the fallback handled it — not a human patch?<br>
+    • Can you show the cumulative calibration table from Week 22 through Week 31 — not just this week's number?<br>
+    • Can every team member explain, in their own words, the part of the system they own?<br><br>
+    <strong>If the answer to any of these is no, that's what this week is for — not adding something new, but making one of these answers true.</strong></p>
+  </div>
+
+  <div class="callout teal">
+    <div class="callout-title teal">What "rehearsed" actually means</div>
+    <p>It doesn't mean a scripted performance. It means your team has said the two-minute version of your segment out loud, at least once, before Monday — and knows exactly which screen, which file, which commit you're pointing to when you say "here's the evidence." Teams that stumble on Demo Day are almost always the ones who never once rehearsed it out loud beforehand.</p>
+  </div>
+</section>
+
+<!-- DEPENDENCY CHAIN -->
+<section id="dependency">
+  <div class="section-title">The Dependency Chain — Now the Thing You're Proving, Not Building</div>
+
+  <p>You've run this chain eight times already. This sprint it isn't a new risk to manage — it's the evidence itself. The chain that ran cleanly, sprint after sprint, is your case for a distinction.</p>
+
+  <div style="background:var(--navy-2);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;overflow-x:auto;">
+    <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-size:.85rem;font-weight:600;">
+      <div style="background:rgba(45,212,191,.12);color:var(--teal);padding:.4rem .8rem;border-radius:6px;">R3 Almanac</div>
+      <div style="color:var(--muted);">→</div>
+      <div style="background:rgba(45,212,191,.12);color:var(--teal);padding:.4rem .8rem;border-radius:6px;">R4 Macro</div>
+      <div style="color:var(--muted);">→</div>
+      <div style="background:rgba(45,212,191,.12);color:var(--teal);padding:.4rem .8rem;border-radius:6px;">R5 Technical</div>
+      <div style="color:var(--muted);">→</div>
+      <div style="background:rgba(201,168,76,.12);color:var(--gold);padding:.4rem .8rem;border-radius:6px;">R8 LLM Synthesis</div>
+      <div style="color:var(--muted);">→</div>
+      <div style="background:rgba(201,168,76,.12);color:var(--gold);padding:.4rem .8rem;border-radius:6px;">R7 Human Score</div>
+      <div style="color:var(--muted);">→</div>
+      <div style="background:rgba(61,204,138,.12);color:var(--success);padding:.4rem .8rem;border-radius:6px;">R9 Tag vW31</div>
+    </div>
+    <p style="margin-top:1rem;font-size:.8rem;color:var(--muted);">Same chain as every sprint. The only thing that changes this week is what a broken link now costs you — there's no Sprint 10 to fix it in. <strong style="color:var(--white);">One missing link this week shows up live, in the room, on Monday.</strong></p>
+  </div>
+
+  <p>R2's job this week is the same as always — watch the chain from Monday, not Sunday — plus one new job: confirm every role has rehearsed their two-minute segment before Demo Day.</p>
+
+  <div class="callout soft">
+    <div class="callout-title muted">What R2 says this week</div>
+    <p><em>"This is it — last sprint. If your part of the chain has been solid for eight sprints, this week is about proving it, not touching it. If something's still shaky, tell me now — we fix reliability, not add scope. And everyone: say your two minutes out loud to the team at least once before Monday."</em></p>
+  </div>
+</section>
+
+<!-- WHAT TO SUBMIT -->
+<section id="must-submit">
+  <div class="section-title">What to Submit by Sunday 2 August · 23:59 SGT</div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="big">1</div>
+      <strong>Final tag <code>vW31</code></strong><br>
+      <span style="font-size:.85rem;color:var(--muted)">Exact format: lowercase <code>v</code>, capital <code>W</code>, two digits. This is the record that seals the project.</span>
+    </div>
+    <div class="card">
+      <div class="big">2</div>
+      <strong>Cumulative calibration table, W22–W31</strong><br>
+      <span style="font-size:.85rem;color:var(--muted)">The full nine-sprint accuracy trend, not just this week's delta. R10 owns this — it is the single most differentiating artefact on Demo Day.</span>
+    </div>
+    <div class="card">
+      <div class="big">3</div>
+      <strong>Final retrospective + Demo Day role assignment confirmed</strong><br>
+      <span style="font-size:.85rem;color:var(--muted)"><code>retrospective_W31.md</code> committed, and every role knows exactly which segment they present Monday.</span>
+    </div>
+  </div>
+</section>
+
+<!-- STANDING OBLIGATIONS -->
+<section id="r2-obligations">
+  <div class="section-title">Standing Scrum Obligations — Still Enforced, Final Sprint</div>
+  <p>The mid-week check-in and dependency discipline do not relax because it's the last sprint — if anything, they matter more, because there is no next sprint to absorb a slip.</p>
+
+  <div class="obligation-list">
+    <div class="ob">
+      <div class="ob-day">Mon 27</div>
+      <div class="ob-text">
+        <strong>Sprint Planning — final sprint goal.</strong> R1 writes the goal, but this sprint the goal is reliability and rehearsal, not new scope. DoD includes "two-minute segment rehearsed" as an explicit item for every role.
+        <div class="evidence-box"><strong>Evidence:</strong> <code>sprint_goal_W31.md</code> committed before end of Monday.</div>
+      </div>
+    </div>
+    <div class="ob critical">
+      <div class="ob-day">Wed 29 ⚠️</div>
+      <div class="ob-text">
+        <strong>Mid-week check-in — still mandatory.</strong> R2 contacts every role individually. Confirms status and, this sprint, confirms whether each person has rehearsed their segment yet.
+        <div class="evidence-box"><strong>Evidence:</strong> <code>standup_midweek_W31.md</code> committed by Wednesday 23:59 SGT, naming every role.</div>
+      </div>
+    </div>
+    <div class="ob">
+      <div class="ob-day">Thu 30</div>
+      <div class="ob-text">
+        <strong>Agent outputs confirmed committed.</strong> Same dependency gate as every sprint — R8 cannot start until R3, R4, R5 have committed.
+        <div class="evidence-box"><strong>Evidence:</strong> Commit timestamps on agent files.</div>
+      </div>
+    </div>
+    <div class="ob">
+      <div class="ob-day">Sat 1 Aug</div>
+      <div class="ob-text">
+        <strong>Full team rehearsal.</strong> Run the entire two-minute-per-role sequence out loud, start to finish, as a team — not each person practising alone.
+        <div class="evidence-box"><strong>Evidence:</strong> No file to commit here — but R2 should be able to describe on Monday when this happened and what changed as a result.</div>
+      </div>
+    </div>
+    <div class="ob critical">
+      <div class="ob-day">Sun 2 Aug ⚠️</div>
+      <div class="ob-text">
+        <strong>Final tag and retrospective.</strong> <code>vW31</code> cut, <code>retrospective_W31.md</code> committed, cumulative calibration table finalised before midnight.
+        <div class="evidence-box"><strong>Evidence:</strong> Tag timestamp before 23:59 SGT. This is the last one — no late window.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CADENCE -->
+<section id="workflow">
+  <div class="section-title">Sprint 9 Cadence — With Rehearsal Checkpoint</div>
+  <table class="wf-table">
+    <thead>
+      <tr><th>When</th><th>What happens</th><th>R2's responsibility</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day">Mon 27</td>
+        <td><span class="scrum-tag">SPRINT PLANNING</span><br>Final sprint goal set: reliability + rehearsal, not new scope.</td>
+        <td>Facilitate. Confirm every role knows their Demo Day segment. Commit sprint goal today.</td>
+      </tr>
+      <tr>
+        <td class="day">Tue–Wed</td>
+        <td><span class="scrum-tag">EXECUTION + CHECK-IN</span><br>Final reliability fixes only. Roles begin drafting their two-minute segment.</td>
+        <td>Contact every role individually by Wednesday. Commit <code>standup_midweek_W31.md</code> by Wed 23:59.</td>
+      </tr>
+      <tr class="hl">
+        <td class="day">Thu 30</td>
+        <td><span class="scrum-tag">SYNTHESIS GATE</span><br>Same dependency gate — R8 waits on R3, R4, R5.</td>
+        <td>Confirm all agent outputs are committed before R8 starts.</td>
+      </tr>
+      <tr>
+        <td class="day">Fri–Sat</td>
+        <td><span class="scrum-tag">AUTOMATED FETCH + REHEARSAL</span><br>Pipeline runs on schedule. Team rehearses full Demo Day sequence out loud at least once.</td>
+        <td>Confirm the fetch ran without intervention. Organise the full run-through.</td>
+      </tr>
+      <tr class="hl">
+        <td class="day">Sun 2 Aug · 23:59</td>
+        <td><span class="scrum-tag">SPRINT SEALED — FINAL</span><br><code>vW31</code> tag cut. Cumulative calibration table finalised. Retrospective committed.</td>
+        <td>Confirm all DoD items checked. Sign off before R9 cuts the final tag.</td>
+      </tr>
+      <tr>
+        <td class="day">Mon 3 Aug</td>
+        <td><span class="scrum-tag">FINAL DEMO DAY</span><br>Every role presents their two-minute segment, live, with evidence.</td>
+        <td>Open the presentation. Introduce the team's nine-sprint story before handing to each role.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- WHAT CHANGES FROM SPRINT 8 -->
+<section id="whats-new">
+  <div class="section-title">What Changes From Sprint 8</div>
+
+  <div class="callout danger">
+    <div class="callout-title danger">🆕 No new features — the one hard rule of this sprint</div>
+    <p>Sprint 8 was about hardening what exists. Sprint 9 is about proving it. Any team that spends this week adding scope instead of rehearsing and stabilising is working against their own Demo Day, not toward it.</p>
+  </div>
+
+  <div class="callout teal">
+    <div class="callout-title teal">🆕 New: full-team rehearsal is now a graded expectation</div>
+    <p>Every role presents their own two-minute segment on Demo Day. This sprint, actually running that sequence out loud as a team — at least once, before Monday — is expected and will show in how the presentation goes.</p>
+  </div>
+
+  <div class="callout teal">
+    <div class="callout-title teal">🆕 New: the calibration table must be cumulative, W22–W31</div>
+    <p>Not just this week's delta. The full nine-sprint trend is the artefact that shows whether the system actually learned — it is the hardest thing to fake and the easiest thing to verify live.</p>
+  </div>
+
+  <div class="callout soft">
+    <div class="callout-title muted">Still in effect: mid-week check-in is a graded artefact</div>
+    <p><code>standup_midweek_W31.md</code> committed by Wednesday 29 July 23:59 SGT is still mandatory, named per role, with any blockers and R2's response action documented.</p>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="section-title">Sprint 9 Roles — Final Sprint Checklist by Role</div>
+  <div class="role-grid">
+    <div class="role-card spotlight">
+      <div class="role-id">R2 · Scrum Master</div>
+      <div class="role-name">Rehearsal owner this sprint</div>
+      <div class="role-focus">Mid-week check-in still mandatory. Confirm every role has rehearsed their segment. Organise the full team run-through. Open Monday's Demo Day presentation.</div>
+      <div><span class="scrum-principle">A segment rehearsed Saturday goes smoothly Monday. One rehearsed for the first time live doesn't.</span></div>
+    </div>
+    <div class="role-card gold-spot">
+      <div class="role-id">R1 · Product Owner</div>
+      <div class="role-name">Final Sprint Goal</div>
+      <div class="role-focus">Write the sprint goal Monday — reliability and rehearsal, not new scope. DoD includes "segment rehearsed" per role.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-id">R3 · Almanac</div>
+      <div class="role-real">→ Research Analyst</div>
+      <div class="role-focus">Final commit by Wednesday, same as every sprint. Know your two-minute segment cold.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-id">R4 · Macro</div>
+      <div class="role-real">→ Macro Analyst</div>
+      <div class="role-focus">Final commit by Wednesday. Prepare your Demo Day segment.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-id">R5 · Technical</div>
+      <div class="role-real">→ Data Analyst</div>
+      <div class="role-focus">Final technical read committed before Wednesday. Prepare your segment.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-id">R6 · Data</div>
+      <div class="role-real">→ Data Engineer</div>
+      <div class="role-focus">Confirm the Friday cron fires one last time without intervention. This is your strongest piece of Demo Day evidence.</div>
+    </div>
+    <div class="role-card gold-spot">
+      <div class="role-id">R7 · Human Score</div>
+      <div class="role-real">→ Senior Analyst</div>
+      <div class="role-focus">Final Wild Card, sourced and specific. Be ready to explain, live, one moment your judgement changed the team's call.</div>
+    </div>
+    <div class="role-card gold-spot">
+      <div class="role-id">R8 · LLM Operator</div>
+      <div class="role-real">→ AI/ML Engineer</div>
+      <div class="role-focus">Final synthesis run. Be ready to show, live, what happens if one provider fails — the fallback is your Demo Day proof point.</div>
+    </div>
+    <div class="role-card gold-spot">
+      <div class="role-id">R9 · GitHub Lead</div>
+      <div class="role-real">→ DevOps Engineer</div>
+      <div class="role-focus">Merge all branches Saturday. Cut the final <code>vW31</code> tag before Sunday midnight. Have the Actions run history open and ready Monday.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-id">R10 · Calibration</div>
+      <div class="role-real">→ Product Analyst</div>
+      <div class="role-focus">Build and finalise the cumulative W22–W31 accuracy table. This is the artefact every team will be judged on hardest — know it cold.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-title">Sprint 9 Timeline</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-date">MON 27 JUL — SPRINT PLANNING</div><div class="tl-event">Sprint 9 opens · Final sprint goal: reliability + rehearsal</div><div class="tl-detail">Sprint goal committed. DoD includes rehearsed segment per role.</div></div>
+    <div class="tl-item critical"><div class="tl-date">WED 29 JUL — MID-WEEK CHECK-IN ⚠️</div><div class="tl-event">R2 confirms status and rehearsal progress per role</div><div class="tl-detail"><code>standup_midweek_W31.md</code> committed by 23:59.</div></div>
+    <div class="tl-item"><div class="tl-date">THU 30 JUL — SYNTHESIS GATE</div><div class="tl-event">R3 + R4 + R5 committed · R8 starts final synthesis</div><div class="tl-detail">Final comparison table committed. R10 finalises the cumulative table.</div></div>
+    <div class="tl-item"><div class="tl-date">SAT 1 AUG — FULL TEAM REHEARSAL</div><div class="tl-event">Run the entire Demo Day sequence out loud, once, as a team</div><div class="tl-detail">Every role says their two minutes. Fix anything that stumbles — now, not Monday.</div></div>
+    <div class="tl-item deadline"><div class="tl-date">SUN 2 AUG · 23:59 SGT — SPRINT SEALED, FINAL</div><div class="tl-event">🏁 vW31 cut · Cumulative calibration table finalised · Retrospective committed</div><div class="tl-detail">Last tag of the term. No late window.</div></div>
+    <div class="tl-item deadline"><div class="tl-date">MON 3 AUG — FINAL DEMO DAY</div><div class="tl-event">🎓 Every role presents live, with evidence</div><div class="tl-detail">The last time the team presents together. Nine sprints, on the table.</div></div>
+  </div>
+</section>
+
+<!-- DISCORD TEMPLATE -->
+<section id="discord">
+  <div class="section-title">Discord Submission Template — Sprint 9 · vW31 (Final)</div>
+  <p>Post in your team channel before Sunday 2 August 23:59 SGT.</p>
+<pre>TEAM: Team __ / Practical __
+SPRINT: 9 · vW31 · FINAL
+GITHUB REPO:
+RELEASE LINK:
+
+━━━ SM CHECK-IN (R2) ━━━
+standup_midweek_W31.md committed by Wed 29 Jul: Y/N
+All roles rehearsed their Demo Day segment: Y/N
+Full team rehearsal run-through completed: Y/N · when:
+
+━━━ SPRINT GOAL ━━━
+Our Sprint 9 goal was:
+Did we meet it: Y / Partial / N
+
+━━━ PREDICTION ━━━
+File committed (prediction_W31.json or .md): Y/N
+SPX direction + confidence:
+NDX direction + confidence:
+IWM direction + confidence:
+All 11 sectors covered: Y/N
+Human Score Wild Card applied: Y/N
+Wild Card reasoning:
+
+━━━ PIPELINE ━━━
+Automated fetch ran Sat morning SGT with no human intervention: Y/N
+GitHub Actions run URL:
+All branches merged before final tag: Y/N
+
+━━━ AGENTS (all committed before R8 synthesis) ━━━
+Almanac R3 committed by Thu: Y/N
+Macro R4 committed by Thu: Y/N
+Technical R5 committed by Thu: Y/N
+
+━━━ AI SYNTHESIS ━━━
+LLM 1 via API: Y/N · model:
+LLM 2 via API (fallback): Y/N · model:
+Fallback demonstrated working: Y/N
+
+━━━ CALIBRATION — CUMULATIVE ━━━
+Cumulative table W22–W31 committed: Y/N
+Overall direction accuracy across all 9 sprints:
+Did accuracy improve over the term: Y/N
+
+━━━ SCRUM HEALTH — FINAL ━━━
+retrospective_W31.md committed: Y/N
+Every role R1–R10 rehearsed and ready for Mon 3 Aug: Y/N
+One thing this team is proudest of across all 9 sprints:</pre>
+</section>
+
+<section id="reminders">
+  <div class="section-title">Sprint 9 Standing Reminders</div>
+  <div style="display:flex;flex-direction:column;gap:.9rem">
+    <div class="callout soft">
+      <div class="callout-title muted">The mid-week check-in is not a Discord message</div>
+      <p>Same rule as every sprint — R2 must contact each role member individually and document the result in <code>standup_midweek_W31.md</code>, naming each role with a status line. This is the last time it's assessed. Don't let it slip because it's the final week.</p>
+    </div>
+    <div class="callout soft">
+      <div class="callout-title muted">Tag format: vW31 — still enforced, no exceptions this time</div>
+      <p>Lowercase <code>v</code>, capital <code>W</code>, two digits. This is the final release tag of the term — get the format right the first time.</p>
+    </div>
+    <div class="callout danger">
+      <div class="callout-title danger">If something is still broken — fix reliability, don't add scope</div>
+      <p>If your pipeline still needs a manual step, or a piece isn't working, this week is for closing that gap — not for building something new around it. A smaller system that demonstrably works beats a bigger one you have to explain away on Demo Day.</p>
+    </div>
+    <div class="callout teal">
+      <div class="callout-title teal">The data domain is the training environment. Scrum is the lesson.</div>
+      <p>You were never assessed on whether you predicted the market correctly. You were assessed on whether your team ran a professional delivery cycle — planned, executed, reviewed, and retrospected — with a system that improved sprint over sprint. Sprint 9 and Demo Day are where that whole story gets told at once.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>CP3405 Design Thinking 3 · TR2 2026 · Sprint 9 · vW31 Due Sunday 2 August 2026 · 23:59 SGT · Final Demo Day Monday 3 August 2026</footer>
+
+</body>
+</html>
