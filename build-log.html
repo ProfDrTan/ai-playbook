@@ -257,7 +257,7 @@
       <div class="eyebrow">Live Development Tracker</div>
       <h2>Market Prediction Engine — Build Log</h2>
       <p class="sub">Not a student exercise. This is a commercial-grade, self-learning market signal system, built by extracting and enhancing the architecture proven in CP3405 Team 1's project — modular agents, multi-LLM synthesis, and trust-weighted calibration that actually feeds back into future predictions.</p>
-      <span class="stamp">LIVE — LAST SYNCED 2026-07-08</span>
+      <span class="stamp">LIVE — LAST SYNCED 2026-07-27</span>
       <div class="note" style="max-width:640px; margin-top:20px;">
         Confirmed directly against <code>ProfDrTan/market-prediction-engine</code>
         via the GitHub API. All statuses below reflect the actual commit history,
@@ -316,7 +316,7 @@
           <tr><td><code>agents/macro/macro_agent.py</code></td><td>Risk-on / risk-off regime classifier.</td><td><span class="status done">done</span></td></tr>
           <tr><td><code>agents/almanac/almanac_agent.py</code></td><td>Seasonal bias from historical monthly returns.</td><td><span class="status done">done</span></td></tr>
           <tr><td><code>agents/evidence/</code></td><td>Planned fourth agent — not yet started.</td><td><span class="status planned">not started</span></td></tr>
-          <tr><td><code>agents/llm/multi_model_runner.py</code></td><td>Queries 4 free OpenRouter models; trust-weighted synthesis. Uses plain KEY:value prompt format (Team 1-derived fix, 2026-07-09) instead of JSON.</td><td><span class="status done">done &mdash; verified fix</span></td></tr>
+          <tr><td><code>agents/llm/multi_model_runner.py</code></td><td>Queries 4 free OpenRouter models; trust-weighted synthesis. Uses plain KEY:value prompt format (Team 1-derived fix, 2026-07-09) instead of JSON. GPT-OSS model ID swapped 120b&rarr;20b, 2026-07-27, see changelog.</td><td><span class="status done">done &mdash; verified fix</span></td></tr>
           <tr><td><code>calibration/trust_weights.py</code></td><td>EMA-based trust scoring with a minimum weight floor.</td><td><span class="status done">done</span></td></tr>
           <tr><td><code>calibration/score_predictions.py</code></td><td>Automated calibration scoring (replaces Team 1's manual QA).</td><td><span class="status done">done</span></td></tr>
           <tr><td><code>run_pipeline.py</code></td><td>Orchestrates the full weekly run for SPX/NDX/IWM.</td><td><span class="status done">done</span></td></tr>
@@ -337,6 +337,45 @@
       <div class="sheet-body">
         <h3 class="section-title">Changelog</h3>
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
+
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-07-27 &mdash; COMMANDMENT #6</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt not trust a green checkmark that was hardcoded to always be green.</strong>
+            <br><br>
+            Two separate problems were hiding behind each other in <code>weekly-pipeline.yml</code>.
+            First: <code>openai/gpt-oss-120b:free</code> &mdash; one of the four OpenRouter models in
+            the synthesis panel &mdash; had quietly disappeared from OpenRouter's free tier. Every
+            weekly run had been getting a 404 for that model, silently, for weeks. Second, and the
+            reason nobody noticed: the pipeline step ended in a hardcoded <code>exit 0</code>,
+            specifically so a Python crash wouldn't block the log-commit step that follows it. That's
+            a reasonable reason to write <code>exit 0</code> &mdash; but it meant the workflow would
+            show green in GitHub's UI even in a total-failure scenario, not just a partial one like
+            this. The checkmark and the actual outcome had been decoupled from each other.
+            <br><br>
+            <strong>The fix, in two parts:</strong>
+            <ul style="margin:8px 0 8px 20px; font-size:12px;">
+              <li>Swapped the model ID to <code>openai/gpt-oss-20b:free</code>, which is still live on
+                  OpenRouter's free tier as of this check.</li>
+              <li>Added a step <em>after</em> the commit-and-push step that counts today's prediction
+                  files and fails the run for real if fewer than 3 exist &mdash; so the log-preserving
+                  reason for the original <code>exit 0</code> is kept, but a genuine failure now shows
+                  red instead of being permanently invisible.</li>
+            </ul>
+            Verified by manually dispatching the workflow after the fix and watching it complete
+            end-to-end: no more 404s from GPT-OSS, all three prediction files (GSPC, NDX, IWM) written.
+            Gemma and Laguna still hit 429s from OpenRouter's free-tier rate limit most runs &mdash;
+            that's a real ceiling, not a bug, and the system already degrades gracefully around it by
+            synthesizing from whichever models respond.
+            <br><br>
+            <strong>The pattern to apply everywhere we build automation, including our own:</strong> a
+            workaround that forces a step to always succeed (<code>exit 0</code>, <code>set +e</code>
+            without a following check, <code>|| true</code>) needs a paired check somewhere downstream
+            that verifies the actual thing the step was supposed to produce &mdash; otherwise "always
+            green" quietly becomes "green regardless of outcome," and nobody finds out until they go
+            looking for a reason unrelated to the actual bug.
+          </div>
+        </div>
 
         <div class="changelog-entry">
           <div class="changelog-date">2026-07-11 &mdash; COMMANDMENT #5</div>
