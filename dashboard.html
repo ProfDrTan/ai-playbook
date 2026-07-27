@@ -99,7 +99,7 @@ svg.spark{display:block;}
 
 <div id="main-content" style="display:block;">
 <header>
-  <div><div class="h1">Team Pipeline Dashboard</div><div class="hsub">CP3405 DT3 TR2 2026 · Sprint 6 · vW28 · Prof Dr Tan</div></div>
+  <div><div class="h1">Team Pipeline Dashboard</div><div class="hsub">CP3405 DT3 TR2 2026 · <span id="sprint-label">loading…</span> · Prof Dr Tan</div></div>
   <span class="live">● LIVE</span>
   <a href="dt3-roadmap-draft.html" style="text-decoration:none;background:rgba(167,139,250,.15);color:var(--purple);border:1px solid rgba(167,139,250,.4);padding:6px 14px;border-radius:999px;font-size:.78rem;font-weight:700;">🗺 Roadmap (draft — needs fixing)</a>
 </header>
@@ -180,8 +180,8 @@ function resetDelta() { if(current){ setBL(current); render(current); } }
 
 async function fetchLatest() {
   try {
-    const url = 'https://raw.githubusercontent.com/ProfDrTan/dt3-tr2-26-course-website/main/dashboard/data.json?t=' + Date.now();
-    const r = await fetch(url, { cache: 'no-store' });
+    const url = 'https://api.github.com/repos/ProfDrTan/dt3-tr2-26-course-website/contents/dashboard/data.json?t=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.raw+json' } });
     if (!r.ok) { setFetchStatus(false, 'HTTP ' + r.status); return null; }
     const j = await r.json();
     setFetchStatus(true);
@@ -190,16 +190,16 @@ async function fetchLatest() {
 }
 async function fetchHistory() {
   try {
-    const url = 'https://raw.githubusercontent.com/ProfDrTan/dt3-tr2-26-course-website/main/dashboard/history.json?t=' + Date.now();
-    const r = await fetch(url, { cache: 'no-store' });
+    const url = 'https://api.github.com/repos/ProfDrTan/dt3-tr2-26-course-website/contents/dashboard/history.json?t=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.raw+json' } });
     if (!r.ok) return [];
     return await r.json();
   } catch(e) { return []; }
 }
 async function fetchDiscordSignals() {
   try {
-    const url = 'https://raw.githubusercontent.com/ProfDrTan/dt3-tr2-26-course-website/main/dashboard/discord-signals.json?t=' + Date.now();
-    const r = await fetch(url, { cache: 'no-store' });
+    const url = 'https://api.github.com/repos/ProfDrTan/dt3-tr2-26-course-website/contents/dashboard/discord-signals.json?t=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.raw+json' } });
     if (!r.ok) return null;
     return await r.json();
   } catch(e) { return null; }
@@ -669,6 +669,8 @@ function renderTrendCharts(data) {
 function render(data) {
   if (!data) return;
   if (data.sprint_tag) SPRINT = data.sprint_tag;
+  const sprintLabelEl = document.getElementById('sprint-label');
+  if (sprintLabelEl) sprintLabelEl.textContent = SPRINT;
   if (data.sprint_deadline_utc) SPRINT_DEADLINE_UTC = data.sprint_deadline_utc;
   document.getElementById('lu').textContent = toSGT(data.updated) + '  (SGT, UTC+8)';
   renderStaleness();
