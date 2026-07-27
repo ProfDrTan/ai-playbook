@@ -180,8 +180,8 @@ function resetDelta() { if(current){ setBL(current); render(current); } }
 
 async function fetchLatest() {
   try {
-    const url = 'https://api.github.com/repos/ProfDrTan/dt3-tr2-26-course-website/contents/dashboard/data.json?t=' + Date.now();
-    const r = await fetch(url, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.raw+json' } });
+    const url = 'https://raw.githubusercontent.com/ProfDrTan/dt3-tr2-26-course-website/main/dashboard/data.json?t=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store' });
     if (!r.ok) { setFetchStatus(false, 'HTTP ' + r.status); return null; }
     const j = await r.json();
     setFetchStatus(true);
@@ -190,16 +190,16 @@ async function fetchLatest() {
 }
 async function fetchHistory() {
   try {
-    const url = 'https://api.github.com/repos/ProfDrTan/dt3-tr2-26-course-website/contents/dashboard/history.json?t=' + Date.now();
-    const r = await fetch(url, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.raw+json' } });
+    const url = 'https://raw.githubusercontent.com/ProfDrTan/dt3-tr2-26-course-website/main/dashboard/history.json?t=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store' });
     if (!r.ok) return [];
     return await r.json();
   } catch(e) { return []; }
 }
 async function fetchDiscordSignals() {
   try {
-    const url = 'https://api.github.com/repos/ProfDrTan/dt3-tr2-26-course-website/contents/dashboard/discord-signals.json?t=' + Date.now();
-    const r = await fetch(url, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.raw+json' } });
+    const url = 'https://raw.githubusercontent.com/ProfDrTan/dt3-tr2-26-course-website/main/dashboard/discord-signals.json?t=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store' });
     if (!r.ok) return null;
     return await r.json();
   } catch(e) { return null; }
