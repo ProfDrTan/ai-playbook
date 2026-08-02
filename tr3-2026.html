@@ -123,8 +123,28 @@
   <div class="note">To build next week's sprint page: copy the previous one, change <code>data-sprint-monday</code> and <code>data-sprint-number</code> on the <code>&lt;body&gt;</code> tag — that's it. Every date, every tag, every artefact filename on the entire page updates itself. There is no third place to remember to fix, because there's only one place a date or tag number is ever typed at all.</div>
 
 
-  <h2>Still To Be Decided</h2>
-  <div class="rule">Everything else — team size, assessment structure, pipeline architecture requirements, mid-trimester milestone details — is intentionally left open. Revisit once TR2's remaining weeks (Sprint 8, Sprint 9, Demo Day) surface more lessons worth folding in.</div>
+  <h2>Pre-TR3 Punch List <span style="font-size:12px; color:var(--line-cyan); font-family:'IBM Plex Mono',monospace; font-weight:400;">— running, updated as TR2 closes out</span></h2>
+  <p style="margin-bottom:16px; font-size:15px;">Items graduate from "open" to "done" as they get built. Last updated: <code>2026-08-02</code>, from the Sprint 9 retro.</p>
+
+  <div class="rule" data-status="open"><b>[OPEN] Ship the sprint convention as a day-1 template, not a mid-trimester discovery.</b> The vW convention above is locked — bake it directly into the TR3 starter repo/README rather than re-deriving it live.</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] One-page "architecture constitution" handed out in week 1.</b> No Cloudflare Workers ever. GitHub API as the shared datastore, never localStorage-only for anything needing cross-device sync (CP5640 tracker failed live on this in TR2). Dashboards fetch only from a public path, never an unauthenticated private repo.</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] PAT setup checklist, day 1.</b> Fine-grained PAT scopes (Contents, Workflows, Actions, Secrets) are separate buckets and this cost real debugging time in TR2 — give every team the exact scopes needed up front.</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] Teach the LLM-parsing lesson before teams build their pipelines.</b> JSON-mode output causes parse failures with reasoning models (Nemotron, Laguna) — Team 1's plain <code>KEY:value</code> line-scanning approach was the fix. Short handout/lecture so every team doesn't independently rediscover this.</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] Standardize CI workflow naming across teams</b> (e.g. required <code>main-pipeline.yml</code>). TR2 teams each named their pipeline differently (python-checks, Auto Prediction, Update Market Data...) which makes generic "did your pipeline run" monitoring harder than it needs to be.</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] Ship dt3-monitor v1 with TR2's late additions already built in</b> — contributor classification, PR-age flagging, Discord blocker-keyword detection, noise-workflow filtering — plus a new check: flag open PRs older than N days as the sprint deadline nears (would have caught Team 1's 4-PR pileup before Demo Day in TR2).</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] Pre-empt the OpenRouter rate-limit wall.</b> TR2's 429 errors were a balance/cap issue, not a bug. Either pre-fund a shared pool or state the free-tier ceiling explicitly in week 1.</div>
+
+  <div class="rule" data-status="open"><b>[OPEN] Add a pipeline self-check rubric line.</b> market-prediction-engine's own weekly pipeline silently "succeeded" without committing new data (found 2 Aug 2026) — a real idempotency bug that passed CI. Require every team's automation to include a "did this actually produce new output" guard, not just a green checkmark.</div>
+
+  <div class="rule" data-status="keep"><b>[KEEP — don't rebuild] Human Score rubric with Wild Card as the primary differentiator, and the Almanac/Macro/Technical + LLM-synthesis agent structure.</b> Both worked well in TR2 as designed; the gap was delivery timing, not the design itself.</div>
+
+  <div class="note">Team size, assessment structure beyond the above, and any further mid-trimester milestones remain open and will keep accumulating here as more TR2 weeks (through Demo Day, 3 Aug) surface lessons.</div>
 
   <footer>TR3 2026 Planning · Prof Dr Tan · Private draft · AI Playbook only</footer>
 </main>
