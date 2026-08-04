@@ -257,7 +257,7 @@
       <div class="eyebrow">Live Development Tracker</div>
       <h2>Market Prediction Engine — Build Log</h2>
       <p class="sub">Not a student exercise. This is a commercial-grade, self-learning market signal system, built by extracting and enhancing the architecture proven in CP3405 Team 1's project — modular agents, multi-LLM synthesis, and trust-weighted calibration that actually feeds back into future predictions.</p>
-      <span class="stamp">LIVE — LAST SYNCED 2026-07-27</span>
+      <span class="stamp">LIVE — LAST SYNCED 2026-08-03</span>
       <div class="note" style="max-width:640px; margin-top:20px;">
         Confirmed directly against <code>ProfDrTan/market-prediction-engine</code>
         via the GitHub API. All statuses below reflect the actual commit history,
@@ -337,6 +337,75 @@
       <div class="sheet-body">
         <h3 class="section-title">Changelog</h3>
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
+
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-08-03 &mdash; GitHub Pages enabled, repo made public</div>
+          <div class="note" style="margin-top:8px;">
+            The front end existed and was correct, but nothing was actually serving it &mdash;
+            <code>market-prediction-engine</code> had no GitHub Pages deployment configured at all, and
+            the repo was private, which meant the free Pages tier wasn't even available as an option
+            (Enterprise is the only way to host Pages privately). Two manual steps, both requiring
+            repo-admin scope the working PAT doesn't carry: changed visibility to public under
+            Settings &rarr; General &rarr; Danger Zone (nothing sensitive was ever in the committed
+            files &mdash; <code>OPENROUTER_API_KEY</code> lives in Actions Secrets, not in code), then
+            Settings &rarr; Pages &rarr; Source: Deploy from a branch, main, /(root) &rarr; Save.
+            Live at <code>profdrtan.github.io/market-prediction-engine/</code> shortly after.
+          </div>
+        </div>
+
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-08-03 &mdash; COMMANDMENT #7</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>Thou shalt check what a dashboard is actually pointed at before trusting what it shows.</strong>
+            <br><br>
+            <code>index.html</code> looked completely fine &mdash; a well-designed newspaper-style
+            masthead, live-looking numbers, no console errors. It had been silently rendering
+            <strong>Team 2's</strong> repo (<code>LuJunwen212/CP3405-Project</code>) this entire time.
+            The <code>REPO</code> constant and the markdown-parsing logic (<code>parsePredictionMd</code>,
+            built for Team 2's <code>prediction_2026-W##_team2.md</code> file format) were both wired to
+            a student team's data source, not this project's own <code>data/predictions/*.json</code>.
+            Almost certainly a leftover from using Team 2's page as a build reference early on, never
+            redirected afterward.
+            <br><br>
+            <strong>The fix:</strong> rewrote <code>index.html</code> to fetch this repo's own JSON
+            predictions directly (same-origin, no GitHub API calls or rate limits needed once Pages is
+            live), and added three new pages &mdash; <code>agents.html</code> (full Technical/Macro/Almanac
+            breakdown plus every individual LLM's call and reasoning text, not just a summary),
+            <code>calibration.html</code> (live trust-weight bars plus the full historical hit/miss table
+            from <code>data/calibration</code>), and <code>logs.html</code> (raw pipeline run logs,
+            selectable by date). All static, no login required &mdash; unlike the CP3405 team reference
+            this was built against, which needs an admin password to view.
+            <br><br>
+            A <code>data/manifest.json</code> file was added so the static pages can discover what
+            prediction/calibration/log files exist without needing GitHub API calls from the browser,
+            and a step was added to <code>weekly-pipeline.yml</code> to regenerate that manifest on every
+            run &mdash; so new weeks show up on the site automatically, no manual step required.
+            <br><br>
+            <strong>The pattern to apply everywhere:</strong> a dashboard rendering plausible-looking
+            data is not evidence it's rendering <em>its own</em> data. Worth an occasional check of what
+            source a live page is actually hitting, especially for anything scaffolded from a reference
+            implementation early on.
+          </div>
+        </div>
+
+        <div class="changelog-entry">
+          <div class="changelog-date">2026-08-01 &mdash; Fed rhetoric-vs-substance divergence signal</div>
+          <div class="note" style="margin-top:8px;">
+            Added a new sub-signal to the Macro Agent: <code>score_fed_divergence()</code> in
+            <code>agents/macro/macro_agent.py</code>, backed by a small hand-logged
+            <code>agents/macro/fed_events.json</code>. The motivating case: Fed Chair Warsh's July 29
+            press conference was widely read by markets as dovish &mdash; he declined to lean on a soft
+            inflation print, gave vague answers &mdash; but the hard substance pointed the other way:
+            3 hawkish dissents (the most in nearly a decade) and long yields that <em>rose</em> rather
+            than fell, which is itself inconsistent with a genuinely dovish read. The signal compares
+            the market's initial tone-read of a Fed communication against a substance-read derived from
+            the vote breakdown and realized yield reaction; when they diverge, it votes with the
+            substance rather than the tone (hawkish substance &rarr; risk-off vote, since higher-for-longer
+            rates pressure duration-sensitive names like NDX). No vote is added when tone and substance
+            agree, or when the most recent Fed event is more than 10 days old. 8 regression tests added
+            in <code>tests/test_macro_agent.py</code>, all passing before push.
+          </div>
+        </div>
 
         <div class="changelog-entry">
           <div class="changelog-date">2026-07-27 &mdash; COMMANDMENT #6</div>
