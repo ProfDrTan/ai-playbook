@@ -339,6 +339,46 @@
         <p class="section-dek">Every entry below is added at the point of a confirmed repo change — not in advance.</p>
 
         <div class="changelog-entry">
+          <div class="changelog-date">2026-09-11 &mdash; COMMANDMENT #8, #9, #10</div>
+          <div class="note warn" style="margin-top:8px;">
+            <strong>#8 &mdash; Thou shalt use the legacy Pages workflow, not whatever Cloudflare's
+            "Create an app" button defaults to.</strong>
+            <br><br>
+            Cloudflare's dashboard now routes new projects to Workers with static assets by default.
+            Following that flow straight through produced a <code>*.workers.dev</code> site instead of
+            the <code>*.pages.dev</code> pattern every prior site (TR2's course site, the wealth
+            dashboard) actually uses. The real path is a small link easy to miss: at the bottom of the
+            "Make something new" screen, <strong>"Need to use the legacy Pages workflow? Continue to
+            Pages"</strong>. That's the one to click, every time, for a plain static site.
+            <br><br>
+            <strong>#9 &mdash; Thou shalt never put anything students/public will see on GitHub Pages.</strong>
+            <br><br>
+            A <code>github.io</code> URL embeds the account username in it
+            (<code>profdrtan.github.io/&hellip;</code>), which means anyone who sees the link can go
+            straight to <code>github.com/ProfDrTan</code> and browse every other public repo on the
+            account &mdash; trading bots, the wealth dashboard, everything. Cloudflare Pages doesn't
+            have this problem: a <code>*.pages.dev</code> URL doesn't reveal or link back to the GitHub
+            account behind it at all. GitHub Pages is fine for instructor-only tooling (this very page);
+            it is not fine for anything a student will ever open.
+            <br><br>
+            <strong>#10 &mdash; Thou shalt confirm a tool can actually reach a domain before promising
+            to act on it.</strong>
+            <br><br>
+            A Cloudflare API token was requested and obtained on the assumption that Claude's sandbox
+            could call <code>api.cloudflare.com</code> directly. It can't &mdash; the sandbox's network
+            is allow-listed to a fixed set of domains (GitHub, PyPI, npm, a handful of others), and
+            Cloudflare was never on it. The token turned out to be unusable, and the five-step detour to
+            generate it was wasted time that a 10-second connectivity test at the start would have
+            avoided entirely.
+            <br><br>
+            <strong>The pattern to apply everywhere:</strong> before committing to a multi-step plan that
+            depends on a specific tool, dashboard flow, or API being reachable, verify the assumption
+            first &mdash; a quick test costs far less than discovering the assumption was wrong three
+            steps in.
+          </div>
+        </div>
+
+        <div class="changelog-entry">
           <div class="changelog-date">2026-08-03 &mdash; GitHub Pages enabled, repo made public</div>
           <div class="note" style="margin-top:8px;">
             The front end existed and was correct, but nothing was actually serving it &mdash;
