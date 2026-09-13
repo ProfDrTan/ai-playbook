@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Discord Setup Cheat Sheet | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--blue-deep);color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.7}
+  a{color:var(--line-cyan)}
+  .wrap{max-width:900px;margin:0 auto;padding:50px 24px 90px}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+  h1{font-family:'IBM Plex Mono',monospace;font-size:28px;color:var(--paper);margin-bottom:8px}
+  .sub{color:var(--text-body);opacity:.75;margin-bottom:40px}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:18px;color:var(--paper);margin-top:44px;margin-bottom:14px;border-bottom:1px solid var(--line-dim);padding-bottom:8px}
+  .card{background:var(--blue-panel);border:1px solid var(--line-dim);border-radius:6px;padding:18px 20px;margin:12px 0}
+  .card b{color:var(--paper)}
+  code{background:var(--blue-deep);border:1px solid var(--line-dim);padding:2px 7px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:.9em;color:var(--line-cyan)}
+  .gotcha{background:rgba(217,105,79,.1);border-left:3px solid var(--coral);border-radius:0 6px 6px 0;padding:14px 18px;margin:12px 0;font-size:.92em}
+  .gotcha b{color:var(--coral)}
+  ol,ul{margin:10px 0 10px 22px}
+  li{margin:6px 0}
+  .back{display:inline-block;margin-top:50px;font-family:'IBM Plex Mono',monospace;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tag">Instructor Reference — Not Student-Facing</div>
+  <h1>Discord Setup Cheat Sheet</h1>
+  <p class="sub">How the CP3405 Discord server, roles, and monitoring bot actually get set up — written from the TR3 build session, 13–14 Sep 2026.</p>
+
+  <h2>1. Create a New Server (per trimester)</h2>
+  <div class="card">
+    Left sidebar → green <b>"+"</b> at the bottom → <b>Create My Own</b> → any purpose answer → name it clearly, e.g. "CP3405 TR3 2026" → Create.
+  </div>
+
+  <h2>2. Create Team Channels</h2>
+  <div class="card">
+    Hover <b>Text Channels</b> → "+" → type the name directly (e.g. <code>team-1</code>) → Create Channel. Repeat per team.
+  </div>
+
+  <h2>3. Lock a Channel to One Role (Private Channel)</h2>
+  <div class="card">
+    Right-click the channel → <b>Edit Channel</b> → <b>Permissions</b> tab → toggle <b>"Private Channel"</b> ON. This automatically denies @everyone. Then click <b>"Add members or roles"</b> → type the role name → select it. Confirm it now shows under "Roles" on the left panel.
+  </div>
+  <div class="gotcha"><b>Gotcha:</b> the role search dropdown sometimes doesn't show a role that should be there (scroll/render glitch). Fix: type the exact role name directly into the search box instead of scrolling — it appears once typed.</div>
+  <div class="gotcha"><b>Note:</b> this Private Channel toggle is simpler than manually editing "Advanced permissions" → General Channel Permissions for @everyone. Use the toggle method first; only fall back to Advanced permissions if the toggle isn't available for some reason.</div>
+
+  <h2>4. Create Roles</h2>
+  <div class="card">
+    Server name (top-left) → <b>Server Settings</b> → <b>Roles</b> → <b>Create Role</b>, once per team. No special permissions needed on the role itself — the channel lock (step 3) is what actually restricts access.
+  </div>
+
+  <h2>5. Generate a Permanent Invite Link</h2>
+  <div class="card">
+    Right-click server name → <b>Invite People</b> → <b>"Edit invite link"</b> (small text near the bottom) → set <b>Expire After: Never</b>, <b>Max Uses: No limit</b> → Copy Link.
+  </div>
+
+  <h2>6. Invite the Monitoring Bot ("Dr Tan -Private")</h2>
+  <div class="card">
+    <b>Application ID:</b> <code>1511174177367789748</code><br><br>
+    Invite URL pattern:<br>
+    <code>https://discord.com/api/oauth2/authorize?client_id=1511174177367789748&permissions=66560&scope=bot</code><br><br>
+    Open it → click <b>"Keep Scrolling..."</b> (permissions list) → select the correct server from the dropdown → <b>Authorize</b> → complete captcha if prompted.
+  </div>
+  <div class="gotcha"><b>Gotcha — check this every time:</b> the success screen says "Dr Tan -Private has been authorized and added to [server name]." If an old server (e.g. a prior trimester's) shows up instead of the current one, the dropdown selection didn't take — redo it and read the success message carefully before moving on.</div>
+  <div class="gotcha"><b>Permissions number explained:</b> <code>66560</code> = View Channel (1024) + Read Message History (65536). Enough for read-only monitoring, nothing else.</div>
+
+  <h2>7. Retargeting the Monitor for a New Trimester</h2>
+  <div class="card">
+    The bot's actual logic lives in a private GitHub repo: <b>ProfDrTan/dt3-monitor</b>, file <code>dt3_discord_monitor_actions.py</code>, running automatically via GitHub Actions (<code>.github/workflows/monitor.yml</code>) — no PC or hosting needed, it runs on GitHub's own servers.<br><br>
+    To point it at a new trimester's channels:
+    <ol>
+      <li>Invite the bot to the new server (step 6 above)</li>
+      <li>Get each team channel's ID: User Settings → Advanced → enable <b>Developer Mode</b> → right-click each channel → <b>Copy Channel ID</b></li>
+      <li>Update the <code>CHANNELS = {...}</code> dictionary near the top of <code>dt3_discord_monitor_actions.py</code> with the new IDs, keeping the same team-name keys</li>
+      <li>Push. The existing hourly schedule picks it up automatically — nothing else to configure.</li>
+    </ol>
+  </div>
+  <div class="gotcha"><b>Also in that script:</b> a separate "spotlight" tracker can be pointed at one specific student's personal GitHub repo for closer scrutiny (used on sinder38/Georgii in TR2). Update <code>TEAM1_REPO</code> near the top if a new trimester needs the same targeted tracking — leave it pointed at nothing/disabled if nobody warrants it yet.</div>
+
+  <h2>8. Restricting Access — The Concept</h2>
+  <div class="card">
+    A <b>role</b> is just a tag Discord gives a member. A channel locked to a role is invisible to anyone without that tag — not just "hidden by convention," genuinely not viewable. New members with no role at all only see whatever's left open to @everyone (typically just <code>#general</code>), so that channel functions as a real waiting room once the team channels are locked.
+  </div>
+
+  <a class="back" href="index.html">← Back to AI Playbook</a>
+</div>
+</body>
+</html>
