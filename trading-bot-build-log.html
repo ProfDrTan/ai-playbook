@@ -179,6 +179,12 @@
           Two near-identical order instructions for the same spread ended up live simultaneously, caught only by looking directly at the IBKR Orders screen. <strong>The fix:</strong> <code>ExecutionAdapter.get_open_orders()</code> added, with a same-contract/same-side duplicate check now run inside <code>place_order()</code> before any submission &mdash; a safety net, not a mathematically perfect guarantee, but it catches the exact failure mode observed tonight.
         </div>
 
+        <div class="changelog-date">2026-09-18 &mdash; COMMANDMENT #5</div>
+        <div class="note warn">
+          <span class="commandment-num">Thou shalt check Settings &gt; Profile &gt; Personal Preferences for a saved GitHub token before asking Prof to paste one.</span>
+          A working all-repo fine-grained PAT is saved directly in Prof's own Claude account preferences, specifically so this question never has to be asked again. <strong>The catch, confirmed live:</strong> what actually arrives in Claude's context from that field has been observed truncated (e.g. cut off mid-token), not the full working value &mdash; so a push can still fail even when the token is genuinely saved there. <strong>The fix:</strong> check preferences first, always. If a push fails specifically because the delivered token looks truncated, say so plainly and ask for the full value pasted or screenshotted once as a fallback &mdash; never just repeat the same request as if nothing was saved at all.
+        </div>
+
         <p style="margin-top:30px; color:var(--line-dim); font-size:13px;">Next entries append as the build continues.</p>
       </div>
     </section>
