@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprint 3 · Automate the Manual Process · CP3405 DT3 · TR3 2026</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7fb;font-family:Inter,Segoe UI,Arial,sans-serif;color:#102033;line-height:1.6}
+a{color:#0f6fbd;text-decoration:none;font-weight:800}
+.top{background:#071426;color:#fff;border-bottom:4px solid #12c7b7;padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center;font-weight:900;font-size:1.25rem}
+.badge{background:#12c7b7;color:#071426;padding:8px 12px;border-radius:8px;font-family:monospace}
+.nav{display:flex;overflow:auto;background:#132747;border-bottom:1px solid #0f2040}
+.nav a{padding:14px 18px;color:#dbeafe;white-space:nowrap;font-weight:700;font-size:.9rem;transition:background .2s}
+.nav a:hover{background:#1e3a6e}
+.nav a.active{background:#f5b942;color:#111827}
+.nav a.sys{border-left:3px solid #12c7b7}
+.main{max-width:920px;margin:0 auto;padding:36px 22px 70px}
+h1{font-size:2rem;margin:0 0 6px}
+h2{color:#0e2a52;margin-top:40px;border-bottom:2px solid #e8edf5;padding-bottom:8px}
+.eyebrow{display:inline-block;background:rgba(18,199,183,.15);border:1px solid #12c7b7;color:#0e7a70;padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:900;letter-spacing:.06em;margin-bottom:14px}
+.card{background:#fff;border:1px solid #e6ebf3;border-radius:12px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(16,32,51,.06)}
+.card b{color:#0e2a52}
+.task{background:#fff;border:1px solid #e6ebf3;border-left:5px solid #12c7b7;border-radius:0 12px 12px 0;padding:16px 20px;margin:12px 0}
+.task .num{display:inline-block;width:26px;height:26px;border-radius:50%;background:#132747;color:#f5b942;font-weight:900;font-size:.85rem;text-align:center;line-height:26px;margin-right:8px}
+.dod{margin-top:8px;padding:8px 12px;background:#f0faf9;border-radius:8px;font-size:.88em;color:#0e5a52}
+.dod b{color:#0e7a70;font-size:.78em;letter-spacing:.05em}
+code{background:#eef2f8;padding:2px 7px;border-radius:5px;font-family:monospace;font-size:.92em;color:#0e2a52}
+footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid #e6ebf3;color:#8493a8;font-size:.82rem;text-align:center}
+.draft-banner{background:#dc2626;color:#fff;text-align:center;padding:10px 16px;font-weight:900;font-size:.85rem;letter-spacing:.04em}
+@media(max-width:700px){.main{padding:24px 16px 50px}}
+</style>
+</head>
+<body data-sprint-monday="2026-10-05" data-sprint-number="3">
+
+<div class="draft-banner">DRAFT — REVIEW COPY ONLY · NOT ON THE STUDENT SITE · AI PLAYBOOK STAGING</div>
+
+<div class="top">
+  <div class="brand"><span class="badge" data-tag>vW3</span> CP3405 · Design Thinking III</div>
+  <div style="color:#12c7b7;font-family:monospace;font-size:.9rem">TR3 2026</div>
+</div>
+
+<nav class="nav">
+  <a href="../sprint1/index.html">Sprint 1</a>
+  <a href="../sprint2/index.html">Sprint 2</a>
+  <a class="active" href="index.html">Sprint 3 — Automate the Manual Process</a>
+  <a href="../github/index.html">GitHub</a>
+  <a href="../almanac/index.html">Almanac Agent</a>
+  <a class="sys" href="../scrum/index.html">Scrum Reference</a>
+</nav>
+
+<div class="main">
+  <span class="eyebrow">Starts Monday — due the following Monday</span>
+  <h1>Sprint 3 <span style="color:#8493a8;font-weight:700">— vW3</span> — Automate the Manual Process</h1>
+  <p style="color:#3a4a5e;font-size:1.05rem">Last week you did it all by hand — sixteen lookups, sector math, macro notes, seasonality. This week your job is to make the computer do at least one part of that for you.</p>
+
+  <h2>The Sprint Goal</h2>
+  <div class="card">
+    <b>Replace at least one manual Sprint 2 task with a working automation — a script, scheduled job, or simple bot that fetches or calculates that same data without you typing it in by hand.</b>
+    <p style="margin:8px 0 0">It doesn't need to be polished. It needs to run, and it needs to save you the exact pain you felt last week.</p>
+  </div>
+
+  <h2>The Backlog — Pick Your Automation Target</h2>
+
+  <div class="task">
+    <span class="num">1</span><b>Technical: automate the OHLC pull</b>
+    <p style="margin:8px 0 0">Write a script that fetches weekly OHLC for some or all of the 16 instruments from Sprint 2 (SPX, NDX, 10-year yield, gold, Bitcoin, 11 sector ETFs) — via an API or library instead of manually reading Yahoo Finance.</p>
+    <div class="dod"><b>DONE MEANS</b> — running code, committed to your team repo, that outputs the same data you gathered by hand in Sprint 2, for at least 5 of the 16 instruments.</div>
+  </div>
+
+  <div class="task">
+    <span class="num">2</span><b>Macro: automate the sector comparison</b>
+    <p style="margin:8px 0 0">Script the weekly % change calculation and the "beat or lagged vs. SPX" comparison from Sprint 2, so it recalculates automatically once new price data comes in.</p>
+    <div class="dod"><b>DONE MEANS</b> — code that takes price data and outputs which sectors beat/lagged SPX, with no manual math.</div>
+  </div>
+
+  <div class="task">
+    <span class="num">3</span><b>Reflection: manual vs. automated</b>
+    <p style="margin:8px 0 0">Write 150–250 words comparing the two experiences — what took longer to automate than expected, what broke, what you'd automate next if you had another week.</p>
+    <div class="dod"><b>DONE MEANS</b> — reflection committed as <code>reports/vW3.md</code> in your team repo.</div>
+  </div>
+
+  <h2>Then: Write It Up and Present</h2>
+  <div class="card">
+    <b>Bring your working automation and reflection to Monday's session.</b> Be ready to run it live or show output — not just describe it.
+  </div>
+
+  <h2>Presentation Order</h2>
+  <div class="card">
+    <b>Team 2 → Team 3 → Team 4 → Team 5 → Team 1</b> — order rotates each sprint so the same team isn't always last.
+  </div>
+  <div class="card" style="border-left:4px solid #dc2626">
+    <b>Real deadline: Sunday night, not Monday morning.</b> Code and reflection committed by <b>Sunday</b>. Monday is presentation day, not build day.
+  </div>
+
+  <h2>What Monday Actually Is</h2>
+  <div class="card">
+    <b>Sprint Review of what you automated, plus Sprint 4 Planning.</b> Come having done the work.
+  </div>
+</div>
+
+<footer>CP3405 Design Thinking III · TR3 2026 · Sprint 3 — Automate the Manual Process · DRAFT, not yet approved for the student site</footer>
+
+<script>
+(function(){
+  const body = document.body;
+  const sprintN = body.dataset.sprintNumber;
+  document.querySelectorAll('[data-tag]').forEach(el => { el.textContent = `vW${sprintN}`; });
+})();
+</script>
+</body>
+</html>
