@@ -93,9 +93,9 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   </div>
 
   <div class="task">
-    <span class="num">5</span><b>R5 — Human Score &amp; UI: judge the automation, and make it presentable</b>
-    <p style="margin:8px 0 0">Give a human score (1–5) to how much you'd trust this week's automated output vs. last week's manual output, with one sentence of reasoning — and decide how that output should actually be shown to a human (a simple table, a summary line, whatever fits).</p>
-    <div class="dod"><b>DONE MEANS</b> — a scored, reasoned judgment plus a basic presentation of the output, both committed to your repo, plus a board card tracking this task through to Done.</div>
+    <span class="num">5</span><b>R5 — Human Score &amp; UI: build a live page, not a static one</b>
+    <p style="margin:8px 0 0">Give a human score (1–5) to how much you'd trust this week's automated output vs. last week's manual output, with one sentence of reasoning. Then build a page that <b>reads from R2/R3's automation output</b> (a committed data file) rather than hand-typed numbers — if the automation reruns with new figures, the page should update without anyone touching the HTML. Include at least one chart (Chart.js via CDN, or hand-rolled SVG — numbers in a table alone isn't new this sprint), and show this week's automated figures side-by-side with last week's manual ones so the score has something concrete to react to.</p>
+    <div class="dod"><b>DONE MEANS</b> — a committed page that fetches from a committed data file (not hardcoded), renders at least one chart, and shows the Human Score + reasoning alongside a manual-vs-automated comparison — plus a board card tracking this task through to Done.</div>
   </div>
 
   <div class="task">
