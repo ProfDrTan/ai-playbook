@@ -60,7 +60,7 @@
 <div class="status-row">
   <span class="status live">real data, verified</span>
   <span class="status warn">3 spec conflicts found</span>
-  <span class="status warn">automation blocked without a paid API key</span>
+  <span class="status warn">this sandbox's own allowlist blocked the free route</span>
 </div>
 
 <h2>The actual goal</h2>
@@ -82,8 +82,9 @@
 <h2>Where it broke</h2>
 
 <div class="card tension">
-<h3>1 · No free, key-less data source actually reaches a locked-down build environment</h3>
-<p>"Automate the pull" assumes a script can just fetch a number. In practice every no-signup market-data endpoint (Yahoo's undocumented endpoints, most free tiers) either requires an API key or isn't reachable from a sandboxed environment with an allowlisted network — this build hit exactly that wall. The only way through, without a paid key, was a manual verified read of two cited sources. That's not automation; it's a human doing the "automated" step by hand and calling it done. A team without a data-provider API key (Alpha Vantage, Polygon, etc.) will hit this same wall and either fake the automation, burn time getting a key approved, or quietly fall back to manual entry without saying so.</p>
+<h3>1 · This build environment's own network allowlist blocked the free route — not a real-world paywall</h3>
+<p>The actual free, key-less path students use is <code>yfinance</code> (wraps Yahoo Finance's public chart endpoint) or a plain CSV pull from <code>stooq.com</code> — no signup, no key, exactly what "automate the pull" should mean. Both were tried here and both were refused outright: <code>curl -I https://query1.finance.yahoo.com/v8/finance/chart/^GSPC</code> and the equivalent stooq request each came back <code>403</code> with <code>x-deny-reason: host_not_allowed</code> — this sandbox's egress allowlist doesn't include finance-data hosts, full stop. That's a constraint of this particular build tool, not evidence the free option doesn't exist. The verified-by-hand number above stands as a correctness check, not a substitute for the real pull.</p>
+<p>The actual risk for students is narrower than "no free source exists": <code>yfinance</code> scrapes an undocumented Yahoo endpoint that changes shape without notice (it did exactly that mid-request above, returning malformed JSON on a related call) — so the real failure mode is a silently broken scraper on assignment day, not a missing free tier.</p>
 </div>
 
 <div class="card tension">
