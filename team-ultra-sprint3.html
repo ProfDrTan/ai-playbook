@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Team Ultra — Sprint 3 Reference Build | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans', sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  main{max-width:860px; margin:0 auto; padding:50px 24px 100px;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--line-cyan); text-decoration:none; display:inline-block; margin-bottom:24px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:14px;}
+  h1{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(24px,4vw,34px); color:var(--paper); line-height:1.25; margin-bottom:16px;}
+  p.sub{font-size:15.5px; color:var(--text-body); max-width:700px; margin-bottom:20px;}
+  .status-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;}
+  .status{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; border-radius:99px; padding:5px 12px; border:1px solid var(--line-dim);}
+  .status.live{color:var(--green); border-color:var(--green);}
+  .status.warn{color:var(--coral); border-color:var(--coral);}
+  h2{font-family:'IBM Plex Mono', monospace; font-size:19px; color:var(--paper); margin:44px 0 16px; padding-bottom:10px; border-bottom:1px solid var(--line-dim); scroll-margin-top:20px;}
+  h3{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--amber); margin:22px 0 8px;}
+  p{margin-bottom:14px; font-size:15px;}
+  .card{background:var(--blue-panel); border:1px solid var(--line-dim); border-radius:8px; padding:18px 20px; margin-bottom:16px;}
+  .card.evidence{border-left:3px solid var(--green);}
+  .card.tension{border-left:3px solid var(--coral);}
+  .card.principle{border-left:3px solid var(--purple);}
+  table{width:100%; border-collapse:collapse; font-size:14px; margin:10px 0;}
+  th, td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line-dim);}
+  th{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; color:var(--amber); text-transform:uppercase;}
+  td.num, th.num{font-family:'IBM Plex Mono', monospace;}
+  code, pre{font-family:'IBM Plex Mono', monospace; font-size:13px;}
+  code{background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;}
+  pre{background:#0A1F33; border:1px solid var(--line-dim); border-radius:6px; padding:14px 16px; overflow-x:auto; margin:10px 0;}
+  .src{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--line-cyan); opacity:0.85;}
+  ol, ul{margin:8px 0 8px 20px;}
+  li{margin-bottom:8px; font-size:14.5px;}
+</style>
+</head>
+<body>
+<main>
+<a class="back-link" href="index.html">← AI Playbook</a>
+<div class="eyebrow">Build Log · Reference, Not Student-Facing</div>
+<h1>Team Ultra — Sprint 3 Reference Build</h1>
+<p class="sub">Built to the actual Sprint 3 spec in <code>sprint3-draft.html</code>, with real data, to see what a team hits before it goes anywhere near students.</p>
+<div class="status-row">
+  <span class="status live">real data, verified</span>
+  <span class="status warn">3 spec conflicts found</span>
+  <span class="status warn">automation blocked without a paid API key</span>
+</div>
+
+<h2>The actual goal</h2>
+<div class="card">
+"Introduce the first automated data pull (SPX weekly close), while keeping the narrative/judgment layer fully human-written — automation replaces data-gathering, not thinking." — <em>sprint3-draft.html</em>, current working draft
+</div>
+<p>That's narrower than it sounds. One data point, automated. Everything else — the read on it — stays a person's call. Below is what building exactly that, for real, actually involves.</p>
+
+<h2>What got pulled</h2>
+<table>
+  <tr><th>Field</th><th class="num">Value</th><th>Source</th></tr>
+  <tr><td>SPX close, Mon Sep 21 2026</td><td class="num">7,764.70</td><td class="src">CNBC / Bloomberg, timestamped 4:51pm ET</td></tr>
+  <tr><td>Prior close, Fri Sep 18 2026</td><td class="num">7,650.50</td><td class="src">same</td></tr>
+  <tr><td>Change</td><td class="num">+114.20 (+1.49%)</td><td class="src">calculated</td></tr>
+  <tr><td>Driver</td><td>chip-stock rally — Intel +12%, AMD +10% (crossed $1T market cap), Qualcomm +9%</td><td class="src">CNBC live blog, Sep 21</td></tr>
+</table>
+<p>Cross-checked against a second source (St. Louis Fed's FRED SPX series) to test the "source-verification" step the draft calls for. That's where the first real problem showed up.</p>
+
+<h2>Where it broke</h2>
+
+<div class="card tension">
+<h3>1 · No free, key-less data source actually reaches a locked-down build environment</h3>
+<p>"Automate the pull" assumes a script can just fetch a number. In practice every no-signup market-data endpoint (Yahoo's undocumented endpoints, most free tiers) either requires an API key or isn't reachable from a sandboxed environment with an allowlisted network — this build hit exactly that wall. The only way through, without a paid key, was a manual verified read of two cited sources. That's not automation; it's a human doing the "automated" step by hand and calling it done. A team without a data-provider API key (Alpha Vantage, Polygon, etc.) will hit this same wall and either fake the automation, burn time getting a key approved, or quietly fall back to manual entry without saying so.</p>
+</div>
+
+<div class="card tension">
+<h3>2 · The two "authoritative" sources don't agree on freshness</h3>
+<p>FRED's SP500 series — the St. Louis Fed's own feed — was still showing <strong>2026-09-17</strong> as its latest observation when checked on Sep 22, a multi-day lag behind same-day market reporting. If "verify against a second source" is the instruction, a team needs to be told in advance which source is authoritative when two disagree, or every team invents its own tie-breaker rule silently.</p>
+</div>
+
+<div class="card tension">
+<h3>3 · No published schema for where the pull's output lives</h3>
+<p>This is the exact blocker <em>sprint3-draft.html</em> already flags from Sprint 1/2 — "there's no template" — and it reappears here. Nothing in the current draft says whether the automated SPX value should land as a JSON file, a CSV row, a commit message, or a FigJam card. Four teams will make four different choices, and R4 (Data & Calibration) has nothing consistent to calibrate against.</p>
+</div>
+
+<div class="card tension">
+<h3>4 · Two sources of truth disagree on scope</h3>
+<p>The CP3405 planning notes describe Sprint 3 as a six-role deliverable — R1 through R6 each producing a distinct artifact (macro update, technical indicator, calibration check, human score, LLM/GitHub component, FigJam board). <em>sprint3-draft.html</em> — the actual working draft — scopes Sprint 3 far narrower: one automated data pull, everything else continuing as manual Sprint-2-style work. A team (or an AI) building from the planning notes alone would over-build; building from the draft alone would under-deliver on the six-role framework. Worth resolving which document is current before either goes out.</p>
+</div>
+
+<h2>What worked</h2>
+<div class="card evidence">
+<p>The narrow scope is buildable. A verified SPX close, cited to two sources with the disagreement between them documented rather than hidden, plus a one-paragraph human-written read on <em>why</em> it moved (chip-stock rally, not a macro surprise) — that's a clean, honest version of "automation replaces data-gathering, not thinking." The failure mode isn't the concept; it's that nothing in the current spec tells a team what to do when the data source itself doesn't cooperate.</p>
+</div>
+
+<h2>Recommendation</h2>
+<ol>
+<li>Name one authoritative SPX source in the Sprint 3 page itself, with a stated fallback if it's unreachable — don't leave teams to invent one.</li>
+<li>Ship the output schema (file name, format, location) with the sprint instructions, not as a mid-week patch — the same fix already identified for Sprint 1/2's template gap.</li>
+<li>Reconcile the CP3405 planning notes against <em>sprint3-draft.html</em> before either is finalized — right now they'd produce two different assignments.</li>
+</ol>
+
+</main>
+</body>
+</html>
