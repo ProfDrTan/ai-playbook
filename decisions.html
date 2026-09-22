@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Decision Log — AI Playbook (Claude reference)</title>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:960px;margin:0 auto;padding:24px;background:#0d1117;color:#c9d1d9;line-height:1.6}
+  h1{color:#fff;border-bottom:2px solid #C9A227;padding-bottom:10px}
+  h2{color:#58a6ff;margin-top:36px;font-size:19px}
+  .banner{background:#b3261e;color:#fff;padding:10px 16px;border-radius:6px;font-weight:bold;margin-bottom:16px}
+  .meta{color:#8b949e;font-size:13px;margin-bottom:20px}
+  .entry{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 18px;margin:12px 0}
+  .entry.resolved{border-left:4px solid #3fb950}
+  .entry.open{border-left:4px solid #e8a63c}
+  .date{font-family:monospace;font-size:12px;color:#8b949e;margin-bottom:6px}
+  .status{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-family:monospace;margin-left:8px}
+  .status.done{background:#0d2818;color:#3fb950;border:1px solid #3fb950}
+  .status.pending{background:#3d2a00;color:#e8a63c;border:1px solid #e8a63c}
+  code{background:#21262d;padding:2px 6px;border-radius:4px;font-size:12px}
+  .evidence{font-size:12.5px;color:#8b949e;margin-top:8px;border-top:1px dashed #30363d;padding-top:8px}
+  ul{margin:8px 0 8px 20px}
+  li{margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="banner">⚠ PRIVATE — Claude reference only. Every entry below is checked against a real commit or a real chat transcript, not memory. Read this before asserting whether something was reviewed, agreed, or published.</div>
+<h1>Decision Log</h1>
+<p class="meta">What's actually been agreed, checkable against evidence, most recent first. This exists because Claude got the Sprint 3 review sequence wrong on 2026-09-22 — stated it hadn't been reviewed when it had been, in a different chat. This log is the fix: check here, not memory, before making a claim about what was or wasn't agreed.</p>
+
+<h2>2026-09-22 — Today</h2>
+
+<div class="entry open">
+<div class="date">2026-09-22 <span class="status pending">OPEN</span></div>
+<strong>Naming collision: two unrelated things both called "Team Ultra."</strong>
+<p><code>prism.html</code> (2026-07-18) established "Team Ultra — The Composite Reference Pipeline" as an existing concept. <code>team-ultra-sprint3.html</code> (created today) reuses the name for something unrelated — a Sprint 3 automation reference build. Not yet reconciled.</p>
+<div class="evidence">Evidence: git log, both files, ProfDrTan/ai-playbook.</div>
+</div>
+
+<div class="entry open">
+<div class="date">2026-09-22 <span class="status pending">OPEN</span></div>
+<strong><code>ai-playbook/sprint3-draft.html</code> is stale and should be deleted.</strong>
+<p>Last touched 2026-09-19. Superseded by <code>sprint3-review.html</code>, which was the actual reviewed-and-approved draft and was correctly deleted 2026-09-21 once Sprint 3 went live. This leftover file caused a real misread today — Claude built content against it instead of the live, approved spec.</p>
+<div class="evidence">Evidence: git log --follow on both filenames, ProfDrTan/ai-playbook.</div>
+</div>
+
+<h2>2026-09-21 — Sprint 3 published to the student site</h2>
+
+<div class="entry resolved">
+<div class="date">2026-09-21, 08:22–08:30 UTC <span class="status done">CONFIRMED REVIEWED, THEN PUBLISHED</span></div>
+<strong>Sprint 3 content was drafted in chat, reviewed, corrected, then approved for publish — not skipped.</strong>
+<p>Sequence, from the actual transcript: Claude first mentioned Sprint 3 prematurely without content existing → corrected, logged the standing rule below → content built in chat as <code>sprint3_v2.html</code> and reviewed → Prof said "Let's put it on the live website now" → pushed → a staging/draft banner was accidentally left in the pushed file → Prof caught it immediately → banner and staging language stripped in the same session → confirmed clean.</p>
+<ul>
+<li>Commit <code>07db927</code> — "Publish Sprint 3 live - replaces coming-soon placeholder"</li>
+<li>Commit <code>26cdfea</code> — "Strip draft banner and staging language - now genuinely live"</li>
+<li>Commit <code>112edb8</code> / <code>e219c14</code> — presentation template added and linked</li>
+</ul>
+<div class="evidence">Evidence: dt3-tr3-26-course-website commit history + chat 2058279d-5495-49fd-a635-ccc3efdda024 ("Students requesting on Figma"), 2026-09-21.</div>
+</div>
+
+<div class="entry resolved">
+<div class="date">2026-09-21 <span class="status done">STANDING RULE, LOGGED</span></div>
+<strong>Nothing sprint-related goes live on the student-facing site without review first.</strong>
+<p>Set explicitly after Claude mentioned Sprint 3 as if content already existed when it didn't. Applies to every future sprint, not just Sprint 3.</p>
+<div class="evidence">Evidence: chat 2058279d-5495-49fd-a635-ccc3efdda024, same session; also logged to <code>/areas/cp3405-tr3-planning.md</code>.</div>
+</div>
+
+<h2>Earlier TR3 planning — standing decisions (see <code>/areas/cp3405-tr3-planning.md</code> for full detail)</h2>
+
+<div class="entry resolved">
+<div class="date">Ongoing, TR3 2026 <span class="status done">STANDING</span></div>
+<strong>Six-role framework, rebalanced.</strong>
+<p>R1 Product Owner &amp; Scrum Master (also owns FigJam board, attendance, role rotation), R2 Almanac &amp; Macro, R3 Technical &amp; Economic, R4 Data &amp; Calibration, R5 Human Score &amp; UI, R6 LLM &amp; GitHub. Each role has an explicit "does NOT own" boundary. This is the framework actually reflected in the live Sprint 3 page.</p>
+</div>
+
+<div class="entry resolved">
+<div class="date">Ongoing, TR3 2026 <span class="status done">STANDING</span></div>
+<strong>FigJam is enforced from Sprint 3 onward, graded against Scrum artifacts</strong> (Definition of Done, backlog items on the shared board), not a generic kanban exercise. Sprint 1's zero activity was not penalized.
+</div>
+
+<div class="entry resolved">
+<div class="date">Ongoing, TR3 2026 <span class="status done">STANDING</span></div>
+<strong>Team-change requests</strong> are only accommodated as swaps between two consenting students — kept verbal, not published on the site.
+</div>
+
+<div class="entry resolved">
+<div class="date">Ongoing, TR3 2026 <span class="status done">STANDING</span></div>
+<strong>Weekly status reports pull from both GitHub org activity AND Discord signals</strong> (via dt3-monitor), never GitHub commit counts alone.
+</div>
+
+<h2>How to keep this log honest</h2>
+<p>Every entry above points at a commit hash or a chat title/ID that can be re-checked. When something new gets agreed and published, add an entry here with the same standard: a real commit or a real transcript, not a recollection. If a claim can't be pointed at evidence, it doesn't go in this log as "confirmed" — it stays a guess until it's checked.</p>
+
+</body>
+</html>
