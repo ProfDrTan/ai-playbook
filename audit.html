@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Site Audit — AI Playbook (Claude reference)</title>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:1100px;margin:0 auto;padding:24px;background:#0d1117;color:#c9d1d9;line-height:1.6}
+  h1{color:#fff;border-bottom:2px solid #C9A227;padding-bottom:10px}
+  h2{color:#58a6ff;margin-top:32px}
+  .banner{background:#b3261e;color:#fff;padding:10px 16px;border-radius:6px;font-weight:bold;margin-bottom:16px}
+  .meta{color:#8b949e;font-size:13px;margin-bottom:20px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid #30363d;vertical-align:top}
+  th{color:#C9A227;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+  td.num{font-family:monospace;white-space:nowrap}
+  code{background:#21262d;padding:2px 6px;border-radius:4px;font-size:12px}
+  .tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin:1px 3px 1px 0;font-family:monospace}
+  .tag.draft{background:#3d2a00;color:#e8a63c;border:1px solid #e8a63c}
+  .tag.noindex{background:#1a2233;color:#58a6ff;border:1px solid #58a6ff}
+  .tag.orphan{background:#2d1418;color:#f85149;border:1px solid #f85149}
+  .card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px 18px;margin:14px 0}
+  .card.issue{border-left:4px solid #f85149}
+</style>
+</head>
+<body>
+<div class="banner">⚠ PRIVATE — Claude reference only, not a student-facing or polished page. Regenerate before trusting if it's been more than a few days.</div>
+<h1>Site Audit — AI Playbook</h1>
+<p class="meta">Generated from <code>ProfDrTan/ai-playbook</code> git history, 27 tracked pages, 141 total commits, as of 2026-09-22.</p>
+
+<h2>Known issues found this pass</h2>
+
+<div class="card issue">
+<strong>sprint3-draft.html is stale and should be deleted.</strong> The reviewed/approved draft was <code>sprint3-review.html</code>, deleted 2026-09-21 after Sprint 3 went live on the student site — correctly. <code>sprint3-draft.html</code> is a separate, older, never-cleaned-up file that doesn't reflect the approved content. It caused a real misread on 2026-09-22 (built a "Team Ultra" reference against it instead of the live, approved spec). Recommend deleting it now that it's identified.
+</div>
+
+<div class="card issue">
+<strong>Two different things are both called "Team Ultra."</strong> <code>prism.html</code> (2026-07-18) already defines "Team Ultra — The Composite Reference Pipeline" as an established concept. <code>team-ultra-sprint3.html</code> (2026-09-22, today) is a new, unrelated build that reuses the same name for a Sprint 3 reference build. These need to be reconciled — either rename today's file, or fold it into the existing Team Ultra concept — before it causes the same kind of confusion sprint3-draft.html just did.
+</div>
+
+<div class="card issue">
+<strong>Six pages are orphaned (not linked from index.html) and marked draft/private in their own text:</strong> <code>checklist.html</code>, <code>discord-cheat-sheet.html</code>, <code>dt3-roadmap-draft.html</code>, <code>sprint9-preview.html</code>, <code>figurehead-roadmap.html</code>, <code>launch.html</code>. Some may be intentionally private (fine); others may just be forgotten, the same failure mode as sprint3-draft.html. Worth a pass to confirm which are still live references vs. dead weight.
+</div>
+
+<div class="card issue">
+<strong>dt3-watch.html is the largest file on the site (166 KB) and is not linked from index.html.</strong> Either it's an intentionally standalone/bookmarked page, or it's orphaned. Worth confirming.
+</div>
+
+<h2>Full inventory</h2>
+<table>
+<tr><th>File</th><th>Title</th><th>First commit</th><th>Last commit</th><th>Commits</th><th>Size</th><th>Flags</th></tr>
+<tr>
+      <td><code>almanac.html</code></td>
+      <td>The Weekly Almanac — Market Prediction Engine</td>
+      <td class="num">2026-07-11</td>
+      <td class="num">2026-07-11</td>
+      <td class="num">1</td>
+      <td class="num">15.5 KB</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><code>build-log.html</code></td>
+      <td>Build Log — Market Prediction Engine | The AI Playbook</td>
+      <td class="num">2026-07-08</td>
+      <td class="num">2026-09-19</td>
+      <td class="num">19</td>
+      <td class="num">56.2 KB</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><code>checklist.html</code></td>
+      <td>Monday Readiness Checklist · AI Playbook</td>
+      <td class="num">2026-09-19</td>
+      <td class="num">2026-09-19</td>
+      <td class="num">1</td>
+      <td class="num">5.7 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>command-center.html</code></td>
+      <td>Command Center — The AI Playbook</td>
+      <td class="num">2026-07-10</td>
+      <td class="num">2026-07-31</td>
+      <td class="num">3</td>
+      <td class="num">10.5 KB</td>
+      <td><span class="tag draft">draft/private text</span></td>
+    </tr>
+<tr>
+      <td><code>dashboard.html</code></td>
+      <td>DT3 Pipeline Dashboard</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">2026-07-27</td>
+      <td class="num">11</td>
+      <td class="num">94.0 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span></td>
+    </tr>
+<tr>
+      <td><code>discord-cheat-sheet.html</code></td>
+      <td>Discord Setup Cheat Sheet | The AI Playbook</td>
+      <td class="num">2026-09-13</td>
+      <td class="num">2026-09-13</td>
+      <td class="num">1</td>
+      <td class="num">6.9 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>dt3-roadmap-draft.html</code></td>
+      <td>Roadmap · CP3405 DT3</td>
+      <td class="num">2026-07-21</td>
+      <td class="num">2026-07-21</td>
+      <td class="num">1</td>
+      <td class="num">24.3 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>dt3-watch.html</code></td>
+      <td>DT3 Watch · CP3405 TR2 2026</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">1</td>
+      <td class="num">165.4 KB</td>
+      <td><span class="tag noindex">noindex</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>figurehead-roadmap.html</code></td>
+      <td>AI Figurehead Roadmap — The AI Playbook</td>
+      <td class="num">2026-07-17</td>
+      <td class="num">2026-07-17</td>
+      <td class="num">2</td>
+      <td class="num">25.1 KB</td>
+      <td><span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>index.html</code></td>
+      <td>The AI Playbook — Working Draft</td>
+      <td class="num">2026-07-02</td>
+      <td class="num">2026-07-29</td>
+      <td class="num">30</td>
+      <td class="num">81.0 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>launch.html</code></td>
+      <td>Prof Dr Tan · Command Centre</td>
+      <td class="num">2026-07-18</td>
+      <td class="num">2026-07-18</td>
+      <td class="num">1</td>
+      <td class="num">10.2 KB</td>
+      <td><span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>paper.html</code></td>
+      <td>Sprint by Sprint — Prof Dr Tan · Research Paper Draft</td>
+      <td class="num">2026-07-07</td>
+      <td class="num">2026-07-16</td>
+      <td class="num">7</td>
+      <td class="num">73.4 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>pr-patterns.html</code></td>
+      <td>Understanding Pull Request Patterns — The AI Playbook</td>
+      <td class="num">2026-07-12</td>
+      <td class="num">2026-07-12</td>
+      <td class="num">1</td>
+      <td class="num">9.3 KB</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><code>prism.html</code></td>
+      <td>PRISM Journey Map + Team Ultra · Prof Dr Tan</td>
+      <td class="num">2026-07-18</td>
+      <td class="num">2026-07-18</td>
+      <td class="num">1</td>
+      <td class="num">27.2 KB</td>
+      <td><span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>robots.txt</code></td>
+      <td>(no title)</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">1</td>
+      <td class="num">0.0 KB</td>
+      <td><span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>scrum-lessons.html</code></td>
+      <td>Scrum Reference — Live Lessons | The AI Playbook</td>
+      <td class="num">2026-07-25</td>
+      <td class="num">2026-09-21</td>
+      <td class="num">6</td>
+      <td class="num">17.0 KB</td>
+      <td><span class="tag noindex">noindex</span></td>
+    </tr>
+<tr>
+      <td><code>sprint3-draft.html</code></td>
+      <td>Sprint 3 Planning (DRAFT) · AI Playbook</td>
+      <td class="num">2026-09-19</td>
+      <td class="num">2026-09-19</td>
+      <td class="num">1</td>
+      <td class="num">3.9 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>sprint8-preview.html</code></td>
+      <td>Sprint 8 — System Hardening + Demo Prep · CP3405 DT3 TR2 2026</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">2</td>
+      <td class="num">37.1 KB</td>
+      <td><span class="tag draft">draft/private text</span></td>
+    </tr>
+<tr>
+      <td><code>sprint8.html</code></td>
+      <td>Sprint 8 &amp; 9 Planning — Prof Dr Tan (Private)</td>
+      <td class="num">2026-07-18</td>
+      <td class="num">2026-07-26</td>
+      <td class="num">8</td>
+      <td class="num">24.5 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span></td>
+    </tr>
+<tr>
+      <td><code>sprint9-preview.html</code></td>
+      <td>Sprint 9 — Final Sprint: Demo Day · CP3405 DT3 TR2 2026</td>
+      <td class="num">2026-07-26</td>
+      <td class="num">2026-07-27</td>
+      <td class="num">5</td>
+      <td class="num">33.7 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>team-ultra-sprint3.html</code></td>
+      <td>Team Ultra — Sprint 3 Reference Build | The AI Playbook</td>
+      <td class="num">2026-09-22</td>
+      <td class="num">2026-09-22</td>
+      <td class="num">2</td>
+      <td class="num">9.4 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span> <span class="tag orphan">not linked from index</span></td>
+    </tr>
+<tr>
+      <td><code>team1-case-study.html</code></td>
+      <td>Case Study: Team 1, Sprint 7 | The AI Playbook</td>
+      <td class="num">2026-07-21</td>
+      <td class="num">2026-07-25</td>
+      <td class="num">7</td>
+      <td class="num">34.9 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span></td>
+    </tr>
+<tr>
+      <td><code>team1-code-walkthrough.html</code></td>
+      <td>Team 1 Code Walkthrough | The AI Playbook</td>
+      <td class="num">2026-07-10</td>
+      <td class="num">2026-07-10</td>
+      <td class="num">1</td>
+      <td class="num">28.6 KB</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><code>team1-dissection.html</code></td>
+      <td>Team 1 Dissection | The AI Playbook</td>
+      <td class="num">2026-07-09</td>
+      <td class="num">2026-07-10</td>
+      <td class="num">6</td>
+      <td class="num">30.8 KB</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><code>tr3-2026.html</code></td>
+      <td>TR3 2026 — Sprint Convention | The AI Playbook</td>
+      <td class="num">2026-07-19</td>
+      <td class="num">2026-08-02</td>
+      <td class="num">3</td>
+      <td class="num">13.4 KB</td>
+      <td><span class="tag draft">draft/private text</span> <span class="tag noindex">noindex</span></td>
+    </tr>
+<tr>
+      <td><code>trading-bot-build-log.html</code></td>
+      <td>Build Log — The AI Trading Lab | The AI Playbook</td>
+      <td class="num">2026-07-29</td>
+      <td class="num">2026-09-18</td>
+      <td class="num">2</td>
+      <td class="num">18.0 KB</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><code>when-to-use-what.html</code></td>
+      <td>When to Use What | The AI Playbook</td>
+      <td class="num">2026-07-09</td>
+      <td class="num">2026-07-09</td>
+      <td class="num">2</td>
+      <td class="num">21.1 KB</td>
+      <td>—</td>
+    </tr>
+</table>
+
+<h2>How this was built</h2>
+<p>Cloned <code>ProfDrTan/ai-playbook</code> with full history, read each tracked page's git log (first commit, last commit, commit count), checked its <code>&lt;title&gt;</code>, scanned for draft/private/noindex markers in its own text, and checked whether <code>index.html</code> links to it. No content was guessed — every row comes from the repo itself.</p>
+
+</body>
+</html>
