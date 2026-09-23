@@ -9,6 +9,68 @@
           "latest_push": "2026-09-22T02:00:45Z",
           "contributors": 8
         },
+        "git_activity": {
+          "workflow": "branch+PR",
+          "branches_count": 7,
+          "merged_prs": [
+            {
+              "number": 1,
+              "branch": "feature/sprint2-github-modification",
+              "author": "uv-22",
+              "merged_at": "2026-09-19T20:33"
+            },
+            {
+              "number": 4,
+              "branch": "R4",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 2,
+              "branch": "R3",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 3,
+              "branch": "R5",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:01"
+            },
+            {
+              "number": 5,
+              "branch": "Role-1",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:02"
+            }
+          ]
+        },
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-20T18:59"
+          },
+          "R2": {
+            "commits": 1,
+            "last": "2026-09-19T20:30"
+          },
+          "R3": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          },
+          "R4": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          },
+          "R5": {
+            "commits": 2,
+            "last": "2026-09-20T17:36"
+          },
+          "R6": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          }
+        },
         "discord": {
           "msg_count": 77,
           "members": 7,
@@ -38,6 +100,37 @@
           "commits_total": 34,
           "latest_push": "2026-09-20T14:57:09Z",
           "contributors": 8
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 2,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 3,
+            "last": "2026-09-20T14:45"
+          },
+          "R2": {
+            "commits": 2,
+            "last": "2026-09-19T22:44"
+          },
+          "R3": {
+            "commits": 2,
+            "last": "2026-09-20T05:27"
+          },
+          "R4": {
+            "commits": 5,
+            "last": "2026-09-20T21:44"
+          },
+          "R5": {
+            "commits": 8,
+            "last": "2026-09-20T22:38"
+          },
+          "R6": {
+            "commits": 3,
+            "last": "2026-09-19T23:53"
+          }
         },
         "discord": {
           "msg_count": 50,
@@ -69,6 +162,37 @@
           "latest_push": "2026-09-21T03:10:44Z",
           "contributors": 5
         },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-20T19:32"
+          },
+          "R2": {
+            "commits": 5,
+            "last": "2026-09-20T13:08"
+          },
+          "R3": {
+            "commits": 3,
+            "last": "2026-09-20T15:47"
+          },
+          "R4": {
+            "commits": 3,
+            "last": "2026-09-21T11:10"
+          },
+          "R5": {
+            "commits": 6,
+            "last": "2026-09-20T19:08"
+          },
+          "R6": {
+            "commits": 7,
+            "last": "2026-09-20T17:53"
+          }
+        },
         "discord": {
           "msg_count": 43,
           "members": 6,
@@ -99,6 +223,37 @@
           "latest_push": "2026-09-22T04:48:46Z",
           "contributors": 4
         },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 1,
+            "last": "2026-09-20T14:42"
+          },
+          "R2": {
+            "commits": 19,
+            "last": "2026-09-17T19:55"
+          },
+          "R3": {
+            "commits": 4,
+            "last": "2026-09-20T13:45"
+          },
+          "R4": {
+            "commits": 1,
+            "last": "2026-09-19T22:13"
+          },
+          "R5": {
+            "commits": 0,
+            "last": null
+          },
+          "R6": {
+            "commits": 0,
+            "last": null
+          }
+        },
         "discord": {
           "msg_count": 17,
           "members": 3,
@@ -121,32 +276,6 @@
         "figjam": {
           "status": "empty",
           "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
-        }
-      },
-      "Team 5": {
-        "github": {
-          "commits_total": 5,
-          "latest_push": "2026-09-21T01:10:42Z",
-          "contributors": 1
-        },
-        "discord": {
-          "msg_count": 4,
-          "members": 2,
-          "top3": [
-            {
-              "name": "alanmusk_01429",
-              "count": 3
-            },
-            {
-              "name": "shiro_0272902",
-              "count": 1
-            }
-          ],
-          "least_active_note": "archived \u2014 merged into Team 4"
-        },
-        "figjam": {
-          "status": "archived",
-          "note": "section correctly empty \u2014 merged into Team 4"
         }
       }
     }
