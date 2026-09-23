@@ -76,6 +76,24 @@
   .pr-label b{fill:var(--gold)}
 
   .empty-state{color:var(--dim);font-size:14px;padding:40px;text-align:center}
+
+  /* Alert cards — designed to be screenshotted standalone */
+  .alerts-section{margin-bottom:26px}
+  .alerts-title{font-size:13px;color:var(--dim);font-family:monospace;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .alert-card{max-width:640px;background:#161215;border:2px solid var(--red);border-radius:10px;padding:20px 22px;margin-bottom:14px}
+  .alert-card.watch{border-color:var(--amber)}
+  .alert-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;flex-wrap:wrap;gap:8px}
+  .alert-team{font-size:19px;font-weight:800}
+  .alert-badge{font-family:monospace;font-size:11px;font-weight:800;letter-spacing:0.5px;padding:4px 11px;border-radius:999px;background:var(--red);color:#1a0e0c}
+  .alert-badge.watch{background:var(--amber)}
+  .alert-ts{font-family:monospace;font-size:10.5px;color:var(--dim);margin-bottom:14px}
+  .alert-list{list-style:none;padding:0;margin:0}
+  .alert-list li{font-size:13.5px;padding:7px 0;border-top:1px solid #2a2224;display:flex;gap:8px}
+  .alert-list li:first-child{border-top:none}
+  .alert-list li .dot{color:var(--red);flex-shrink:0}
+  .alert-card.watch .alert-list li .dot{color:var(--amber)}
+  .alert-foot{font-size:10.5px;color:var(--dim);margin-top:14px;border-top:1px dashed #332a2c;padding-top:10px;font-family:monospace}
+  .ok-line{font-size:12.5px;color:var(--green);font-family:monospace;padding:4px 0}
 </style>
 </head>
 <body>
@@ -156,12 +174,71 @@ async function load() {
     </svg>`;
   }
 
+  function computeFlags(name, t, allTeams) {
+    const flags = [];
+    const roleOrder = ['R1','R2','R3','R4','R5','R6'];
+    const roleNames = {R1:'Product Owner & Scrum Master', R2:'Almanac & Macro', R3:'Technical & Economic', R4:'Data & Calibration', R5:'Human Score & UI', R6:'LLM & GitHub'};
+    const deadRoles = roleOrder.filter(r => !t.roles[r] || t.roles[r].commits === 0);
+    deadRoles.forEach(r => flags.push({sev:'high', text:`${r} (${roleNames[r]}) — 0 commits, no evidence ever produced`}));
+
+    const thinRoles = roleOrder.filter(r => t.roles[r] && t.roles[r].commits >= 1 && t.roles[r].commits <= 1 && !deadRoles.includes(r));
+    thinRoles.forEach(r => flags.push({sev:'med', text:`${r} (${roleNames[r]}) — only 1 commit total`}));
+
+    if (t.figjam.status !== 'active') {
+      flags.push({sev:'med', text:`FigJam board — still the untouched template, no backlog or Definition of Done visible`});
+    }
+
+    const engagements = Object.values(allTeams).map(x => x.discord.msg_count / x.discord.members);
+    const avgEngagement = engagements.reduce((a,b)=>a+b,0) / engagements.length;
+    const thisEngagement = t.discord.msg_count / t.discord.members;
+    if (thisEngagement < avgEngagement * 0.5) {
+      flags.push({sev:'med', text:`Discord — ${t.discord.msg_count} messages across ${t.discord.members} members (${thisEngagement.toFixed(1)}/member) vs ${avgEngagement.toFixed(1)}/member team average`});
+    }
+    return flags;
+  }
+
+  function renderAlerts(snap) {
+    const rows = Object.entries(snap.teams).map(([name, t]) => ({name, t, flags: computeFlags(name, t, snap.teams)}));
+    const flagged = rows.filter(r => r.flags.length > 0).sort((a,b) => {
+      const sevScore = f => f.filter(x=>x.sev==='high').length * 10 + f.length;
+      return sevScore(b.flags) - sevScore(a.flags);
+    });
+    const clean = rows.filter(r => r.flags.length === 0);
+
+    if (!flagged.length) return '';
+
+    let html = `<div class="alerts-section">
+      <div class="alerts-title">⚠ Needs a look — as of ${fmtTs(snap.timestamp)}</div>`;
+
+    flagged.forEach(({name, flags}) => {
+      const isHigh = flags.some(f => f.sev === 'high');
+      html += `<div class="alert-card ${isHigh ? '' : 'watch'}">
+        <div class="alert-head">
+          <div class="alert-team">${name}</div>
+          <div class="alert-badge ${isHigh ? '' : 'watch'}">${isHigh ? 'NEEDS ATTENTION' : 'WATCH'}</div>
+        </div>
+        <div class="alert-ts">Status check — ${fmtTs(snap.timestamp)}</div>
+        <ul class="alert-list">
+          ${flags.map(f => `<li><span class="dot">●</span><span>${f.text}</span></li>`).join('')}
+        </ul>
+        <div class="alert-foot">Generated from live GitHub + Discord + FigJam data, not a manual assessment.</div>
+      </div>`;
+    });
+
+    if (clean.length) {
+      html += clean.map(r => `<div class="ok-line">✓ ${r.name} — no flags this check</div>`).join('');
+    }
+    html += '</div>';
+    return html;
+  }
+
   function renderSnapshot(idx) {
     const snap = history[idx];
     const prev = idx > 0 ? history[idx - 1] : null;
     document.querySelectorAll('.rail-item').forEach((el, i) => el.classList.toggle('active', i === idx));
 
     let html = `<div class="snapshot-label">${snap.label || 'Status check'} — ${fmtTs(snap.timestamp)}</div>`;
+    html += renderAlerts(snap);
 
     for (const [name, t] of Object.entries(snap.teams)) {
       const pt = prev ? prev.teams[name] : null;
