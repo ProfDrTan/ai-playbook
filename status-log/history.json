@@ -1,0 +1,154 @@
+[
+  {
+    "timestamp": "2026-09-23T09:25:00+08:00",
+    "label": "Baseline \u2014 first status check",
+    "teams": {
+      "Team 1": {
+        "github": {
+          "commits_total": 42,
+          "latest_push": "2026-09-22T02:00:45Z",
+          "contributors": 8
+        },
+        "discord": {
+          "msg_count": 77,
+          "members": 7,
+          "top3": [
+            {
+              "name": "ayephyuss",
+              "count": 37
+            },
+            {
+              "name": "sololeveller233637",
+              "count": 13
+            },
+            {
+              "name": "hawlermathew",
+              "count": 11
+            }
+          ],
+          "least_active_note": "3 of 7 members with 0 counted messages"
+        },
+        "figjam": {
+          "status": "empty",
+          "note": "role cards and all 4 columns still placeholders"
+        }
+      },
+      "Team 2": {
+        "github": {
+          "commits_total": 34,
+          "latest_push": "2026-09-20T14:57:09Z",
+          "contributors": 8
+        },
+        "discord": {
+          "msg_count": 50,
+          "members": 8,
+          "top3": [
+            {
+              "name": "aliceinsomewhere",
+              "count": 18
+            },
+            {
+              "name": "mufor.",
+              "count": 12
+            },
+            {
+              "name": "1nonlyneon",
+              "count": 5
+            }
+          ],
+          "least_active_note": "several members under 3 messages"
+        },
+        "figjam": {
+          "status": "active",
+          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+        }
+      },
+      "Team 3": {
+        "github": {
+          "commits_total": 35,
+          "latest_push": "2026-09-21T03:10:44Z",
+          "contributors": 5
+        },
+        "discord": {
+          "msg_count": 43,
+          "members": 6,
+          "top3": [
+            {
+              "name": "alexlee149",
+              "count": 25
+            },
+            {
+              "name": "persitatu",
+              "count": 6
+            },
+            {
+              "name": "wilil_20",
+              "count": 4
+            }
+          ],
+          "least_active_note": "one member driving most of the volume"
+        },
+        "figjam": {
+          "status": "empty",
+          "note": "role cards and all 4 columns still placeholders"
+        }
+      },
+      "Team 4": {
+        "github": {
+          "commits_total": 51,
+          "latest_push": "2026-09-22T04:48:46Z",
+          "contributors": 4
+        },
+        "discord": {
+          "msg_count": 17,
+          "members": 3,
+          "top3": [
+            {
+              "name": "axey_125",
+              "count": 12
+            },
+            {
+              "name": "alanmusk_01429",
+              "count": 4
+            },
+            {
+              "name": "hjy987._44307",
+              "count": 1
+            }
+          ],
+          "least_active_note": "most GitHub activity of any team, lowest Discord volume, and asked in-channel whether they even have a FigJam board"
+        },
+        "figjam": {
+          "status": "empty",
+          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+        }
+      },
+      "Team 5": {
+        "github": {
+          "commits_total": 5,
+          "latest_push": "2026-09-21T01:10:42Z",
+          "contributors": 1
+        },
+        "discord": {
+          "msg_count": 4,
+          "members": 2,
+          "top3": [
+            {
+              "name": "alanmusk_01429",
+              "count": 3
+            },
+            {
+              "name": "shiro_0272902",
+              "count": 1
+            }
+          ],
+          "least_active_note": "archived \u2014 merged into Team 4"
+        },
+        "figjam": {
+          "status": "archived",
+          "note": "section correctly empty \u2014 merged into Team 4"
+        }
+      }
+    }
+  }
+]
