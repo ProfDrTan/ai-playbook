@@ -177,9 +177,10 @@ async function load() {
   function computeFlags(name, t, allTeams) {
     const flags = [];
     const roleOrder = ['R1','R2','R3','R4','R5','R6'];
-    const predLabels = {missing: 'never created a prediction file', lost: 'had a prediction file, but it lost its content and no longer exists', 'wrong-sprint': 'submitted a prediction — but for the wrong sprint'};
+    const predLabels = {missing: 'never created a prediction file', lost: 'had a prediction file, but it lost its content and no longer exists', 'wrong-sprint': 'submitted a prediction — but for the wrong sprint', 'submitted-late': 'submitted a prediction — but after the Tuesday deadline'};
     if (t.prediction && t.prediction.status !== 'submitted') {
-      flags.push({sev:'high', text:`Prediction Challenge — deadline was Tuesday, this team ${predLabels[t.prediction.status]}. ${t.prediction.detail}`});
+      const sev = t.prediction.status === 'submitted-late' ? 'med' : 'high';
+      flags.push({sev, text:`Prediction Challenge — deadline was Tuesday, this team ${predLabels[t.prediction.status]}. ${t.prediction.detail}`});
     }
 
     const roleNames = {R1:'Product Owner & Scrum Master', R2:'Almanac & Macro', R3:'Technical & Economic', R4:'Data & Calibration', R5:'Human Score & UI', R6:'LLM & GitHub'};
