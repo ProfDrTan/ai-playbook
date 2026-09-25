@@ -1209,5 +1209,307 @@
       }
     },
     "data_notes": "Discord data is fresh again \u2014 dt3-monitor's fetch step succeeded at 14:35pm SGT even though the workflow's 'publish' step is still failing (so the Action shows 'failure' overall, but the underlying state.json did update \u2014 worth checking directly rather than trusting the workflow status badge alone). GitHub: Team 2 pushed one new commit at 7:13am UTC (3:13pm SGT) \u2014 'Add automated macro data for R2', a real automation deliverable landing during the sprint window. FigJam re-screenshotted \u2014 unchanged, still only Team 2 actively using it. Prediction Challenge status unchanged."
+  },
+  {
+    "timestamp": "2026-09-26T06:34:00+08:00",
+    "label": "Status check \u2014 requested by Prof Tan (3-day gap, actual close revealed)",
+    "teams": {
+      "Team 1": {
+        "github": {
+          "commits_total": 46,
+          "latest_push": "2026-09-25T10:16:27Z",
+          "contributors": 8
+        },
+        "git_activity": {
+          "workflow": "branch+PR",
+          "branches_count": 7,
+          "merged_prs": [
+            {
+              "number": 1,
+              "branch": "feature/sprint2-github-modification",
+              "author": "uv-22",
+              "merged_at": "2026-09-19T20:33"
+            },
+            {
+              "number": 4,
+              "branch": "R4",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 2,
+              "branch": "R3",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 3,
+              "branch": "R5",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:01"
+            },
+            {
+              "number": 5,
+              "branch": "Role-1",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:02"
+            }
+          ]
+        },
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-20T18:59"
+          },
+          "R2": {
+            "commits": 1,
+            "last": "2026-09-19T20:30"
+          },
+          "R3": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          },
+          "R4": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          },
+          "R5": {
+            "commits": 2,
+            "last": "2026-09-20T17:36"
+          },
+          "R6": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          }
+        },
+        "discord": {
+          "msg_count": 26,
+          "members": 7,
+          "top3": [
+            {
+              "name": "hawlermathew",
+              "count": 10
+            },
+            {
+              "name": "busy_swan_05684",
+              "count": 8
+            },
+            {
+              "name": "zhang_41520",
+              "count": 6
+            }
+          ],
+          "least_active_note": "3 of 7 members with 0 counted messages",
+          "stale": false
+        },
+        "figjam": {
+          "status": "empty",
+          "note": "role cards and all 4 columns still placeholders"
+        },
+        "prediction": {
+          "status": "lost",
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+        }
+      },
+      "Team 2": {
+        "github": {
+          "commits_total": 45,
+          "latest_push": "2026-09-25T19:08:08Z",
+          "contributors": 8
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 2,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 3,
+            "last": "2026-09-20T14:45"
+          },
+          "R2": {
+            "commits": 3,
+            "last": "2026-09-23T07:13"
+          },
+          "R3": {
+            "commits": 2,
+            "last": "2026-09-20T05:27"
+          },
+          "R4": {
+            "commits": 5,
+            "last": "2026-09-20T21:44"
+          },
+          "R5": {
+            "commits": 8,
+            "last": "2026-09-20T22:38"
+          },
+          "R6": {
+            "commits": 3,
+            "last": "2026-09-19T23:53"
+          }
+        },
+        "discord": {
+          "msg_count": 41,
+          "members": 8,
+          "top3": [
+            {
+              "name": "aliceinsomewhere",
+              "count": 12
+            },
+            {
+              "name": "liangjinghong_97317",
+              "count": 10
+            },
+            {
+              "name": "mufor.",
+              "count": 5
+            }
+          ],
+          "least_active_note": "several members under 3 messages",
+          "stale": false
+        },
+        "figjam": {
+          "status": "active",
+          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+        },
+        "prediction": {
+          "status": "missing",
+          "detail": "No prediction file was ever created in the repo."
+        }
+      },
+      "Team 3": {
+        "github": {
+          "commits_total": 44,
+          "latest_push": "2026-09-21T03:10:45Z",
+          "contributors": 5
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-20T19:32"
+          },
+          "R2": {
+            "commits": 5,
+            "last": "2026-09-20T13:08"
+          },
+          "R3": {
+            "commits": 3,
+            "last": "2026-09-20T15:47"
+          },
+          "R4": {
+            "commits": 3,
+            "last": "2026-09-21T11:10"
+          },
+          "R5": {
+            "commits": 6,
+            "last": "2026-09-20T19:08"
+          },
+          "R6": {
+            "commits": 7,
+            "last": "2026-09-20T17:53"
+          }
+        },
+        "discord": {
+          "msg_count": 10,
+          "members": 6,
+          "top3": [
+            {
+              "name": "27ccc_",
+              "count": 5
+            },
+            {
+              "name": "wendilin_39493_15226",
+              "count": 2
+            },
+            {
+              "name": "ying73",
+              "count": 2
+            }
+          ],
+          "least_active_note": "one member driving most of the volume",
+          "stale": false
+        },
+        "figjam": {
+          "status": "empty",
+          "note": "role cards and all 4 columns still placeholders"
+        },
+        "prediction": {
+          "status": "submitted-late",
+          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 \u2014 error 0.044%, closest of any team, but late."
+        }
+      },
+      "Team 4": {
+        "github": {
+          "commits_total": 51,
+          "latest_push": "2026-09-22T04:48:46Z",
+          "contributors": 4
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 1,
+            "last": "2026-09-20T14:42"
+          },
+          "R2": {
+            "commits": 19,
+            "last": "2026-09-17T19:55"
+          },
+          "R3": {
+            "commits": 4,
+            "last": "2026-09-20T13:45"
+          },
+          "R4": {
+            "commits": 1,
+            "last": "2026-09-19T22:13"
+          },
+          "R5": {
+            "commits": 0,
+            "last": null
+          },
+          "R6": {
+            "commits": 0,
+            "last": null
+          }
+        },
+        "discord": {
+          "msg_count": 21,
+          "members": 3,
+          "top3": [
+            {
+              "name": "axey_125",
+              "count": 9
+            },
+            {
+              "name": "shiro_0272902",
+              "count": 5
+            },
+            {
+              "name": "jahanvi.10_37766",
+              "count": 4
+            }
+          ],
+          "least_active_note": "most GitHub activity of any team, lowest Discord volume, and asked in-channel whether they even have a FigJam board",
+          "stale": false
+        },
+        "figjam": {
+          "status": "empty",
+          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+        },
+        "prediction": {
+          "status": "submitted",
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 \u2014 error 0.473%. On time, but Team 3's late submission was closer."
+        }
+      }
+    },
+    "data_notes": "First check after a 3-day gap (last check was Wed 3:16pm). GitHub: Team 1 +4 commits, Team 2 +10 commits (new push Fri 7:08pm), Team 3 +9 commits \u2014 but Team 3's repo hasn't been pushed to since Mon 21st despite the commit-count field including older commits counted differently; Team 4 completely flat \u2014 zero pushes in 4 days, worst of any team, compounding its existing R5/R6 gaps. Discord data is fresh (fetch step succeeded again; publish step still shows 'failure' in Actions but the underlying JSON updates regardless \u2014 this appears to be a persistent, not transient, bug in the monitor's publish step worth fixing properly). FigJam not re-screenshotted this check. Actual SPX close now confirmed: 7,743.41 (Yahoo Finance ^GSPC, at-close quote) \u2014 Team 3's late Sep 23 submission (7,740.00) turned out closer than Team 4's on-time one (7,780.00): 0.044% vs 0.473% error."
   }
 ]
