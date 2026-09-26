@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sprint 4 — DRAFT for Review | AI Playbook</title>
+<style>
+  :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--blue-deep); color:var(--text-body); font-family:'IBM Plex Sans', -apple-system, sans-serif; line-height:1.65; }
+  main{max-width:900px; margin:0 auto; padding:40px 24px 100px;}
+  .eyebrow{font-family:monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:14px;}
+  h1{font-family:monospace; font-weight:700; font-size:clamp(22px,4vw,30px); color:var(--paper); margin-bottom:10px;}
+  p.sub{font-size:15px; max-width:680px; margin-bottom:24px;}
+  h2{font-family:monospace; font-size:18px; color:var(--paper); margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line-dim);}
+  h3{font-family:monospace; font-size:13.5px; color:var(--amber); margin:18px 0 6px;}
+  p{margin-bottom:12px; font-size:14.5px;}
+  .card{background:var(--blue-panel); border:1px solid var(--line-dim); border-radius:8px; padding:16px 18px; margin-bottom:14px;}
+  .card.fix{border-left:3px solid var(--coral);}
+  .card.retro{border-left:3px solid var(--green);}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
+  th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line-dim);}
+  th{font-family:monospace; font-size:10.5px; color:var(--amber); text-transform:uppercase;}
+  code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;}
+  ul,ol{margin:6px 0 6px 20px;}
+  li{margin-bottom:6px; font-size:14px;}
+  .status{font-family:monospace; font-size:11px; padding:4px 11px; border-radius:99px; border:1px solid var(--line-dim); display:inline-block; margin-right:8px;}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Draft · Not Student-Facing · For Prof Tan's Review Before Monday 28 Sep</div>
+<h1>Sprint 4 — Draft</h1>
+<p class="sub">Launches Monday 28 Sep, due Sunday 4 Oct 23:59 SGT, presented Monday 5 Oct. Built to replace the stale TR2 <code>sprint4/index.html</code> currently live, and to close the specific gaps Sprint 3's real data surfaced.</p>
+
+<h2>What's actually wrong with the live page right now</h2>
+<div class="card fix">
+<p><code>sprint4/index.html</code> is unedited TR2 content: dated "Mon 8 Jun 2026," release tag <code>vW24</code>, roles labeled "R9 GitHub Lead" and "R6 + R10" instead of this term's R1–R6, and Demo Day listed as "Mon 3 Aug" instead of the real Week 10 (23–29 Nov). <code>roadmap/index.html</code> is also TR2-labeled and currently shows a broken placeholder. Both need replacing, not editing — the underlying TR2 content doesn't map cleanly onto TR3's simpler R1–R6 structure.</p>
+</div>
+
+<h2>What Sprint 3 actually showed — folded into this design</h2>
+
+<div class="card retro">
+<h3>1 · Team 4: R5 and R6 have zero commits, ever</h3>
+<p>Confirmed via the status log, not assumed — Human Score &amp; UI and LLM &amp; GitHub have never been touched in Team 4's repo, despite them having the most total GitHub activity of any team. "Six roles in concert" isn't being enforced by the current design; it needs to be structural, not aspirational.</p>
+</div>
+
+<div class="card retro">
+<h3>2 · Only Team 2 actually uses FigJam</h3>
+<p>Teams 1, 3, and 4's board sections are still the untouched template — role cards unassigned, all four columns empty — while Team 2's shows real backlog items moving through Review and Done. The enforcement Sprint 3 added didn't move the other three teams.</p>
+</div>
+
+<div class="card retro">
+<h3>3 · The Prediction Challenge's late-but-accurate case</h3>
+<p>Team 3 submitted after the Tuesday deadline but was the closest of any team (0.044% error) once the actual close was known; Team 4 was on time but further off (0.473%). Worth keeping the deadline firm while not conflating "late" with "wrong" in how it's scored.</p>
+</div>
+
+<div class="card retro">
+<h3>4 · The source-of-record fix from Sprint 3 worked</h3>
+<p>Naming Yahoo Finance's <code>^GSPC</code> historical page as the authoritative close, with Google Finance as a stated fallback, resolved the "whose number counts" ambiguity. Any new automated data point in Sprint 4 should get the same treatment from day one, not retrofitted after a team hits the same wall.</p>
+</div>
+
+<h2>Sprint 4 goal</h2>
+<p>Sprint 3 automated <em>one</em> manual step (the SPX close) while keeping judgment fully human-written. Sprint 4 automates a <em>second</em> step — and, separately and non-negotiably, closes the R5/R6 gap: every team demos a working artifact from all six roles, not just the roles that happen to be active already.</p>
+
+<h2>What every team must submit — due Sun 4 Oct, 23:59 SGT</h2>
+<table>
+<tr><th>Deliverable</th><th>Role</th><th>Notes</th></tr>
+<tr><td>Second automated data pull (any source, named up front as the record if new)</td><td>R2 or R3</td><td>Committed as a script + output file, not a one-off manual entry</td></tr>
+<tr><td>Prediction Challenge, Week 4 target</td><td>Full team</td><td>Same format as Sprint 3; deadline Tuesday, scored against Yahoo Finance <code>^GSPC</code></td></tr>
+<tr><td>Working artifact from <strong>every</strong> role, R1–R6</td><td>All six</td><td>No role may show zero commits this sprint — this is graded per-role, not per-team</td></tr>
+<tr><td>FigJam board: backlog + DoD + at least one card moved through all 4 columns</td><td>R1</td><td>Same bar as Sprint 3, still enforced</td></tr>
+<tr><td>One-sentence retro callback: what changed since Sprint 3</td><td>R1</td><td>Presented Monday 5 Oct</td></tr>
+</table>
+
+<h2>Open questions before this goes live</h2>
+<ol>
+<li>Should the "no role at zero commits" rule carry an explicit grade penalty, or stay a flagged-but-ungraded expectation like FigJam was in Sprint 1?</li>
+<li>Is a second automated data pull the right escalation, or should Sprint 4 instead deepen the existing SPX pipeline (e.g. add the LLM-synthesis step the old TR2 draft's "Level 3" described) rather than adding a new metric?</li>
+<li>Team 4's R5/R6 gap: worth a direct message before Monday, separate from the general Sprint 4 announcement, so it isn't the first they're hearing of it in front of the whole class?</li>
+</ol>
+
+</main>
+</body>
+</html>
