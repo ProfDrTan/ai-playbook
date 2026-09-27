@@ -1511,5 +1511,307 @@
       }
     },
     "data_notes": "First check after a 3-day gap (last check was Wed 3:16pm). GitHub: Team 1 +4 commits, Team 2 +10 commits (new push Fri 7:08pm), Team 3 +9 commits \u2014 but Team 3's repo hasn't been pushed to since Mon 21st despite the commit-count field including older commits counted differently; Team 4 completely flat \u2014 zero pushes in 4 days, worst of any team, compounding its existing R5/R6 gaps. Discord data is fresh (fetch step succeeded again; publish step still shows 'failure' in Actions but the underlying JSON updates regardless \u2014 this appears to be a persistent, not transient, bug in the monitor's publish step worth fixing properly). FigJam not re-screenshotted this check. Actual SPX close now confirmed: 7,743.41 (Yahoo Finance ^GSPC, at-close quote) \u2014 Team 3's late Sep 23 submission (7,740.00) turned out closer than Team 4's on-time one (7,780.00): 0.044% vs 0.473% error."
+  },
+  {
+    "timestamp": "2026-09-27T08:48:00+08:00",
+    "label": "Status check \u2014 requested by Prof Tan (pre-Monday weekend push)",
+    "teams": {
+      "Team 1": {
+        "github": {
+          "commits_total": 74,
+          "latest_push": "2026-09-26T19:25:03Z",
+          "contributors": 8
+        },
+        "git_activity": {
+          "workflow": "branch+PR",
+          "branches_count": 7,
+          "merged_prs": [
+            {
+              "number": 1,
+              "branch": "feature/sprint2-github-modification",
+              "author": "uv-22",
+              "merged_at": "2026-09-19T20:33"
+            },
+            {
+              "number": 4,
+              "branch": "R4",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 2,
+              "branch": "R3",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 3,
+              "branch": "R5",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:01"
+            },
+            {
+              "number": 5,
+              "branch": "Role-1",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:02"
+            }
+          ]
+        },
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-20T18:59"
+          },
+          "R2": {
+            "commits": 1,
+            "last": "2026-09-19T20:30"
+          },
+          "R3": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          },
+          "R4": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          },
+          "R5": {
+            "commits": 2,
+            "last": "2026-09-20T17:36"
+          },
+          "R6": {
+            "commits": 2,
+            "last": "2026-09-20T22:28"
+          }
+        },
+        "discord": {
+          "msg_count": 84,
+          "members": 7,
+          "top3": [
+            {
+              "name": "hawlermathew",
+              "count": 36
+            },
+            {
+              "name": "ayephyuss",
+              "count": 22
+            },
+            {
+              "name": "sololeveller233637",
+              "count": 10
+            }
+          ],
+          "least_active_note": "3 of 7 members with 0 counted messages",
+          "stale": false
+        },
+        "figjam": {
+          "status": "active",
+          "note": "roles named, all 4 columns populated with real cards \u2014 was empty template as of last check"
+        },
+        "prediction": {
+          "status": "lost",
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+        }
+      },
+      "Team 2": {
+        "github": {
+          "commits_total": 71,
+          "latest_push": "2026-09-26T19:28:17Z",
+          "contributors": 8
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 2,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 3,
+            "last": "2026-09-20T14:45"
+          },
+          "R2": {
+            "commits": 3,
+            "last": "2026-09-23T07:13"
+          },
+          "R3": {
+            "commits": 2,
+            "last": "2026-09-20T05:27"
+          },
+          "R4": {
+            "commits": 5,
+            "last": "2026-09-20T21:44"
+          },
+          "R5": {
+            "commits": 8,
+            "last": "2026-09-20T22:38"
+          },
+          "R6": {
+            "commits": 3,
+            "last": "2026-09-19T23:53"
+          }
+        },
+        "discord": {
+          "msg_count": 49,
+          "members": 8,
+          "top3": [
+            {
+              "name": "liangjinghong_97317",
+              "count": 16
+            },
+            {
+              "name": "1nonlyneon",
+              "count": 9
+            },
+            {
+              "name": "mufor.",
+              "count": 9
+            }
+          ],
+          "least_active_note": "several members under 3 messages",
+          "stale": false
+        },
+        "figjam": {
+          "status": "active",
+          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+        },
+        "prediction": {
+          "status": "missing",
+          "detail": "No prediction file was ever created in the repo."
+        }
+      },
+      "Team 3": {
+        "github": {
+          "commits_total": 55,
+          "latest_push": "2026-09-26T19:03:20Z",
+          "contributors": 5
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-20T19:32"
+          },
+          "R2": {
+            "commits": 5,
+            "last": "2026-09-20T13:08"
+          },
+          "R3": {
+            "commits": 3,
+            "last": "2026-09-20T15:47"
+          },
+          "R4": {
+            "commits": 3,
+            "last": "2026-09-21T11:10"
+          },
+          "R5": {
+            "commits": 6,
+            "last": "2026-09-20T19:08"
+          },
+          "R6": {
+            "commits": 7,
+            "last": "2026-09-20T17:53"
+          }
+        },
+        "discord": {
+          "msg_count": 11,
+          "members": 6,
+          "top3": [
+            {
+              "name": "27ccc_",
+              "count": 3
+            },
+            {
+              "name": "ying73",
+              "count": 2
+            },
+            {
+              "name": "persitatu",
+              "count": 2
+            }
+          ],
+          "least_active_note": "one member driving most of the volume",
+          "stale": false
+        },
+        "figjam": {
+          "status": "active",
+          "note": "roles named, all 4 columns populated \u2014 was empty template as of last check"
+        },
+        "prediction": {
+          "status": "submitted-late",
+          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 \u2014 error 0.044%, closest of any team, but late."
+        }
+      },
+      "Team 4": {
+        "github": {
+          "commits_total": 65,
+          "latest_push": "2026-09-26T08:34:27Z",
+          "contributors": 4
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        },
+        "roles": {
+          "R1": {
+            "commits": 1,
+            "last": "2026-09-20T14:42"
+          },
+          "R2": {
+            "commits": 19,
+            "last": "2026-09-17T19:55"
+          },
+          "R3": {
+            "commits": 4,
+            "last": "2026-09-20T13:45"
+          },
+          "R4": {
+            "commits": 1,
+            "last": "2026-09-19T22:13"
+          },
+          "R5": {
+            "commits": 1,
+            "last": "2026-09-26T08:24"
+          },
+          "R6": {
+            "commits": 2,
+            "last": "2026-09-26T08:34"
+          }
+        },
+        "discord": {
+          "msg_count": 62,
+          "members": 3,
+          "top3": [
+            {
+              "name": "axey_125",
+              "count": 22
+            },
+            {
+              "name": "alanmusk_01429",
+              "count": 17
+            },
+            {
+              "name": "shiro_0272902",
+              "count": 11
+            }
+          ],
+          "least_active_note": "most GitHub activity of any team, lowest Discord volume, and asked in-channel whether they even have a FigJam board",
+          "stale": false
+        },
+        "figjam": {
+          "status": "active",
+          "note": "R2 and R6 roles named, real cards in To Do/In Progress/Review/Done \u2014 was empty template as of last check; R1/R3/R4/R5 still unnamed placeholders"
+        },
+        "prediction": {
+          "status": "submitted",
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 \u2014 error 0.473%. On time, but Team 3's late submission was closer."
+        }
+      }
+    },
+    "data_notes": "Major weekend push before Monday's presentation. GitHub: all 4 teams roughly doubled their commit counts since Wed/Thu (Team 1 +28, Team 2 +26, Team 3 +11, Team 4 +14). FigJam: Teams 1 and 3 went from completely untouched templates to fully active boards \u2014 the Sprint 3 retro finding ('only Team 2 uses FigJam') is now largely resolved without intervention. Team 4 partially caught up (R2/R6 named, real cards) but R1/R3/R4/R5 sections are still placeholder. Team 4's R5/R6 code gap is also partially closing: R6 now has real files (audit_log.md, release_checklist.md), R5 has a folder but only a .gitkeep placeholder \u2014 created but not yet populated. Discord confirms the same pattern: Team 1 and Team 4 both surged (Team 4 16\u219262 messages), Team 3 dropped to its lowest yet (11 messages) despite decent commit volume \u2014 coordination happening more in commits than chat for that team, or coordination happening elsewhere."
   }
 ]
