@@ -30,9 +30,9 @@
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft · Not Student-Facing · For Prof Tan's Review Before Monday 28 Sep</div>
+<div class="eyebrow">Draft v2 · Not Student-Facing · Finalized by Prof Tan evening 27 Sep, folding in same-day findings</div>
 <h1>Sprint 4 — Draft</h1>
-<p class="sub">Launches Monday 28 Sep, due Sunday 4 Oct 23:59 SGT, presented Monday 5 Oct. Built to replace the stale TR2 <code>sprint4/index.html</code> currently live, and to close the specific gaps Sprint 3's real data surfaced.</p>
+<p class="sub">Launches Monday 28 Sep, due Sunday 4 Oct 23:59 SGT, presented Monday 5 Oct. Built to replace the stale TR2 <code>sprint4/index.html</code> currently live, to close the gaps Sprint 3's real data surfaced, and to move every team one step further into the published <a href="/architecture/">System Architecture</a> — specifically Stages 6–7, which no team has reached yet.</p>
 
 <h2>What's actually wrong with the live page right now</h2>
 <div class="card fix">
@@ -42,43 +42,56 @@
 <h2>What Sprint 3 actually showed — folded into this design</h2>
 
 <div class="card retro">
-<h3>1 · Team 4: R5 and R6 have zero commits, ever</h3>
-<p>Confirmed via the status log, not assumed — Human Score &amp; UI and LLM &amp; GitHub have never been touched in Team 4's repo, despite them having the most total GitHub activity of any team. "Six roles in concert" isn't being enforced by the current design; it needs to be structural, not aspirational.</p>
+<h3>1 · The R5/R6 gap closed, but only under deadline pressure</h3>
+<p>Team 4's Human Score &amp; UI and LLM &amp; GitHub roles sat at zero commits as of Wednesday's check, then both got real content (<code>dashboard.html</code>; <code>audit_log.md</code> + <code>release_checklist.md</code>) over the weekend once flagged. Good that it closed — but it closed reactively, days after the gap existed. The fix isn't "check harder at the end," it's catching it midweek while it's still solvable.</p>
 </div>
 
 <div class="card retro">
-<h3>2 · Only Team 2 actually uses FigJam</h3>
-<p>Teams 1, 3, and 4's board sections are still the untouched template — role cards unassigned, all four columns empty — while Team 2's shows real backlog items moving through Review and Done. The enforcement Sprint 3 added didn't move the other three teams.</p>
+<h3>2 · FigJam adoption improved, but two teams are now access-blocked, not template-stuck</h3>
+<p>Teams 1, 3, and 4 all moved from untouched templates to fully active boards (all four columns populated) — the Sprint 3 enforcement worked. But two new, different problems surfaced <em>this morning</em>: Team 1's qiu0181 hit a verification error and had a teammate move his card manually instead of it getting fixed; two Team 4 students (estelle_wen_05110, alanmusk_01429) reported they can't edit the board at all. Access, not adoption, is now the live issue.</p>
 </div>
 
 <div class="card retro">
-<h3>3 · The Prediction Challenge's late-but-accurate case</h3>
+<h3>3 · Discord surfaced a real communication split, independent of GitHub activity</h3>
+<p>Team 3 is the most accurate predictor of any team but nearly silent on Discord (5 messages all sprint, 3 active members) — their coordination is happening somewhere invisible. Team 2 has 3 of 6 members barely present in-channel despite steady commits. Per-role GitHub activity alone doesn't catch this; it needs its own signal.</p>
+</div>
+
+<div class="card retro">
+<h3>4 · The Prediction Challenge's late-but-accurate case</h3>
 <p>Team 3 submitted after the Tuesday deadline but was the closest of any team (0.044% error) once the actual close was known; Team 4 was on time but further off (0.473%). Worth keeping the deadline firm while not conflating "late" with "wrong" in how it's scored.</p>
 </div>
 
 <div class="card retro">
-<h3>4 · The source-of-record fix from Sprint 3 worked</h3>
-<p>Naming Yahoo Finance's <code>^GSPC</code> historical page as the authoritative close, with Google Finance as a stated fallback, resolved the "whose number counts" ambiguity. Any new automated data point in Sprint 4 should get the same treatment from day one, not retrofitted after a team hits the same wall.</p>
+<h3>5 · The source-of-record fix from Sprint 3 worked</h3>
+<p>Naming Yahoo Finance's <code>^GSPC</code> historical page as the authoritative close, with Google Finance as a stated fallback, resolved the "whose number counts" ambiguity. Every new automated artifact in Sprint 4 gets the same treatment from day one.</p>
+</div>
+
+<div class="card retro">
+<h3>6 · Every team is stuck at the same architecture stage</h3>
+<p>All four teams execute Stages 1–5 of the published architecture (data sources → agent analysis → LLM synthesis → human score → locked prediction) but stop there. Only Team 3 shows any trace of Stage 6 work. Nobody has built Stage 6 (Delta Measurement) or Stage 7 (Prescriptions) — the loop that turns last week's miss into this week's agent-weight adjustment. This is the one gap that's identical across all four teams, which makes it the right common target.</p>
 </div>
 
 <h2>Sprint 4 goal</h2>
-<p>Sprint 3 automated <em>one</em> manual step (the SPX close) while keeping judgment fully human-written. Sprint 4 automates a <em>second</em> step — and, separately and non-negotiably, closes the R5/R6 gap: every team demos a working artifact from all six roles, not just the roles that happen to be active already.</p>
+<p>One common bar for all four teams — no team gets a different target. Sprint 4 closes Stages 6–7 of the published architecture (Delta Measurement → Prescriptions) and formalizes Stage 3 (LLM Synthesis), which every team currently does informally at best. Separately and structurally: the Wednesday check-in becomes a committed artifact, not a conversation, so a gap like R5/R6's is caught while it's still solvable — not discovered at the Sunday deadline.</p>
 
 <h2>What every team must submit — due Sun 4 Oct, 23:59 SGT</h2>
 <table>
 <tr><th>Deliverable</th><th>Role</th><th>Notes</th></tr>
-<tr><td>Second automated data pull (any source, named up front as the record if new)</td><td>R2 or R3</td><td>Committed as a script + output file, not a one-off manual entry</td></tr>
+<tr><td><code>llm-synthesis/vW4.md</code> — Stage 3 formalized</td><td>R5</td><td>Log where ChatGPT / Gemini / DeepSeek agreed and diverged before the Human Score stage, per the architecture page's own Stage 3 description</td></tr>
+<tr><td><code>delta/vW4.md</code> — Stage 6</td><td>R4</td><td>Sprint 3 locked prediction vs. actual close, broken into the three signals the architecture defines: error size, direction, and which agent contributed most to the miss</td></tr>
+<tr><td><code>prescriptions/vW4.md</code> — Stage 7</td><td>R4 + R1</td><td>One concrete, specific agent-weight adjustment for Sprint 5 arising from the delta — not a general reflection</td></tr>
+<tr><td><code>checkin/wednesday.md</code></td><td>R1</td><td>Committed by Wed 30 Sep, 12:00 SGT — individual per-role status, not a paraphrase of the group channel. dt3-monitor will flag any team missing this by Wed 17:00</td></tr>
 <tr><td>Prediction Challenge, Week 4 target</td><td>Full team</td><td>Same format as Sprint 3; deadline Tuesday, scored against Yahoo Finance <code>^GSPC</code></td></tr>
-<tr><td>Working artifact from <strong>every</strong> role, R1–R6</td><td>All six</td><td>No role may show zero commits this sprint — this is graded per-role, not per-team</td></tr>
-<tr><td>FigJam board: backlog + DoD + at least one card moved through all 4 columns</td><td>R1</td><td>Same bar as Sprint 3, still enforced</td></tr>
-<tr><td>One-sentence retro callback: what changed since Sprint 3</td><td>R1</td><td>Presented Monday 5 Oct</td></tr>
+<tr><td>Working artifact from <strong>every</strong> role, R1–R6, minimum 5 commits each</td><td>All six</td><td>Graded per-role, not per-team — same floor for all four teams regardless of current activity level</td></tr>
+<tr><td>Every FigJam card moved to Done links a Discord message</td><td>R1</td><td>Targets the Team 3 silent-Discord and Team 1/4 "moved-it-for-them" patterns without naming either team in the requirement itself</td></tr>
+<tr><td>Confirmed GitHub write + FigJam edit access for every listed teammate</td><td>R1</td><td>Floor to clear before Sprint 4 starts, not a stretch goal — Teams 1 and 4 currently have unresolved access blockers</td></tr>
 </table>
 
-<h2>Open questions before this goes live</h2>
+<h2>Decided — no longer open</h2>
 <ol>
-<li>Should the "no role at zero commits" rule carry an explicit grade penalty, or stay a flagged-but-ungraded expectation like FigJam was in Sprint 1?</li>
-<li>Is a second automated data pull the right escalation, or should Sprint 4 instead deepen the existing SPX pipeline (e.g. add the LLM-synthesis step the old TR2 draft's "Level 3" described) rather than adding a new metric?</li>
-<li>Team 4's R5/R6 gap: worth a direct message before Monday, separate from the general Sprint 4 announcement, so it isn't the first they're hearing of it in front of the whole class?</li>
+<li>No grade-penalty cliff for zero-commit roles. A flat per-role commit floor (5) applies to all four teams instead — avoids penalizing Team 3/4, where thin-but-real roles (1–2 commits) still shipped working output.</li>
+<li>Not a second, unrelated data pull. The escalation is Stages 6–7 of the existing architecture — deepens what's already built rather than adding a disconnected metric, and gives every team the same target regardless of how mature their current pipeline is.</li>
+<li>Team 4's R5/R6 gap and the two FigJam access blockers (Team 1, Team 4) surface naturally through tomorrow's presentation questions rather than a separate pre-emptive message — the questions are designed to make each team explain their own gap in the room.</li>
 </ol>
 
 </main>
