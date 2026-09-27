@@ -1845,7 +1845,33 @@
           "status": "active",
           "note": "all 4 columns populated, unchanged from prior check"
         },
-        "live_blocker": "qiu0181 (06:28 SGT today): stuck on a 'verification required' step, asked teammate to move R6 to Done manually; zhang_41520 separately walked a teammate through a local-server fix for viewing R5's branch \u2014 access/workflow friction, not resolved in-thread"
+        "live_blocker": "qiu0181 (06:28 SGT today): stuck on a 'verification required' step, asked teammate to move R6 to Done manually; zhang_41520 separately walked a teammate through a local-server fix for viewing R5's branch \u2014 access/workflow friction, not resolved in-thread",
+        "roles": {
+          "R1": {
+            "commits": 4,
+            "last": "2026-09-26 06:20"
+          },
+          "R2": {
+            "commits": 10,
+            "last": "2026-09-26 12:29"
+          },
+          "R3": {
+            "commits": 3,
+            "last": "2026-09-26 18:38"
+          },
+          "R4": {
+            "commits": 7,
+            "last": "2026-09-26 18:42"
+          },
+          "R5": {
+            "commits": 13,
+            "last": "2026-09-27 08:37"
+          },
+          "R6": {
+            "commits": 6,
+            "last": "2026-09-27 05:08"
+          }
+        }
       },
       "Team 2": {
         "github": {
@@ -1874,7 +1900,33 @@
           "status": "active",
           "note": "unchanged from prior check"
         },
-        "live_blocker": null
+        "live_blocker": null,
+        "roles": {
+          "R1": {
+            "commits": 4,
+            "last": "2026-09-25 10:07"
+          },
+          "R2": {
+            "commits": 11,
+            "last": "2026-09-23 13:48"
+          },
+          "R3": {
+            "commits": 5,
+            "last": "2026-09-25 10:15"
+          },
+          "R4": {
+            "commits": 12,
+            "last": "2026-09-26 16:47"
+          },
+          "R5": {
+            "commits": 17,
+            "last": "2026-09-26 17:39"
+          },
+          "R6": {
+            "commits": 12,
+            "last": "2026-09-27 12:52"
+          }
+        }
       },
       "Team 3": {
         "github": {
@@ -1890,7 +1942,33 @@
           "status": "active",
           "note": "all 4 columns populated, unchanged from prior check"
         },
-        "live_blocker": null
+        "live_blocker": null,
+        "roles": {
+          "R1": {
+            "commits": 2,
+            "last": "2026-09-27 09:32"
+          },
+          "R2": {
+            "commits": 2,
+            "last": "2026-09-26 09:41"
+          },
+          "R3": {
+            "commits": 5,
+            "last": "2026-09-26 09:28"
+          },
+          "R4": {
+            "commits": 2,
+            "last": "2026-09-25 11:52"
+          },
+          "R5": {
+            "commits": 1,
+            "last": "2026-09-23 16:36"
+          },
+          "R6": {
+            "commits": 8,
+            "last": "2026-09-26 18:02"
+          }
+        }
       },
       "Team 4": {
         "github": {
@@ -1898,13 +1976,29 @@
           "latest_push": "2026-09-27T12:41:00Z"
         },
         "roles": {
+          "R1": {
+            "commits": 1,
+            "last": "2026-09-26 08:23"
+          },
+          "R2": {
+            "commits": 2,
+            "last": "2026-09-27 08:20"
+          },
+          "R3": {
+            "commits": 3,
+            "last": "2026-09-26 19:03"
+          },
+          "R4": {
+            "commits": 1,
+            "last": "2026-09-26 08:24"
+          },
           "R5": {
-            "status": "populated",
-            "note": "evidence/vW3/r5_model_integration now has dashboard.html alongside the old .gitkeep \u2014 gap from prior check is closed"
+            "commits": 2,
+            "last": "2026-09-27 12:41"
           },
           "R6": {
-            "status": "populated",
-            "note": "evidence/vW3/r6_release_governance now has audit_log.md and release_checklist.md \u2014 gap from prior check is closed"
+            "commits": 3,
+            "last": "2026-09-26 08:19"
           }
         },
         "discord": {
