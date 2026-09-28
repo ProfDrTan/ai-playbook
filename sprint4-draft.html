@@ -125,13 +125,9 @@
     "gold": "One sentence."
   },
   "leads": { "spx": "github-username (R2)", "ndx": "github-username (R3)", "gold": "github-username (R4)" },
-  "r1_confirms": true,
-  "members": [
-    { "github": "username", "role": "R1", "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "DOWN",
-      "why": "One sentence." }
-  ]
+  "r1_confirms": true
 }</pre>
-<p>Structured JSON, not free-form markdown, so it can be checked, scored and shown on the UI automatically. <code>team_call</code> is the final call, filed by R1 after R5's Human Score. <code>why</code> holds one sentence per call, written by that instrument's owner. <code>leads</code> names the person accountable for each instrument. <code>r1_confirms</code> means R1 has checked that every sentence is present. Every member also enters their own call with their own one-sentence reason. Anything that does not validate counts as no entry.</p>
+<p>Structured JSON, not free-form markdown, so it can be checked, scored and shown on the UI automatically. <code>team_call</code> is the final call, filed by R1 after R5's Human Score. <code>why</code> holds one sentence per call, written by that instrument's owner. <code>leads</code> names the person accountable for each instrument. <code>r1_confirms</code> means R1 has checked that every sentence is present. Anything that does not validate counts as no entry.</p>
 
 <h3>2a · Who owns each prediction target</h3>
 <p>Every role feeds all three instruments, but each target has <strong>one named owner</strong> who proposes the number, writes the case for it, and is the person asked about it on Monday.</p>
@@ -146,7 +142,7 @@
 <tr><td>R2, R3</td><td>Agent outputs (R2 almanac and macro, R3 technical) cover all three instruments, written and committed before the LLMs are queried. These are what the one-sentence reasons draw on</td></tr>
 <tr><td>R6</td><td>Queries the three LLMs on all three instruments; supplies the agree/diverge log</td></tr>
 <tr><td>R5</td><td>Human Score on each instrument: confirm, adjust or override the owner's number, with the reason written down</td></tr>
-<tr><td>R1 (Scrum Master)</td><td>Files <code>predictions/vW4.json</code> before the lock, names the three owners in <code>leads</code>, chases every member's call and reason, and confirms (<code>r1_confirms</code>) that every one-sentence reason is present. No confirmation, no valid entry</td></tr>
+<tr><td>R1 (Scrum Master)</td><td>Files <code>predictions/vW4.json</code> before the lock, names the three owners in <code>leads</code>, chases the three owners for their sentences, and confirms (<code>r1_confirms</code>) that every one-sentence reason is present. No confirmation, no valid entry</td></tr>
 <tr><td>R4</td><td>Also the official recorder of prices for the team (§2b). Because R4 both owns the gold call and records the actuals, the number of record is the one posted centrally, not R4's copy</td></tr>
 </table>
 <p>Workload watch: R4 (gold call, actuals, delta, prescriptions) and R6 (LLM queries on three instruments, synthesis, release) are the two heaviest roles this sprint. The live roles-page Monday speaking points would need a matching edit; I have not touched the live site.</p>
@@ -294,15 +290,8 @@
 <p><strong>Not built yet:</strong> the validator, the lock script, the status-board posts and the ledger page. The design is ready to build and dry-run against Sprint 3's real repos today.</p>
 </div>
 
-<h2>4 · Raising participation</h2>
-<div class="card">
-<ul>
-<li><strong>Everyone predicts.</strong> Each member enters an individual call in <code>members[]</code>. R1's <code>team_call</code> is the official team entry.</li>
-<li><strong>Participation share is public.</strong> Valid individual entries divided by team members, shown per team on the leaderboard beside accuracy. A 6-of-6 team looks very different from a 2-of-6 team.</li>
-<li><strong>Individual accuracy is ranked too</strong>, so a member can beat their own team's call — which also feeds calibration (R4).</li>
-<li><strong>Harder option, for your decision:</strong> the team entry is official only if every member has submitted.</li>
-</ul>
-</div>
+<h2>4 · Participation</h2>
+<div class="card"><p>One entry per team: one prediction for the three markets. No individual entries. Participation comes from the oral defense, where any member can be asked.</p></div>
 
 <h2>5 · Sprint 4 goal — one common bar, stretched toward the full architecture</h2>
 <p>Same target for all four teams, no tiers. Sprint 4 takes three instruments through Stages 1–5, builds Stages 6–7 for the first time, and makes the UI show the whole chain from committed data rather than typed-in numbers.</p>
@@ -350,7 +339,7 @@ Every team uses the same schema, so any team's dashboard could display any team'
 <h2>7 · What every team must submit</h2>
 <table>
 <tr><th>Deliverable</th><th>Owner</th><th>Due</th></tr>
-<tr><td><code>predictions/vW4.json</code> — team call, one-sentence reason per call, R1 confirmation, and every member's own call with their own reason</td><td>R1 (all members; instrument owners write the reasons)</td><td><strong>Wed 30 Sep 23:59 SGT — locked</strong></td></tr>
+<tr><td><code>predictions/vW4.json</code> — the team's call on all three markets, one-sentence reason per call, R1 confirmation</td><td>R1 (owners write the sentences)</td><td><strong>Wed 30 Sep 23:59 SGT — locked</strong></td></tr>
 <tr><td>R2 and R3 agent outputs; <code>llm-synthesis/vW4.json</code> (R6); <code>human-score/vW4.json</code> (R5) — all committed <em>before</em> the lock</td><td>R2, R3, R6, R5</td><td>Wed 30 Sep, ahead of the lock. Later commits are marked "post-lock" on the ledger; not disqualifying, but visible</td></tr>
 <tr><td>UI at <code>ui/index.html</code> showing the calls and reasons (the Locked Prediction panel)</td><td>R5</td><td><strong>Wed 30 Sep 23:59 SGT</strong></td></tr>
 <tr><td><code>checkin/wednesday.md</code> — individual per-role status, not a paraphrase of the group chat</td><td>R1</td><td>Wed 30 Sep 12:00 SGT. Staff check for missing ones by 17:00</td></tr>

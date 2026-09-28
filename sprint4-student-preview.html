@@ -98,7 +98,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   </div>
 
   <h2>Your Entry: <code>predictions/vW4.json</code></h2>
-  <p>One file, one format, on <code>main</code> in your team repo.</p>
+  <p>One file, one prediction per team, on <code>main</code> in your team repo.</p>
 <pre>{
   "sprint": "vW4",
   "team": "team-N",
@@ -109,16 +109,11 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     "gold": "One sentence."
   },
   "leads": { "spx": "github-username (R2)", "ndx": "github-username (R3)", "gold": "github-username (R4)" },
-  "r1_confirms": true,
-  "members": [
-    { "github": "username", "role": "R1", "spx_close": 0.00, "ndx_close": 0.00,
-      "gold_direction": "DOWN", "why": "One sentence." }
-  ]
+  "r1_confirms": true
 }</pre>
   <ul>
     <li><code>team_call</code> is your final call. R1 files it after R5's Human Score.</li>
     <li><code>why</code> is one sentence per call, written by that market's owner.</li>
-    <li><b>Every team member also enters their own call and their own one sentence</b> in <code>members</code>.</li>
     <li><code>gold_direction</code> must read exactly <code>"UP"</code> or <code>"DOWN"</code>.</li>
     <li><b>R1 (Scrum Master) makes sure every sentence is in the file</b>, then sets <code>r1_confirms</code> to true.</li>
     <li>Anything missing or unreadable is no entry.</li>
@@ -146,7 +141,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 
   <div class="task">
     <span class="num">R1</span><b>Product Owner &amp; Scrum Master: file the entry, check every sentence</b>
-    <p style="margin:8px 0 0">File <code>predictions/vW4.json</code> and name the three owners. Chase every member for their call and sentence, and check none is missing. Commit <code>checkin/wednesday.md</code> by Wednesday 12:00: contact each role member individually and record each person's real status. Confirm every teammate has GitHub write access and FigJam edit access <b>before the Wednesday deadline</b>. With R4, write the prescription.</p>
+    <p style="margin:8px 0 0">File <code>predictions/vW4.json</code> and name the three owners. Chase the three owners for their sentences, and check none is missing. Commit <code>checkin/wednesday.md</code> by Wednesday 12:00: contact each role member individually and record each person's real status. Confirm every teammate has GitHub write access and FigJam edit access <b>before the Wednesday deadline</b>. With R4, write the prescription.</p>
     <div class="dod"><b>DONE MEANS</b> — a complete entry filed before Wednesday 23:59, a per-role check-in committed, and every FigJam card moved to Done linking a Discord message.</div>
   </div>
 
@@ -213,7 +208,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   <div class="tablewrap">
   <table>
     <tr><th>What</th><th>Owner</th><th>Due</th></tr>
-    <tr><td><code>predictions/vW4.json</code>: team call, one sentence per call, R1 confirmation, every member's own call</td><td>R1 (everyone)</td><td><b>Wed 30 Sep 23:59</b></td></tr>
+    <tr><td><code>predictions/vW4.json</code>: the team's call on all three markets, one sentence per call, R1 confirmation</td><td>R1 (owners write the sentences)</td><td><b>Wed 30 Sep 23:59</b></td></tr>
     <tr><td>R2 and R3 outputs, <code>llm-synthesis/vW4.json</code>, <code>human-score/vW4.json</code>, all committed before the deadline</td><td>R2, R3, R6, R5</td><td><b>Wed 30 Sep 23:59</b></td></tr>
     <tr><td>Locked Prediction panel live in <code>ui/index.html</code></td><td>R5</td><td><b>Wed 30 Sep 23:59</b></td></tr>
     <tr><td><code>checkin/wednesday.md</code>: individual per-role status</td><td>R1</td><td>Wed 30 Sep 12:00</td></tr>
