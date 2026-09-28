@@ -41,11 +41,8 @@
 <p class="sub">Launches Monday 28 Sep · <strong>predictions locked Wed 30 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
 <div class="card decide">
-<h3>NEEDS YOUR DECISION BEFORE THIS GOES LIVE</h3>
-<ol>
-<li><strong>Confirm the gold baseline.</strong> Drafted as the Fri 25 Sep New York close: <strong>4,321.20</strong> for <code>GCZ26.CMX</code>. That figure is provisional: the Yahoo page I read was stamped 4:59:59 PM EDT on 25 Sep with the market still open, one second before the session end. Please confirm the final figure on Yahoo's 25 Sep row before release.</li>
-<li><strong>Three changes I made that you have not explicitly approved:</strong> (a) the LLM synthesis, Human Score, delta and prescription files are now JSON with a written <code>narrative</code> field instead of markdown, so the UI reads them directly and students do not write everything twice; (b) the LLM synthesis and Human Score are due <em>before</em> the lock, not Sunday, since the call depends on them; (c) I dropped the promise of timed Discord status posts, because the monitor's schedule is unreliable. Say if you want any reversed.</li>
-</ol>
+<h3>NOTHING WAITING ON YOU</h3>
+<p>No open decisions. The student-facing version is <a href="sprint4-student-preview.html">sprint4-student-preview.html</a>.</p>
 </div>
 
 <h2>What changed from v2</h2>
@@ -112,7 +109,7 @@
 <tr><th>Instrument</th><th>Predict</th><th>Source of record</th><th>Scored by</th></tr>
 <tr><td>S&amp;P 500</td><td>Fri 2 Oct closing level</td><td>Yahoo Finance <code>^GSPC</code> (Google Finance fallback)</td><td>Absolute % error</td></tr>
 <tr><td>Nasdaq-100</td><td>Fri 2 Oct closing level</td><td>Yahoo Finance <code>^NDX</code> — <em>verify ticker</em></td><td>Absolute % error</td></tr>
-<tr><td>Gold futures (/GC)</td><td>Direction only: UP or DOWN, Fri 2 Oct close vs Fri 25 Sep close</td><td>Yahoo Finance <code>GCZ26.CMX</code> (COMEX gold futures /GC, Dec 2026). <code>GC=F</code> is Yahoo's continuous symbol for the same product; use the explicit contract for both dates. <em>Fri 25 Sep Close: 4,321.20 (provisional)</em></td><td>Correct / incorrect. Unchanged to the cent = void</td></tr>
+<tr><td>Gold futures (/GC)</td><td>Direction only: UP or DOWN, Fri 2 Oct close vs Fri 25 Sep close</td><td>Yahoo Finance <code>GCZ26.CMX</code> (COMEX gold futures /GC, Dec 2026). <code>GC=F</code> is Yahoo's continuous symbol for the same product; use the explicit contract for both dates. <em>Close of market on Friday (New York), same as SPX and NDX</em></td><td>Correct / incorrect. Unchanged to the cent = void</td></tr>
 </table>
 <p>Fri 2 Oct's US close falls in the early hours of Sat 3 Oct SGT. One file, one format, fixed path: <code>predictions/vW4.json</code>.</p>
 <pre>{
@@ -387,8 +384,10 @@ Every team uses the same schema, so any team's dashboard could display any team'
 <li>Third instrument is gold futures (/GC), December 2026 contract, direction only.</li>
 <li>No random predictions, no essays: one sentence per call, and every student must be able to defend it in the practical on Mon 5 Oct. R1 (Scrum Master) makes sure every sentence is in the file.</li>
 <li>Prediction lock is Wed 30 Sep 23:59 SGT.</li>
-<li>The Monday defense is oral only. It is not marked.</li>
-<li>Gold baseline is Friday 25 Sep's New York close, the same Friday as the SPX reference.</li>
+<li>The Monday defense is oral only. Marking is left to Prof Tan.</li>
+<li>Gold baseline is the close of market on Friday 25 Sep, New York time, read off Yahoo exactly like SPX and NDX. No number is given to students.</li>
+<li>LLM synthesis, Human Score, delta and prescription are JSON files with a written <code>narrative</code> field, so the dashboard reads them directly and students write each result once.</li>
+<li>LLM synthesis and Human Score are committed by the Wednesday 23:59 prediction deadline, since the team's call is made from them.</li>
 <li>No starter template. Students get the written spec in §6 and build their own dashboards to it.</li>
 <li>Team 4's thin roles and the Team 1 / Team 4 FigJam access blockers surface through class questions, not a separate pre-emptive message.</li>
 </ol>
