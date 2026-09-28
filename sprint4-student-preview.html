@@ -63,7 +63,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 </nav>
 
 <div class="main">
-  <span class="eyebrow">Starts Monday 28 Sep — dashboard live Tuesday 29 Sep — prediction locks Wednesday 30 Sep 23:59 SGT — everything else due Sunday 4 Oct 23:59 SGT — presented Monday 5 Oct</span>
+  <span class="eyebrow">Starts Monday 28 Sep — dashboard live Tuesday 29 Sep — prediction locks Wednesday 30 Sep 23:59 SGT — everything else due Saturday 3 Oct 23:59 SGT (not Sunday) — presented Monday 5 Oct</span>
   <h1>Sprint 4 <span style="color:#8493a8;font-weight:700">— vW4</span> — Predict Three Markets, Defend Your Call</h1>
   <p style="color:#3a4a5e;font-size:1.05rem">Last sprint you automated. This sprint your team makes a real call on three markets, locks it, and can explain it out loud. Then you build the last two stages of the <a href="https://dt3-tr3-26-course-website.pages.dev/architecture/index.html">system architecture</a>: measuring how far off you were, and deciding what to change.</p>
 
@@ -197,7 +197,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 
   <div class="task">
     <span class="num">R5</span><b>Human Score &amp; UI: judge the calls, build the dashboard</b>
-    <p style="margin:8px 0 0">Human Score on each of the three markets in <code>human-score/vW4.json</code>: confirm, adjust or override the owner's number, with the reason written down. Then build your team dashboard at <code>ui/index.html</code> (see below) and keep it live all week: the GitHub and FigJam panels by Tuesday night, the Predictions panel with the prediction on Wednesday, the rest by Sunday.</p>
+    <p style="margin:8px 0 0">Human Score on each of the three markets in <code>human-score/vW4.json</code>: confirm, adjust or override the owner's number, with the reason written down. Then build your team dashboard at <code>ui/index.html</code> (see below) and keep it live all week: the GitHub and FigJam panels by Tuesday night, the Predictions panel with the prediction on Wednesday, the rest by Saturday.</p>
     <div class="dod"><b>DONE MEANS</b> — a Human Score for all three markets before the deadline, and a dashboard with all seven panels, live and current all week, reading committed data files.</div>
   </div>
 
@@ -225,10 +225,10 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     <tr><td>GitHub Activity: commits per role since Monday, last commit time, the ten latest commits</td><td><code>data-panel="github"</code></td><td><code>data/github_activity.json</code></td><td><b>Tue 29 Sep 23:59</b>, then refreshed daily</td></tr>
     <tr><td>FigJam Activity: the cards in To Do, In Progress, Review and Done, with a Discord link on every Done card</td><td><code>data-panel="figjam"</code></td><td><code>data/figjam_status.json</code></td><td><b>Tue 29 Sep 23:59</b>, then updated daily</td></tr>
     <tr><td>Predictions: the three calls, each owner, each one-sentence reason</td><td><code>data-panel="predictions"</code></td><td><code>predictions/vW4.json</code></td><td>Wed 30 Sep 23:59</td></tr>
-    <tr><td>LLM Synthesis</td><td><code>data-panel="llm-synthesis"</code></td><td><code>llm-synthesis/vW4.json</code></td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Human Score</td><td><code>data-panel="human-score"</code></td><td><code>human-score/vW4.json</code></td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Delta: predicted vs actual, how far off, right or wrong direction, which agent pulled you off</td><td><code>data-panel="delta"</code></td><td><code>delta/vW4.json</code></td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Prescription: the one change for next sprint</td><td><code>data-panel="prescription"</code></td><td><code>prescriptions/vW4.json</code></td><td>Sun 4 Oct 23:59</td></tr>
+    <tr><td>LLM Synthesis</td><td><code>data-panel="llm-synthesis"</code></td><td><code>llm-synthesis/vW4.json</code></td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Human Score</td><td><code>data-panel="human-score"</code></td><td><code>human-score/vW4.json</code></td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Delta: predicted vs actual, how far off, right or wrong direction, which agent pulled you off</td><td><code>data-panel="delta"</code></td><td><code>delta/vW4.json</code></td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Prescription: the one change for next sprint</td><td><code>data-panel="prescription"</code></td><td><code>prescriptions/vW4.json</code></td><td>Sat 3 Oct 23:59</td></tr>
   </table>
   </div>
   <h3>What the GitHub and FigJam panels should show (invented data)</h3>
@@ -279,6 +279,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   </div>
 
   <h2>Everything You Hand In</h2>
+  <div class="card key"><b>Everything else is due Saturday 3 Oct at 23:59 Singapore time. Not Sunday.</b> Nothing is due on Sunday 4 Oct.</div>
   <div class="tablewrap">
   <table>
     <tr><th>What</th><th>Owner</th><th>Due</th></tr>
@@ -287,17 +288,17 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     <tr><td>GitHub Activity and FigJam Activity panels live in <code>ui/index.html</code>, then refreshed every day</td><td>R5 (panels), R6 (GitHub file), R1 (FigJam file)</td><td><b>Tue 29 Sep 23:59</b>, then daily</td></tr>
     <tr><td>Predictions panel live in <code>ui/index.html</code></td><td>R5</td><td><b>Wed 30 Sep 23:59</b></td></tr>
     <tr><td><code>checkin/wednesday.md</code>: individual per-role status</td><td>R1</td><td>Wed 30 Sep 12:00</td></tr>
-    <tr><td><code>actuals/vW4.json</code>, <code>delta/vW4.json</code> and its script</td><td>R4</td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td><code>prescriptions/vW4.json</code></td><td>R4 + R1</td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Dashboard with all seven panels, current</td><td>R5</td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td><code>instruments.json</code></td><td>R6 + R3</td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Release tag <code>vW4</code>, link verified</td><td>R6</td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Working commits from every role R1–R6, at least 5 each</td><td>All six</td><td>Sun 4 Oct 23:59</td></tr>
-    <tr><td>Every FigJam card in Done links a Discord message</td><td>R1</td><td>Sun 4 Oct 23:59</td></tr>
+    <tr><td><code>actuals/vW4.json</code>, <code>delta/vW4.json</code> and its script</td><td>R4</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td><code>prescriptions/vW4.json</code></td><td>R4 + R1</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Dashboard with all seven panels, current</td><td>R5</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td><code>instruments.json</code></td><td>R6 + R3</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Release tag <code>vW4</code>, link verified</td><td>R6</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Working commits from every role R1–R6, at least 5 each</td><td>All six</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Every FigJam card in Done links a Discord message</td><td>R1</td><td>Sat 3 Oct 23:59</td></tr>
   </table>
   </div>
   <div class="card red">
-    <b>Three real deadlines.</b> <b>Tuesday night:</b> dashboard live with GitHub and FigJam activity. <b>Wednesday night:</b> the prediction (R1's check-in is due earlier, at Wednesday 12:00). <b>Sunday night:</b> everything else, not Monday morning. The dashboard is refreshed every day in between. Monday is presentation day, not build day.
+    <b>Three real deadlines.</b> <b>Tuesday night:</b> dashboard live with GitHub and FigJam activity. <b>Wednesday night:</b> the prediction (R1's check-in is due earlier, at Wednesday 12:00). <b>Saturday night, 3 Oct 23:59:</b> everything else. Not Sunday, and not Monday morning. The dashboard is refreshed every day in between. Monday is presentation day, not build day.
   </div>
 
   <h2>Monday 5 Oct — Start With Your Progress</h2>
@@ -320,7 +321,8 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     <tr><td>Wed 30 Sep 12:00</td><td>Individual per-role check-in committed (R1)</td></tr>
     <tr><td><b>Wed 30 Sep 23:59</b></td><td><b>Prediction locked</b>: file, sentences, R1 confirmation and the Predictions panel</td></tr>
     <tr><td>Fri 2 Oct</td><td>The target Friday. The US close lands early Saturday morning Singapore time</td></tr>
-    <tr><td>Sun 4 Oct 23:59</td><td>Everything else due</td></tr>
+    <tr><td>Sat 3 Oct 23:59</td><td><b>Everything else due</b> (Saturday, not Sunday)</td></tr>
+    <tr><td>Sun 4 Oct</td><td>Nothing is due. Your work is reviewed ahead of Monday</td></tr>
     <tr><td>Mon 5 Oct</td><td>Live progress block, presentation, oral defense</td></tr>
   </table>
   </div>
