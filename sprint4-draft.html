@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sprint 4 — DRAFT v3.2 for Review | AI Playbook</title>
+<title>Sprint 4 — DRAFT v3.3 for Review | AI Playbook</title>
 <style>
   :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -36,18 +36,17 @@
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft v3.2 · Not Student-Facing · Revised Mon 28 Sep · adds instrument owners + how to read open/close</div>
+<div class="eyebrow">Draft v3.3 · Not Student-Facing · Revised Mon 28 Sep · owners and gold futures confirmed; adds mini tutorial</div>
 <h1>Sprint 4 — Draft</h1>
 <p class="sub">Launches Monday 28 Sep · <strong>predictions locked Tue 29 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
 <div class="card decide">
 <h3>NEEDS YOUR DECISION BEFORE THIS GOES LIVE</h3>
 <ol>
-<li><strong>Third instrument = gold. Please confirm.</strong> Your dictation read "direction of goal"; I have taken it as <em>gold</em>. Drafted as direction only (UP / DOWN) on <strong>COMEX gold futures (/GC), December 2026 contract, Yahoo Finance <code>GCZ26.CMX</code></strong>: Fri 2 Oct close vs Fri 25 Sep close, using Yahoo's <em>Close</em> column for both. The exact contract is named so a contract roll cannot distort the comparison. I have not pulled the Fri 25 Sep baseline — <strong>fill in from Yahoo's history page before release</strong> (<em>baseline: ____</em>).</li>
+<li><strong>Gold futures baseline still blank.</strong> Third instrument is confirmed as COMEX gold futures (/GC), Dec 2026, Yahoo <code>GCZ26.CMX</code>. Fill in the Fri 25 Sep Close from Yahoo's history page before release (<em>baseline: ____</em>).</li>
 <li><strong>Scoring.</strong> Proposed: SPX and NDX ranked by absolute % error vs actual close; gold = correct direction or not. Point values are yours to set.</li>
 <li><strong>Participation gate.</strong> Recommended: every member submits an individual call, and each team's participation share is published. Harder alternative: the team entry only counts if <em>all</em> members submitted. See §4.</li>
 <li><strong>Late entries.</strong> Strict as you asked: no entry = 0 challenge points and "NO ENTRY" on the leaderboard. Optional softener: a late file is still accepted as <em>unofficial</em> so the team still has something for Stage 6. Your call.</li>
-<li><strong>Instrument owners as drafted?</strong> SPX = R2, NDX = R3, Gold = R4 (§2). Each owner proposes and defends one number; R5 applies the Human Score to all three; R1 files and locks. Change any of these freely.</li>
 <li><strong>Official closing figure.</strong> Drafted as the value in Yahoo Finance's <em>Close</em> column, read by you and posted by Sat 3 Oct 12:00 SGT, so there is one number of record and no "my screen says" disputes (§2).</li>
 <li><strong>UI consistency: all five panels mandatory, or only three?</strong> Drafted as all five (§6), with teams free to style them however they like. Also: the starter template and data schema do not exist yet; teams need them by Tue 29 Sep 12:00 to have a fair chance at a Sunday UI deadline (§6).</li>
 <li><strong>Opening progress block on Mon 5 Oct.</strong> Drafted as UI, FigJam, GitHub shown live before each team's prediction presentation (§8). Timings are my proposal.</li>
@@ -183,6 +182,68 @@
 </ul>
 </div>
 
+<h3>2c · Mini tutorial: reading the numbers and making your call</h3>
+<div class="card lock">
+<h3>What is "gold futures (/GC)"?</h3>
+<p>A futures contract is an agreement to buy or sell something at a set price on a future date. <strong>/GC</strong> is the COMEX gold futures contract. Its price is quoted in US dollars per troy ounce. You do not trade it; you only read its price and predict which way it moves.</p>
+<h3>Decoding the symbol <code>GCZ26.CMX</code></h3>
+<table>
+<tr><th>Part</th><th>Means</th></tr>
+<tr><td><code>GC</code></td><td>Gold futures</td></tr>
+<tr><td><code>Z</code></td><td>Delivery month, December (futures month letters: G = Feb, J = Apr, M = Jun, Q = Aug, V = Oct, Z = Dec)</td></tr>
+<tr><td><code>26</code></td><td>Year 2026</td></tr>
+<tr><td><code>.CMX</code></td><td>The COMEX exchange</td></tr>
+</table>
+<p><strong>Why a named contract?</strong> Every month has its own contract with its own price. If you compare a price from one contract with a price from another, the gap between them can look like a market move when it is not. So everyone uses <code>GCZ26.CMX</code> for both dates. Yahoo's <code>GC=F</code> is a continuous symbol for the same product; do not use it here.</p>
+
+<h3>Step 1 — Read the History page</h3>
+<p>The table has these columns: <strong>Date, Open, High, Low, Close, Adj Close, Volume</strong>.</p>
+<ul>
+<li><strong>Open</strong> = the first price of that day's bar. <strong>Close</strong> = the last price of it.</li>
+<li>Use <strong>Close</strong> for everything in this challenge. Ignore Adj Close.</li>
+<li>Read the row with the right <strong>date</strong>. Yahoo lists US trading dates, so Fri 2 Oct is the Fri 2 Oct row even though the day finishes early Saturday morning Singapore time. There are no rows for weekends.</li>
+<li>Do not read the big live price at the top of the page. It moves during trading and is not the Close.</li>
+</ul>
+
+<h3>Step 2 — Work out the direction</h3>
+<p>You are predicting whether gold's Close on <strong>Fri 2 Oct</strong> will be above or below its Close on <strong>Fri 25 Sep</strong>.</p>
+<table>
+<tr><th>If Close on Fri 2 Oct is…</th><th>…than Close on Fri 25 Sep</th><th>Result</th></tr>
+<tr><td>higher</td><td></td><td><strong>UP</strong></td></tr>
+<tr><td>lower</td><td></td><td><strong>DOWN</strong></td></tr>
+<tr><td>identical</td><td></td><td>Void (no score either way)</td></tr>
+</table>
+<p><strong>Worked example (invented numbers, not real prices).</strong> Fri 25 Sep Close = 3,000.0. Fri 2 Oct Close = 3,040.0. 3,040.0 is higher than 3,000.0, so the answer is <strong>UP</strong>. Had it been 2,960.0, the answer would be <strong>DOWN</strong>. The size of the move does not matter, only the direction.</p>
+
+<h3>Step 3 — Make your call</h3>
+<ol>
+<li>Record the Fri 25 Sep Close. That is the line gold has to cross.</li>
+<li>Read Mon 28 Sep and Tue 29 Sep. Is gold above or below the line so far? This is information, not the answer: a week can reverse.</li>
+<li>Ask what could push it from here, using your agents' work: the US dollar, interest-rate expectations, risk sentiment, and the chart trend. Then write <strong>UP</strong> or <strong>DOWN</strong> and the one-sentence reason. That reason goes to R5 for the Human Score.</li>
+</ol>
+
+<h3>The same page pattern for the two indices</h3>
+<p>Use the History pages for <code>^GSPC</code> and <code>^NDX</code>, and read <strong>Close</strong> the same way. For the indices you predict the actual Close <em>level</em> on Fri 2 Oct, to two decimals as Yahoo shows it, not just the direction.</p>
+
+<h3>Where each number goes</h3>
+<table>
+<tr><th>You predict</th><th>Field in <code>predictions/vW4.json</code></th><th>Owner</th></tr>
+<tr><td>S&amp;P 500 Close level, Fri 2 Oct</td><td><code>spx_close</code> (a number)</td><td>R2</td></tr>
+<tr><td>Nasdaq-100 Close level, Fri 2 Oct</td><td><code>ndx_close</code> (a number)</td><td>R3</td></tr>
+<tr><td>Gold direction, Fri 2 Oct vs Fri 25 Sep</td><td><code>gold_direction</code> ("UP" or "DOWN")</td><td>R4</td></tr>
+</table>
+
+<h3>Common mistakes to avoid</h3>
+<ul>
+<li>Reading <strong>Adj Close</strong> instead of <strong>Close</strong>.</li>
+<li>Comparing <code>GC=F</code> on one date with <code>GCZ26.CMX</code> on another.</li>
+<li>Reading the live price at the top of the page instead of the row for the date.</li>
+<li>Using the wrong Friday: baseline is Fri 25 Sep, target is Fri 2 Oct.</li>
+<li>Writing "up" or "higher" in the file. It must read exactly <code>"UP"</code> or <code>"DOWN"</code>, or the file is invalid.</li>
+<li>Reading the Fri 2 Oct row before Yahoo has updated. Wait until after the US close and check again before posting.</li>
+</ul>
+</div>
+
 <h2>3 · Preserving the integrity of the prediction</h2>
 <div class="card lock">
 <h3>Cutoff: Tuesday 29 Sep 2026, 23:59:59 SGT (= 15:59:59 UTC)</h3>
@@ -314,6 +375,8 @@ Because every team uses the same schema, any team's dashboard could display any 
 <li>No grade-penalty cliff for zero-commit roles; a flat 5-commit floor per role applies to all four teams. (Corrected: only Team 4's R4 and R6 are genuinely thin. Team 3's roles all have 6+ commits; v2 was wrong on this.)</li>
 <li>One common bar for all teams; the escalation is the existing architecture, not a disconnected metric.</li>
 <li>R5 owns the UI alongside the Human Score; R6 is LLM &amp; GitHub. Live on the roles page since this morning.</li>
+<li>Instrument owners: S&amp;P 500 = R2, Nasdaq-100 = R3, gold futures = R4. R5 applies the Human Score to all three; R1 files and locks.</li>
+<li>Third instrument is gold futures (/GC), December 2026 contract, direction only.</li>
 <li>Team 4's thin roles and the Team 1 / Team 4 FigJam access blockers surface through class questions, not a separate pre-emptive message.</li>
 </ol>
 
