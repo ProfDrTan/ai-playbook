@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sprint 4 — DRAFT for Review | AI Playbook</title>
+<title>Sprint 4 — DRAFT v3 for Review | AI Playbook</title>
 <style>
   :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -12,86 +12,208 @@
   main{max-width:900px; margin:0 auto; padding:40px 24px 100px;}
   .eyebrow{font-family:monospace; font-size:12px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:14px;}
   h1{font-family:monospace; font-weight:700; font-size:clamp(22px,4vw,30px); color:var(--paper); margin-bottom:10px;}
-  p.sub{font-size:15px; max-width:680px; margin-bottom:24px;}
+  p.sub{font-size:15px; max-width:700px; margin-bottom:24px;}
   h2{font-family:monospace; font-size:18px; color:var(--paper); margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line-dim);}
   h3{font-family:monospace; font-size:13.5px; color:var(--amber); margin:18px 0 6px;}
   p{margin-bottom:12px; font-size:14.5px;}
   .card{background:var(--blue-panel); border:1px solid var(--line-dim); border-radius:8px; padding:16px 18px; margin-bottom:14px;}
   .card.fix{border-left:3px solid var(--coral);}
   .card.retro{border-left:3px solid var(--green);}
+  .card.decide{border-left:3px solid var(--amber); background:#1b3f5c;}
+  .card.lock{border-left:3px solid var(--purple);}
   table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
-  th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line-dim);}
+  th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line-dim); vertical-align:top;}
   th{font-family:monospace; font-size:10.5px; color:var(--amber); text-transform:uppercase;}
   code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:4px; font-family:monospace; font-size:12.5px;}
+  pre{background:rgba(0,0,0,.28); border:1px solid var(--line-dim); border-radius:6px; padding:12px 14px; font-family:monospace; font-size:12px; overflow-x:auto; margin:8px 0 14px; color:var(--paper);}
   ul,ol{margin:6px 0 6px 20px;}
   li{margin-bottom:6px; font-size:14px;}
-  .status{font-family:monospace; font-size:11px; padding:4px 11px; border-radius:99px; border:1px solid var(--line-dim); display:inline-block; margin-right:8px;}
+  .tag{font-family:monospace; font-size:10.5px; padding:2px 8px; border-radius:99px; border:1px solid var(--line-dim); margin-right:6px; white-space:nowrap;}
+  .tag.you{color:var(--green); border-color:var(--green);}
+  .tag.me{color:var(--amber); border-color:var(--amber);}
+  .tag.todo{color:var(--coral); border-color:var(--coral);}
 </style>
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft v2 · Not Student-Facing · Finalized by Prof Tan evening 27 Sep, folding in same-day findings</div>
+<div class="eyebrow">Draft v3 · Not Student-Facing · Revised Mon 28 Sep after Sprint 3 review</div>
 <h1>Sprint 4 — Draft</h1>
-<p class="sub">Launches Monday 28 Sep, due Sunday 4 Oct 23:59 SGT, presented Monday 5 Oct. Built to replace the stale TR2 <code>sprint4/index.html</code> currently live, to close the gaps Sprint 3's real data surfaced, and to move every team one step further into the published <a href="/architecture/">System Architecture</a> — specifically Stages 6–7, which no team has reached yet.</p>
+<p class="sub">Launches Monday 28 Sep · <strong>predictions locked Tue 29 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
-<h2>What's actually wrong with the live page right now</h2>
-<div class="card fix">
-<p><code>sprint4/index.html</code> is unedited TR2 content: dated "Mon 8 Jun 2026," release tag <code>vW24</code>, roles labeled "R9 GitHub Lead" and "R6 + R10" instead of this term's R1–R6, and Demo Day listed as "Mon 3 Aug" instead of the real Week 10 (23–29 Nov). <code>roadmap/index.html</code> is also TR2-labeled and currently shows a broken placeholder. Both need replacing, not editing — the underlying TR2 content doesn't map cleanly onto TR3's simpler R1–R6 structure.</p>
+<div class="card decide">
+<h3>NEEDS YOUR DECISION BEFORE THIS GOES LIVE</h3>
+<ol>
+<li><strong>Third instrument = gold. Please confirm.</strong> Your dictation read "direction of goal"; I have taken it as <em>gold</em>. Drafted as direction only (UP / DOWN), COMEX gold futures via Yahoo Finance <code>GC=F</code>, Fri 2 Oct close vs Fri 25 Sep close. I have not verified that ticker or the Fri 25 Sep baseline — <strong>fill in / verify before release</strong> (<em>baseline: ____</em>).</li>
+<li><strong>Scoring.</strong> Proposed: SPX and NDX ranked by absolute % error vs actual close; gold = correct direction or not. Point values are yours to set.</li>
+<li><strong>Participation gate.</strong> Recommended: every member submits an individual call, and each team's participation share is published. Harder alternative: the team entry only counts if <em>all</em> members submitted. See §4.</li>
+<li><strong>Late entries.</strong> Strict as you asked: no entry = 0 challenge points and "NO ENTRY" on the leaderboard. Optional softener: a late file is still accepted as <em>unofficial</em> so the team still has something for Stage 6. Your call.</li>
+<li><strong>Enforcement is a design, not yet built or tested.</strong> Do not promise it to students until the lock script has had a dry run (§3). Two facts that shaped it are in §3.</li>
+</ol>
 </div>
 
-<h2>What Sprint 3 actually showed — folded into this design</h2>
+<h2>What changed from v2</h2>
+<div class="card">
+<ul>
+<li><span class="tag you">YOUR INSTRUCTION</span>Prediction now covers three instruments: SPX and NDX (closing level) plus gold (direction).</li>
+<li><span class="tag you">YOUR INSTRUCTION</span>Prediction file locks Tue 29 Sep 23:59 SGT. Miss it and there is no entry.</li>
+<li><span class="tag you">YOUR INSTRUCTION</span>R5 owns the UI as well as the Human Score (already live on the <a href="https://dt3-tr3-26-course-website.pages.dev/roles/">roles page</a>).</li>
+<li><span class="tag me">MY PROPOSAL</span><code>llm-synthesis/vW4.md</code> moves from R5 to R6. With R5 now carrying Human Score + UI, and R6 having lost the UI, R6 is the one who already queries the three LLMs and sees where they agree and diverge.</li>
+<li><span class="tag me">MY PROPOSAL</span>Bar raised toward the full architecture: delta is script-generated, the UI must display Stages 3–7 from committed data, and instruments live in one config file (§5).</li>
+<li><span class="tag me">FIXED</span>Three claims in v2 were wrong or unverified and are corrected below (Team 3 Discord counts, Team 2 "3 of 6 members", the "1–2 commit roles" line).</li>
+</ul>
+</div>
+
+<h2>1 · What Sprint 3 actually showed</h2>
 
 <div class="card retro">
 <h3>1 · The R5/R6 gap closed, but only under deadline pressure</h3>
-<p>Team 4's Human Score &amp; UI and LLM &amp; GitHub roles sat at zero commits as of Wednesday's check, then both got real content (<code>dashboard.html</code>; <code>audit_log.md</code> + <code>release_checklist.md</code>) over the weekend once flagged. Good that it closed — but it closed reactively, days after the gap existed. The fix isn't "check harder at the end," it's catching it midweek while it's still solvable.</p>
+<p>Team 4's Human Score/UI and LLM/GitHub roles were at zero commits at Wednesday's check, then got real content over the weekend once flagged. Full-history count now: Team 4 R4 = 2 commits, R6 = 3, R5 = 4 — still thin, but no longer empty. It closed reactively; the fix is catching it midweek.</p>
 </div>
 
 <div class="card retro">
-<h3>2 · FigJam adoption improved, but two teams are now access-blocked, not template-stuck</h3>
-<p>Teams 1, 3, and 4 all moved from untouched templates to fully active boards (all four columns populated) — the Sprint 3 enforcement worked. But two new, different problems surfaced <em>this morning</em>: Team 1's qiu0181 hit a verification error and had a teammate move his card manually instead of it getting fixed; two Team 4 students (estelle_wen_05110, alanmusk_01429) reported they can't edit the board at all. Access, not adoption, is now the live issue.</p>
+<h3>2 · FigJam: access, not adoption, is now the issue</h3>
+<p>Teams 1, 3 and 4 moved from untouched templates to fully populated boards. New blockers in Discord: Team 1's qiu0181 hit a "verification required" step and asked a teammate to move his card, and said he could not edit; two Team 4 students (estelle_wen_05110, alanmusk_01429) reported they cannot edit the board. Neither is confirmed fixed.</p>
 </div>
 
 <div class="card retro">
-<h3>3 · Discord surfaced a real communication split, independent of GitHub activity</h3>
-<p>Team 3 is the most accurate predictor of any team but nearly silent on Discord (5 messages all sprint, 3 active members) — their coordination is happening somewhere invisible. Team 2 has 3 of 6 members barely present in-channel despite steady commits. Per-role GitHub activity alone doesn't catch this; it needs its own signal.</p>
+<h3>3 · Discord activity is uneven across teams</h3>
+<p>As of 06:23 SGT Mon 28 Sep: Team 1 = 126 messages / 8 people, Team 4 = 87 / 6, Team 2 = 53 / 5 (two people wrote 38), Team 3 = 10 / 5. Team 3 is far the quietest despite having the closest Sprint 3 prediction. (v2 said "5 messages, 3 members" — that was stale, and its Team 2 line was unverified; both replaced.) Discord handles are not mapped to GitHub accounts, so treat member counts as indicative.</p>
 </div>
 
 <div class="card retro">
-<h3>4 · The Prediction Challenge's late-but-accurate case</h3>
-<p>Team 3 submitted after the Tuesday deadline but was the closest of any team (0.044% error) once the actual close was known; Team 4 was on time but further off (0.473%). Worth keeping the deadline firm while not conflating "late" with "wrong" in how it's scored.</p>
-</div>
-
-<div class="card retro">
-<h3>5 · The source-of-record fix from Sprint 3 worked</h3>
-<p>Naming Yahoo Finance's <code>^GSPC</code> historical page as the authoritative close, with Google Finance as a stated fallback, resolved the "whose number counts" ambiguity. Every new automated artifact in Sprint 4 gets the same treatment from day one.</p>
-</div>
-
-<div class="card retro">
-<h3>6 · Every team is stuck at the same architecture stage</h3>
-<p>All four teams execute Stages 1–5 of the published architecture (data sources → agent analysis → LLM synthesis → human score → locked prediction) but stop there. Only Team 3 shows any trace of Stage 6 work. Nobody has built Stage 6 (Delta Measurement) or Stage 7 (Prescriptions) — the loop that turns last week's miss into this week's agent-weight adjustment. This is the one gap that's identical across all four teams, which makes it the right common target.</p>
-</div>
-
-<h2>Sprint 4 goal</h2>
-<p>One common bar for all four teams — no team gets a different target. Sprint 4 closes Stages 6–7 of the published architecture (Delta Measurement → Prescriptions) and formalizes Stage 3 (LLM Synthesis), which every team currently does informally at best. Separately and structurally: the Wednesday check-in becomes a committed artifact, not a conversation, so a gap like R5/R6's is caught while it's still solvable — not discovered at the Sunday deadline.</p>
-
-<h2>What every team must submit — due Sun 4 Oct, 23:59 SGT</h2>
+<h3>4 · Sprint 3 predictions, scored against the 7,743.41 close</h3>
 <table>
-<tr><th>Deliverable</th><th>Role</th><th>Notes</th></tr>
-<tr><td><code>llm-synthesis/vW4.md</code> — Stage 3 formalized</td><td>R5</td><td>Log where ChatGPT / Gemini / DeepSeek agreed and diverged before the Human Score stage, per the architecture page's own Stage 3 description</td></tr>
-<tr><td><code>delta/vW4.md</code> — Stage 6</td><td>R4</td><td>Sprint 3 locked prediction vs. actual close, broken into the three signals the architecture defines: error size, direction, and which agent contributed most to the miss</td></tr>
-<tr><td><code>prescriptions/vW4.md</code> — Stage 7</td><td>R4 + R1</td><td>One concrete, specific agent-weight adjustment for Sprint 5 arising from the delta — not a general reflection</td></tr>
-<tr><td><code>checkin/wednesday.md</code></td><td>R1</td><td>Committed by Wed 30 Sep, 12:00 SGT — individual per-role status, not a paraphrase of the group channel. dt3-monitor will flag any team missing this by Wed 17:00</td></tr>
-<tr><td>Prediction Challenge, Week 4 target</td><td>Full team</td><td>Same format as Sprint 3; deadline Tuesday, scored against Yahoo Finance <code>^GSPC</code></td></tr>
-<tr><td>Working artifact from <strong>every</strong> role, R1–R6, minimum 5 commits each</td><td>All six</td><td>Graded per-role, not per-team — same floor for all four teams regardless of current activity level</td></tr>
-<tr><td>Every FigJam card moved to Done links a Discord message</td><td>R1</td><td>Targets the Team 3 silent-Discord and Team 1/4 "moved-it-for-them" patterns without naming either team in the requirement itself</td></tr>
-<tr><td>Confirmed GitHub write + FigJam edit access for every listed teammate</td><td>R1</td><td>Floor to clear before Sprint 4 starts, not a stretch goal — Teams 1 and 4 currently have unresolved access blockers</td></tr>
+<tr><th>Team</th><th>Predicted</th><th>Error</th><th>Timing</th></tr>
+<tr><td>Team 3</td><td>7,740</td><td>3.41 (0.044%)</td><td>Added Thu 24 Sep, after the Tuesday deadline; edited again 00:35 SGT Mon 28 Sep</td></tr>
+<tr><td>Team 1</td><td>7,750</td><td>6.59 (0.085%)</td><td>File created Tue 22 Sep, renamed away same day, re-created Sun 27 Sep after the close</td></tr>
+<tr><td>Team 4</td><td>7,780</td><td>36.59 (0.473%)</td><td>Created Tue 22 Sep, updated Sat 26 Sep</td></tr>
+<tr><td>Team 2</td><td>7,790</td><td>46.59 (0.602%)</td><td>Created Tue 22 Sep, actual close added Sat 26 Sep</td></tr>
+</table>
+<p>The most accurate team was the late one. Keep the deadline firm, but do not conflate "late" with "wrong".</p>
+</div>
+
+<div class="card fix">
+<h3>5 · Prediction files are mutable, and that is the integrity gap</h3>
+<p>All four Sprint 3 files were edited after the deadline — mostly legitimately, to record the actual close — but Team 1's was renamed away and re-created after the close, and Team 3's was submitted late and edited again today. Nobody has to have done anything wrong for this to matter: <strong>as things stand, nothing proves what any team had committed at the deadline.</strong> That is what §3 fixes.</p>
+</div>
+
+<div class="card retro">
+<h3>6 · The source-of-record fix worked</h3>
+<p>Naming Yahoo Finance <code>^GSPC</code> (Google Finance as stated fallback) removed the "whose number counts" dispute. Sprint 4 does the same for every instrument (§2).</p>
+</div>
+
+<div class="card retro">
+<h3>7 · Every team is stuck at Stage 5 of the architecture</h3>
+<p>All four run Stages 1–5 (data → agents → LLM synthesis → Human Score → locked prediction) and stop. Only Team 3 shows any trace of Stage 6. Nobody has built Stage 6 (Delta) or Stage 7 (Prescriptions), so it is the right common target.</p>
+</div>
+
+<h2>2 · Prediction Challenge — Week 4</h2>
+<table>
+<tr><th>Instrument</th><th>Predict</th><th>Source of record</th><th>Scored by</th></tr>
+<tr><td>S&amp;P 500</td><td>Fri 2 Oct closing level</td><td>Yahoo Finance <code>^GSPC</code> (Google Finance fallback)</td><td>Absolute % error</td></tr>
+<tr><td>Nasdaq-100</td><td>Fri 2 Oct closing level</td><td>Yahoo Finance <code>^NDX</code> — <em>verify ticker</em></td><td>Absolute % error</td></tr>
+<tr><td>Gold</td><td>Direction only: UP or DOWN, Fri 2 Oct close vs Fri 25 Sep close</td><td>Yahoo Finance <code>GC=F</code> — <em>verify; baseline ____</em></td><td>Correct / incorrect. Unchanged to the cent = void</td></tr>
+</table>
+<p>Fri 2 Oct's US close falls in the early hours of Sat 3 Oct SGT. One file, one format, fixed path: <code>predictions/vW4.json</code>.</p>
+<pre>{
+  "sprint": "vW4",
+  "team": "team-N",
+  "team_call": { "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "UP" },
+  "members": [
+    { "github": "username", "role": "R1", "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "DOWN" }
+  ]
+}</pre>
+<p>Structured JSON, not free-form markdown, so it can be validated and scored automatically. <code>team_call</code> is R1's final call. Anything that does not validate counts as no entry.</p>
+
+<h2>3 · Preserving the integrity of the prediction</h2>
+<div class="card lock">
+<h3>Cutoff: Tuesday 29 Sep 2026, 23:59:59 SGT (= 15:59:59 UTC)</h3>
+<ol>
+<li><strong>The clock is GitHub's, not the team's.</strong> A team's entry is the last push to <code>main</code> made at or before the cutoff, using GitHub's server-side push time. Commit timestamps are set by whoever commits, so they are not used.</li>
+<li><strong>The lock job archives it, outside the teams' reach.</strong> It copies the file into <code>dt3-monitor</code> under <code>locks/vW4/&lt;team&gt;.json</code> together with the commit SHA, push time and a SHA-256 hash of the content. Every student has read-only access to <code>dt3-monitor</code> (I checked all 31 collaborators; only you have write), so no team can alter the archive.</li>
+<li><strong>Scoring uses the archived copy only.</strong> Whatever happens to the team's file afterwards — edited, renamed, force-pushed — is irrelevant. A team that changes its file later simply has a file that no longer matches its locked hash.</li>
+<li><strong>Hashes are announced.</strong> Right after the lock, the hash per team goes to Discord and onto a public ledger. A hash reveals nothing about the prediction, but anyone can verify their own.</li>
+<li><strong>No entry means no entry.</strong> No file, an invalid file, or a push after the cutoff: 0 points and "NO ENTRY" on the leaderboard. There is no "I thought I submitted" — see the pre-lock status board below.</li>
+</ol>
+<h3>Pre-lock status board (participation lever)</h3>
+<p>At Tue 12:00, 20:00 and 23:00 SGT the monitor posts <strong>VALID / INVALID / MISSING</strong> for each team to Discord — status only, never the values. This is the pressure that gets R1s chasing their teams before midnight, and it removes any excuse.</p>
+<h3>Two facts that shaped the design</h3>
+<ul>
+<li><strong>The monitor's schedule cannot be the cutoff.</strong> <code>dt3-monitor</code> is set to run every 10 minutes, but its recent runs land 3–5 hours apart, and every one of the last 8 has ended in failure at the "Publish history to public site" step (the Discord half succeeds). So the cutoff is a <em>time in the data</em>, evaluated whenever the lock job runs, and the lock job is run <strong>manually on Wed morning</strong> rather than left to a 23:59 cron.</li>
+<li><strong>Whether teams can read each other's repos is unverified.</strong> All four team repos are private, but my token cannot see the org's base permission. If it is anything above "none", a team could read a rival's file before the cutoff. Check it before release. Fallback if needed: submit only the SHA-256 hash by Tuesday, and reveal the file after Friday's close.</li>
+</ul>
+<h3>Ways this could be gamed, and the answer</h3>
+<table>
+<tr><th>Attempt</th><th>Defence</th></tr>
+<tr><td>Push after midnight, backdate the commit</td><td>Cutoff uses server-side push time, not commit dates</td></tr>
+<tr><td>Edit the file after seeing Wednesday–Friday moves</td><td>Scoring reads the archived copy; a changed file mismatches its locked hash</td></tr>
+<tr><td>Force-push or rewrite history after the lock</td><td>Archive is a copy in a repo teams cannot write to; a locked SHA that is no longer reachable is flagged</td></tr>
+<tr><td>Submit on a branch or in a fork</td><td>Only <code>main</code> of the team repo counts</td></tr>
+<tr><td>Delete or rename the file, re-create it later (Sprint 3 Team 1 pattern)</td><td>Lock records what was present at the cutoff; a later re-creation cannot change it</td></tr>
+<tr><td>Copy another team's call</td><td>Depends on the read-access check above</td></tr>
+</table>
+<p><strong>Not built yet:</strong> the validator, the lock script, the status-board posts and the ledger page. The design is ready to build and dry-run against Sprint 3's real repos today.</p>
+</div>
+
+<h2>4 · Raising participation</h2>
+<div class="card">
+<ul>
+<li><strong>Everyone predicts.</strong> Each member enters an individual call in <code>members[]</code>. R1's <code>team_call</code> is the official team entry.</li>
+<li><strong>Participation share is public.</strong> Valid individual entries divided by team members, shown per team on the leaderboard beside accuracy. A 6-of-6 team looks very different from a 2-of-6 team.</li>
+<li><strong>Individual accuracy is ranked too</strong>, so a member can beat their own team's call — which also feeds calibration (R4).</li>
+<li><strong>Harder option, for your decision:</strong> the team entry is official only if every member has submitted.</li>
+</ul>
+</div>
+
+<h2>5 · Sprint 4 goal — one common bar, stretched toward the full architecture</h2>
+<p>Same target for all four teams, no tiers. Sprint 4 takes three instruments through Stages 1–5, builds Stages 6–7 for the first time, and makes the UI show the whole chain from committed data rather than typed-in numbers.</p>
+<table>
+<tr><th>Stage</th><th>What each team must show in Sprint 4</th></tr>
+<tr><td>1–2 · Data &amp; agents</td><td>R2 and R3 outputs cover SPX, NDX and gold. Instruments defined in one <code>instruments.json</code> — no hard-coded tickers in scripts — so Stage 8 (11 sectors) later is a config change, not a rewrite</td></tr>
+<tr><td>3 · LLM synthesis</td><td>Agreement/divergence across ChatGPT, Gemini, DeepSeek, per instrument, logged before the Human Score</td></tr>
+<tr><td>4 · Human Score</td><td>Per instrument, with written justification</td></tr>
+<tr><td>5 · Locked prediction</td><td>Locked via §3, three instruments</td></tr>
+<tr><td>6 · Delta</td><td>Script-generated, not hand-calculated. Sprint 3's prediction was SPX only, so the vW4 delta covers SPX; NDX and gold deltas start in Sprint 5</td></tr>
+<tr><td>7 · Prescriptions</td><td>One concrete agent-weight adjustment for Sprint 5, arising from the delta</td></tr>
+</table>
+
+<h2>6 · What every team must submit</h2>
+<table>
+<tr><th>Deliverable</th><th>Owner</th><th>Due</th></tr>
+<tr><td><code>predictions/vW4.json</code> — team call + every member's call</td><td>R1 (all members)</td><td><strong>Tue 29 Sep 23:59 SGT — locked</strong></td></tr>
+<tr><td>Agent outputs and LLM synthesis for all three instruments, plus Human Score file, committed <em>before</em> the lock</td><td>R2, R3, R6, R5</td><td>Tue 29 Sep, ahead of the lock. Later commits are marked "post-lock" on the ledger; not disqualifying, but visible</td></tr>
+<tr><td><code>checkin/wednesday.md</code> — individual per-role status, not a paraphrase of the group chat</td><td>R1</td><td>Wed 30 Sep 12:00 SGT. dt3-monitor flags missing ones by Wed 17:00</td></tr>
+<tr><td><code>llm-synthesis/vW4.md</code> — Stage 3 formalized</td><td>R6 <span class="tag me">moved from R5</span></td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td><code>delta/vW4.md</code> + the script that generates it — error size, direction, contributing agent</td><td>R4</td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td><code>prescriptions/vW4.md</code> — Stage 7</td><td>R4 + R1</td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td>UI/dashboard showing the locked prediction (with lock time), LLM synthesis, Human Score, delta and prescription, all read from committed data files</td><td>R5</td><td>Sun 4 Oct 23:59; live demo Mon 5 Oct</td></tr>
+<tr><td><code>instruments.json</code> — single source of tickers and sources</td><td>R6 + R3</td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td>Release tag for the sprint, verified accessible</td><td>R6</td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td>Working artifact from every role R1–R6, minimum 5 commits each</td><td>All six</td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td>Every FigJam card moved to Done links a Discord message</td><td>R1</td><td>Sun 4 Oct 23:59</td></tr>
+<tr><td>Confirmed GitHub write + FigJam edit access for every teammate</td><td>R1</td><td>Before the Tue lock — pre-launch floor, not a stretch</td></tr>
+</table>
+<p>Week 4 R5 workload note: R5 now carries the Human Score for three instruments plus the UI. That was the point of the move, but watch it in Wednesday's check-ins.</p>
+
+<h2>7 · Timeline</h2>
+<table>
+<tr><th>When (SGT)</th><th>What</th></tr>
+<tr><td>Mon 28 Sep</td><td>Announcement live; agents start</td></tr>
+<tr><td>Tue 29 Sep 12:00 / 20:00 / 23:00</td><td>Pre-lock status board posts</td></tr>
+<tr><td><strong>Tue 29 Sep 23:59:59</strong></td><td><strong>Prediction lock</strong></td></tr>
+<tr><td>Wed 30 Sep, morning</td><td>Lock job run manually; hashes and ledger published</td></tr>
+<tr><td>Wed 30 Sep 12:00</td><td>Individual check-ins committed</td></tr>
+<tr><td>Fri 2 Oct (US close early Sat 3 Oct SGT)</td><td>Target closes</td></tr>
+<tr><td>Sun 4 Oct 23:59</td><td>All other deliverables due</td></tr>
+<tr><td>Mon 5 Oct</td><td>Presentations, live UI demos, scoring</td></tr>
 </table>
 
 <h2>Decided — no longer open</h2>
 <ol>
-<li>No grade-penalty cliff for zero-commit roles. A flat per-role commit floor (5) applies to all four teams instead — avoids penalizing Team 3/4, where thin-but-real roles (1–2 commits) still shipped working output.</li>
-<li>Not a second, unrelated data pull. The escalation is Stages 6–7 of the existing architecture — deepens what's already built rather than adding a disconnected metric, and gives every team the same target regardless of how mature their current pipeline is.</li>
-<li>Team 4's R5/R6 gap and the two FigJam access blockers (Team 1, Team 4) surface naturally through tomorrow's presentation questions rather than a separate pre-emptive message — the questions are designed to make each team explain their own gap in the room.</li>
+<li>No grade-penalty cliff for zero-commit roles; a flat 5-commit floor per role applies to all four teams. (Corrected: only Team 4's R4 and R6 are genuinely thin. Team 3's roles all have 6+ commits; v2 was wrong on this.)</li>
+<li>One common bar for all teams; the escalation is the existing architecture, not a disconnected metric.</li>
+<li>R5 owns the UI alongside the Human Score; R6 is LLM &amp; GitHub. Live on the roles page since this morning.</li>
+<li>Team 4's thin roles and the Team 1 / Team 4 FigJam access blockers surface through class questions, not a separate pre-emptive message.</li>
 </ol>
 
 </main>
