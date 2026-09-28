@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sprint 4 — DRAFT v3.5 for Review | AI Playbook</title>
+<title>Sprint 4 — DRAFT v3.6 for Review | AI Playbook</title>
 <style>
   :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -36,17 +36,15 @@
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft v3.5 · Not Student-Facing · Revised Mon 28 Sep · lock moved to Wed night; one-sentence reasons + Monday defense</div>
+<div class="eyebrow">Draft v3.6 · Not Student-Facing · Revised Mon 28 Sep · gold baseline set; defense is oral; no template</div>
 <h1>Sprint 4 — Draft</h1>
 <p class="sub">Launches Monday 28 Sep · <strong>predictions locked Wed 30 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
 <div class="card decide">
 <h3>NEEDS YOUR DECISION BEFORE THIS GOES LIVE</h3>
 <ol>
-<li><strong>Gold futures baseline still blank.</strong> Fill in the Fri 25 Sep Close for <code>GCZ26.CMX</code> from Yahoo's history page before release (<em>baseline: ____</em>).</li>
-<li><strong>How is the Monday defense marked?</strong> Drafted: any team member can be picked, not just the owner, and you question them from their one-sentence reason (§2d). Pass/fail per student, or graded? Your call.</li>
-<li><strong>Three things I changed that you have not explicitly approved:</strong> (a) the LLM synthesis, Human Score, delta and prescription files are now JSON with a written <code>narrative</code> field instead of markdown, so the UI reads them directly and students do not write everything twice; (b) the LLM synthesis and Human Score are due <em>before</em> the lock, not Sunday, since the call depends on them; (c) I dropped the promise of timed Discord status posts, because the monitor's schedule is unreliable. Say if you want any reversed.</li>
-<li><strong>UI starter template and data schema do not exist yet.</strong> Teams need them by Tue 29 Sep 12:00 to have a fair chance at showing their calls by Wed night. The lock and validator tooling can be decided later; this part is what students will see.</li>
+<li><strong>Confirm the gold baseline.</strong> Drafted as the Fri 25 Sep New York close: <strong>4,321.20</strong> for <code>GCZ26.CMX</code>. That figure is provisional: the Yahoo page I read was stamped 4:59:59 PM EDT on 25 Sep with the market still open, one second before the session end. Please confirm the final figure on Yahoo's 25 Sep row before release.</li>
+<li><strong>Three changes I made that you have not explicitly approved:</strong> (a) the LLM synthesis, Human Score, delta and prescription files are now JSON with a written <code>narrative</code> field instead of markdown, so the UI reads them directly and students do not write everything twice; (b) the LLM synthesis and Human Score are due <em>before</em> the lock, not Sunday, since the call depends on them; (c) I dropped the promise of timed Discord status posts, because the monitor's schedule is unreliable. Say if you want any reversed.</li>
 </ol>
 </div>
 
@@ -114,7 +112,7 @@
 <tr><th>Instrument</th><th>Predict</th><th>Source of record</th><th>Scored by</th></tr>
 <tr><td>S&amp;P 500</td><td>Fri 2 Oct closing level</td><td>Yahoo Finance <code>^GSPC</code> (Google Finance fallback)</td><td>Absolute % error</td></tr>
 <tr><td>Nasdaq-100</td><td>Fri 2 Oct closing level</td><td>Yahoo Finance <code>^NDX</code> — <em>verify ticker</em></td><td>Absolute % error</td></tr>
-<tr><td>Gold futures (/GC)</td><td>Direction only: UP or DOWN, Fri 2 Oct close vs Fri 25 Sep close</td><td>Yahoo Finance <code>GCZ26.CMX</code> (COMEX gold futures /GC, Dec 2026). <code>GC=F</code> is Yahoo's continuous symbol for the same product; use the explicit contract for both dates. <em>Baseline ____</em></td><td>Correct / incorrect. Unchanged to the cent = void</td></tr>
+<tr><td>Gold futures (/GC)</td><td>Direction only: UP or DOWN, Fri 2 Oct close vs Fri 25 Sep close</td><td>Yahoo Finance <code>GCZ26.CMX</code> (COMEX gold futures /GC, Dec 2026). <code>GC=F</code> is Yahoo's continuous symbol for the same product; use the explicit contract for both dates. <em>Fri 25 Sep Close: 4,321.20 (provisional)</em></td><td>Correct / incorrect. Unchanged to the cent = void</td></tr>
 </table>
 <p>Fri 2 Oct's US close falls in the early hours of Sat 3 Oct SGT. One file, one format, fixed path: <code>predictions/vW4.json</code>.</p>
 <pre>{
@@ -179,6 +177,7 @@
 <h3>Rules that keep it fair</h3>
 <ul>
 <li><strong>One number of record.</strong> You read the Fri 2 Oct Close from Yahoo and post it by Sat 3 Oct 12:00 SGT (US close is early Sat 3 Oct SGT). That posted figure is the one everyone is scored on, even if Yahoo revises it afterwards.</li>
+<li><strong>"Friday close" means the New York close.</strong> Markets do not trade on Saturday, so Friday's Close is the last price of Friday's US session, which falls in the early hours of Saturday in Singapore: about 4:00 pm New York (04:00 SGT) for the two indices, and about 5:00 pm New York (05:00 SGT) for COMEX gold futures. For reference, the Fri 25 Sep S&amp;P 500 Close is 7,743.41, the Sprint 3 target.</li>
 <li><strong>Same source for both dates.</strong> Gold direction compares two Closes from the same page. If Yahoo is unavailable, use Google Finance for SPX and NDX, and for gold use one alternative source for <em>both</em> dates. Never mix sources.</li>
 <li><strong>Futures caveat.</strong> COMEX gold trades almost around the clock, so its "Close" is the last price of Yahoo's daily bar and can differ from the official exchange settlement. That is why the source, the exact contract and both dates are fixed in advance.</li>
 <li><strong>R4 commits <code>actuals/vW4.json</code></strong> (date, open, close, source URL, time read) for the dates above; the Fri 2 Oct value goes in by Sat 3 Oct 18:00 SGT. Stage 6 reads from it.</li>
@@ -253,7 +252,7 @@
 <p><strong>No random predictions.</strong> Every call must be backed by the data your team actually gathered: the almanac view, the macro news, and the technical picture from your agent outputs. Your team does not write essays about it. Instead:</p>
 <ol>
 <li><strong>Write one sentence per call</strong> saying what you relied on. Every member writes one for their own call too.</li>
-<li><strong>Be ready to defend it on Mon 5 Oct in the practical.</strong> We pick a sentence and use it as the starting point to question your real deliberations: which agent output, which LLM view, what the Human Score decided, and why. <strong>Any member can be picked, not just the instrument owner.</strong></li>
+<li><strong>Be ready to defend it on Mon 5 Oct in the practical.</strong> This is an oral conversation, not a written test, and it is not marked. We pick a sentence and use it as the starting point to question your real deliberations: which agent output, which LLM view, what the Human Score decided, and why. <strong>Any member can be picked, not just the instrument owner.</strong></li>
 <li>A call with no sentence is invalid, and R1 (Scrum Master) is responsible for making sure none is missing.</li>
 </ol>
 <h3>What a good sentence looks like (invented examples)</h3>
@@ -343,7 +342,7 @@ A panel whose data does not exist yet shows "Not yet available", not an error.</
 <tr><td><code>prescriptions/vW4.json</code></td><td>agent, weight change, reason</td></tr>
 </table>
 Every team uses the same schema, so any team's dashboard could display any team's data. The <code>narrative</code> field holds the written explanation the UI displays.</li>
-<li><strong>Starter template.</strong> A skeleton in <code>team-template</code>: the five panels stubbed, sample JSON files, and a loader. Teams restyle and extend it. This prevents the divergence rather than correcting it. <span class="tag todo">NOT BUILT</span> Needed by Tue 29 Sep 12:00.</li>
+<li><strong>No template needed.</strong> This section is the requirement: teams build their own dashboard to this spec. Nothing is handed out.</li>
 <li><strong>Free:</strong> colours, layout, charts, extra panels. Extras are welcome (Team 3's and Team 1's extras stay), but the five required panels must be present.</li>
 </ol>
 </div>
@@ -381,7 +380,6 @@ Every team uses the same schema, so any team's dashboard could display any team'
 <table>
 <tr><th>When (SGT)</th><th>What</th></tr>
 <tr><td>Mon 28 Sep</td><td>Announcement live; agents start</td></tr>
-<tr><td>Tue 29 Sep 12:00</td><td>UI starter template and data schema published to teams (not yet built)</td></tr>
 <tr><td>Wed 30 Sep 12:00</td><td>Individual check-ins committed</td></tr>
 <tr><td><strong>Wed 30 Sep 23:59:59</strong></td><td><strong>Prediction lock</strong> — file, one-sentence reasons and R1 confirmation must all be in; the UI must show the calls and reasons</td></tr>
 <tr><td>Thu 1 Oct, morning</td><td>Lock job run by hand; hashes and ledger published</td></tr>
@@ -400,6 +398,9 @@ Every team uses the same schema, so any team's dashboard could display any team'
 <li>Third instrument is gold futures (/GC), December 2026 contract, direction only.</li>
 <li>No random predictions, no essays: one sentence per call, and every student must be able to defend it in the practical on Mon 5 Oct. R1 (Scrum Master) makes sure every sentence is in the file.</li>
 <li>Prediction lock is Wed 30 Sep 23:59 SGT.</li>
+<li>The Monday defense is oral only. It is not marked.</li>
+<li>Gold baseline is Friday 25 Sep's New York close, the same Friday as the SPX reference.</li>
+<li>No starter template. Students get the written spec in §6 and build their own dashboards to it.</li>
 <li>Team 4's thin roles and the Team 1 / Team 4 FigJam access blockers surface through class questions, not a separate pre-emptive message.</li>
 </ol>
 
