@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sprint 4 — DRAFT v3.1 for Review | AI Playbook</title>
+<title>Sprint 4 — DRAFT v3.2 for Review | AI Playbook</title>
 <style>
   :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -36,7 +36,7 @@
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft v3.1 · Not Student-Facing · Revised Mon 28 Sep · adds UI consistency + opening progress block</div>
+<div class="eyebrow">Draft v3.2 · Not Student-Facing · Revised Mon 28 Sep · adds instrument owners + how to read open/close</div>
 <h1>Sprint 4 — Draft</h1>
 <p class="sub">Launches Monday 28 Sep · <strong>predictions locked Tue 29 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
@@ -47,6 +47,8 @@
 <li><strong>Scoring.</strong> Proposed: SPX and NDX ranked by absolute % error vs actual close; gold = correct direction or not. Point values are yours to set.</li>
 <li><strong>Participation gate.</strong> Recommended: every member submits an individual call, and each team's participation share is published. Harder alternative: the team entry only counts if <em>all</em> members submitted. See §4.</li>
 <li><strong>Late entries.</strong> Strict as you asked: no entry = 0 challenge points and "NO ENTRY" on the leaderboard. Optional softener: a late file is still accepted as <em>unofficial</em> so the team still has something for Stage 6. Your call.</li>
+<li><strong>Instrument owners as drafted?</strong> SPX = R2, NDX = R3, Gold = R4 (§2). Each owner proposes and defends one number; R5 applies the Human Score to all three; R1 files and locks. Change any of these freely.</li>
+<li><strong>Official closing figure.</strong> Drafted as the value in Yahoo Finance's <em>Close</em> column, read by you and posted by Sat 3 Oct 12:00 SGT, so there is one number of record and no "my screen says" disputes (§2).</li>
 <li><strong>UI consistency: all five panels mandatory, or only three?</strong> Drafted as all five (§6), with teams free to style them however they like. Also: the starter template and data schema do not exist yet; teams need them by Tue 29 Sep 12:00 to have a fair chance at a Sunday UI deadline (§6).</li>
 <li><strong>Opening progress block on Mon 5 Oct.</strong> Drafted as UI, FigJam, GitHub shown live before each team's prediction presentation (§8). Timings are my proposal.</li>
 <li><strong>Enforcement is a design, not yet built or tested.</strong> Do not promise it to students until the lock script has had a dry run (§3). Two facts that shaped it are in §3.</li>
@@ -123,11 +125,63 @@
   "sprint": "vW4",
   "team": "team-N",
   "team_call": { "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "UP" },
+  "leads": { "spx": "github-username (R2)", "ndx": "github-username (R3)", "gold": "github-username (R4)" },
   "members": [
     { "github": "username", "role": "R1", "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "DOWN" }
   ]
 }</pre>
-<p>Structured JSON, not free-form markdown, so it can be validated and scored automatically. <code>team_call</code> is R1's final call. Anything that does not validate counts as no entry.</p>
+<p>Structured JSON, not free-form markdown, so it can be validated and scored automatically. <code>team_call</code> is the final call, filed by R1 after R5's Human Score. <code>leads</code> names the person accountable for each instrument. Anything that does not validate counts as no entry.</p>
+
+<h3>2a · Who owns each prediction target</h3>
+<p>Every role feeds all three instruments, but each target has <strong>one named owner</strong> who proposes the number, writes the case for it, and is the person asked about it on Monday.</p>
+<table>
+<tr><th>Target</th><th>Owner (proposes and defends)</th><th>Why this role</th></tr>
+<tr><td>S&amp;P 500 close</td><td><strong>R2 — Almanac &amp; Macro</strong></td><td>Seasonality and the macro backdrop drive the broad index; R2's Monday job is already "seasonal pattern + macro thesis supporting the call"</td></tr>
+<tr><td>Nasdaq-100 close</td><td><strong>R3 — Technical</strong></td><td>Levels, trend and momentum; R3's Monday job is already "chart evidence and key levels"</td></tr>
+<tr><td>Gold futures direction</td><td><strong>R4 — Data &amp; Calibration</strong></td><td>A binary call, and R4 already tracks directional accuracy per model and per agent</td></tr>
+</table>
+<table>
+<tr><th>Role</th><th>Responsibility for the three targets</th></tr>
+<tr><td>R2, R3</td><td>Agent outputs cover all three instruments, written before the LLMs are queried</td></tr>
+<tr><td>R6</td><td>Queries the three LLMs on all three instruments; supplies the agree/diverge log</td></tr>
+<tr><td>R5</td><td>Human Score on each instrument: confirm, adjust or override the owner's number, with the reason written down</td></tr>
+<tr><td>R1</td><td>Files <code>predictions/vW4.json</code> before the lock, names the three owners in <code>leads</code>, and chases every member's individual call</td></tr>
+<tr><td>R4</td><td>Also the official recorder of prices for the team (§2b). Because R4 both owns the gold call and records the actuals, the number of record is the one posted centrally, not R4's copy</td></tr>
+</table>
+<p>Workload watch: R4 (gold call, actuals, delta, prescriptions) and R6 (LLM queries on three instruments, synthesis, release) are the two heaviest roles this sprint. The live roles-page Monday speaking points would need a matching edit; I have not touched the live site.</p>
+
+<h3>2b · How to read the open and close — reliable sources</h3>
+<div class="card lock">
+<p><strong>Use Yahoo Finance's daily History page. It is the source of record for all three instruments.</strong></p>
+<table>
+<tr><th>Instrument</th><th>History page</th></tr>
+<tr><td>S&amp;P 500 (<code>^GSPC</code>)</td><td><a href="https://finance.yahoo.com/quote/%5EGSPC/history/">finance.yahoo.com/quote/%5EGSPC/history/</a></td></tr>
+<tr><td>Nasdaq-100 (<code>^NDX</code>)</td><td><a href="https://finance.yahoo.com/quote/%5ENDX/history/">finance.yahoo.com/quote/%5ENDX/history/</a></td></tr>
+<tr><td>Gold futures /GC, Dec 2026 (<code>GCZ26.CMX</code>)</td><td><a href="https://finance.yahoo.com/quote/GCZ26.CMX/history/">finance.yahoo.com/quote/GCZ26.CMX/history/</a></td></tr>
+</table>
+<ol>
+<li>Open the History page for the instrument.</li>
+<li>Set the time period to cover the dates you need, and the frequency to <strong>Daily</strong>.</li>
+<li>Find the row for the date. Read the <strong>Open</strong> and <strong>Close</strong> columns. Use <strong>Close</strong>, not Adj Close, for the prediction and for scoring.</li>
+<li>Record the value, the date, the page URL and the time you read it. If Yahoo's Download button is unavailable to you, reading the row on screen is enough.</li>
+</ol>
+<h3>Which dates to record</h3>
+<table>
+<tr><th>Date</th><th>Record</th><th>Used for</th></tr>
+<tr><td>Fri 25 Sep</td><td>Close (all three)</td><td>Baseline; the gold direction is measured against it</td></tr>
+<tr><td>Mon 28 Sep</td><td>Open and Close (all three)</td><td>Agent inputs</td></tr>
+<tr><td>Tue 29 Sep, before the lock</td><td>Latest available Close</td><td>Agent inputs</td></tr>
+<tr><td>Fri 2 Oct</td><td>Close (all three)</td><td><strong>The target, used for scoring</strong></td></tr>
+</table>
+<h3>Rules that keep it fair</h3>
+<ul>
+<li><strong>One number of record.</strong> You read the Fri 2 Oct Close from Yahoo and post it by Sat 3 Oct 12:00 SGT (US close is early Sat 3 Oct SGT). That posted figure is the one everyone is scored on, even if Yahoo revises it afterwards.</li>
+<li><strong>Same source for both dates.</strong> Gold direction compares two Closes from the same page. If Yahoo is unavailable, use Google Finance for SPX and NDX, and for gold use one alternative source for <em>both</em> dates. Never mix sources.</li>
+<li><strong>Futures caveat.</strong> COMEX gold trades almost around the clock, so its "Close" is the last price of Yahoo's daily bar and can differ from the official exchange settlement. That is why the source, the exact contract and both dates are fixed in advance.</li>
+<li><strong>R4 commits <code>actuals/vW4.json</code></strong> (date, open, close, source URL, time read) for the dates above; the Fri 2 Oct value goes in by Sat 3 Oct 18:00 SGT. Stage 6 reads from it.</li>
+<li>A tie on gold (identical Close on both dates) is void.</li>
+</ul>
+</div>
 
 <h2>3 · Preserving the integrity of the prediction</h2>
 <div class="card lock">
@@ -216,6 +270,7 @@ Because every team uses the same schema, any team's dashboard could display any 
 <tr><th>Deliverable</th><th>Owner</th><th>Due</th></tr>
 <tr><td><code>predictions/vW4.json</code> — team call + every member's call</td><td>R1 (all members)</td><td><strong>Tue 29 Sep 23:59 SGT — locked</strong></td></tr>
 <tr><td>Agent outputs and LLM synthesis for all three instruments, plus Human Score file, committed <em>before</em> the lock</td><td>R2, R3, R6, R5</td><td>Tue 29 Sep, ahead of the lock. Later commits are marked "post-lock" on the ledger; not disqualifying, but visible</td></tr>
+<tr><td><code>actuals/vW4.json</code> — prices from Yahoo History (§2b); Fri 2 Oct Close by Sat 3 Oct 18:00 SGT</td><td>R4</td><td>Baseline and inputs Tue 29 Sep; target Sat 3 Oct</td></tr>
 <tr><td><code>checkin/wednesday.md</code> — individual per-role status, not a paraphrase of the group chat</td><td>R1</td><td>Wed 30 Sep 12:00 SGT. dt3-monitor flags missing ones by Wed 17:00</td></tr>
 <tr><td><code>llm-synthesis/vW4.md</code> — Stage 3 formalized</td><td>R6 <span class="tag me">moved from R5</span></td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td><code>delta/vW4.md</code> + the script that generates it — error size, direction, contributing agent</td><td>R4</td><td>Sun 4 Oct 23:59</td></tr>
@@ -249,6 +304,7 @@ Because every team uses the same schema, any team's dashboard could display any 
 <tr><td>Wed 30 Sep, morning</td><td>Lock job run manually; hashes and ledger published</td></tr>
 <tr><td>Wed 30 Sep 12:00</td><td>Individual check-ins committed</td></tr>
 <tr><td>Fri 2 Oct (US close early Sat 3 Oct SGT)</td><td>Target closes</td></tr>
+<tr><td>Sat 3 Oct 12:00 / 18:00</td><td>Official closes posted / R4 commits <code>actuals/vW4.json</code></td></tr>
 <tr><td>Sun 4 Oct 23:59</td><td>All other deliverables due</td></tr>
 <tr><td>Mon 5 Oct</td><td>Each team: live UI / FigJam / GitHub progress block first, then presentation, scoring</td></tr>
 </table>
