@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sprint 4 — DRAFT v3 for Review | AI Playbook</title>
+<title>Sprint 4 — DRAFT v3.1 for Review | AI Playbook</title>
 <style>
   :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -36,7 +36,7 @@
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft v3 · Not Student-Facing · Revised Mon 28 Sep after Sprint 3 review</div>
+<div class="eyebrow">Draft v3.1 · Not Student-Facing · Revised Mon 28 Sep · adds UI consistency + opening progress block</div>
 <h1>Sprint 4 — Draft</h1>
 <p class="sub">Launches Monday 28 Sep · <strong>predictions locked Tue 29 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
@@ -47,6 +47,8 @@
 <li><strong>Scoring.</strong> Proposed: SPX and NDX ranked by absolute % error vs actual close; gold = correct direction or not. Point values are yours to set.</li>
 <li><strong>Participation gate.</strong> Recommended: every member submits an individual call, and each team's participation share is published. Harder alternative: the team entry only counts if <em>all</em> members submitted. See §4.</li>
 <li><strong>Late entries.</strong> Strict as you asked: no entry = 0 challenge points and "NO ENTRY" on the leaderboard. Optional softener: a late file is still accepted as <em>unofficial</em> so the team still has something for Stage 6. Your call.</li>
+<li><strong>UI consistency: all five panels mandatory, or only three?</strong> Drafted as all five (§6), with teams free to style them however they like. Also: the starter template and data schema do not exist yet; teams need them by Tue 29 Sep 12:00 to have a fair chance at a Sunday UI deadline (§6).</li>
+<li><strong>Opening progress block on Mon 5 Oct.</strong> Drafted as UI, FigJam, GitHub shown live before each team's prediction presentation (§8). Timings are my proposal.</li>
 <li><strong>Enforcement is a design, not yet built or tested.</strong> Do not promise it to students until the lock script has had a dry run (§3). Two facts that shaped it are in §3.</li>
 </ol>
 </div>
@@ -59,6 +61,8 @@
 <li><span class="tag you">YOUR INSTRUCTION</span>R5 owns the UI as well as the Human Score (already live on the <a href="https://dt3-tr3-26-course-website.pages.dev/roles/">roles page</a>).</li>
 <li><span class="tag me">MY PROPOSAL</span><code>llm-synthesis/vW4.md</code> moves from R5 to R6. With R5 now carrying Human Score + UI, and R6 having lost the UI, R6 is the one who already queries the three LLMs and sees where they agree and diverge.</li>
 <li><span class="tag me">MY PROPOSAL</span>Bar raised toward the full architecture: delta is script-generated, the UI must display Stages 3–7 from committed data, and instruments live in one config file (§5).</li>
+<li><span class="tag you">YOUR INSTRUCTION</span>Each team's next presentation opens with UI, FigJam and GitHub progress, shown live, before the presentation proper (§8).</li>
+<li><span class="tag you">YOUR INSTRUCTION</span>UI must be consistent across teams (§6). Structure, data and location are fixed; styling stays free.</li>
 <li><span class="tag me">FIXED</span>Three claims in v2 were wrong or unverified and are corrected below (Team 3 Discord counts, Team 2 "3 of 6 members", the "1–2 commit roles" line).</li>
 </ul>
 </div>
@@ -177,7 +181,37 @@
 <tr><td>7 · Prescriptions</td><td>One concrete agent-weight adjustment for Sprint 5, arising from the delta</td></tr>
 </table>
 
-<h2>6 · What every team must submit</h2>
+<h2>6 · UI consistency across teams</h2>
+<p>Sprint 3's four dashboards differ a lot: Team 1 has Human Score, comparison table, chart and OHLC table; Team 2 has charts, tables and a macro comparison; Team 3 has the largest and most styled build; Team 4 has one bar chart and a text summary. The code also lives in four different places, and Teams 1–2 read CSV while Teams 3–4 read JSON. The fix is to <strong>fix the structure, the data and the location, and leave the styling free</strong>.</p>
+<div class="card lock">
+<ol>
+<li><strong>Fixed location.</strong> Every dashboard lives at <code>ui/index.html</code> in the team repo, so all four are found and opened the same way.</li>
+<li><strong>Five required panels, same names, same order</strong>, one per stage. Each carries a fixed attribute so it can be checked automatically:
+<table>
+<tr><th>Panel</th><th>Attribute</th><th>Data file it reads</th></tr>
+<tr><td>Locked Prediction (with lock time)</td><td><code>data-panel="locked-prediction"</code></td><td><code>data/locked_prediction.json</code></td></tr>
+<tr><td>LLM Synthesis</td><td><code>data-panel="llm-synthesis"</code></td><td><code>data/llm_synthesis.json</code></td></tr>
+<tr><td>Human Score</td><td><code>data-panel="human-score"</code></td><td><code>data/human_score.json</code></td></tr>
+<tr><td>Delta</td><td><code>data-panel="delta"</code></td><td><code>data/delta.json</code></td></tr>
+<tr><td>Prescription</td><td><code>data-panel="prescription"</code></td><td><code>data/prescription.json</code></td></tr>
+</table></li>
+<li><strong>Fixed data contract.</strong> The UI reads only these JSON files, never typed-in numbers. Proposed required fields:
+<table>
+<tr><th>File</th><th>Required fields</th></tr>
+<tr><td><code>locked_prediction.json</code></td><td>sprint, team, locked_at, spx_close, ndx_close, gold_direction, sha256</td></tr>
+<tr><td><code>llm_synthesis.json</code></td><td>per instrument: each model's view, agree (yes/no), divergence note</td></tr>
+<tr><td><code>human_score.json</code></td><td>per instrument: score, decision (confirm / adjust / override), justification</td></tr>
+<tr><td><code>delta.json</code></td><td>instrument, predicted, actual, error, error_pct, direction_correct, top contributing agent</td></tr>
+<tr><td><code>prescription.json</code></td><td>agent, weight change, reason</td></tr>
+</table>
+Because every team uses the same schema, any team's dashboard could display any team's data. The lock job writes a display copy of <code>locked_prediction.json</code> into each team repo; scoring never reads it (it uses the archive in §3), so editing it gains nothing.</li>
+<li><strong>Starter template.</strong> A skeleton in <code>team-template</code>: the five panels stubbed, sample JSON files, and a loader. Teams restyle and extend it. This is the strongest measure because it prevents the divergence rather than correcting it. <span class="tag todo">NOT BUILT</span> Needed by Tue 29 Sep 12:00.</li>
+<li><strong>Automated check.</strong> <code>dt3-monitor</code> checks each team repo for <code>ui/index.html</code>, all five panel attributes and all five data files parsing correctly, and posts pass/fail per team to Discord. <span class="tag todo">NOT BUILT</span></li>
+<li><strong>Free:</strong> colours, layout, charts, extra panels. Extras are welcome (Team 3's and Team 1's extras stay), but the five required panels must be present.</li>
+</ol>
+</div>
+
+<h2>7 · What every team must submit</h2>
 <table>
 <tr><th>Deliverable</th><th>Owner</th><th>Due</th></tr>
 <tr><td><code>predictions/vW4.json</code> — team call + every member's call</td><td>R1 (all members)</td><td><strong>Tue 29 Sep 23:59 SGT — locked</strong></td></tr>
@@ -186,7 +220,7 @@
 <tr><td><code>llm-synthesis/vW4.md</code> — Stage 3 formalized</td><td>R6 <span class="tag me">moved from R5</span></td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td><code>delta/vW4.md</code> + the script that generates it — error size, direction, contributing agent</td><td>R4</td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td><code>prescriptions/vW4.md</code> — Stage 7</td><td>R4 + R1</td><td>Sun 4 Oct 23:59</td></tr>
-<tr><td>UI/dashboard showing the locked prediction (with lock time), LLM synthesis, Human Score, delta and prescription, all read from committed data files</td><td>R5</td><td>Sun 4 Oct 23:59; live demo Mon 5 Oct</td></tr>
+<tr><td>UI at <code>ui/index.html</code> with the five required panels (§6), reading the five data files; passes the automated check</td><td>R5</td><td>Sun 4 Oct 23:59; live in the opening block Mon 5 Oct</td></tr>
 <tr><td><code>instruments.json</code> — single source of tickers and sources</td><td>R6 + R3</td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td>Release tag for the sprint, verified accessible</td><td>R6</td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td>Working artifact from every role R1–R6, minimum 5 commits each</td><td>All six</td><td>Sun 4 Oct 23:59</td></tr>
@@ -195,17 +229,28 @@
 </table>
 <p>Week 4 R5 workload note: R5 now carries the Human Score for three instruments plus the UI. That was the point of the move, but watch it in Wednesday's check-ins.</p>
 
-<h2>7 · Timeline</h2>
+<h2>8 · Mon 5 Oct — opening progress block, before the presentation proper</h2>
+<p>Each team opens with a short, <strong>live</strong> progress block. Live means the real thing opened on the day, not screenshots or slides. Only then does the team move into its prediction presentation.</p>
+<table>
+<tr><th>Segment</th><th>Presenter</th><th>Must show</th><th>Proposed time</th></tr>
+<tr><td>UI</td><td>R5</td><td>The dashboard from <code>ui/index.html</code>, walked through the five panels in order; what changed since last week</td><td>2 min</td></tr>
+<tr><td>FigJam</td><td>R1</td><td>The board, every card in Done, each with its linked Discord message</td><td>1 min</td></tr>
+<tr><td>GitHub</td><td>R6</td><td>The repo open on screen: this week's commits across roles, the release tag, the evidence folder</td><td>1 min</td></tr>
+</table>
+<p>All teams are scored on the same checklist (five panels present, every Done-card linked, every role has commits, tag verified), so a differently styled dashboard cannot hide a missing stage. Presenters are the three roles that own each item, which also makes it obvious in the room when a role has nothing to show. Timings are a proposal; adjust to your slot length.</p>
+
+<h2>9 · Timeline</h2>
 <table>
 <tr><th>When (SGT)</th><th>What</th></tr>
 <tr><td>Mon 28 Sep</td><td>Announcement live; agents start</td></tr>
+<tr><td>Tue 29 Sep 12:00</td><td>UI starter template and data schema published to teams (not yet built)</td></tr>
 <tr><td>Tue 29 Sep 12:00 / 20:00 / 23:00</td><td>Pre-lock status board posts</td></tr>
 <tr><td><strong>Tue 29 Sep 23:59:59</strong></td><td><strong>Prediction lock</strong></td></tr>
 <tr><td>Wed 30 Sep, morning</td><td>Lock job run manually; hashes and ledger published</td></tr>
 <tr><td>Wed 30 Sep 12:00</td><td>Individual check-ins committed</td></tr>
 <tr><td>Fri 2 Oct (US close early Sat 3 Oct SGT)</td><td>Target closes</td></tr>
 <tr><td>Sun 4 Oct 23:59</td><td>All other deliverables due</td></tr>
-<tr><td>Mon 5 Oct</td><td>Presentations, live UI demos, scoring</td></tr>
+<tr><td>Mon 5 Oct</td><td>Each team: live UI / FigJam / GitHub progress block first, then presentation, scoring</td></tr>
 </table>
 
 <h2>Decided — no longer open</h2>
