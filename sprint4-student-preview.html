@@ -10,6 +10,7 @@
 body{margin:0;background:#f5f7fb;font-family:Inter,Segoe UI,Arial,sans-serif;color:#102033;line-height:1.6}
 a{color:#0f6fbd;text-decoration:none;font-weight:800}
 .preview{background:#f5b942;color:#111827;text-align:center;padding:8px 12px;font-weight:800;font-size:.85rem}
+.preview{background:#f5b942;color:#111827;text-align:center;padding:8px 12px;font-weight:800;font-size:.85rem}
 .top{background:#071426;color:#fff;border-bottom:4px solid #12c7b7;padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
 .brand{display:flex;gap:14px;align-items:center;font-weight:900;font-size:1.25rem}
 .badge{background:#12c7b7;color:#071426;padding:8px 12px;border-radius:8px;font-family:monospace}
@@ -45,7 +46,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 </head>
 <body data-sprint-monday="2026-09-28" data-sprint-number="4">
 
-<div class="preview">PREVIEW for Prof Tan's review. Not published to the student site.</div>
+<div class="preview">PREVIEW mirror of the live Sprint 4 page. Private.</div>
 
 <div class="top">
   <div class="brand"><span class="badge" data-tag>vW4</span> CP3405 · Design Thinking III</div>
@@ -69,7 +70,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 
   <h2>The Sprint Goal</h2>
   <div class="card">
-    <b>Lock a three-market prediction by Wednesday night, defend it on Monday, then work out how far off you were (the <a href="#delta">delta</a>) and decide one concrete change for next sprint (the <a href="#delta">prescription</a>), and show the whole chain on your team dashboard. The dashboard also tracks your team's GitHub and FigJam activity, and it stays live and up to date all week.</b>
+    <b>Lock a three-market prediction by Wednesday night, defend it on Monday, then work out how far off you were (the <a href="#delta">delta</a>) and decide one concrete change for next sprint (the <a href="#delta">prescription</a>), and show the whole chain on your team dashboard. The dashboard also shows who holds each role, and tracks your team's GitHub and FigJam activity, and it stays live and up to date all week.</b>
   </div>
 
   <h2 id="delta">Two New Ideas This Sprint: Delta and Prescription</h2>
@@ -173,7 +174,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 
   <div class="task">
     <span class="num">R1</span><b>Product Owner &amp; Scrum Master: file the entry, check every sentence</b>
-    <p style="margin:8px 0 0">File <code>predictions/vW4.json</code> and name the three owners. Chase the three owners for their sentences, and check none is missing. Commit <code>checkin/wednesday.md</code> by Wednesday 12:00: contact each role member individually and record each person's real status. Confirm every teammate has GitHub write access and FigJam edit access <b>before the Wednesday deadline</b>. Keep <code>data/roles.json</code> (who holds which role, with GitHub usernames) and <b>update <code>data/figjam_status.json</code> every day</b>: the cards in each FigJam column and, for every Done card, its Discord message link. With R4, write the prescription.</p>
+    <p style="margin:8px 0 0">File <code>predictions/vW4.json</code> and name the three owners. Chase the three owners for their sentences, and check none is missing. Commit <code>checkin/wednesday.md</code> by Wednesday 12:00: contact each role member individually and record each person's real status. Confirm every teammate has GitHub write access and FigJam edit access <b>before the Wednesday deadline</b>. Keep <code>data/roles.json</code>: the student name and GitHub username in each role R1–R6, for every sprint so far, with a new entry at the start of each sprint because roles rotate. Also <b>update <code>data/figjam_status.json</code> every day</b>: the cards in each FigJam column and, for every Done card, its Discord message link. With R4, write the prescription.</p>
     <div class="dod"><b>DONE MEANS</b> — a complete entry filed before Wednesday 23:59, a per-role check-in committed, every FigJam card moved to Done linking a Discord message, and a FigJam status file updated every day.</div>
   </div>
 
@@ -197,13 +198,13 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 
   <div class="task">
     <span class="num">R5</span><b>Human Score &amp; UI: judge the calls, build the dashboard</b>
-    <p style="margin:8px 0 0">Human Score on each of the three markets in <code>human-score/vW4.json</code>: confirm, adjust or override the owner's number, with the reason written down. Then build your team dashboard at <code>ui/index.html</code> (see below) and keep it live all week: the GitHub and FigJam panels by Tuesday night, the Predictions panel with the prediction on Wednesday, the rest by Saturday.</p>
-    <div class="dod"><b>DONE MEANS</b> — a Human Score for all three markets before the deadline, and a dashboard with all seven panels, live and current all week, reading committed data files.</div>
+    <p style="margin:8px 0 0">Human Score on each of the three markets in <code>human-score/vW4.json</code>: confirm, adjust or override the owner's number, with the reason written down. Then build your team dashboard at <code>ui/index.html</code> (see below) and keep it live all week: the Roles, GitHub and FigJam panels by Tuesday night, the Predictions panel with the prediction on Wednesday, the rest by Saturday.</p>
+    <div class="dod"><b>DONE MEANS</b> — a Human Score for all three markets before the deadline, and a dashboard with all eight panels, live and current all week, reading committed data files.</div>
   </div>
 
   <div class="task">
     <span class="num">R6</span><b>LLM &amp; GitHub: query the models, ship the release</b>
-    <p style="margin:8px 0 0">Query ChatGPT, Gemini and DeepSeek with identical prompts on all three markets. Build <b>Stage 3, LLM Synthesis</b> (<code>llm-synthesis/vW4.json</code>): where the models agreed and diverged, per market, before the Human Score, plus a <code>narrative</code>. Commit all evidence, keep the folder clean, create the <code>vW4</code> release tag, and verify the link. Write a small script that reads your repo's commits since Monday 28 Sep and writes <code>data/github_activity.json</code>. <b>Run it and commit the result every day.</b></p>
+    <p style="margin:8px 0 0">Query ChatGPT, Gemini and DeepSeek with identical prompts on all three markets. Build <b>Stage 3, LLM Synthesis</b> (<code>llm-synthesis/vW4.json</code>): where the models agreed and diverged, per market, before the Human Score, plus a <code>narrative</code>. Commit all evidence, keep the folder clean, create the <code>vW4</code> release tag, and verify the link. Write a small script that reads your repo's commits for the current sprint and writes <code>data/github_activity.json</code>, keeping the entries for earlier sprints. <b>Run it and commit the result every day.</b></p>
     <div class="dod"><b>DONE MEANS</b> — synthesis committed before the Wednesday deadline, a clean repo, a release tag that opens, and a GitHub activity file refreshed every day.</div>
   </div>
 
@@ -214,7 +215,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   <p>Style it however you like. The structure is the same for every team, so anyone can find what they're looking for.</p>
   <ul>
     <li>It lives at <code>ui/index.html</code> in your team repo.</li>
-    <li>It has these seven panels, in this order, each tagged with the attribute shown.</li>
+    <li>It has these eight panels, in this order, each tagged with the attribute shown.</li>
     <li>Each panel reads its committed file directly. No hand-typed numbers.</li>
     <li>Every panel shows <b>Last updated</b>, taken from the file's <code>updated_at</code> field, so nobody has to guess how fresh it is.</li>
     <li>A panel whose data doesn't exist yet shows "Not yet available", not an error.</li>
@@ -222,7 +223,8 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   <div class="tablewrap">
   <table>
     <tr><th>Panel</th><th>Attribute</th><th>Reads</th><th>Live by</th></tr>
-    <tr><td>GitHub Activity: commits per role since Monday, last commit time, the ten latest commits</td><td><code>data-panel="github"</code></td><td><code>data/github_activity.json</code></td><td><b>Tue 29 Sep 23:59</b>, then refreshed daily</td></tr>
+    <tr><td>Roles: for every sprint so far, the student name in each role R1–R6, with the current sprint highlighted</td><td><code>data-panel="roles"</code></td><td><code>data/roles.json</code></td><td><b>Tue 29 Sep 23:59</b>, then a new entry each sprint</td></tr>
+    <tr><td>GitHub Activity: for each sprint, commits per role and per student, last commit time, the ten latest commits</td><td><code>data-panel="github"</code></td><td><code>data/github_activity.json</code></td><td><b>Tue 29 Sep 23:59</b>, then refreshed daily</td></tr>
     <tr><td>FigJam Activity: the cards in To Do, In Progress, Review and Done, with a Discord link on every Done card</td><td><code>data-panel="figjam"</code></td><td><code>data/figjam_status.json</code></td><td><b>Tue 29 Sep 23:59</b>, then updated daily</td></tr>
     <tr><td>Predictions: the three calls, each owner, each one-sentence reason</td><td><code>data-panel="predictions"</code></td><td><code>predictions/vW4.json</code></td><td>Wed 30 Sep 23:59</td></tr>
     <tr><td>LLM Synthesis</td><td><code>data-panel="llm-synthesis"</code></td><td><code>llm-synthesis/vW4.json</code></td><td>Sat 3 Oct 23:59</td></tr>
@@ -231,9 +233,17 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     <tr><td>Prescription: the one change for next sprint</td><td><code>data-panel="prescription"</code></td><td><code>prescriptions/vW4.json</code></td><td>Sat 3 Oct 23:59</td></tr>
   </table>
   </div>
-  <h3>What the GitHub and FigJam panels should show (invented data)</h3>
+  <h3>What the Roles, GitHub and FigJam panels should show (invented data)</h3>
   <div class="card">
     <b>Real activity, not just links.</b> A link to your repo or your board is not enough. The panels show what your team has actually done, so a gap is visible midweek while there's still time to fix it. Every panel also shows when it was last updated.
+    <p style="margin:12px 0 4px"><b>Roles</b>, one row per sprint, so the rotation is visible:</p>
+    <div class="tablewrap">
+    <table>
+      <tr><th>Sprint</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th></tr>
+      <tr><td>vW3</td><td>Alex Tan</td><td>Ben Lee</td><td>Chen Wei</td><td>Dana Ng</td><td>Eli Koh</td><td>Fay Lim</td></tr>
+      <tr><td><b>vW4 (this sprint)</b></td><td><b>Fay Lim</b></td><td><b>Alex Tan</b></td><td><b>Ben Lee</b></td><td><b>Chen Wei</b></td><td><b>Dana Ng</b></td><td><b>Eli Koh</b></td></tr>
+    </table>
+    </div>
     <p style="margin:12px 0 4px"><b>GitHub Activity</b>, last updated Tue 29 Sep 21:40:</p>
     <div class="tablewrap">
     <table>
@@ -260,16 +270,16 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
 
   <h3>Keeping it fresh</h3>
   <ul>
-    <li><b>GitHub:</b> R6's script reads your commits since Monday 28 Sep and writes <code>data/github_activity.json</code>. Run it and commit the result every day.</li>
+    <li><b>GitHub:</b> R6's script reads your commits for the current sprint and writes <code>data/github_activity.json</code>. Run it and commit the result every day. Keep the entries for earlier sprints.</li>
     <li><b>FigJam:</b> R1 updates <code>data/figjam_status.json</code> every day from the board. It takes a few minutes.</li>
-    <li><b>Roles:</b> R1 keeps <code>data/roles.json</code> so the GitHub panel can show commits per role.</li>
+    <li><b>Roles:</b> roles rotate every sprint, so at the start of each sprint R1 adds a new entry to <code>data/roles.json</code> with each student's name and GitHub username per role. Fill in every earlier sprint too, so the history starts complete. This is how we see who did what work, sprint by sprint.</li>
   </ul>
   <h3>What goes in each file</h3>
   <div class="tablewrap">
   <table>
     <tr><th>File</th><th>Required fields</th></tr>
-    <tr><td><code>data/roles.json</code></td><td>for each of R1–R6: the GitHub username(s) holding that role</td></tr>
-    <tr><td><code>data/github_activity.json</code></td><td><code>updated_at</code>; per role: commits since Monday 28 Sep and last commit time; the ten latest commits (role, author, message, time)</td></tr>
+    <tr><td><code>data/roles.json</code></td><td>for every sprint so far (vW1, vW2, vW3, vW4…): the sprint's start date and, for each of R1–R6, the student's name and GitHub username</td></tr>
+    <tr><td><code>data/github_activity.json</code></td><td><code>updated_at</code>; for each sprint, per role: the student's name, commits and last commit time; the ten latest commits (role, author, message, time)</td></tr>
     <tr><td><code>data/figjam_status.json</code></td><td><code>updated_at</code>, <code>board_url</code>; the four columns, each a list of cards (title, owner role); every Done card also has its <code>discord_link</code></td></tr>
     <tr><td><code>llm-synthesis/vW4.json</code></td><td>per market: each model's view, whether they agree (yes/no), the divergence note; plus <code>narrative</code></td></tr>
     <tr><td><code>human-score/vW4.json</code></td><td>per market: score, decision (confirm / adjust / override), justification</td></tr>
@@ -285,12 +295,12 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     <tr><th>What</th><th>Owner</th><th>Due</th></tr>
     <tr><td><code>predictions/vW4.json</code>: the team's call on all three markets, one sentence per call, R1 confirmation</td><td>R1 (owners write the sentences)</td><td><b>Wed 30 Sep 23:59</b></td></tr>
     <tr><td>R2 and R3 outputs, <code>llm-synthesis/vW4.json</code>, <code>human-score/vW4.json</code>, all committed before the deadline</td><td>R2, R3, R6, R5</td><td><b>Wed 30 Sep 23:59</b></td></tr>
-    <tr><td>GitHub Activity and FigJam Activity panels live in <code>ui/index.html</code>, then refreshed every day</td><td>R5 (panels), R6 (GitHub file), R1 (FigJam file)</td><td><b>Tue 29 Sep 23:59</b>, then daily</td></tr>
+    <tr><td>Roles, GitHub Activity and FigJam Activity panels live in <code>ui/index.html</code>, then refreshed every day</td><td>R5 (panels), R1 (roles and FigJam files), R6 (GitHub file)</td><td><b>Tue 29 Sep 23:59</b>, then daily</td></tr>
     <tr><td>Predictions panel live in <code>ui/index.html</code></td><td>R5</td><td><b>Wed 30 Sep 23:59</b></td></tr>
     <tr><td><code>checkin/wednesday.md</code>: individual per-role status</td><td>R1</td><td>Wed 30 Sep 12:00</td></tr>
     <tr><td><code>actuals/vW4.json</code>, <code>delta/vW4.json</code> and its script</td><td>R4</td><td>Sat 3 Oct 23:59</td></tr>
     <tr><td><code>prescriptions/vW4.json</code></td><td>R4 + R1</td><td>Sat 3 Oct 23:59</td></tr>
-    <tr><td>Dashboard with all seven panels, current</td><td>R5</td><td>Sat 3 Oct 23:59</td></tr>
+    <tr><td>Dashboard with all eight panels, current</td><td>R5</td><td>Sat 3 Oct 23:59</td></tr>
     <tr><td><code>instruments.json</code></td><td>R6 + R3</td><td>Sat 3 Oct 23:59</td></tr>
     <tr><td>Release tag <code>vW4</code>, link verified</td><td>R6</td><td>Sat 3 Oct 23:59</td></tr>
     <tr><td>Working commits from every role R1–R6, at least 5 each</td><td>All six</td><td>Sat 3 Oct 23:59</td></tr>
@@ -298,14 +308,14 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   </table>
   </div>
   <div class="card red">
-    <b>Three real deadlines.</b> <b>Tuesday night:</b> dashboard live with GitHub and FigJam activity. <b>Wednesday night:</b> the prediction (R1's check-in is due earlier, at Wednesday 12:00). <b>Saturday night, 3 Oct 23:59:</b> everything else. Not Sunday, and not Monday morning. The dashboard is refreshed every day in between. Monday is presentation day, not build day.
+    <b>Three real deadlines.</b> <b>Tuesday night:</b> dashboard live with roles, GitHub and FigJam activity. <b>Wednesday night:</b> the prediction (R1's check-in is due earlier, at Wednesday 12:00). <b>Saturday night, 3 Oct 23:59:</b> everything else. Not Sunday, and not Monday morning. The dashboard is refreshed every day in between. Monday is presentation day, not build day.
   </div>
 
   <h2>Monday 5 Oct — Start With Your Progress</h2>
   <div class="card">
     <b>Before your presentation proper, every team opens with a short live progress block. Live means the real thing open on screen, not screenshots.</b>
     <ul style="margin-bottom:0">
-      <li><b>UI (R5, 2 minutes):</b> open <code>ui/index.html</code> and walk through the seven panels in order. Say what changed since last week.</li>
+      <li><b>UI (R5, 2 minutes):</b> open <code>ui/index.html</code> and walk through the eight panels in order. Say what changed since last week.</li>
       <li><b>FigJam (R1, 1 minute):</b> open the board and show the cards in Done, each with its linked Discord message.</li>
       <li><b>GitHub (R6, 1 minute):</b> open the repo and show this week's commits across roles, the release tag and the evidence folder.</li>
     </ul>
@@ -317,7 +327,7 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
   <table>
     <tr><th>When (Singapore time)</th><th>What</th></tr>
     <tr><td>Mon 28 Sep</td><td>Sprint 4 starts</td></tr>
-    <tr><td>Tue 29 Sep 23:59</td><td>Dashboard live with GitHub and FigJam panels, updated with real data</td></tr>
+    <tr><td>Tue 29 Sep 23:59</td><td>Dashboard live with Roles, GitHub and FigJam panels, updated with real data</td></tr>
     <tr><td>Wed 30 Sep 12:00</td><td>Individual per-role check-in committed (R1)</td></tr>
     <tr><td><b>Wed 30 Sep 23:59</b></td><td><b>Prediction locked</b>: file, sentences, R1 confirmation and the Predictions panel</td></tr>
     <tr><td>Fri 2 Oct</td><td>The target Friday. The US close lands early Saturday morning Singapore time</td></tr>
