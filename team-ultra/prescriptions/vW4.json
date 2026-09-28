@@ -1,0 +1,6 @@
+{
+  "updated_at": "2026-09-27T14:00:00+08:00",
+  "agent": "Almanac",
+  "weight_change": "Lean less on the Almanac agent's seasonal read when Technical and Macro disagree with it; treat it as one input among three rather than the deciding one.",
+  "reason": "The Almanac agent's bullish seasonal read was furthest from Friday's actual close in the Sprint 3 delta. Technical's support/resistance read was closer. Add a check: if Almanac disagrees with both other agents, R5 must ask why before accepting the team call."
+}

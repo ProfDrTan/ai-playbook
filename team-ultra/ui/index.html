@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Team Ultra — Sprint 4 Dashboard (Example)</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7fb;font-family:Inter,Segoe UI,Arial,sans-serif;color:#102033;line-height:1.6}
+a{color:#0f6fbd;text-decoration:none;font-weight:700}
+.banner{background:#f5b942;color:#111827;text-align:center;padding:8px 12px;font-weight:800;font-size:.85rem}
+.top{background:#071426;color:#fff;border-bottom:4px solid #12c7b7;padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center;font-weight:900;font-size:1.2rem}
+.badge{background:#12c7b7;color:#071426;padding:6px 11px;border-radius:8px;font-family:monospace;font-size:.85rem}
+.main{max-width:980px;margin:0 auto;padding:30px 22px 70px}
+h1{font-size:1.7rem;margin:0 0 4px}
+.sub{color:#5a6c82;margin-bottom:28px}
+.panel{background:#fff;border:1px solid #e6ebf3;border-radius:12px;padding:20px 22px;margin-bottom:18px;box-shadow:0 1px 3px rgba(16,32,51,.05)}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px;border-bottom:2px solid #eef2f8;padding-bottom:10px}
+.panel-head h2{margin:0;font-size:1.05rem;color:#0e2a52}
+.updated{font-size:.78rem;color:#8493a8;font-family:monospace}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #eef2f8;vertical-align:top}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.03em;color:#8493a8}
+.current{background:#fffbeb}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:99px;background:#eef2f8;color:#0e2a52}
+.tag.up{background:#e6f7ee;color:#0e7a45}
+.tag.confirm{background:#e6f7ee;color:#0e7a45}
+.tag.adjust{background:#fff4e0;color:#a3660a}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.col h3{font-size:.75rem;color:#8493a8;text-transform:uppercase;margin:0 0 8px}
+.card{background:#f5f7fb;border:1px solid #e6ebf3;border-radius:8px;padding:8px 10px;font-size:.82rem;margin-bottom:8px}
+.card .own{color:#8493a8;font-size:.75rem;display:block;margin-top:2px}
+.err{color:#dc2626;font-weight:700}
+.na{color:#8493a8;font-style:italic;padding:14px 0}
+code{background:#eef2f8;padding:1px 6px;border-radius:4px;font-family:monospace;font-size:.85em}
+.why{background:#f0faf9;border-left:3px solid #12c7b7;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.88rem;margin-top:6px}
+footer{max-width:980px;margin:30px auto 0;padding:16px 22px;border-top:1px solid #e6ebf3;color:#8493a8;font-size:.8rem;text-align:center}
+@media(max-width:700px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="banner">EXAMPLE — Team Ultra is not a real team. Built to show what a complete Sprint 4 dashboard looks like.</div>
+<div class="top">
+  <div class="brand"><span class="badge">vW4</span> Team Ultra</div>
+  <div style="color:#12c7b7;font-family:monospace;font-size:.85rem">CP3405 · TR3 2026 · Example</div>
+</div>
+<div class="main">
+  <h1>Team Ultra — Sprint 4 Dashboard</h1>
+  <p class="sub">This is a worked example: real data where it exists (the Sprint 3 actual close), invented predictions and scores everywhere else. The structure — panel order, attributes, file paths — is exactly what every team's own <code>ui/index.html</code> should follow. See the <a href="../index.html">rubric</a> for why each part matters.</p>
+
+  <div class="panel" data-panel="roles">
+    <div class="panel-head"><h2>Roles</h2><span class="updated" id="u-roles"></span></div>
+    <div id="c-roles"></div>
+  </div>
+
+  <div class="panel" data-panel="github">
+    <div class="panel-head"><h2>GitHub Activity</h2><span class="updated" id="u-github"></span></div>
+    <div id="c-github"></div>
+  </div>
+
+  <div class="panel" data-panel="figjam">
+    <div class="panel-head"><h2>FigJam Activity</h2><span class="updated" id="u-figjam"></span></div>
+    <div id="c-figjam"></div>
+  </div>
+
+  <div class="panel" data-panel="predictions">
+    <div class="panel-head"><h2>Locked Prediction</h2><span class="updated" id="u-predictions"></span></div>
+    <div id="c-predictions"></div>
+  </div>
+
+  <div class="panel" data-panel="llm-synthesis">
+    <div class="panel-head"><h2>LLM Synthesis</h2><span class="updated" id="u-llm"></span></div>
+    <div id="c-llm"></div>
+  </div>
+
+  <div class="panel" data-panel="human-score">
+    <div class="panel-head"><h2>Human Score</h2><span class="updated" id="u-hs"></span></div>
+    <div id="c-hs"></div>
+  </div>
+
+  <div class="panel" data-panel="delta">
+    <div class="panel-head"><h2>Delta</h2><span class="updated" id="u-delta"></span></div>
+    <div id="c-delta"></div>
+  </div>
+
+  <div class="panel" data-panel="prescription">
+    <div class="panel-head"><h2>Prescription</h2><span class="updated" id="u-presc"></span></div>
+    <div id="c-presc"></div>
+  </div>
+</div>
+<footer>Team Ultra · fictional example for CP3405 Design Thinking III · TR3 2026</footer>
+
+<script>
+async function j(path){ try{ const r=await fetch(path); if(!r.ok) throw 0; return await r.json(); }catch(e){ return null; } }
+function na(el){ el.innerHTML='<div class="na">Not yet available</div>'; }
+function fmtT(iso){ if(!iso) return ''; return 'Last updated ' + iso.replace('T',' ').slice(0,16); }
+
+(async()=>{
+  // ROLES
+  const roles = await j('../data/roles.json');
+  if(roles){
+    document.getElementById('u-roles').textContent = fmtT(roles.updated_at);
+    const sprints = Object.keys(roles.sprints);
+    const current = sprints[sprints.length-1];
+    let h = '<table><tr><th>Sprint</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th></tr>';
+    for(const s of sprints){
+      const row = roles.sprints[s];
+      h += `<tr class="${s===current?'current':''}"><td><b>${s}${s===current?' (current)':''}</b></td>`;
+      for(const r of ['R1','R2','R3','R4','R5','R6']) h += `<td>${row[r].name}</td>`;
+      h += '</tr>';
+    }
+    h += '</table>';
+    document.getElementById('c-roles').innerHTML = h;
+  } else na(document.getElementById('c-roles'));
+
+  // GITHUB
+  const gh = await j('../data/github_activity.json');
+  if(gh){
+    document.getElementById('u-github').textContent = fmtT(gh.updated_at);
+    const cur = gh.sprints.vW4;
+    let h = '<table><tr><th>Role</th><th>Who</th><th>Commits (vW4)</th><th>Last commit</th></tr>';
+    for(const r of ['R1','R2','R3','R4','R5','R6']){
+      const x = cur.roles[r];
+      h += `<tr><td>${r}</td><td>${x.name}</td><td>${x.commits}</td><td>${x.last_commit}</td></tr>`;
+    }
+    h += '</table><div style="margin-top:10px;font-size:.82rem;color:#5a6c82">';
+    for(const c of cur.latest_commits) h += `${c.role} · ${c.author} · ${c.message} · ${c.time}<br>`;
+    h += '</div>';
+    document.getElementById('c-github').innerHTML = h;
+  } else na(document.getElementById('c-github'));
+
+  // FIGJAM
+  const fj = await j('../data/figjam_status.json');
+  if(fj){
+    document.getElementById('u-figjam').textContent = fmtT(fj.updated_at);
+    let h = '<div class="cols">';
+    for(const col of ['To Do','In Progress','Review','Done']){
+      h += `<div class="col"><h3>${col} · ${fj.columns[col].length}</h3>`;
+      for(const c of fj.columns[col]){
+        h += `<div class="card">${c.title}<span class="own">${c.owner}</span>${c.discord_link?`<a href="${c.discord_link}" style="font-size:.75rem">Discord message</a>`:''}</div>`;
+      }
+      h += '</div>';
+    }
+    h += '</div>';
+    document.getElementById('c-figjam').innerHTML = h;
+  } else na(document.getElementById('c-figjam'));
+
+  // PREDICTIONS
+  const pr = await j('../predictions/vW4.json');
+  if(pr){
+    document.getElementById('u-predictions').textContent = pr.r1_confirms ? 'Locked — R1 confirmed' : 'Not yet confirmed';
+    const tc = pr.team_call;
+    let h = '<table><tr><th>Market</th><th>Call</th><th>Owner</th></tr>';
+    h += `<tr><td>S&amp;P 500</td><td>${tc.spx_close.toFixed(2)}</td><td>${pr.leads.spx}</td></tr>`;
+    h += `<tr><td>Nasdaq-100</td><td>${tc.ndx_close.toFixed(2)}</td><td>${pr.leads.ndx}</td></tr>`;
+    h += `<tr><td>Gold futures (/GC)</td><td><span class="tag up">${tc.gold_direction}</span></td><td>${pr.leads.gold}</td></tr>`;
+    h += '</table>';
+    h += `<div class="why"><b>SPX:</b> ${pr.why.spx}</div>`;
+    h += `<div class="why"><b>NDX:</b> ${pr.why.ndx}</div>`;
+    h += `<div class="why"><b>Gold:</b> ${pr.why.gold}</div>`;
+    document.getElementById('c-predictions').innerHTML = h;
+  } else na(document.getElementById('c-predictions'));
+
+  // LLM SYNTHESIS
+  const llm = await j('../llm-synthesis/vW4.json');
+  if(llm){
+    document.getElementById('u-llm').textContent = fmtT(llm.updated_at);
+    let h = '';
+    for(const [k,label] of [['spx','S&P 500'],['ndx','Nasdaq-100'],['gold','Gold']]){
+      const x = llm.instruments[k];
+      h += `<h3 style="font-size:.9rem;margin:10px 0 4px">${label} <span class="tag ${x.agree?'confirm':'adjust'}">${x.agree?'Agree':'Diverge'}</span></h3>`;
+      h += '<table><tr><th>Model</th><th>View</th></tr>';
+      for(const m of x.models) h += `<tr><td>${m.model}</td><td>${m.view}</td></tr>`;
+      h += `</table><div style="font-size:.85rem;color:#5a6c82;margin:4px 0 10px">${x.divergence_note}</div>`;
+    }
+    h += `<div class="why">${llm.narrative}</div>`;
+    document.getElementById('c-llm').innerHTML = h;
+  } else na(document.getElementById('c-llm'));
+
+  // HUMAN SCORE
+  const hs = await j('../human-score/vW4.json');
+  if(hs){
+    document.getElementById('u-hs').textContent = fmtT(hs.updated_at);
+    let h = '<table><tr><th>Market</th><th>Score</th><th>Decision</th><th>Justification</th></tr>';
+    for(const [k,label] of [['spx','S&P 500'],['ndx','Nasdaq-100'],['gold','Gold']]){
+      const x = hs.instruments[k];
+      h += `<tr><td>${label}</td><td>${x.score}/5</td><td><span class="tag ${x.decision}">${x.decision}</span></td><td>${x.justification}</td></tr>`;
+    }
+    h += '</table>';
+    document.getElementById('c-hs').innerHTML = h;
+  } else na(document.getElementById('c-hs'));
+
+  // DELTA
+  const d = await j('../delta/vW4.json');
+  if(d){
+    document.getElementById('u-delta').textContent = fmtT(d.updated_at) + ' · Sprint 3 result';
+    let h = '<table>';
+    h += `<tr><th>Predicted</th><td>${d.predicted.toFixed(2)}</td></tr>`;
+    h += `<tr><th>Actual</th><td>${d.actual.toFixed(2)}</td></tr>`;
+    h += `<tr><th>Error</th><td class="err">${d.error.toFixed(2)} (${d.error_pct}%)</td></tr>`;
+    h += `<tr><th>Direction</th><td>${d.direction_correct}</td></tr>`;
+    h += `<tr><th>Furthest-off agent</th><td>${d.top_contributing_agent}</td></tr>`;
+    h += '</table>';
+    h += `<div class="why">${d.narrative}</div>`;
+    document.getElementById('c-delta').innerHTML = h;
+  } else na(document.getElementById('c-delta'));
+
+  // PRESCRIPTION
+  const p = await j('../prescriptions/vW4.json');
+  if(p){
+    document.getElementById('u-presc').textContent = fmtT(p.updated_at);
+    document.getElementById('c-presc').innerHTML =
+      `<table><tr><th>Agent</th><td>${p.agent}</td></tr><tr><th>Change</th><td>${p.weight_change}</td></tr><tr><th>Reason</th><td>${p.reason}</td></tr></table>`;
+  } else na(document.getElementById('c-presc'));
+})();
+</script>
+</body>
+</html>

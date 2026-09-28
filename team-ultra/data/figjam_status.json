@@ -1,0 +1,51 @@
+{
+  "updated_at": "2026-09-29T23:00:00+08:00",
+  "board_url": "#",
+  "note": "Invented example board state.",
+  "columns": {
+    "To Do": [
+      {
+        "title": "Prep Monday defense notes",
+        "owner": "R1"
+      }
+    ],
+    "In Progress": [
+      {
+        "title": "Delta script for SPX",
+        "owner": "R4"
+      },
+      {
+        "title": "Prescription draft",
+        "owner": "R4"
+      }
+    ],
+    "Review": [
+      {
+        "title": "LLM synthesis narrative",
+        "owner": "R6"
+      }
+    ],
+    "Done": [
+      {
+        "title": "Wednesday check-in committed",
+        "owner": "R1",
+        "discord_link": "#"
+      },
+      {
+        "title": "GitHub + FigJam access confirmed for all six",
+        "owner": "R1",
+        "discord_link": "#"
+      },
+      {
+        "title": "Predictions locked (SPX, NDX, gold)",
+        "owner": "R1",
+        "discord_link": "#"
+      },
+      {
+        "title": "Roles + GitHub + FigJam panels live",
+        "owner": "R5",
+        "discord_link": "#"
+      }
+    ]
+  }
+}

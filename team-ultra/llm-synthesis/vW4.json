@@ -1,0 +1,60 @@
+{
+  "updated_at": "2026-09-29T21:00:00+08:00",
+  "instruments": {
+    "spx": {
+      "models": [
+        {
+          "model": "ChatGPT",
+          "view": "Bullish, ~7,800"
+        },
+        {
+          "model": "Gemini",
+          "view": "Bullish, ~7,820"
+        },
+        {
+          "model": "DeepSeek",
+          "view": "Neutral to slightly bullish, ~7,790"
+        }
+      ],
+      "agree": true,
+      "divergence_note": "All three lean bullish; DeepSeek is the most cautious on magnitude."
+    },
+    "ndx": {
+      "models": [
+        {
+          "model": "ChatGPT",
+          "view": "Bullish, ~26,450"
+        },
+        {
+          "model": "Gemini",
+          "view": "Bullish, ~26,500"
+        },
+        {
+          "model": "DeepSeek",
+          "view": "Bearish, ~26,150"
+        }
+      ],
+      "agree": false,
+      "divergence_note": "DeepSeek diverges, citing stretched valuations in mega-cap tech that the other two models did not weight as heavily."
+    },
+    "gold": {
+      "models": [
+        {
+          "model": "ChatGPT",
+          "view": "UP"
+        },
+        {
+          "model": "Gemini",
+          "view": "UP"
+        },
+        {
+          "model": "DeepSeek",
+          "view": "UP"
+        }
+      ],
+      "agree": true,
+      "divergence_note": "Unanimous UP, all three citing softer rate-cut-delay expectations."
+    }
+  },
+  "narrative": "The three models agree on direction for SPX and gold, with only DeepSeek pulling toward a lower NDX call on valuation grounds. R5's Human Score treated the NDX split as a reason to sit closer to the lower end of the model range rather than fully siding with ChatGPT and Gemini."
+}

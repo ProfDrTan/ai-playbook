@@ -1,0 +1,113 @@
+{
+  "updated_at": "2026-09-29T23:00:00+08:00",
+  "note": "Invented example commit activity.",
+  "sprints": {
+    "vW4": {
+      "roles": {
+        "R1": {
+          "name": "Jordan Cole",
+          "commits": 6,
+          "last_commit": "2026-09-29 22:40"
+        },
+        "R2": {
+          "name": "Mia Sato",
+          "commits": 9,
+          "last_commit": "2026-09-29 21:15"
+        },
+        "R3": {
+          "name": "Devon Osei",
+          "commits": 8,
+          "last_commit": "2026-09-29 20:52"
+        },
+        "R4": {
+          "name": "Priya Nair",
+          "commits": 5,
+          "last_commit": "2026-09-29 19:30"
+        },
+        "R5": {
+          "name": "Leo Fischer",
+          "commits": 11,
+          "last_commit": "2026-09-29 22:58"
+        },
+        "R6": {
+          "name": "Sam Whitfield",
+          "commits": 7,
+          "last_commit": "2026-09-29 18:47"
+        }
+      },
+      "latest_commits": [
+        {
+          "role": "R5",
+          "author": "leo-fischer",
+          "message": "Add Roles and Predictions panels to dashboard",
+          "time": "2026-09-29 22:58"
+        },
+        {
+          "role": "R1",
+          "author": "jordan-cole",
+          "message": "Update Wednesday check-in notes",
+          "time": "2026-09-29 22:40"
+        },
+        {
+          "role": "R2",
+          "author": "mia-sato",
+          "message": "Write SPX one-sentence reason and almanac note",
+          "time": "2026-09-29 21:15"
+        },
+        {
+          "role": "R3",
+          "author": "devon-osei",
+          "message": "Add NDX support/resistance levels",
+          "time": "2026-09-29 20:52"
+        },
+        {
+          "role": "R6",
+          "author": "sam-whitfield",
+          "message": "Query three LLMs, log agreement/divergence",
+          "time": "2026-09-29 18:47"
+        },
+        {
+          "role": "R4",
+          "author": "priya-nair",
+          "message": "Record Friday 25 Sep closes in actuals",
+          "time": "2026-09-29 19:30"
+        }
+      ]
+    },
+    "vW3": {
+      "roles": {
+        "R1": {
+          "name": "Mia Sato",
+          "commits": 14,
+          "last_commit": "2026-09-26 20:10"
+        },
+        "R2": {
+          "name": "Devon Osei",
+          "commits": 9,
+          "last_commit": "2026-09-25 18:22"
+        },
+        "R3": {
+          "name": "Priya Nair",
+          "commits": 7,
+          "last_commit": "2026-09-25 12:05"
+        },
+        "R4": {
+          "name": "Leo Fischer",
+          "commits": 8,
+          "last_commit": "2026-09-26 09:44"
+        },
+        "R5": {
+          "name": "Sam Whitfield",
+          "commits": 15,
+          "last_commit": "2026-09-27 15:30"
+        },
+        "R6": {
+          "name": "Jordan Cole",
+          "commits": 10,
+          "last_commit": "2026-09-27 16:02"
+        }
+      },
+      "latest_commits": []
+    }
+  }
+}

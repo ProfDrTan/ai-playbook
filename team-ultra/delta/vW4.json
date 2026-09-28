@@ -1,0 +1,12 @@
+{
+  "updated_at": "2026-09-27T13:00:00+08:00",
+  "note": "Sprint 3 delta, using Team Ultra's invented Sprint 3 SPX prediction against the real actual close.",
+  "instrument": "spx",
+  "predicted": 7760.0,
+  "actual": 7743.41,
+  "error": 16.59,
+  "error_pct": 0.21,
+  "direction_correct": "n/a — SPX was predicted as a level this sprint, not a direction",
+  "top_contributing_agent": "Almanac",
+  "narrative": "Team Ultra predicted 7,760.00 for Friday's S&P 500 close; it actually closed at 7,743.41 (Yahoo Finance, ^GSPC) — an error of 16.59 points, about 0.21%. The Almanac agent's seasonal read was the most bullish of the three inputs and pulled the final number furthest from the outcome; the Technical agent's more neutral support/resistance read was closest."
+}

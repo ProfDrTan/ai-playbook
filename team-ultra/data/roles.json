@@ -1,0 +1,60 @@
+{
+  "updated_at": "2026-09-29T23:00:00+08:00",
+  "note": "Invented example team (Team Ultra), not a real CP3405 team. Roles rotate every sprint — add a new entry here, keep the old ones.",
+  "sprints": {
+    "vW3": {
+      "start_date": "2026-09-21",
+      "R1": {
+        "name": "Mia Sato",
+        "github": "mia-sato"
+      },
+      "R2": {
+        "name": "Devon Osei",
+        "github": "devon-osei"
+      },
+      "R3": {
+        "name": "Priya Nair",
+        "github": "priya-nair"
+      },
+      "R4": {
+        "name": "Leo Fischer",
+        "github": "leo-fischer"
+      },
+      "R5": {
+        "name": "Sam Whitfield",
+        "github": "sam-whitfield"
+      },
+      "R6": {
+        "name": "Jordan Cole",
+        "github": "jordan-cole"
+      }
+    },
+    "vW4": {
+      "start_date": "2026-09-28",
+      "R1": {
+        "name": "Jordan Cole",
+        "github": "jordan-cole"
+      },
+      "R2": {
+        "name": "Mia Sato",
+        "github": "mia-sato"
+      },
+      "R3": {
+        "name": "Devon Osei",
+        "github": "devon-osei"
+      },
+      "R4": {
+        "name": "Priya Nair",
+        "github": "priya-nair"
+      },
+      "R5": {
+        "name": "Leo Fischer",
+        "github": "leo-fischer"
+      },
+      "R6": {
+        "name": "Sam Whitfield",
+        "github": "sam-whitfield"
+      }
+    }
+  }
+}

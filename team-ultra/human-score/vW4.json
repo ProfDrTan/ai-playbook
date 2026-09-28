@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-09-29T22:00:00+08:00",
+  "instruments": {
+    "spx": {
+      "score": 4,
+      "decision": "confirm",
+      "justification": "Almanac, technical and macro all point the same way this week; the LLMs agree; no reason to override R2's call."
+    },
+    "ndx": {
+      "score": 3,
+      "decision": "adjust",
+      "justification": "LLMs split on NDX. Sided with the two bullish models but pulled the number down from R3's original 26,450 toward the middle of the range, since DeepSeek's valuation concern is a real one."
+    },
+    "gold": {
+      "score": 5,
+      "decision": "confirm",
+      "justification": "Unanimous across all three lenses and all three LLMs; nothing here to second-guess."
+    }
+  }
+}

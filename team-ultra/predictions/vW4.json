@@ -1,0 +1,20 @@
+{
+  "sprint": "vW4",
+  "team": "team-ultra",
+  "team_call": {
+    "spx_close": 7810.0,
+    "ndx_close": 26400.0,
+    "gold_direction": "UP"
+  },
+  "why": {
+    "spx": "Support near 7,760 has held twice this month and the seasonal pattern for early October leans positive, so I expect a modest new high.",
+    "ndx": "Price is above both the 20-day and 50-day averages with resistance at 26,450; a clean break there argues for a continued push higher.",
+    "gold": "Rate-cut odds firmed after this week's data, which usually helps gold, and it has held above its 20-day average all week, so I say UP."
+  },
+  "leads": {
+    "spx": "mia-sato (R2)",
+    "ndx": "devon-osei (R3)",
+    "gold": "priya-nair (R4)"
+  },
+  "r1_confirms": true
+}
