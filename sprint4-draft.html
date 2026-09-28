@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sprint 4 — DRAFT v3.3 for Review | AI Playbook</title>
+<title>Sprint 4 — DRAFT v3.4 for Review | AI Playbook</title>
 <style>
   :root{ --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63; --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8; --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --purple:#A78BFA; --text-body:#CFE4F0; }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -36,7 +36,7 @@
 </head>
 <body>
 <main>
-<div class="eyebrow">Draft v3.3 · Not Student-Facing · Revised Mon 28 Sep · owners and gold futures confirmed; adds mini tutorial</div>
+<div class="eyebrow">Draft v3.4 · Not Student-Facing · Revised Mon 28 Sep · evidence-backed predictions, published on the UI</div>
 <h1>Sprint 4 — Draft</h1>
 <p class="sub">Launches Monday 28 Sep · <strong>predictions locked Tue 29 Sep 23:59 SGT</strong> · due Sun 4 Oct 23:59 SGT · presented Mon 5 Oct. Replaces the stale TR2 <code>sprint4/index.html</code> currently live. Moves every team further into the published <a href="/architecture/">System Architecture</a>: three instruments through Stages 1–5, and Stages 6–7 built for the first time.</p>
 
@@ -48,7 +48,8 @@
 <li><strong>Participation gate.</strong> Recommended: every member submits an individual call, and each team's participation share is published. Harder alternative: the team entry only counts if <em>all</em> members submitted. See §4.</li>
 <li><strong>Late entries.</strong> Strict as you asked: no entry = 0 challenge points and "NO ENTRY" on the leaderboard. Optional softener: a late file is still accepted as <em>unofficial</em> so the team still has something for Stage 6. Your call.</li>
 <li><strong>Official closing figure.</strong> Drafted as the value in Yahoo Finance's <em>Close</em> column, read by you and posted by Sat 3 Oct 12:00 SGT, so there is one number of record and no "my screen says" disputes (§2).</li>
-<li><strong>UI consistency: all five panels mandatory, or only three?</strong> Drafted as all five (§6), with teams free to style them however they like. Also: the starter template and data schema do not exist yet; teams need them by Tue 29 Sep 12:00 to have a fair chance at a Sunday UI deadline (§6).</li>
+<li><strong>Evidence rules (§2d).</strong> Drafted: 9 evidence blocks per team (almanac, macro, technical for each of the 3 instruments), each with structured fields plus a paragraph of <strong>at least 60 words</strong>. The 60 is my number; change it freely. The validator can check form (fields present, word count, support below resistance) but not quality, so quality rests on R1's sign-off, R5's Human Score, and your review. Do you want evidence quality marked separately?</li>
+<li><strong>UI timing (§6).</strong> I read "published on the UI" as: by Tue 29 Sep 23:59 each UI must show the team's calls and evidence (two panels); the other four panels stay due Sun 4 Oct. Confirm that is what you meant. Also: six panels are now mandatory, not five, and the starter template and data schema do not exist yet; teams need them by Tue 29 Sep 12:00.</li>
 <li><strong>Opening progress block on Mon 5 Oct.</strong> Drafted as UI, FigJam, GitHub shown live before each team's prediction presentation (§8). Timings are my proposal.</li>
 <li><strong>Enforcement is a design, not yet built or tested.</strong> Do not promise it to students until the lock script has had a dry run (§3). Two facts that shaped it are in §3.</li>
 </ol>
@@ -64,6 +65,8 @@
 <li><span class="tag me">MY PROPOSAL</span>Bar raised toward the full architecture: delta is script-generated, the UI must display Stages 3–7 from committed data, and instruments live in one config file (§5).</li>
 <li><span class="tag you">YOUR INSTRUCTION</span>Each team's next presentation opens with UI, FigJam and GitHub progress, shown live, before the presentation proper (§8).</li>
 <li><span class="tag you">YOUR INSTRUCTION</span>UI must be consistent across teams (§6). Structure, data and location are fixed; styling stays free.</li>
+<li><span class="tag you">YOUR INSTRUCTION</span>No random predictions: every call must be backed by almanac, macro and technical evidence, each a paragraph with specifics (§2d). R1 must confirm it is all in.</li>
+<li><span class="tag you">YOUR INSTRUCTION</span>Predictions and their evidence are shown on each team's UI by the Tuesday deadline (§6).</li>
 <li><span class="tag me">FIXED</span>Three claims in v2 were wrong or unverified and are corrected below (Team 3 Discord counts, Team 2 "3 of 6 members", the "1–2 commit roles" line).</li>
 </ul>
 </div>
@@ -125,11 +128,24 @@
   "team": "team-N",
   "team_call": { "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "UP" },
   "leads": { "spx": "github-username (R2)", "ndx": "github-username (R3)", "gold": "github-username (R4)" },
+  "evidence": {
+    "spx": {
+      "almanac":   { "author": "github-username", "pattern": "...", "source": "...", "paragraph": "..." },
+      "macro":     { "author": "github-username",
+                     "events": [ { "date": "YYYY-MM-DD", "event": "...", "expected_effect": "..." } ],
+                     "paragraph": "..." },
+      "technical": { "author": "github-username", "support": 0.00, "resistance": 0.00,
+                     "trend": "...", "paragraph": "..." }
+    },
+    "ndx":  { "almanac": {...}, "macro": {...}, "technical": {...} },
+    "gold": { "almanac": {...}, "macro": {...}, "technical": {...} }
+  },
+  "r1_signoff": { "github": "github-username", "evidence_checked": true },
   "members": [
     { "github": "username", "role": "R1", "spx_close": 0.00, "ndx_close": 0.00, "gold_direction": "DOWN" }
   ]
 }</pre>
-<p>Structured JSON, not free-form markdown, so it can be validated and scored automatically. <code>team_call</code> is the final call, filed by R1 after R5's Human Score. <code>leads</code> names the person accountable for each instrument. Anything that does not validate counts as no entry.</p>
+<p>Structured JSON, not free-form markdown, so it can be validated, scored and shown on the UI automatically. The evidence sits <em>inside</em> the locked file, so the reasoning is locked together with the numbers and cannot be written after the fact. Individual member calls do not need evidence. <code>team_call</code> is the final call, filed by R1 after R5's Human Score. <code>leads</code> names the person accountable for each instrument. Anything that does not validate counts as no entry.</p>
 
 <h3>2a · Who owns each prediction target</h3>
 <p>Every role feeds all three instruments, but each target has <strong>one named owner</strong> who proposes the number, writes the case for it, and is the person asked about it on Monday.</p>
@@ -141,10 +157,11 @@
 </table>
 <table>
 <tr><th>Role</th><th>Responsibility for the three targets</th></tr>
-<tr><td>R2, R3</td><td>Agent outputs cover all three instruments, written before the LLMs are queried</td></tr>
+<tr><td>R2</td><td>Writes the <strong>almanac</strong> and <strong>macro</strong> evidence for all three instruments (§2d), before the LLMs are queried</td></tr>
+<tr><td>R3</td><td>Writes the <strong>technical</strong> evidence (support, resistance, trend) for all three instruments (§2d), before the LLMs are queried</td></tr>
 <tr><td>R6</td><td>Queries the three LLMs on all three instruments; supplies the agree/diverge log</td></tr>
-<tr><td>R5</td><td>Human Score on each instrument: confirm, adjust or override the owner's number, with the reason written down</td></tr>
-<tr><td>R1</td><td>Files <code>predictions/vW4.json</code> before the lock, names the three owners in <code>leads</code>, and chases every member's individual call</td></tr>
+<tr><td>R5</td><td>Human Score on each instrument: confirm, adjust or override the owner's number, with the reason written down. The reason must refer to at least one point from each of the three evidence lenses</td></tr>
+<tr><td>R1 (Scrum Master)</td><td>Files <code>predictions/vW4.json</code> before the lock, names the three owners in <code>leads</code>, chases every member's individual call, and <strong>signs off that all nine evidence blocks are present and meet the §2d checklist</strong>. No sign-off, no valid entry</td></tr>
 <tr><td>R4</td><td>Also the official recorder of prices for the team (§2b). Because R4 both owns the gold call and records the actuals, the number of record is the one posted centrally, not R4's copy</td></tr>
 </table>
 <p>Workload watch: R4 (gold call, actuals, delta, prescriptions) and R6 (LLM queries on three instruments, synthesis, release) are the two heaviest roles this sprint. The live roles-page Monday speaking points would need a matching edit; I have not touched the live site.</p>
@@ -244,6 +261,38 @@
 </ul>
 </div>
 
+<h3>2d · Evidence: no random predictions</h3>
+<div class="card lock">
+<p><strong>Every call must be supported by three lenses: almanac, macro and technical. One sentence is not enough.</strong> Each team writes <strong>9 evidence blocks</strong> (3 lenses × 3 instruments), each a paragraph of at least 60 words plus the specific fields below. They are part of <code>predictions/vW4.json</code> and are locked with it.</p>
+<table>
+<tr><th>Lens</th><th>Author</th><th>Required fields</th><th>What the paragraph must say</th></tr>
+<tr><td>Almanac</td><td>R2</td><td><code>pattern</code>, <code>source</code></td><td>The seasonal or calendar pattern that applies to this week, <strong>named with its source</strong>, and whether it supports the call. If the pattern is weak or contradicted by the other lenses, say so</td></tr>
+<tr><td>Macro</td><td>R2</td><td><code>events</code> (each with date, event, expected effect)</td><td>The major scheduled or breaking economic news that could move this instrument this week, <strong>with dates</strong>, and how each is likely to push the price and why</td></tr>
+<tr><td>Technical</td><td>R3</td><td><code>support</code>, <code>resistance</code>, <code>trend</code></td><td>Where <strong>support and resistance</strong> sit (as numbers), the current trend, and what a break above or below those levels would mean for the call</td></tr>
+</table>
+
+<h3>Technical: what "support and resistance" means</h3>
+<p><strong>Support</strong> is a price area where falls have previously paused or reversed. <strong>Resistance</strong> is a price area where rises have previously stalled. Find them on the daily chart: recent swing lows and highs, last week's low and high, and moving averages such as the 20-day and 50-day. Support must be below resistance. Say which side of each level the price is on and what would change your mind.</p>
+<h3>Macro: what counts as "major news"</h3>
+<p>Scheduled releases (jobs, inflation, GDP, central-bank decisions and speeches) and any breaking event. Check every date on the official source, since schedules can change: the Federal Reserve (federalreserve.gov) for policy meetings and speeches, the US Bureau of Labor Statistics (bls.gov) for jobs and inflation releases, the US Bureau of Economic Analysis (bea.gov) for GDP and spending data. For gold, also cover the US dollar and interest-rate expectations. Typical relationships, not rules: higher-for-longer rate expectations tend to press on equities and on gold, and a weaker dollar tends to help gold. Explain your reasoning; do not just name the event.</p>
+<h3>Almanac: what to state</h3>
+<p>Use a named almanac or seasonal dataset. State the pattern, the source, and how the pattern applies to 28 Sep–2 Oct. Do not quote a pattern you cannot source.</p>
+
+<h3>Model paragraph (invented numbers, illustrating the level of detail only)</h3>
+<p><em>Technical, for an imaginary index:</em> "The index closed Monday at 5,020, above its 20-day average of 4,985, and has been in an uptrend since mid-month. Support sits at 4,960, where it paused twice last week, with a second area near 4,900 at the 50-day average. Resistance is 5,060, the high it failed to clear on Thursday. A close above 5,060 would open room toward 5,100; a close below 4,960 would weaken the trend and argue against a higher finish. Volume has faded on the latest rallies, which favours caution over a large move."</p>
+
+<h3>R1's checklist before signing off</h3>
+<ol>
+<li>All 9 blocks are present and every paragraph is a paragraph, not a sentence.</li>
+<li>Technical blocks give a numeric support below a numeric resistance.</li>
+<li>Macro blocks name dated events, and the dates were checked on an official source.</li>
+<li>Almanac blocks name a source.</li>
+<li>Each block names its author, and the author is a team member.</li>
+<li>The three lenses are consistent with the call, or the disagreement is stated openly.</li>
+</ol>
+<p><strong>What the validator checks:</strong> the form (fields present, 60-word minimum, support below resistance, sign-off present). <strong>What it cannot check:</strong> whether the reasoning is good. That is R1's sign-off, R5's Human Score, and your review after the lock.</p>
+</div>
+
 <h2>3 · Preserving the integrity of the prediction</h2>
 <div class="card lock">
 <h3>Cutoff: Tuesday 29 Sep 2026, 23:59:59 SGT (= 15:59:59 UTC)</h3>
@@ -255,7 +304,7 @@
 <li><strong>No entry means no entry.</strong> No file, an invalid file, or a push after the cutoff: 0 points and "NO ENTRY" on the leaderboard. There is no "I thought I submitted" — see the pre-lock status board below.</li>
 </ol>
 <h3>Pre-lock status board (participation lever)</h3>
-<p>At Tue 12:00, 20:00 and 23:00 SGT the monitor posts <strong>VALID / INVALID / MISSING</strong> for each team to Discord — status only, never the values. This is the pressure that gets R1s chasing their teams before midnight, and it removes any excuse.</p>
+<p>At Tue 12:00, 20:00 and 23:00 SGT the monitor posts <strong>VALID / INVALID / MISSING</strong> for each team to Discord — status only, never the values. It also shows evidence completeness (blocks passing, out of 9) and whether R1 has signed off. This is the pressure that gets R1s chasing their teams before midnight, and it removes any excuse.</p>
 <h3>Two facts that shaped the design</h3>
 <ul>
 <li><strong>The monitor's schedule cannot be the cutoff.</strong> <code>dt3-monitor</code> is set to run every 10 minutes, but its recent runs land 3–5 hours apart, and every one of the last 8 has ended in failure at the "Publish history to public site" step (the Discord half succeeds). So the cutoff is a <em>time in the data</em>, evaluated whenever the lock job runs, and the lock job is run <strong>manually on Wed morning</strong> rather than left to a 23:59 cron.</li>
@@ -288,7 +337,7 @@
 <p>Same target for all four teams, no tiers. Sprint 4 takes three instruments through Stages 1–5, builds Stages 6–7 for the first time, and makes the UI show the whole chain from committed data rather than typed-in numbers.</p>
 <table>
 <tr><th>Stage</th><th>What each team must show in Sprint 4</th></tr>
-<tr><td>1–2 · Data &amp; agents</td><td>R2 and R3 outputs cover SPX, NDX and gold. Instruments defined in one <code>instruments.json</code> — no hard-coded tickers in scripts — so Stage 8 (11 sectors) later is a config change, not a rewrite</td></tr>
+<tr><td>1–2 · Data &amp; agents</td><td>R2 and R3 outputs cover SPX, NDX and gold, and each instrument's almanac, macro and technical evidence is written up as a paragraph (§2d). Instruments defined in one <code>instruments.json</code> — no hard-coded tickers in scripts — so Stage 8 (11 sectors) later is a config change, not a rewrite</td></tr>
 <tr><td>3 · LLM synthesis</td><td>Agreement/divergence across ChatGPT, Gemini, DeepSeek, per instrument, logged before the Human Score</td></tr>
 <tr><td>4 · Human Score</td><td>Per instrument, with written justification</td></tr>
 <tr><td>5 · Locked prediction</td><td>Locked via §3, three instruments</td></tr>
@@ -301,10 +350,11 @@
 <div class="card lock">
 <ol>
 <li><strong>Fixed location.</strong> Every dashboard lives at <code>ui/index.html</code> in the team repo, so all four are found and opened the same way.</li>
-<li><strong>Five required panels, same names, same order</strong>, one per stage. Each carries a fixed attribute so it can be checked automatically:
+<li><strong>Six required panels, same names, same order</strong>, following the chain from evidence to prescription. Each carries a fixed attribute so it can be checked automatically:
 <table>
 <tr><th>Panel</th><th>Attribute</th><th>Data file it reads</th></tr>
-<tr><td>Locked Prediction (with lock time)</td><td><code>data-panel="locked-prediction"</code></td><td><code>data/locked_prediction.json</code></td></tr>
+<tr><td>Locked Prediction: SPX level, NDX level, gold direction, each owner, and lock status</td><td><code>data-panel="locked-prediction"</code></td><td><code>predictions/vW4.json</code> + <code>data/lock.json</code></td></tr>
+<tr><td>Evidence: the almanac, macro and technical blocks for each instrument, including support and resistance and dated events</td><td><code>data-panel="evidence"</code></td><td><code>predictions/vW4.json</code></td></tr>
 <tr><td>LLM Synthesis</td><td><code>data-panel="llm-synthesis"</code></td><td><code>data/llm_synthesis.json</code></td></tr>
 <tr><td>Human Score</td><td><code>data-panel="human-score"</code></td><td><code>data/human_score.json</code></td></tr>
 <tr><td>Delta</td><td><code>data-panel="delta"</code></td><td><code>data/delta.json</code></td></tr>
@@ -313,30 +363,32 @@
 <li><strong>Fixed data contract.</strong> The UI reads only these JSON files, never typed-in numbers. Proposed required fields:
 <table>
 <tr><th>File</th><th>Required fields</th></tr>
-<tr><td><code>locked_prediction.json</code></td><td>sprint, team, locked_at, spx_close, ndx_close, gold_direction, sha256</td></tr>
+<tr><td><code>predictions/vW4.json</code></td><td>the schema in §2 (calls, leads, evidence, R1 sign-off), read directly from the repo</td></tr>
+<tr><td><code>data/lock.json</code></td><td>locked_at, sha256 — written by the lock job on Wed; until then the panel reads "Pending lock"</td></tr>
 <tr><td><code>llm_synthesis.json</code></td><td>per instrument: each model's view, agree (yes/no), divergence note</td></tr>
 <tr><td><code>human_score.json</code></td><td>per instrument: score, decision (confirm / adjust / override), justification</td></tr>
 <tr><td><code>delta.json</code></td><td>instrument, predicted, actual, error, error_pct, direction_correct, top contributing agent</td></tr>
 <tr><td><code>prescription.json</code></td><td>agent, weight change, reason</td></tr>
 </table>
-Because every team uses the same schema, any team's dashboard could display any team's data. The lock job writes a display copy of <code>locked_prediction.json</code> into each team repo; scoring never reads it (it uses the archive in §3), so editing it gains nothing.</li>
-<li><strong>Starter template.</strong> A skeleton in <code>team-template</code>: the five panels stubbed, sample JSON files, and a loader. Teams restyle and extend it. This is the strongest measure because it prevents the divergence rather than correcting it. <span class="tag todo">NOT BUILT</span> Needed by Tue 29 Sep 12:00.</li>
-<li><strong>Automated check.</strong> <code>dt3-monitor</code> checks each team repo for <code>ui/index.html</code>, all five panel attributes and all five data files parsing correctly, and posts pass/fail per team to Discord. <span class="tag todo">NOT BUILT</span></li>
-<li><strong>Free:</strong> colours, layout, charts, extra panels. Extras are welcome (Team 3's and Team 1's extras stay), but the five required panels must be present.</li>
+Because every team uses the same schema, any team's dashboard could display any team's data. The lock job writes a lock stamp <code>data/lock.json</code> into each team repo; scoring never reads it (it uses the archive in §3), so editing it gains nothing.</li>
+<li><strong>Starter template.</strong> A skeleton in <code>team-template</code>: the six panels stubbed, sample JSON files, and a loader. Teams restyle and extend it. This is the strongest measure because it prevents the divergence rather than correcting it. <span class="tag todo">NOT BUILT</span> Needed by Tue 29 Sep 12:00.</li>
+<li><strong>Automated check.</strong> <code>dt3-monitor</code> checks each team repo for <code>ui/index.html</code>, all six panel attributes and every data file parsing correctly, and posts pass/fail per team to Discord. <span class="tag todo">NOT BUILT</span></li>
+<li><strong>Free:</strong> colours, layout, charts, extra panels. Extras are welcome (Team 3's and Team 1's extras stay), but the six required panels must be present.</li>
 </ol>
 </div>
 
 <h2>7 · What every team must submit</h2>
 <table>
 <tr><th>Deliverable</th><th>Owner</th><th>Due</th></tr>
-<tr><td><code>predictions/vW4.json</code> — team call + every member's call</td><td>R1 (all members)</td><td><strong>Tue 29 Sep 23:59 SGT — locked</strong></td></tr>
+<tr><td><code>predictions/vW4.json</code> — team call, the 9 evidence blocks (§2d), R1 sign-off, and every member's individual call</td><td>R1 (all members; R2 and R3 write the evidence)</td><td><strong>Tue 29 Sep 23:59 SGT — locked</strong></td></tr>
+<tr><td>UI at <code>ui/index.html</code> showing the calls and the evidence: Locked Prediction and Evidence panels, reading <code>predictions/vW4.json</code></td><td>R5</td><td><strong>Tue 29 Sep 23:59 SGT</strong></td></tr>
 <tr><td>Agent outputs and LLM synthesis for all three instruments, plus Human Score file, committed <em>before</em> the lock</td><td>R2, R3, R6, R5</td><td>Tue 29 Sep, ahead of the lock. Later commits are marked "post-lock" on the ledger; not disqualifying, but visible</td></tr>
 <tr><td><code>actuals/vW4.json</code> — prices from Yahoo History (§2b); Fri 2 Oct Close by Sat 3 Oct 18:00 SGT</td><td>R4</td><td>Baseline and inputs Tue 29 Sep; target Sat 3 Oct</td></tr>
 <tr><td><code>checkin/wednesday.md</code> — individual per-role status, not a paraphrase of the group chat</td><td>R1</td><td>Wed 30 Sep 12:00 SGT. dt3-monitor flags missing ones by Wed 17:00</td></tr>
 <tr><td><code>llm-synthesis/vW4.md</code> — Stage 3 formalized</td><td>R6 <span class="tag me">moved from R5</span></td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td><code>delta/vW4.md</code> + the script that generates it — error size, direction, contributing agent</td><td>R4</td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td><code>prescriptions/vW4.md</code> — Stage 7</td><td>R4 + R1</td><td>Sun 4 Oct 23:59</td></tr>
-<tr><td>UI at <code>ui/index.html</code> with the five required panels (§6), reading the five data files; passes the automated check</td><td>R5</td><td>Sun 4 Oct 23:59; live in the opening block Mon 5 Oct</td></tr>
+<tr><td>UI with all six required panels (§6) reading their data files; passes the automated check</td><td>R5</td><td>Sun 4 Oct 23:59; live in the opening block Mon 5 Oct</td></tr>
 <tr><td><code>instruments.json</code> — single source of tickers and sources</td><td>R6 + R3</td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td>Release tag for the sprint, verified accessible</td><td>R6</td><td>Sun 4 Oct 23:59</td></tr>
 <tr><td>Working artifact from every role R1–R6, minimum 5 commits each</td><td>All six</td><td>Sun 4 Oct 23:59</td></tr>
@@ -349,11 +401,11 @@ Because every team uses the same schema, any team's dashboard could display any 
 <p>Each team opens with a short, <strong>live</strong> progress block. Live means the real thing opened on the day, not screenshots or slides. Only then does the team move into its prediction presentation.</p>
 <table>
 <tr><th>Segment</th><th>Presenter</th><th>Must show</th><th>Proposed time</th></tr>
-<tr><td>UI</td><td>R5</td><td>The dashboard from <code>ui/index.html</code>, walked through the five panels in order; what changed since last week</td><td>2 min</td></tr>
+<tr><td>UI</td><td>R5</td><td>The dashboard from <code>ui/index.html</code>, walked through the six panels in order; what changed since last week</td><td>2 min</td></tr>
 <tr><td>FigJam</td><td>R1</td><td>The board, every card in Done, each with its linked Discord message</td><td>1 min</td></tr>
 <tr><td>GitHub</td><td>R6</td><td>The repo open on screen: this week's commits across roles, the release tag, the evidence folder</td><td>1 min</td></tr>
 </table>
-<p>All teams are scored on the same checklist (five panels present, every Done-card linked, every role has commits, tag verified), so a differently styled dashboard cannot hide a missing stage. Presenters are the three roles that own each item, which also makes it obvious in the room when a role has nothing to show. Timings are a proposal; adjust to your slot length.</p>
+<p>All teams are scored on the same checklist (six panels present, every Done-card linked, every role has commits, tag verified), so a differently styled dashboard cannot hide a missing stage. Presenters are the three roles that own each item, which also makes it obvious in the room when a role has nothing to show. Timings are a proposal; adjust to your slot length.</p>
 
 <h2>9 · Timeline</h2>
 <table>
@@ -361,7 +413,7 @@ Because every team uses the same schema, any team's dashboard could display any 
 <tr><td>Mon 28 Sep</td><td>Announcement live; agents start</td></tr>
 <tr><td>Tue 29 Sep 12:00</td><td>UI starter template and data schema published to teams (not yet built)</td></tr>
 <tr><td>Tue 29 Sep 12:00 / 20:00 / 23:00</td><td>Pre-lock status board posts</td></tr>
-<tr><td><strong>Tue 29 Sep 23:59:59</strong></td><td><strong>Prediction lock</strong></td></tr>
+<tr><td><strong>Tue 29 Sep 23:59:59</strong></td><td><strong>Prediction lock</strong> — file, evidence and R1 sign-off must all be in, and the UI must show the calls and evidence</td></tr>
 <tr><td>Wed 30 Sep, morning</td><td>Lock job run manually; hashes and ledger published</td></tr>
 <tr><td>Wed 30 Sep 12:00</td><td>Individual check-ins committed</td></tr>
 <tr><td>Fri 2 Oct (US close early Sat 3 Oct SGT)</td><td>Target closes</td></tr>
@@ -377,6 +429,7 @@ Because every team uses the same schema, any team's dashboard could display any 
 <li>R5 owns the UI alongside the Human Score; R6 is LLM &amp; GitHub. Live on the roles page since this morning.</li>
 <li>Instrument owners: S&amp;P 500 = R2, Nasdaq-100 = R3, gold futures = R4. R5 applies the Human Score to all three; R1 files and locks.</li>
 <li>Third instrument is gold futures (/GC), December 2026 contract, direction only.</li>
+<li>No random predictions: almanac, macro and technical evidence, each a paragraph with specifics, written by R2 (almanac, macro) and R3 (technical), signed off by R1 (Scrum Master), locked with the prediction.</li>
 <li>Team 4's thin roles and the Team 1 / Team 4 FigJam access blockers surface through class questions, not a separate pre-emptive message.</li>
 </ol>
 
