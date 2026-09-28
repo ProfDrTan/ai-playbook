@@ -231,6 +231,33 @@ footer{max-width:920px;margin:40px auto 0;padding:20px 22px;border-top:1px solid
     <tr><td>Prescription: the one change for next sprint</td><td><code>data-panel="prescription"</code></td><td><code>prescriptions/vW4.json</code></td><td>Sun 4 Oct 23:59</td></tr>
   </table>
   </div>
+  <h3>What the GitHub and FigJam panels should show (invented data)</h3>
+  <div class="card">
+    <b>Real activity, not just links.</b> A link to your repo or your board is not enough. The panels show what your team has actually done, so a gap is visible midweek while there's still time to fix it. Every panel also shows when it was last updated.
+    <p style="margin:12px 0 4px"><b>GitHub Activity</b>, last updated Tue 29 Sep 21:40:</p>
+    <div class="tablewrap">
+    <table>
+      <tr><th>Role</th><th>Who</th><th>Commits since Mon</th><th>Last commit</th></tr>
+      <tr><td>R1</td><td>student-a</td><td>4</td><td>Tue 20:12</td></tr>
+      <tr><td>R2</td><td>student-b</td><td>3</td><td>Tue 18:30</td></tr>
+      <tr><td>R3</td><td>student-c</td><td>5</td><td>Tue 21:05</td></tr>
+      <tr><td>R4</td><td>student-d</td><td><b>0</b></td><td><b>none yet</b></td></tr>
+      <tr><td>R5</td><td>student-e</td><td>6</td><td>Tue 21:40</td></tr>
+      <tr><td>R6</td><td>student-f</td><td>2</td><td>Mon 22:15</td></tr>
+    </table>
+    </div>
+    <p style="margin:0 0 12px">Plus the ten latest commits (role, author, message, time).</p>
+    <p style="margin:12px 0 4px"><b>FigJam Activity</b>, last updated Tue 29 Sep 21:30:</p>
+    <div class="tablewrap">
+    <table>
+      <tr><th>To Do</th><th>In Progress</th><th>Review</th><th>Done</th></tr>
+      <tr><td>Write gold sentence (R4)<br>Build delta script (R4)<br>Release tag vW4 (R6)</td><td>Technical outputs (R3)<br>Dashboard panels (R5)</td><td>Almanac and macro notes (R2)</td><td>Wednesday check-in (R1) + Discord link<br>Access confirmed (R1) + Discord link</td></tr>
+    </table>
+    </div>
+    <p style="margin:0">Notice that R4 has no commits yet in the first table. That is exactly what this panel is for.</p>
+  </div>
+  <p><b>Tuesday's first version:</b> you can fill in <code>data/github_activity.json</code> and <code>data/figjam_status.json</code> by hand to get the panels live. After that they must be refreshed every day.</p>
+
   <h3>Keeping it fresh</h3>
   <ul>
     <li><b>GitHub:</b> R6's script reads your commits since Monday 28 Sep and writes <code>data/github_activity.json</code>. Run it and commit the result every day.</li>
