@@ -1,7 +1,7 @@
 [
   {
     "timestamp": "2026-09-23T09:25:00+08:00",
-    "label": "Baseline \u2014 first status check",
+    "label": "Baseline — first status check",
     "teams": {
       "Team 1": {
         "github": {
@@ -96,7 +96,7 @@
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         }
       },
       "Team 2": {
@@ -157,7 +157,7 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+          "note": "roles named, cards in To Do/In Progress/Review/Done — only team with real movement"
         },
         "prediction": {
           "status": "missing",
@@ -226,7 +226,7 @@
         },
         "prediction": {
           "status": "wrong-sprint",
-          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction \u2014 wrong sprint, not the vW3 challenge."
+          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction — wrong sprint, not the vW3 challenge."
         }
       },
       "Team 4": {
@@ -287,18 +287,18 @@
         },
         "figjam": {
           "status": "empty",
-          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+          "note": "role cards and all 4 columns still placeholders — matches their own Discord question about whether the board exists"
         },
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 \u2014 0.197% error against the real close (7764.70)."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 — 0.197% error against the real close (7764.70)."
         }
       }
     }
   },
   {
     "timestamp": "2026-09-23T12:45:00+08:00",
-    "label": "Status check \u2014 GitHub reverified, Discord pipeline confirmed broken",
+    "label": "Status check — GitHub reverified, Discord pipeline confirmed broken",
     "teams": {
       "Team 1": {
         "github": {
@@ -395,7 +395,7 @@
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         }
       },
       "Team 2": {
@@ -458,7 +458,7 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+          "note": "roles named, cards in To Do/In Progress/Review/Done — only team with real movement"
         },
         "prediction": {
           "status": "missing",
@@ -529,7 +529,7 @@
         },
         "prediction": {
           "status": "wrong-sprint",
-          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction \u2014 wrong sprint, not the vW3 challenge."
+          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction — wrong sprint, not the vW3 challenge."
         }
       },
       "Team 4": {
@@ -592,19 +592,19 @@
         },
         "figjam": {
           "status": "empty",
-          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+          "note": "role cards and all 4 columns still placeholders — matches their own Discord question about whether the board exists"
         },
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 \u2014 0.197% error against the real close (7764.70)."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 — 0.197% error against the real close (7764.70)."
         }
       }
     },
-    "data_notes": "GitHub numbers reverified live at 12:45pm SGT \u2014 no change since baseline (main branches untouched on all 4 repos). Discord numbers are NOT fresh: dt3-monitor's hourly job has failed on its last 5 runs (since ~20:00 SGT Sep 22), specifically the 'Publish history to public site' step \u2014 so these Discord counts are carried over from the last successful run at 09:25am, not a live check. FigJam and Prediction Challenge findings are also carried over from the baseline check (point-in-time facts, not re-screenshotted this pass)."
+    "data_notes": "GitHub numbers reverified live at 12:45pm SGT — no change since baseline (main branches untouched on all 4 repos). Discord numbers are NOT fresh: dt3-monitor's hourly job has failed on its last 5 runs (since ~20:00 SGT Sep 22), specifically the 'Publish history to public site' step — so these Discord counts are carried over from the last successful run at 09:25am, not a live check. FigJam and Prediction Challenge findings are also carried over from the baseline check (point-in-time facts, not re-screenshotted this pass)."
   },
   {
     "timestamp": "2026-09-23T12:51:00+08:00",
-    "label": "Status check \u2014 requested by Prof Tan",
+    "label": "Status check — requested by Prof Tan",
     "teams": {
       "Team 1": {
         "github": {
@@ -701,7 +701,7 @@
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         }
       },
       "Team 2": {
@@ -764,7 +764,7 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+          "note": "roles named, cards in To Do/In Progress/Review/Done — only team with real movement"
         },
         "prediction": {
           "status": "missing",
@@ -835,7 +835,7 @@
         },
         "prediction": {
           "status": "wrong-sprint",
-          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction \u2014 wrong sprint, not the vW3 challenge."
+          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction — wrong sprint, not the vW3 challenge."
         }
       },
       "Team 4": {
@@ -898,19 +898,19 @@
         },
         "figjam": {
           "status": "empty",
-          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+          "note": "role cards and all 4 columns still placeholders — matches their own Discord question about whether the board exists"
         },
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 \u2014 0.197% error against the real close (7764.70)."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 — 0.197% error against the real close (7764.70)."
         }
       }
     },
-    "data_notes": "GitHub reverified live \u2014 no change on any of the 4 repos since the 12:45pm check. Discord monitor pipeline is still failing (same run, created 2026-09-23T01:25:21Z / 09:25am SGT, conclusion: failure) \u2014 Discord numbers remain carried over from 09:25am, unchanged. Prediction Challenge status confirmed and unchanged: Team 4 is the only team with a valid, on-time submission."
+    "data_notes": "GitHub reverified live — no change on any of the 4 repos since the 12:45pm check. Discord monitor pipeline is still failing (same run, created 2026-09-23T01:25:21Z / 09:25am SGT, conclusion: failure) — Discord numbers remain carried over from 09:25am, unchanged. Prediction Challenge status confirmed and unchanged: Team 4 is the only team with a valid, on-time submission."
   },
   {
     "timestamp": "2026-09-23T15:16:00+08:00",
-    "label": "Status check \u2014 requested by Prof Tan",
+    "label": "Status check — requested by Prof Tan",
     "teams": {
       "Team 1": {
         "github": {
@@ -1006,7 +1006,7 @@
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         }
       },
       "Team 2": {
@@ -1068,7 +1068,7 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+          "note": "roles named, cards in To Do/In Progress/Review/Done — only team with real movement"
         },
         "prediction": {
           "status": "missing",
@@ -1138,7 +1138,7 @@
         },
         "prediction": {
           "status": "wrong-sprint",
-          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction \u2014 wrong sprint, not the vW3 challenge."
+          "detail": "prediction.md exists but is dated Sep 20 and is explicitly their Sprint 2 retrospective prediction — wrong sprint, not the vW3 challenge."
         }
       },
       "Team 4": {
@@ -1200,19 +1200,19 @@
         },
         "figjam": {
           "status": "empty",
-          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+          "note": "role cards and all 4 columns still placeholders — matches their own Discord question about whether the board exists"
         },
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 \u2014 0.197% error against the real close (7764.70)."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7780.00 — 0.197% error against the real close (7764.70)."
         }
       }
     },
-    "data_notes": "Discord data is fresh again \u2014 dt3-monitor's fetch step succeeded at 14:35pm SGT even though the workflow's 'publish' step is still failing (so the Action shows 'failure' overall, but the underlying state.json did update \u2014 worth checking directly rather than trusting the workflow status badge alone). GitHub: Team 2 pushed one new commit at 7:13am UTC (3:13pm SGT) \u2014 'Add automated macro data for R2', a real automation deliverable landing during the sprint window. FigJam re-screenshotted \u2014 unchanged, still only Team 2 actively using it. Prediction Challenge status unchanged."
+    "data_notes": "Discord data is fresh again — dt3-monitor's fetch step succeeded at 14:35pm SGT even though the workflow's 'publish' step is still failing (so the Action shows 'failure' overall, but the underlying state.json did update — worth checking directly rather than trusting the workflow status badge alone). GitHub: Team 2 pushed one new commit at 7:13am UTC (3:13pm SGT) — 'Add automated macro data for R2', a real automation deliverable landing during the sprint window. FigJam re-screenshotted — unchanged, still only Team 2 actively using it. Prediction Challenge status unchanged."
   },
   {
     "timestamp": "2026-09-26T06:34:00+08:00",
-    "label": "Status check \u2014 requested by Prof Tan (3-day gap, actual close revealed)",
+    "label": "Status check — requested by Prof Tan (3-day gap, actual close revealed)",
     "teams": {
       "Team 1": {
         "github": {
@@ -1308,7 +1308,7 @@
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         }
       },
       "Team 2": {
@@ -1370,7 +1370,7 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+          "note": "roles named, cards in To Do/In Progress/Review/Done — only team with real movement"
         },
         "prediction": {
           "status": "missing",
@@ -1440,7 +1440,7 @@
         },
         "prediction": {
           "status": "submitted-late",
-          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 \u2014 error 0.044%, closest of any team, but late."
+          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 — error 0.044%, closest of any team, but late."
         }
       },
       "Team 4": {
@@ -1502,19 +1502,19 @@
         },
         "figjam": {
           "status": "empty",
-          "note": "role cards and all 4 columns still placeholders \u2014 matches their own Discord question about whether the board exists"
+          "note": "role cards and all 4 columns still placeholders — matches their own Discord question about whether the board exists"
         },
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 \u2014 error 0.473%. On time, but Team 3's late submission was closer."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 — error 0.473%. On time, but Team 3's late submission was closer."
         }
       }
     },
-    "data_notes": "First check after a 3-day gap (last check was Wed 3:16pm). GitHub: Team 1 +4 commits, Team 2 +10 commits (new push Fri 7:08pm), Team 3 +9 commits \u2014 but Team 3's repo hasn't been pushed to since Mon 21st despite the commit-count field including older commits counted differently; Team 4 completely flat \u2014 zero pushes in 4 days, worst of any team, compounding its existing R5/R6 gaps. Discord data is fresh (fetch step succeeded again; publish step still shows 'failure' in Actions but the underlying JSON updates regardless \u2014 this appears to be a persistent, not transient, bug in the monitor's publish step worth fixing properly). FigJam not re-screenshotted this check. Actual SPX close now confirmed: 7,743.41 (Yahoo Finance ^GSPC, at-close quote) \u2014 Team 3's late Sep 23 submission (7,740.00) turned out closer than Team 4's on-time one (7,780.00): 0.044% vs 0.473% error."
+    "data_notes": "First check after a 3-day gap (last check was Wed 3:16pm). GitHub: Team 1 +4 commits, Team 2 +10 commits (new push Fri 7:08pm), Team 3 +9 commits — but Team 3's repo hasn't been pushed to since Mon 21st despite the commit-count field including older commits counted differently; Team 4 completely flat — zero pushes in 4 days, worst of any team, compounding its existing R5/R6 gaps. Discord data is fresh (fetch step succeeded again; publish step still shows 'failure' in Actions but the underlying JSON updates regardless — this appears to be a persistent, not transient, bug in the monitor's publish step worth fixing properly). FigJam not re-screenshotted this check. Actual SPX close now confirmed: 7,743.41 (Yahoo Finance ^GSPC, at-close quote) — Team 3's late Sep 23 submission (7,740.00) turned out closer than Team 4's on-time one (7,780.00): 0.044% vs 0.473% error."
   },
   {
     "timestamp": "2026-09-27T08:48:00+08:00",
-    "label": "Status check \u2014 requested by Prof Tan (pre-Monday weekend push)",
+    "label": "Status check — requested by Prof Tan (pre-Monday weekend push)",
     "teams": {
       "Team 1": {
         "github": {
@@ -1606,11 +1606,11 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, all 4 columns populated with real cards \u2014 was empty template as of last check"
+          "note": "roles named, all 4 columns populated with real cards — was empty template as of last check"
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         }
       },
       "Team 2": {
@@ -1672,7 +1672,7 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, cards in To Do/In Progress/Review/Done \u2014 only team with real movement"
+          "note": "roles named, cards in To Do/In Progress/Review/Done — only team with real movement"
         },
         "prediction": {
           "status": "missing",
@@ -1738,11 +1738,11 @@
         },
         "figjam": {
           "status": "active",
-          "note": "roles named, all 4 columns populated \u2014 was empty template as of last check"
+          "note": "roles named, all 4 columns populated — was empty template as of last check"
         },
         "prediction": {
           "status": "submitted-late",
-          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 \u2014 error 0.044%, closest of any team, but late."
+          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 — error 0.044%, closest of any team, but late."
         }
       },
       "Team 4": {
@@ -1804,19 +1804,19 @@
         },
         "figjam": {
           "status": "active",
-          "note": "R2 and R6 roles named, real cards in To Do/In Progress/Review/Done \u2014 was empty template as of last check; R1/R3/R4/R5 still unnamed placeholders"
+          "note": "R2 and R6 roles named, real cards in To Do/In Progress/Review/Done — was empty template as of last check; R1/R3/R4/R5 still unnamed placeholders"
         },
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 \u2014 error 0.473%. On time, but Team 3's late submission was closer."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 — error 0.473%. On time, but Team 3's late submission was closer."
         }
       }
     },
-    "data_notes": "Major weekend push before Monday's presentation. GitHub: all 4 teams roughly doubled their commit counts since Wed/Thu (Team 1 +28, Team 2 +26, Team 3 +11, Team 4 +14). FigJam: Teams 1 and 3 went from completely untouched templates to fully active boards \u2014 the Sprint 3 retro finding ('only Team 2 uses FigJam') is now largely resolved without intervention. Team 4 partially caught up (R2/R6 named, real cards) but R1/R3/R4/R5 sections are still placeholder. Team 4's R5/R6 code gap is also partially closing: R6 now has real files (audit_log.md, release_checklist.md), R5 has a folder but only a .gitkeep placeholder \u2014 created but not yet populated. Discord confirms the same pattern: Team 1 and Team 4 both surged (Team 4 16\u219262 messages), Team 3 dropped to its lowest yet (11 messages) despite decent commit volume \u2014 coordination happening more in commits than chat for that team, or coordination happening elsewhere."
+    "data_notes": "Major weekend push before Monday's presentation. GitHub: all 4 teams roughly doubled their commit counts since Wed/Thu (Team 1 +28, Team 2 +26, Team 3 +11, Team 4 +14). FigJam: Teams 1 and 3 went from completely untouched templates to fully active boards — the Sprint 3 retro finding ('only Team 2 uses FigJam') is now largely resolved without intervention. Team 4 partially caught up (R2/R6 named, real cards) but R1/R3/R4/R5 sections are still placeholder. Team 4's R5/R6 code gap is also partially closing: R6 now has real files (audit_log.md, release_checklist.md), R5 has a folder but only a .gitkeep placeholder — created but not yet populated. Discord confirms the same pattern: Team 1 and Team 4 both surged (Team 4 16→62 messages), Team 3 dropped to its lowest yet (11 messages) despite decent commit volume — coordination happening more in commits than chat for that team, or coordination happening elsewhere."
   },
   {
     "timestamp": "2026-09-27T21:20:00+08:00",
-    "label": "Status check \u2014 requested by Prof Tan, framed as Sprint 4 planning input",
+    "label": "Status check — requested by Prof Tan, framed as Sprint 4 planning input",
     "teams": {
       "Team 1": {
         "github": {
@@ -1846,7 +1846,7 @@
           "status": "active",
           "note": "all 4 columns populated, unchanged from prior check"
         },
-        "live_blocker": "qiu0181 (06:28 SGT today): stuck on a 'verification required' step, asked teammate to move R6 to Done manually; zhang_41520 separately walked a teammate through a local-server fix for viewing R5's branch \u2014 access/workflow friction, not resolved in-thread",
+        "live_blocker": "qiu0181 (06:28 SGT today): stuck on a 'verification required' step, asked teammate to move R6 to Done manually; zhang_41520 separately walked a teammate through a local-server fix for viewing R5's branch — access/workflow friction, not resolved in-thread",
         "roles": {
           "R1": {
             "commits": 4,
@@ -1875,7 +1875,7 @@
         },
         "prediction": {
           "status": "lost",
-          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it \u2014 then renamed away entirely by 10:00 the same day. Nothing in the repo now."
+          "detail": "File existed under prediction_vW3.md for ~8h (created Tue 02:05) but was a renamed copy of the boilerplate README, no real number in it — then renamed away entirely by 10:00 the same day. Nothing in the repo now."
         },
         "git_activity": {
           "workflow": "branch+PR",
@@ -2036,7 +2036,7 @@
         },
         "prediction": {
           "status": "submitted-late",
-          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 \u2014 error 0.044%, closest of any team, but late."
+          "detail": "prediction_vW3.md added Sep 23 (after Tuesday deadline), target 7,740.00. Actual close: 7,743.41 — error 0.044%, closest of any team, but late."
         },
         "git_activity": {
           "workflow": "direct-to-main",
@@ -2098,10 +2098,10 @@
           "status": "active",
           "note": "improved from prior check, R2/R6 named+active"
         },
-        "live_blocker": "TWO students (estelle_wen_05110 at 06:42 SGT, alanmusk_01429 at 06:35 SGT) reported today they cannot edit the team FigJam board and are asking teammates to add their cards for them \u2014 a live access/permissions issue, separate from the GitHub access issue already fixed for the four ex-Team-5 members",
+        "live_blocker": "TWO students (estelle_wen_05110 at 06:42 SGT, alanmusk_01429 at 06:35 SGT) reported today they cannot edit the team FigJam board and are asking teammates to add their cards for them — a live access/permissions issue, separate from the GitHub access issue already fixed for the four ex-Team-5 members",
         "prediction": {
           "status": "submitted",
-          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 \u2014 error 0.473%. On time, but Team 3's late submission was closer."
+          "detail": "prediction_vW3.md, created Tue 11:32, target 7,780.00. Actual close: 7,743.41 — error 0.473%. On time, but Team 3's late submission was closer."
         },
         "git_activity": {
           "workflow": "direct-to-main",
@@ -2110,6 +2110,360 @@
         }
       }
     },
-    "data_notes": "Pulled live from GitHub (commit counts + latest push per repo) and Discord (dt3-monitor state, generated 2026-09-27 19:09 SGT) and FigJam (fresh board screenshot). Per-role GitHub commit breakdown only re-pulled for Team 4 (the prior flagged gap) \u2014 Teams 1-3 role breakdown carried forward from the prior snapshot as unchanged; re-verify before relying on it for grading. New this check: two separate FigJam edit-permission blockers surfaced in Discord (Team 1, Team 4) that have not been diagnosed or fixed yet."
+    "data_notes": "Pulled live from GitHub (commit counts + latest push per repo) and Discord (dt3-monitor state, generated 2026-09-27 19:09 SGT) and FigJam (fresh board screenshot). Per-role GitHub commit breakdown only re-pulled for Team 4 (the prior flagged gap) — Teams 1-3 role breakdown carried forward from the prior snapshot as unchanged; re-verify before relying on it for grading. New this check: two separate FigJam edit-permission blockers surfaced in Discord (Team 1, Team 4) that have not been diagnosed or fixed yet."
+  },
+  {
+    "timestamp": "2026-09-28T23:11:32+08:00",
+    "label": "Status check — requested by Prof Tan, Mon 28 Sep evening (Sprint 4 launched 17:38 SGT)",
+    "teams": {
+      "Team 1": {
+        "github": {
+          "commits_total": 114,
+          "latest_push": "2026-09-27T08:39:00Z",
+          "contributors": 10
+        },
+        "discord": {
+          "msg_count": 133,
+          "members": 8,
+          "top3": [
+            {
+              "name": "hawlermathew",
+              "count": 44
+            },
+            {
+              "name": "ayephyuss",
+              "count": 42
+            },
+            {
+              "name": "sololeveller233637",
+              "count": 17
+            }
+          ]
+        },
+        "figjam": {
+          "status": "active",
+          "note": "Still Sprint 3 content, no Sprint 4 cards yet. The same six role cards appear in ALL four columns (24 cards), so cards look copied rather than moved. Cards authored by R1 (ayephyusinsoe)."
+        },
+        "live_blocker": "qiu0181 (Sun 27 Sep 06:28 SGT): stuck on a 'verification required' step and could not edit FigJam; asked a teammate to move his card. No later message seen (Discord data ends 14:55 SGT Mon 28 Sep).",
+        "roles": {
+          "R1": {
+            "commits": 18,
+            "last": "2026-09-27 15:10"
+          },
+          "R2": {
+            "commits": 22,
+            "last": "2026-09-26 20:29"
+          },
+          "R3": {
+            "commits": 9,
+            "last": "2026-09-27 10:15"
+          },
+          "R4": {
+            "commits": 8,
+            "last": "2026-09-27 02:42"
+          },
+          "R5": {
+            "commits": 28,
+            "last": "2026-09-27 16:37"
+          },
+          "R6": {
+            "commits": 7,
+            "last": "2026-09-27 13:08"
+          }
+        },
+        "prediction": {
+          "status": "recreated-after-close",
+          "detail": "prediction_vW3.md, target 7,750. Per the earlier full-history check it was created Tue 22 Sep 02:05 SGT and renamed away the same day; a copy at evidence/R4 was edited 26 Sep 20:21-20:26, renamed away 27 Sep 02:42, then re-created at repo root Sun 27 Sep 02:57 and updated 13:10. Cannot be confirmed as unchanged since the deadline. Error vs 7,743.41 close: 6.59 (0.085%)."
+        },
+        "git_activity": {
+          "workflow": "branch+PR",
+          "branches_count": 9,
+          "merged_prs": [
+            {
+              "number": 1,
+              "branch": "feature/sprint2-github-modification",
+              "author": "uv-22",
+              "merged_at": "2026-09-19T20:33"
+            },
+            {
+              "number": 2,
+              "branch": "R3",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 4,
+              "branch": "R4",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:00"
+            },
+            {
+              "number": 3,
+              "branch": "R5",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:01"
+            },
+            {
+              "number": 5,
+              "branch": "Role-1",
+              "author": "uv-22",
+              "merged_at": "2026-09-20T19:02"
+            },
+            {
+              "number": 7,
+              "branch": "feature/sprint3-dev",
+              "author": "duonghoaian020907",
+              "merged_at": "2026-09-26T14:15"
+            },
+            {
+              "number": 8,
+              "branch": "feature/sprint3-dev",
+              "author": "duonghoaian020907",
+              "merged_at": "2026-09-26T19:51"
+            },
+            {
+              "number": 9,
+              "branch": "feature/sprint3-dev",
+              "author": "duonghoaian020907",
+              "merged_at": "2026-09-27T10:13"
+            },
+            {
+              "number": 10,
+              "branch": "feature/sprint3-r5-ui",
+              "author": "ZhangDawei-14833577",
+              "merged_at": "2026-09-27T15:03"
+            },
+            {
+              "number": 6,
+              "branch": "feature/sprint3-dev",
+              "author": "duonghoaian020907",
+              "merged_at": "2026-09-27T15:04"
+            }
+          ]
+        }
+      },
+      "Team 2": {
+        "github": {
+          "commits_total": 77,
+          "latest_push": "2026-09-27T15:27:50Z",
+          "contributors": 8
+        },
+        "discord": {
+          "msg_count": 51,
+          "members": 5,
+          "top3": [
+            {
+              "name": "aliceinsomewhere",
+              "count": 22
+            },
+            {
+              "name": "liangjinghong_97317",
+              "count": 19
+            },
+            {
+              "name": "1nonlyneon",
+              "count": 4
+            }
+          ]
+        },
+        "figjam": {
+          "status": "active",
+          "note": "Still Sprint 3 content, no Sprint 4 cards yet. To Do / In Progress / Review are empty; all 8 cards sit in Done, all authored by R1 (phoopwintmyintmo)."
+        },
+        "live_blocker": null,
+        "roles": {
+          "R1": {
+            "commits": 17,
+            "last": "2026-09-27 23:23"
+          },
+          "R2": {
+            "commits": 9,
+            "last": "2026-09-23 21:48"
+          },
+          "R3": {
+            "commits": 5,
+            "last": "2026-09-25 18:15"
+          },
+          "R4": {
+            "commits": 12,
+            "last": "2026-09-27 00:47"
+          },
+          "R5": {
+            "commits": 17,
+            "last": "2026-09-27 01:39"
+          },
+          "R6": {
+            "commits": 11,
+            "last": "2026-09-27 20:52"
+          }
+        },
+        "prediction": {
+          "status": "submitted",
+          "detail": "evidence/prediction_vW3.md created Tue 22 Sep 12:54 SGT (updated 13:16); actual close added Sat 26 Sep 13:07. Target 7,790. Error 46.59 (0.602%). CORRECTS earlier log entries that said no prediction file was ever created."
+        },
+        "git_activity": {
+          "workflow": "mixed (mostly direct-to-main, 1 merged PR)",
+          "branches_count": 2,
+          "merged_prs": [
+            {
+              "number": 2,
+              "branch": "r6-sprint3-final",
+              "author": "liangjinghong",
+              "merged_at": "2026-09-27T00:28"
+            }
+          ]
+        }
+      },
+      "Team 3": {
+        "github": {
+          "commits_total": 67,
+          "latest_push": "2026-09-27T16:36:28Z",
+          "contributors": 6
+        },
+        "discord": {
+          "msg_count": 11,
+          "members": 4,
+          "top3": [
+            {
+              "name": "alexlee149",
+              "count": 5
+            },
+            {
+              "name": "wilil_20",
+              "count": 3
+            },
+            {
+              "name": "ying73",
+              "count": 2
+            }
+          ]
+        },
+        "figjam": {
+          "status": "active",
+          "note": "Still Sprint 3 content, no Sprint 4 cards yet. 22 cards across 4 columns, authored by R1, R3 and R4 only; R2 and R5 progress is written by R1; R6 card written by R3. Board says R5 live UI 'not confirmed' although the R5 dashboard was pushed 00:30 SGT Mon."
+        },
+        "live_blocker": null,
+        "roles": {
+          "R1": {
+            "commits": 16,
+            "last": "2026-09-28 00:36"
+          },
+          "R2": {
+            "commits": 8,
+            "last": "2026-09-26 17:41"
+          },
+          "R3": {
+            "commits": 8,
+            "last": "2026-09-26 17:28"
+          },
+          "R4": {
+            "commits": 6,
+            "last": "2026-09-25 19:52"
+          },
+          "R5": {
+            "commits": 10,
+            "last": "2026-09-28 00:31"
+          },
+          "R6": {
+            "commits": 16,
+            "last": "2026-09-27 02:02"
+          }
+        },
+        "prediction": {
+          "status": "submitted-late",
+          "detail": "prediction_vW3.md added Thu 24 Sep 00:14 SGT, after the Tuesday deadline; target 7,740. Scored 27 Sep 17:26 using a Google Finance fallback; edited again Mon 28 Sep 00:35 ('Clarify individual R1 forecast authorship'). Error 3.41 (0.044%), the closest."
+        },
+        "git_activity": {
+          "workflow": "mixed (mostly direct-to-main, 3 merged PRs incl. 1 revert)",
+          "branches_count": 4,
+          "merged_prs": [
+            {
+              "number": 2,
+              "branch": "e3456329006-bit-patch-1",
+              "author": "e3456329006-bit",
+              "merged_at": "2026-09-25T17:30"
+            },
+            {
+              "number": 3,
+              "branch": "r6-sprint3-final",
+              "author": "YingH73",
+              "merged_at": "2026-09-27T01:58"
+            },
+            {
+              "number": 4,
+              "branch": "revert-3-r6-sprint3-final",
+              "author": "YingH73",
+              "merged_at": "2026-09-27T02:03"
+            }
+          ]
+        }
+      },
+      "Team 4": {
+        "github": {
+          "commits_total": 82,
+          "latest_push": "2026-09-28T03:06:18Z",
+          "contributors": 9
+        },
+        "discord": {
+          "msg_count": 92,
+          "members": 6,
+          "top3": [
+            {
+              "name": "shiro_0272902",
+              "count": 30
+            },
+            {
+              "name": "axey_125",
+              "count": 28
+            },
+            {
+              "name": "alanmusk_01429",
+              "count": 16
+            }
+          ]
+        },
+        "figjam": {
+          "status": "active",
+          "note": "Still Sprint 3 content, no Sprint 4 cards yet. 24 cards; R2, R5, R6 wrote their own, but R3 and R4 cards are written by R1 (Thant Zin Tun) on their behalf; R4 (Zihan Wen) has no self-authored card. Consistent with the open edit-access blockers."
+        },
+        "live_blocker": "TWO students (estelle_wen_05110 06:42, alanmusk_01429 06:35 SGT Sun 27 Sep) said they cannot edit FigJam; asked others to write their cards. No resolution seen (Discord data ends 14:55 SGT Mon 28 Sep).",
+        "roles": {
+          "R1": {
+            "commits": 21,
+            "last": "2026-09-28 08:56"
+          },
+          "R2": {
+            "commits": 27,
+            "last": "2026-09-27 16:20"
+          },
+          "R3": {
+            "commits": 8,
+            "last": "2026-09-27 03:03"
+          },
+          "R4": {
+            "commits": 3,
+            "last": "2026-09-28 09:15"
+          },
+          "R5": {
+            "commits": 4,
+            "last": "2026-09-27 22:57"
+          },
+          "R6": {
+            "commits": 3,
+            "last": "2026-09-26 16:19"
+          }
+        },
+        "prediction": {
+          "status": "submitted",
+          "detail": "prediction_vW3.md created Tue 22 Sep 12:32 SGT (11:32 local, +0700), updated Sat 26 Sep 15:49 SGT; target 7,780. Error 36.59 (0.473%)."
+        },
+        "git_activity": {
+          "workflow": "direct-to-main",
+          "branches_count": 1,
+          "merged_prs": []
+        }
+      }
+    },
+    "data_notes": "GitHub: fresh clone of all four team repos at 23:11 SGT; commit totals are since 15 Sep including merges (same method as prior entries; calibrated to reproduce them). Contributors = GitHub API all-time. ROLE COUNTS: method changed. Earlier entries counted only commits under each role's evidence folder, which undercounted (e.g. Team 4 R1 showed 1, actual 21; Team 3 showed 1-2 for several roles, actual 6+). Now counts every commit touching a role folder, plus frontend/ (R5), backend/ (R3) and reports/predictions (R1) for Team 1. Do NOT compare role counts with earlier entries. Sprint 4 activity: 0 commits from any team since launch at 17:38 SGT; no Sprint 4 files (ui/, predictions/vW4, roles.json, checkin/) exist in any repo. Discord: from the dt3-monitor state file generated 14:55 SGT Mon 28 Sep, about 8 hours old (the hourly job has not updated since); nothing after that is visible, including any reaction to the Sprint 4 announcement. Discord has no connector. FigJam: read live from the board at 23:11 SGT. Merged-PR authors for #1-5 (Team 1) carried from the prior entry; new ones are the branch's last committer (PR API not accessible with the org token). Prediction fields corrected: Team 2 previously logged as 'missing' and Team 1 as 'lost'; both are wrong per full history."
   }
 ]
