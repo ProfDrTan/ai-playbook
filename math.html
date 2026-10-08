@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math — Security in Symbols · The AI Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false}]});"></script>
+<style>
+  :root{--blue-deep:#0B2E4A;--blue-panel:#163F63;--line-cyan:#8FC7DE;--line-dim:#3E6683;--paper:#EAF3F8;--amber:#E8A63C;--coral:#D9694F;--text-body:#CFE4F0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--blue-deep);color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;padding:32px 20px;}
+  a{color:var(--line-cyan);}
+  .wrap{max-width:1200px;margin:0 auto;}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);}
+  h1{font-family:'IBM Plex Mono',monospace;color:var(--paper);font-size:28px;margin:6px 0 10px;}
+  .lede{max-width:780px;margin-bottom:22px;}
+  .starter{background:var(--blue-panel);border-left:4px solid var(--amber);padding:16px 18px;margin-bottom:26px;font-size:20px;color:var(--paper);}
+  .starter small{display:block;font-size:13px;color:var(--text-body);margin-top:6px;}
+  .scroll{overflow-x:auto;border:1px solid var(--line-dim);}
+  table{border-collapse:collapse;width:100%;min-width:860px;}
+  th,td{padding:12px 14px;border-bottom:1px solid var(--line-dim);vertical-align:top;text-align:left;font-size:14.5px;}
+  th{background:var(--blue-panel);color:var(--amber);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;position:sticky;top:0;}
+  td.wk{font-family:'IBM Plex Mono',monospace;color:var(--amber);white-space:nowrap;}
+  td.eq{color:var(--paper);font-size:16px;min-width:280px;}
+  td.ex{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;}
+  tr.split td{background:rgba(232,166,60,0.08);color:var(--amber);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+  .none{color:var(--line-dim);}
+  .verify{color:var(--coral);}
+  .notes{margin-top:22px;font-size:13.5px;max-width:860px;}
+  .notes p{margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html">&larr; The AI Playbook</a>
+  <div class="tag" style="margin-top:18px;">Math · Security in Symbols</div>
+  <h1>Math</h1>
+  <p class="lede">Each idea written once in plain words and once as a formula, with the exam questions it ties to.</p>
+
+
+  <div class="scroll"><table>
+    <thead><tr><th>Week</th><th>Mathematical explanation</th><th>Symbol / equation</th><th>Exam question</th></tr></thead>
+    <tbody>
+      <tr class="split"><td colspan="4">Week 4 — Symmetric encryption</td></tr>
+      <tr><td class="wk">Week 4</td><td>Correctness: with the same key on both sides, decryption undoes encryption.</td><td class="eq">\(\forall k,\forall m:\ D_k(E_k(m)) = m\)</td><td class="ex none">Not directly examined</td></tr>
+      <tr><td class="wk">Week 4</td><td>Kerckhoffs: the machines E and D are public; only the key k is secret.</td><td class="eq">\(c = E_k(m),\quad E, D\ \text{public},\ k\ \text{secret}\)</td><td class="ex">2025 Q13</td></tr>
+      <tr><td class="wk">Week 4</td><td>Every cipher has a coordinate on three independent axes.</td><td class="eq">\(\{\text{Sub},\text{Trans}\} \times \{1\text{ key}, 2\text{ keys}\} \times \{\text{Block},\text{Stream}\}\)</td><td class="ex">2025 Q6<br>2025 Q28 (short answer)</td></tr>
+      <tr><td class="wk">Week 4</td><td>Brute force: on average you search half the keyspace. DES has 2<sup>56</sup> keys.</td><td class="eq">\(\mathbb{E}[\text{tries}] = \tfrac{|\mathcal{K}|}{2} = 2^{n-1}\)</td><td class="ex">Week 4 quiz Q3</td></tr>
+      <tr><td class="wk">Week 4</td><td>Reusing a stream key cancels the keystream and leaks both messages.</td><td class="eq">\(c \oplus c' = (m \oplus z) \oplus (m' \oplus z) = m \oplus m'\)</td><td class="ex none">Not directly examined</td></tr>
+      <tr><td class="wk">Week 4</td><td>CTR mode turns a block cipher into a stream cipher (so does CFB).</td><td class="eq">\(C_i = P_i \oplus E_k(\text{ctr}_i)\)</td><td class="ex">Week 4 quiz Q2</td></tr>
+
+      <tr class="split"><td colspan="4">Week 5 — Message authentication &amp; public-key cryptography</td></tr>
+      <tr><td class="wk">Week 5</td><td>Successful decryption does not prove the message is unaltered.</td><td class="eq">\(D_k(c') \text{ decrypts} \;\not\Rightarrow\; m' = m\)</td><td class="ex">2026 TR2 Supp Q21</td></tr>
+      <tr><td class="wk">Week 5</td><td>Two tag types: a hash has one input; a MAC has two (key + message).</td><td class="eq">\(MD = H(M) \quad\text{vs}\quad T = F(K, M)\)</td><td class="ex">2026 TR2 Supp SA2(b)</td></tr>
+      <tr><td class="wk">Week 5</td><td>Any length in, fixed length out — so many inputs share an output: reversible in principle, infeasible in practice.</td><td class="eq">\(H: \{0,1\}^{*} \rightarrow \{0,1\}^{n}\)</td><td class="ex">Week 5 quiz Q5</td></tr>
+      <tr><td class="wk">Week 5</td><td>XOR hash: order doesn’t matter, so swapping blocks gives the same hash — a collision.</td><td class="eq">\(h = B_1 \oplus B_2 \oplus \cdots \oplus B_m,\quad B_1 \oplus B_2 = B_2 \oplus B_1\)</td><td class="ex">2024 Q21<br>2025 Q21<br>TR3 Sample Q18<br>2026 TR2 Supp Q31</td></tr>
+      <tr><td class="wk">Week 5</td><td>Birthday paradox: finding any collision costs far less than matching a given hash.</td><td class="eq">\(1 - \prod_{i=0}^{22}\tfrac{365-i}{365} \approx 0.507;\quad 2^{n/2} \ll 2^{n}\)</td><td class="ex none">Not directly examined</td></tr>
+      <tr><td class="wk">Week 5</td><td>HMAC: hash twice, with the key disguised two different ways.</td><td class="eq">\(H\big((K^{+}\!\oplus \text{opad}) \,\|\, H((K^{+}\!\oplus \text{ipad}) \,\|\, M)\big)\)</td><td class="ex verify">2025 Q28 pt 4 (verify)</td></tr>
+      <tr><td class="wk">Week 5</td><td>Public-key: what one key locks, only the other unlocks. Which key locks decides what you get.</td><td class="eq">\(D_{sk}(E_{pk}(m)) = m\)</td><td class="ex">2024 Q7<br>2025 Q7<br>(options in 2025 Q6, Q16)</td></tr>
+      <tr><td class="wk">Week 5</td><td>Diffie-Hellman: both sides reach the same key without sending it — but nothing proves who is on the other end.</td><td class="eq">\(K = (\alpha^{b})^{a} = (\alpha^{a})^{b} = \alpha^{ab} \bmod q\)</td><td class="ex">Week 5 quiz Q3</td></tr>
+      <tr><td class="wk">Week 5</td><td>RSA: e and d are inverses modulo φ(n). Example: 7 × 23 = 161 ≡ 1 (mod 160).</td><td class="eq">\(ed \equiv 1 \pmod{\varphi(n)},\quad C = M^{e},\ M = C^{d} \bmod n\)</td><td class="ex none">Not directly examined</td></tr>
+      <tr><td class="wk">Week 5</td><td>Digital signature: sign the hash with the private key; anyone checks with the public key.</td><td class="eq">\(S = H(M)^{d} \bmod n,\quad \text{accept iff } S^{e} \bmod n = H(M)\)</td><td class="ex">2024 Q7<br>2025 Q7</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="notes">
+    <p><b>Paper codes:</b> 2024 = December 2024 final · 2025 = 2025 final · TR3 Sample = sample paper · 2026 TR2 Supp = TR2 2026 supplementary/deferred paper. Quiz rows are weekly quiz items, not final-exam questions.</p>
+    <p><b>Verify:</b> the HMAC → 2025 Q28 point 4 link came from an earlier draft and was not re-confirmed against the answer key.</p>
+  </div>
+</div>
+</body>
+</html>
