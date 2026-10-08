@@ -38,7 +38,8 @@ a{color:var(--cyan)}
 .rd.ra{background:rgba(232,166,60,.18);outline:1px solid rgba(232,166,60,.45);border-radius:3px}
 .pill{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:8;background:var(--panel);color:var(--paper);border:1px solid var(--cyan);border-radius:22px;padding:10px 16px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .pill.on{background:var(--amber);color:#0B2E4A}
-.rap{position:fixed;left:14px;bottom:calc(66px + env(safe-area-inset-bottom));z-index:8;background:var(--panel);border:1px solid var(--dim);border-radius:10px;padding:12px 14px;display:none;width:250px;color:var(--paper)}
+.rap{position:fixed;left:14px;bottom:calc(66px + env(safe-area-inset-bottom));z-index:8;background:var(--panel);border:1px solid var(--dim);border-radius:10px;padding:12px 14px;display:none;width:270px;color:var(--paper)}
+.w.wa{background:var(--amber);color:#0B2E4A;border-radius:3px;box-shadow:0 0 0 2px var(--amber)}
 .rap.open{display:block} .rap button{background:none;border:1px solid var(--dim);color:var(--paper);border-radius:6px;padding:6px 12px;margin-right:6px;font-size:15px}
 .rap input{width:100%} .rap .st{font-size:12px;margin-top:6px;color:var(--body)}
 .ans{margin-top:6px;font-size:14px} .ans::before{content:'Answer — ';color:var(--c);font-weight:700}
@@ -335,15 +336,17 @@ const QD=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob("eyIyNC0xIjoge
 const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 function show(r){const e=QD[r];qh.textContent=r+' · '+(e?e.src:'')+(e&&/^Short answer/.test(e.q)?' · SHORT ANSWER':'');
 qb.innerHTML=e?('<div class="rd">'+esc(e.q)+'</div>'+(e.o.length?'<ol type="a">'+e.o.map(o=>'<li class="rd">'+esc(o.replace(/^\((\w)\)\s*/,''))+'</li>').join('')+'</ol>':'')+(e.n?'<div class="nt">'+esc(e.n)+'</div>':'')+'<div class="qans"><div class="aa rd">Answer: '+esc(e.a)+'</div><div class="rd">'+esc(e.w)+'</div>'+(e.f?'<div class="nt">⚠ '+esc(e.f)+'</div>':'')+'</div><div class="nt"><a href="'+e.url+'" target="_blank" rel="noopener">Open source file</a></div>'):'Not found.';}
-function tab(n){if(typeof stopRA==='function'&&raOn)stopRA();document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.t==n));let k=0;document.querySelectorAll('.card').forEach(c=>{const on=c.dataset.ix==n;c.classList.toggle('hide',!on);if(on)k++});cc.textContent='Index '+n+' · '+k+' concepts';try{localStorage.setItem('mt',n)}catch(e){}window.scrollTo(0,0);}
+function tab(n){if(typeof stopRA==='function'&&raOn)stopRA();showTab(n);window.scrollTo(0,0);}
+function showTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.t==n));let k=0;document.querySelectorAll('.card').forEach(c=>{const on=c.dataset.ix==n;c.classList.toggle('hide',!on);if(on)k++});cc.textContent='Index '+n+' · '+k+' concepts';try{localStorage.setItem('mt',n)}catch(e){}}
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>tab(t.dataset.t));
 let st=1;try{st=localStorage.getItem('mt')||1}catch(e){}tab(st);
 document.addEventListener('click',ev=>{const b=ev.target.closest('.ref');if(!b)return;qm.style.display='flex';show(b.dataset.r);});
 qm.addEventListener('click',e=>{if(e.target===qm)qm.style.display='none'});
 </script>
 <button class="pill" id="pill">🔊 Read Aloud</button>
-<div class="rap" id="rap"><div style="font-size:13px;margin-bottom:8px">Read this index aloud</div>
-<button id="raPlay">▶</button><button id="raPause">⏸</button><button id="raStop">⏹</button>
+<div class="rap" id="rap"><div style="font-size:13px;margin-bottom:8px">Read aloud</div>
+<button id="raPlay" title="Read this index">▶ Index</button><button id="raAll" title="Read from here to the end">⏩ To end</button>
+<div style="margin-top:8px"><button id="raPause">⏸</button><button id="raStop">⏹</button></div>
 <div style="font-size:12px;margin-top:10px">Speed <span id="raSv">1.0x</span></div><input type="range" id="raSp" min="0.5" max="2" step="0.1" value="1"><div class="st" id="raSt">Ready.</div></div>
 <script>
 let raQ=[],raI=0,raRate=1,raV=null,raOn=false,raBtn=null;
@@ -352,12 +355,20 @@ speechSynthesis.onvoiceschanged=()=>{raV=pickV()};raV=pickV();if(!raV){let t=0;c
 const raSt=m=>{const e=document.getElementById('raSt');if(e)e.textContent=m};
 function clr(){document.querySelectorAll('.rd.ra').forEach(e=>e.classList.remove('ra'))}
 function resetBtns(){document.querySelectorAll('.lis').forEach(b=>{b.classList.remove('on');b.textContent='🔊 Listen'});pill.classList.remove('on')}
-function next(){if(raI>=raQ.length){clr();raOn=false;resetBtns();raSt('Finished.');return}
- const el=raQ[raI];clr();el.classList.add('ra');if(!el.closest('#qm'))el.scrollIntoView({behavior:'smooth',block:'center'});
- const u=new SpeechSynthesisUtterance((el.classList.contains('ans')?'Answer. ':'')+el.textContent.replace(/\s+/g,' ').trim());u.rate=raRate;if(raV)u.voice=raV;
- u.onend=()=>{raI++;next()};u.onerror=()=>{raI++;next()};speechSynthesis.speak(u);raSt('Reading '+(raI+1)+' / '+raQ.length);}
+function wrapWords(el){if(el.__w)return el.__w;const words=[];const walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walk.nextNode())nodes.push(walk.currentNode);
+ nodes.forEach(t=>{const parts=t.textContent.split(/(\s+)/);if(parts.length<1)return;const f=document.createDocumentFragment();parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){f.appendChild(document.createTextNode(p));return}const sp=document.createElement('span');sp.className='w';sp.textContent=p;f.appendChild(sp);words.push(sp)});t.parentNode.replaceChild(f,t)});
+ let txt='',offs=[];words.forEach((w,i)=>{if(i)txt+=' ';offs.push(txt.length);txt+=w.textContent});el.__w={words,offs,txt};return el.__w;}
+function clrW(){document.querySelectorAll('.w.wa').forEach(e=>e.classList.remove('wa'))}
+function next(){if(raI>=raQ.length){clr();clrW();raOn=false;resetBtns();raSt('Finished.');return}
+ const el=raQ[raI];const card=el.closest('.card');if(card&&card.classList.contains('hide'))showTab(card.dataset.ix);
+ clr();clrW();el.classList.add('ra');if(!el.closest('#qm'))el.scrollIntoView({behavior:'smooth',block:'center'});
+ const W=wrapWords(el);const pre=el.classList.contains('ans')?'Answer. ':'';
+ const u=new SpeechSynthesisUtterance(pre+W.txt);u.rate=raRate;if(raV)u.voice=raV;
+ u.onboundary=ev=>{if(ev.name&&ev.name!=='word')return;const c=ev.charIndex-pre.length;if(c<0)return;let k=0;while(k+1<W.offs.length&&W.offs[k+1]<=c)k++;clrW();if(W.words[k])W.words[k].classList.add('wa');};
+ u.onend=()=>{raI++;next()};u.onerror=()=>{raI++;next()};speechSynthesis.speak(u);
+ const lbl=card?('Index '+card.dataset.ix+' · '):'';raSt(lbl+'Reading '+(raI+1)+' / '+raQ.length);}
 function startRA(els,btn){speechSynthesis.cancel();resetBtns();raQ=els.filter(e=>e.textContent.trim());raI=0;raOn=true;raBtn=btn;if(btn){btn.classList.add('on');btn.textContent='⏹ Stop'}pill.classList.add('on');rap.classList.remove('open');next();}
-function stopRA(){speechSynthesis.cancel();raOn=false;clr();resetBtns();raSt('Stopped.')}
+function stopRA(){speechSynthesis.cancel();raOn=false;clr();clrW();resetBtns();raSt('Stopped.')}
 document.addEventListener('click',ev=>{const b=ev.target.closest('.lis');if(!b)return;ev.stopPropagation();
  if(raOn&&raBtn===b){stopRA();return}
  const scope=b.id==='plis'?document.getElementById('qb').parentElement:b.closest('.card');startRA([...scope.querySelectorAll('.rd')],b);},true);
@@ -365,5 +376,6 @@ pill.onclick=()=>{if(raOn)stopRA();else rap.classList.toggle('open')};
 raPlay.onclick=()=>startRA([...document.querySelectorAll('.card:not(.hide) .rd')],null);
 raPause.onclick=()=>{if(!raOn)return;if(speechSynthesis.speaking&&!speechSynthesis.paused){speechSynthesis.pause();raSt('Paused.')}else if(speechSynthesis.paused){speechSynthesis.resume();raSt('Resumed.')}};
 raStop.onclick=stopRA;
+raAll.onclick=()=>{const cur=+(document.querySelector('.tab.on')||{dataset:{t:1}}).dataset.t;const cards=[...document.querySelectorAll('.card')].filter(c=>+c.dataset.ix>=cur);let st=cards.findIndex(c=>+c.dataset.ix===cur&&c.getBoundingClientRect().bottom>120);if(st<0)st=0;startRA(cards.slice(st).flatMap(c=>[...c.querySelectorAll('.rd')]),null);};
 raSp.oninput=()=>{raRate=parseFloat(raSp.value);raSv.textContent=raRate.toFixed(1)+'x';if(raOn&&speechSynthesis.speaking){speechSynthesis.cancel();next()}};
 </script></body></html>
