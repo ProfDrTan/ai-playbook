@@ -375,7 +375,10 @@ function stopRA(){raTok++;raPaused=false;speechSynthesis.cancel();raOn=false;clr
 function togglePause(){if(!raOn)return;if(!raPaused){raPaused=true;raTok++;speechSynthesis.cancel();raSt('Paused.')}else{raPaused=false;raSt('Resumed.');next(raWordIdx)}syncBtnLabel();}
 document.addEventListener('click',ev=>{const b=ev.target.closest('.lis');if(!b)return;ev.stopPropagation();
  if(raOn&&raBtn===b){togglePause();return}
- const scope=b.id==='plis'?document.getElementById('qb').parentElement:b.closest('.card');startRA([...scope.querySelectorAll('.rd')],b);},true);
+ if(b.id==='plis'){startRA([...document.getElementById('qb').parentElement.querySelectorAll('.rd')],b);return}
+ const thisCard=b.closest('.card');const allCards=[...document.querySelectorAll('.card')];const pos=allCards.indexOf(thisCard);
+ const els=allCards.slice(pos).flatMap(c=>[...c.querySelectorAll('.rd')]);
+ startRA(els,b);},true);
 pill.onclick=()=>{rap.classList.toggle('open')};
 raPlay.onclick=()=>startRA([...document.querySelectorAll('.card:not(.hide) .rd')],null);
 raPause.onclick=togglePause;
