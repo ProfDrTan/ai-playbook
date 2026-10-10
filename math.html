@@ -355,6 +355,7 @@ speechSynthesis.onvoiceschanged=()=>{raV=pickV()};raV=pickV();if(!raV){let t=0;c
 const raSt=m=>{const e=document.getElementById('raSt');if(e)e.textContent=m};
 function clr(){document.querySelectorAll('.rd.ra').forEach(e=>e.classList.remove('ra'))}
 function resetBtns(){document.querySelectorAll('.lis').forEach(b=>{b.classList.remove('on');b.textContent='🔊 Listen'});pill.classList.remove('on');raPause.textContent='⏸'}
+function syncBtnLabel(){if(!raBtn)return;raBtn.textContent=raPaused?'▶ Resume':'⏸ Pause';raPause.textContent=raPaused?'▶':'⏸'}
 function wrapWords(el){if(el.__w)return el.__w;const words=[];const walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walk.nextNode())nodes.push(walk.currentNode);
  nodes.forEach(t=>{const parts=t.textContent.split(/(\s+)/);if(parts.length<1)return;const f=document.createDocumentFragment();parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){f.appendChild(document.createTextNode(p));return}const sp=document.createElement('span');sp.className='w';sp.textContent=p;f.appendChild(sp);words.push(sp)});t.parentNode.replaceChild(f,t)});
  let txt='',offs=[];words.forEach((w,i)=>{if(i)txt+=' ';offs.push(txt.length);txt+=w.textContent});el.__w={words,offs,txt};return el.__w;}
@@ -369,14 +370,15 @@ function next(fromWord){if(raI>=raQ.length){clr();clrW();raOn=false;resetBtns();
  u.onboundary=ev=>{if(myTok!==raTok)return;if(ev.name&&ev.name!=='word')return;const c=ev.charIndex-prefixTxt.length;if(c<0)return;let k=startIdx;while(k+1<W.offs.length&&W.offs[k+1]<=startOffs+c)k++;raWordIdx=k;clrW();if(W.words[k])W.words[k].classList.add('wa');};
  u.onend=()=>{if(myTok!==raTok)return;raWordIdx=0;raI++;next()};u.onerror=()=>{if(myTok!==raTok)return;raWordIdx=0;raI++;next()};speechSynthesis.speak(u);
  const lbl=card?('Index '+card.dataset.ix+' · '):'';raSt(lbl+'Reading '+(raI+1)+' / '+raQ.length+(raPaused?' (paused)':''));}
-function startRA(els,btn){raTok++;speechSynthesis.cancel();resetBtns();raQ=els.filter(e=>e.textContent.trim());raI=0;raWordIdx=0;raPaused=false;raOn=true;raBtn=btn;if(btn){btn.classList.add('on');btn.textContent='⏹ Stop'}pill.classList.add('on');rap.classList.remove('open');next();}
+function startRA(els,btn){raTok++;speechSynthesis.cancel();resetBtns();raQ=els.filter(e=>e.textContent.trim());raI=0;raWordIdx=0;raPaused=false;raOn=true;raBtn=btn;if(btn){btn.classList.add('on');btn.textContent='⏸ Pause'}pill.classList.add('on');next();}
 function stopRA(){raTok++;raPaused=false;speechSynthesis.cancel();raOn=false;clr();clrW();resetBtns();raSt('Stopped.')}
+function togglePause(){if(!raOn)return;if(!raPaused){raPaused=true;raTok++;speechSynthesis.cancel();raSt('Paused.')}else{raPaused=false;raSt('Resumed.');next(raWordIdx)}syncBtnLabel();}
 document.addEventListener('click',ev=>{const b=ev.target.closest('.lis');if(!b)return;ev.stopPropagation();
- if(raOn&&raBtn===b){stopRA();return}
+ if(raOn&&raBtn===b){togglePause();return}
  const scope=b.id==='plis'?document.getElementById('qb').parentElement:b.closest('.card');startRA([...scope.querySelectorAll('.rd')],b);},true);
 pill.onclick=()=>{rap.classList.toggle('open')};
 raPlay.onclick=()=>startRA([...document.querySelectorAll('.card:not(.hide) .rd')],null);
-raPause.onclick=()=>{if(!raOn)return;if(!raPaused){raPaused=true;raTok++;speechSynthesis.cancel();raPause.textContent='▶';raSt('Paused.')}else{raPaused=false;raPause.textContent='⏸';raSt('Resumed.');next(raWordIdx)}};
+raPause.onclick=togglePause;
 raStop.onclick=stopRA;
 raAll.onclick=()=>{const cur=+(document.querySelector('.tab.on')||{dataset:{t:1}}).dataset.t;const cards=[...document.querySelectorAll('.card')].filter(c=>+c.dataset.ix>=cur);let st=cards.findIndex(c=>+c.dataset.ix===cur&&c.getBoundingClientRect().bottom>120);if(st<0)st=0;startRA(cards.slice(st).flatMap(c=>[...c.querySelectorAll('.rd')]),null);};
 raSp.oninput=()=>{raRate=parseFloat(raSp.value);raSv.textContent=raRate.toFixed(1)+'x';if(raOn&&!raPaused&&speechSynthesis.speaking){raTok++;speechSynthesis.cancel();next(raWordIdx)}};
