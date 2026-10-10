@@ -349,7 +349,7 @@ qm.addEventListener('click',e=>{if(e.target===qm)qm.style.display='none'});
 <div style="margin-top:8px"><button id="raPause">⏸</button><button id="raStop">⏹</button></div>
 <div style="font-size:12px;margin-top:10px">Speed <span id="raSv">1.0x</span></div><input type="range" id="raSp" min="0.5" max="2" step="0.1" value="1"><div class="st" id="raSt">Ready.</div></div>
 <script>
-let raQ=[],raI=0,raRate=1,raV=null,raOn=false,raBtn=null,raPaused=false,raWordIdx=0,raSuppress=false;
+let raQ=[],raI=0,raRate=1,raV=null,raOn=false,raBtn=null,raPaused=false,raWordIdx=0,raTok=0;
 function pickV(){const v=speechSynthesis.getVoices();if(!v.length)return null;return v.find(x=>/female/i.test(x.name)&&/^en/i.test(x.lang))||v.find(x=>x.lang==='en-GB')||v.find(x=>/^en/i.test(x.lang))||v[0];}
 speechSynthesis.onvoiceschanged=()=>{raV=pickV()};raV=pickV();if(!raV){let t=0;const p=setInterval(()=>{raV=pickV();if(raV||++t>10)clearInterval(p)},300);}
 const raSt=m=>{const e=document.getElementById('raSt');if(e)e.textContent=m};
@@ -364,19 +364,20 @@ function next(fromWord){if(raI>=raQ.length){clr();clrW();raOn=false;resetBtns();
  clr();clrW();el.classList.add('ra');if(!el.closest('#qm'))el.scrollIntoView({behavior:'smooth',block:'center'});
  const W=wrapWords(el);const pre=el.classList.contains('ans')?'Answer. ':'';
  const startIdx=fromWord||0;const startOffs=W.offs[startIdx]||0;const slicedTxt=W.txt.slice(startOffs);const prefixTxt=startIdx===0?pre:'';
+ const myTok=++raTok;
  const u=new SpeechSynthesisUtterance(prefixTxt+slicedTxt);u.rate=raRate;if(raV)u.voice=raV;
- u.onboundary=ev=>{if(ev.name&&ev.name!=='word')return;const c=ev.charIndex-prefixTxt.length;if(c<0)return;let k=startIdx;while(k+1<W.offs.length&&W.offs[k+1]<=startOffs+c)k++;raWordIdx=k;clrW();if(W.words[k])W.words[k].classList.add('wa');};
- u.onend=()=>{if(raSuppress){raSuppress=false;return}raWordIdx=0;raI++;next()};u.onerror=()=>{if(raSuppress){raSuppress=false;return}raWordIdx=0;raI++;next()};speechSynthesis.speak(u);
+ u.onboundary=ev=>{if(myTok!==raTok)return;if(ev.name&&ev.name!=='word')return;const c=ev.charIndex-prefixTxt.length;if(c<0)return;let k=startIdx;while(k+1<W.offs.length&&W.offs[k+1]<=startOffs+c)k++;raWordIdx=k;clrW();if(W.words[k])W.words[k].classList.add('wa');};
+ u.onend=()=>{if(myTok!==raTok)return;raWordIdx=0;raI++;next()};u.onerror=()=>{if(myTok!==raTok)return;raWordIdx=0;raI++;next()};speechSynthesis.speak(u);
  const lbl=card?('Index '+card.dataset.ix+' · '):'';raSt(lbl+'Reading '+(raI+1)+' / '+raQ.length+(raPaused?' (paused)':''));}
-function startRA(els,btn){speechSynthesis.cancel();resetBtns();raQ=els.filter(e=>e.textContent.trim());raI=0;raWordIdx=0;raPaused=false;raSuppress=false;raOn=true;raBtn=btn;if(btn){btn.classList.add('on');btn.textContent='⏹ Stop'}pill.classList.add('on');rap.classList.remove('open');next();}
-function stopRA(){raSuppress=false;raPaused=false;speechSynthesis.cancel();raOn=false;clr();clrW();resetBtns();raSt('Stopped.')}
+function startRA(els,btn){raTok++;speechSynthesis.cancel();resetBtns();raQ=els.filter(e=>e.textContent.trim());raI=0;raWordIdx=0;raPaused=false;raOn=true;raBtn=btn;if(btn){btn.classList.add('on');btn.textContent='⏹ Stop'}pill.classList.add('on');rap.classList.remove('open');next();}
+function stopRA(){raTok++;raPaused=false;speechSynthesis.cancel();raOn=false;clr();clrW();resetBtns();raSt('Stopped.')}
 document.addEventListener('click',ev=>{const b=ev.target.closest('.lis');if(!b)return;ev.stopPropagation();
  if(raOn&&raBtn===b){stopRA();return}
  const scope=b.id==='plis'?document.getElementById('qb').parentElement:b.closest('.card');startRA([...scope.querySelectorAll('.rd')],b);},true);
 pill.onclick=()=>{if(raOn)stopRA();else rap.classList.toggle('open')};
 raPlay.onclick=()=>startRA([...document.querySelectorAll('.card:not(.hide) .rd')],null);
-raPause.onclick=()=>{if(!raOn)return;if(!raPaused){raPaused=true;raSuppress=true;speechSynthesis.cancel();raPause.textContent='▶';raSt('Paused.')}else{raPaused=false;raPause.textContent='⏸';raSt('Resumed.');next(raWordIdx)}};
+raPause.onclick=()=>{if(!raOn)return;if(!raPaused){raPaused=true;raTok++;speechSynthesis.cancel();raPause.textContent='▶';raSt('Paused.')}else{raPaused=false;raPause.textContent='⏸';raSt('Resumed.');next(raWordIdx)}};
 raStop.onclick=stopRA;
 raAll.onclick=()=>{const cur=+(document.querySelector('.tab.on')||{dataset:{t:1}}).dataset.t;const cards=[...document.querySelectorAll('.card')].filter(c=>+c.dataset.ix>=cur);let st=cards.findIndex(c=>+c.dataset.ix===cur&&c.getBoundingClientRect().bottom>120);if(st<0)st=0;startRA(cards.slice(st).flatMap(c=>[...c.querySelectorAll('.rd')]),null);};
-raSp.oninput=()=>{raRate=parseFloat(raSp.value);raSv.textContent=raRate.toFixed(1)+'x';if(raOn&&!raPaused&&speechSynthesis.speaking){raSuppress=true;speechSynthesis.cancel();next(raWordIdx)}};
+raSp.oninput=()=>{raRate=parseFloat(raSp.value);raSv.textContent=raRate.toFixed(1)+'x';if(raOn&&!raPaused&&speechSynthesis.speaking){raTok++;speechSynthesis.cancel();next(raWordIdx)}};
 </script></body></html>
