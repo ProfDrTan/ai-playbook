@@ -11,7 +11,7 @@ def get(iv, per):
         df = yf.download(s, interval=iv, period=per, progress=False, auto_adjust=False)
         if df is not None and len(df) >= 30:
             if isinstance(df.columns, pd.MultiIndex): df.columns = df.columns.get_level_values(0)
-            df = df[["Open","High","Low","Close"]].dropna()
+            df = df[["Open","High","Low","Close","Volume"]].dropna()
             df.index = df.index.tz_convert("UTC") if df.index.tz is not None else df.index.tz_localize("UTC")
             return df, s
     return None, None
@@ -24,13 +24,13 @@ for step, iv, per, secs, rs in TF:
     df, used = cache[key]
     if df is None: out["timeframes"][step] = {"error": "no data from Yahoo"}; continue
     if rs == "session":
-        df = df.resample("24h", offset="22h").agg({"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
+        df = df.resample("24h", offset="22h").agg({"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}).dropna()
     elif rs:
-        df = df.resample(rs).agg({"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
+        df = df.resample(rs).agg({"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}).dropna()
     df = df.iloc[-261:]
     out["timeframes"][step] = {"symbol_used": used, "chart_step": secs, "chart_end": out["generated_utc"],
         "time": [t.strftime("%Y-%m-%dT%H:%M:%SZ") for t in df.index],
         "open": [round(float(x), 2) for x in df["Open"]], "high": [round(float(x), 2) for x in df["High"]],
-        "low": [round(float(x), 2) for x in df["Low"]], "close": [round(float(x), 2) for x in df["Close"]]}
+        "low": [round(float(x), 2) for x in df["Low"]], "close": [round(float(x), 2) for x in df["Close"]], "volume": [int(x) for x in df["Volume"]]}
     print(step, used, len(df), df.index[-1])
 json.dump(out, open("gold.json", "w"))

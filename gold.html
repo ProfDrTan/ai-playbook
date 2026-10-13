@@ -53,9 +53,10 @@ thead th{color:var(--mute);font-weight:600;font-size:.76rem}tr:last-child td{bor
 .ra .w.on{background:var(--gold);color:#111;border-radius:3px}
 .sr td.l{white-space:normal}
 </style></head><body><main>
-<header><div><h1>Gold Technical Dashboard<small>GCZ6 · Dec 2026</small></h1>
-<div class="meta">Refreshed every 15 minutes · <span id="upd">loading…</span> · <a href="https://claude.ai/artifact/RZLVoAiTZNm3jeqRz8H1qJ" style="color:var(--gold)">real-time IBKR version</a></div></div>
+<header><div><h1>Gold Technical Dashboard<small>GCZ6 · Dec 2026 · delayed</small></h1>
+<div class="meta"><span id="upd">loading…</span></div></div>
 <div style="text-align:right"><div class="price num" id="px">–</div><div class="meta" id="bt"></div></div></header>
+<a href="https://claude.ai/artifact/RZLVoAiTZNm3jeqRz8H1qJ" style="display:block;margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--gold);color:#111;font-weight:700;text-decoration:none">For trading decisions, open the real-time IBKR dashboard →<br><span style="font-weight:400;font-size:.85rem">This page uses delayed Yahoo data (up to about 25 minutes old) and is for review only, not for timing entries.</span></a>
 <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px">
  <button class="btn" id="refresh">Reload data</button>
  <label class="tog"><input type="checkbox" id="live" checked> Include the bar still forming (live, as Investing.com shows)</label>
@@ -82,11 +83,16 @@ thead th{color:var(--mute);font-weight:600;font-size:.76rem}tr:last-child td{bor
   <p class="meta" style="margin:8px 0 0">P = C + 0.1 × S × ATR, where C is the last close, S the summary score (−1 to +1) and ATR the average size of one bar over 14 bars.</p></div>
  <div class="card"><h2><span>Price, last 60 bars</span><span class="meta">gold line = 20-bar average</span></h2><div id="chart"></div></div>
 </div>
+<div class="card" style="margin-top:12px"><h2><span>Volume</span><span class="meta" id="vol-tf"></span></h2>
+ <div class="kpi" style="grid-template-columns:repeat(3,1fr)"><div><small>Last bar vs 20-bar average</small><b class="num" id="v-rel"></b></div><div><small>Volume trend (last 10 vs prior 10 bars)</small><b id="v-trend"></b></div><div><small>On-balance volume, 20 bars</small><b id="v-obv"></b></div></div>
+ <p id="v-read" style="margin:10px 0 0"></p>
+ <div id="v-chart"></div>
+ <p class="meta" style="margin:6px 0 0">Completed bars only (a forming bar's volume is still partial). Relative volume = last bar's volume ÷ its 20-bar average. On-balance volume (OBV) adds a bar's volume when it closes up and subtracts it when it closes down, so it rises when volume flows into up-moves. Volume does not change the Buy/Sell rating above, so the rating stays comparable with Investing.com.</p></div>
 <div class="grid2">
  <div class="card"><h2><span>Technical Indicators</span><span class="meta" id="ind-c"></span></h2><div class="wrap"><table><thead><tr><th>Name</th><th>Value</th><th>Action</th><th class="l">Why</th></tr></thead><tbody id="t-ind"></tbody></table></div></div>
  <div class="card"><h2><span>Moving Averages</span><span class="meta" id="ma-c"></span></h2><div class="wrap"><table><thead><tr><th>Period</th><th>Simple</th><th></th><th>Exponential</th><th></th></tr></thead><tbody id="t-ma"></tbody></table></div></div>
 </div>
-<p class="note">How to read it: each moving average votes Buy if price is above it, Sell if below; each indicator votes by the rule in its "Why" column. Score S = (Buy votes − Sell votes) ÷ number of votes: 0.5 or more is Strong Buy, 0.1 to 0.5 Buy, −0.1 to 0.1 Neutral, −0.5 to −0.1 Sell, −0.5 or less Strong Sell. A moving average with too little history for this contract counts as Neutral. Data: Yahoo Finance bars for the December 2026 gold contract (GCZ26.CMX), fetched every 15 minutes during trading hours. Yahoo runs about 10 minutes behind live prices, so the newest bars can be up to about 25 minutes old; the real-time IBKR version linked at the top has no delay. Daily bars are built from hourly bars on the CME session (22:00–21:00 GMT); 4-hour bars stand in for Investing.com's 5-hour tab.</p>
+<p class="note">How to read it: each moving average votes Buy if price is above it, Sell if below; each indicator votes by the rule in its "Why" column. Score S = (Buy votes − Sell votes) ÷ number of votes: 0.5 or more is Strong Buy, 0.1 to 0.5 Buy, −0.1 to 0.1 Neutral, −0.5 to −0.1 Sell, −0.5 or less Strong Sell. A moving average with too little history for this contract counts as Neutral. Data: Yahoo Finance bars for the December 2026 gold contract (GCZ26.CMX), fetched every 15 minutes during trading hours and about 10 minutes behind live prices. Daily bars follow the CME session (22:00–21:00 GMT); 4-hour bars stand in for Investing.com's 5-hour tab.</p>
 </main>
 <script>
 // Gold technical engine (JS port of the course reference engine)
@@ -151,7 +157,7 @@ const TFS = [["1m","1 Min","ONE_MIN",60],["5m","5 Min","FIVE_MINS",60],["15m","1
 const CLS = {"Strong Buy":"sb","Buy":"b","Neutral":"n","Sell":"s","Strong Sell":"ss"};
 const WHY = {"RSI(14)":"Buy > 50, Sell < 50, Neutral > 70 or < 30","STOCH(9,6)":"Buy if %K (first) is above %D (second); Neutral if %K > 80 or < 20","MACD(12,26,9)":"Buy if MACD line (first) is above signal line (second)","CCI(14)":"Buy > 0, Sell < 0, Neutral beyond ±200","Williams %R(14)":"Buy > −50, Sell < −50, Neutral > −20 or < −80","ROC(12)":"Buy > 0, Sell < 0"};
 const raw = {}, errs = {};
-let curKey = "1h", latestTs = 0;
+let curKey = "1h", picked = false, latestTs = 0;
 const $ = id => document.getElementById(id);
 const f2 = x => x == null || Number.isNaN(x) ? "–" : Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtT = ms => new Date(ms).toUTCString().replace(/^\w+, /,"").replace(":00 GMT"," GMT");
@@ -162,8 +168,8 @@ function bars(key){
   const end = Date.parse(p.chart_end), step = (p.chart_step || 60) * 1000;
   const forming = end - t[n-1] < step;
   if (forming && !$("live").checked) n -= 1;
-  const sl = a => a.slice(0, n);
-  return { t: sl(t), o: sl(o), h: sl(h), l: sl(l), c: sl(c), forming: forming && $("live").checked };
+  const sl = a => a.slice(0, n), v = p.volume || [];
+  return { t: sl(t), o: sl(o), h: sl(h), l: sl(l), c: sl(c), v: v.slice(0, n), vDone: v.slice(0, forming ? t.length - 1 : t.length), cDone: c.slice(0, forming ? t.length - 1 : t.length), hDone: h.slice(0, forming ? t.length - 1 : t.length), lDone: l.slice(0, forming ? t.length - 1 : t.length), forming: forming && $("live").checked };
 }
 function analyses(){ const out = {}; for (const [k,lab] of TFS){ const b = bars(k); if (b){ try { out[k] = {...E.analyse(b), label: lab, key: k, forming: b.forming}; } catch(e){} } } return out; }
 
@@ -181,6 +187,49 @@ function chart(t){
   const up=c[c.length-1]>=c[0];
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Last 60 closes"><path d="${path(m)}" stroke="var(--gold)" stroke-width="2" fill="none"/><path d="${path(c)}" stroke="var(--${up?"sb":"ss"})" stroke-width="1.6" fill="none"/><text x="2" y="12" font-size="11" fill="var(--mute)">${f2(hi)}</text><text x="2" y="${H-2}" font-size="11" fill="var(--mute)">${f2(lo)}</text></svg>`;
 }
+
+function volumeRead(b){
+  const v = b.vDone, c = b.cDone, n = v.length;
+  if (!v.length || n < 41 || v.slice(-20).every(x => !x)) return null;
+  const avg = (a) => a.reduce((s,x)=>s+x,0)/a.length;
+  const rel = v[n-1] / avg(v.slice(n-21, n-1));
+  const recent = avg(v.slice(n-10)), prior = avg(v.slice(n-20, n-10)), vt = recent / prior;
+  const obv = [0]; for (let i = 1; i < n; i++) obv.push(obv[i-1] + (c[i] > c[i-1] ? v[i] : c[i] < c[i-1] ? -v[i] : 0));
+  const obvUp = obv[n-1] > obv[n-21];
+  const pChg = c[n-1] - c[n-11];
+  // divergence over 20 bars: new price high/low not confirmed by OBV
+  const hiP = Math.max(...c.slice(n-20)), loP = Math.min(...c.slice(n-20));
+  const hiO = Math.max(...obv.slice(n-20)), loO = Math.min(...obv.slice(n-20));
+  let div = "";
+  if (c[n-1] >= hiP && obv[n-1] < hiO) div = "Bearish divergence: price is at a 20-bar high but OBV is not, so buyers' volume is not confirming the high.";
+  else if (c[n-1] <= loP && obv[n-1] > loO) div = "Bullish divergence: price is at a 20-bar low but OBV is not, so sellers' volume is not confirming the low.";
+  const trendWord = vt >= 1.15 ? "Rising" : vt <= 0.85 ? "Falling" : "Flat";
+  let read;
+  if (pChg > 0 && trendWord === "Rising") read = "Price is up over the last 10 bars on rising volume: the move is confirmed by participation.";
+  else if (pChg > 0 && trendWord === "Falling") read = "Price is up over the last 10 bars on falling volume: a weak rally, typical of a bounce rather than a new trend.";
+  else if (pChg < 0 && trendWord === "Rising") read = "Price is down over the last 10 bars on rising volume: real selling pressure.";
+  else if (pChg < 0 && trendWord === "Falling") read = "Price is down over the last 10 bars on falling volume: selling is drying up.";
+  else read = `Price ${pChg >= 0 ? "up" : "down"} over the last 10 bars on steady volume: no strong signal from volume.`;
+  if (rel >= 1.5) read += ` The last bar traded ${rel.toFixed(1)} times its usual volume: something is happening; check the news.`;
+  else if (rel <= 0.5) read += ` The last bar was very quiet (${rel.toFixed(1)}× normal).`;
+  return { rel, vt, trendWord, obvUp, read: read + (div ? " " + div : ""), short: read.split(":")[0] + (div ? "; " + div.split(":")[0].toLowerCase() : ""), vols: v.slice(-60), closes: c.slice(-60) };
+}
+function volChart(V){
+  const v = V.vols, W = 480, H = 70, mx = Math.max(...v) || 1, w = W / v.length;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Volume, last 60 completed bars">${v.map((x,i) => { const up = i === 0 || V.closes[i] >= V.closes[i-1]; const h = x / mx * (H - 4); return `<rect x="${(i*w).toFixed(1)}" y="${(H-h).toFixed(1)}" width="${Math.max(1, w-1).toFixed(1)}" height="${h.toFixed(1)}" fill="var(--${up?"b":"s"})" opacity=".75"/>`; }).join("")}</svg>`;
+}
+function volumeProfile(){
+  // hourly bars of the last ~5 sessions: where most contracts changed hands
+  const b = bars("1h"); if (!b || !b.vDone.length) return null;
+  const n = b.vDone.length, k = Math.min(115, n), lo = Math.min(...b.lDone.slice(n-k)), hi = Math.max(...b.hDone.slice(n-k)), step = 2;
+  const bins = new Array(Math.ceil((hi - lo) / step) + 1).fill(0);
+  for (let i = n - k; i < n; i++){ const a = Math.floor((b.lDone[i] - lo) / step), z = Math.floor((b.hDone[i] - lo) / step), share = b.vDone[i] / (z - a + 1); for (let j = a; j <= z; j++) bins[j] += share; }
+  const tot = bins.reduce((s,x)=>s+x,0), poc = bins.indexOf(Math.max(...bins));
+  let inV = bins[poc], L = poc, Hh = poc;
+  while (inV < 0.7 * tot && (L > 0 || Hh < bins.length - 1)){ const dn = L > 0 ? bins[L-1] : -1, up = Hh < bins.length - 1 ? bins[Hh+1] : -1; if (up >= dn){ Hh++; inV += up; } else { L--; inV += dn; } }
+  const px = j => lo + (j + 0.5) * step;
+  return { poc: px(poc), vah: px(Hh), val: px(L) };
+}
 function levels(A, price){
   const D = bars("1d"), W = bars("1w"); if (!D || !A["1d"]) return null;
   // use COMPLETED bars for pivots and swings
@@ -197,6 +246,7 @@ function levels(A, price){
   }
   add(Math.max(...d.h.slice(-20)), "20-session high"); add(Math.min(...d.l.slice(-20)), "20-session low");
   const am = A["1d"].ma.rows; for (const k of ["SMA20","EMA20","SMA50","EMA50","SMA200"]) { const r = am.find(x=>x.name===k); if (r) add(r.value, `Daily ${k.replace("SMA","").replace("EMA","")}-day ${k.startsWith("S")?"simple":"exp."} average`); }
+  const VP = volumeProfile(); if (VP){ add(VP.poc, "Volume point of control (5 sessions)"); add(VP.vah, "Value-area high (5 sessions)"); add(VP.val, "Value-area low (5 sessions)"); }
   L.sort((a,b)=>a.v-b.v);
   const tol = Math.max(4, 0.12 * A["1d"].atr), zones = [];
   for (const x of L){ const z = zones[zones.length-1]; if (z && x.v - z.hi <= tol && x.v - z.lo <= 2 * tol){ z.hi = x.v; z.items.push(x); } else zones.push({lo:x.v, hi:x.v, items:[x]}); }
@@ -218,12 +268,13 @@ let lastStory = "";
 function render(){
   const A = analyses(), keys = TFS.map(x=>x[0]).filter(k=>A[k]);
   if (!keys.length) return;
+  if (!picked && A["1h"]) curKey = "1h";
   if (!A[curKey]) curKey = keys.includes("1h") ? "1h" : keys[0];
   const t = A[curKey], one = bars("1m"), price = one ? one.c[one.c.length-1] : t.close;
   $("px").textContent = f2(price);
   $("bt").textContent = `${t.label} bar ${["1d","1w","1mo"].includes(t.key) ? "of " + new Date(t.time + 6*3600e3).toUTCString().slice(5,16) : fmtT(t.time)}${t.forming ? " (still forming)" : ""}`;
   $("strip").innerHTML = TFS.map(([k,lab]) => A[k] ? `<button class="tf" aria-pressed="${k===curKey}" data-k="${k}"><b>${lab}</b><span class="c-${CLS[A[k].summary.rating]}">${A[k].summary.rating}</span></button>` : `<button class="tf" disabled><b>${lab}</b><span class="c-n">${errs[k] ? "unavailable" : "loading"}</span></button>`).join("");
-  document.querySelectorAll(".tf[data-k]").forEach(b => b.onclick = () => { curKey = b.dataset.k; render(); });
+  document.querySelectorAll(".tf[data-k]").forEach(b => b.onclick = () => { curKey = b.dataset.k; picked = true; render(); });
   $("align").innerHTML = keys.map(k => `<div class="bg-${CLS[A[k].summary.rating]}" title="${A[k].label}: ${A[k].summary.rating}"></div>`).join("");
   const sh = keys.filter(k=>["1m","5m","15m","30m","1h"].includes(k)), lg = keys.filter(k=>!sh.includes(k));
   const avg = ks => ks.reduce((s,k)=>s+A[k].summary.score,0)/(ks.length||1), word = s => s>=.1?"up":s<=-.1?"down":"flat";
@@ -238,6 +289,12 @@ function render(){
     if (r1) lastStory += ` Nearest resistance ${f2(r1.lo)}${r1.hi-r1.lo>=.5?" to "+f2(r1.hi):""}, ${f2(r1.lo-price)} dollars above.`;
     if (s1) lastStory += ` Nearest support ${f2(s1.hi)}${s1.hi-s1.lo>=.5?" down to "+f2(s1.lo):""}, ${f2(price-s1.hi)} dollars below.`;
   }
+  const V = volumeRead(bars(curKey) || {vDone:[]});
+  if (V){ $("v-rel").textContent = V.rel.toFixed(2) + "×"; $("v-trend").textContent = V.trendWord; $("v-trend").className = V.trendWord==="Rising"?"c-sb":V.trendWord==="Falling"?"c-ss":"";
+    $("v-obv").textContent = V.obvUp ? "Rising" : "Falling"; $("v-obv").className = V.obvUp ? "c-sb" : "c-ss"; $("v-read").innerHTML = "<b>" + V.read.split(":")[0] + ":</b>" + V.read.slice(V.read.indexOf(":")+1); $("v-chart").innerHTML = volChart(V);
+    lastStory += ` Volume on the ${t.label.toLowerCase()} chart: ${V.short.charAt(0).toLowerCase() + V.short.slice(1)}.`; }
+  else { $("v-read").textContent = "No volume data for this timeframe."; $("v-chart").innerHTML = ""; ["v-rel","v-trend","v-obv"].forEach(id => $(id).textContent = "–"); }
+  $("vol-tf").textContent = t.label;
   $("story").innerHTML = lastStory.split(" ").map(w => `<span class="w">${w}</span>`).join(" ");
   $("g-sum").innerHTML = gauge(t.summary.score, t.summary.rating, t.summary.buy, t.summary.sell, 18);
   $("g-ind").innerHTML = gauge(t.ind.score, t.ind.rating, t.ind.buy, t.ind.sell, 6);
@@ -249,7 +306,7 @@ function render(){
   $("ma-c").textContent = `Buy ${t.ma.buy} · Sell ${t.ma.sell}`;
   const cell = r => `<td class="num">${f2(r.value)}</td><td class="act c-${r.action==="Buy"?"b":r.action==="Sell"?"s":"n"}">${r.action}</td>`;
   $("t-ma").innerHTML = [5,10,20,50,100,200].map(n => `<tr><td>MA${n}</td>${cell(t.ma.rows.find(r=>r.name==="SMA"+n))}${cell(t.ma.rows.find(r=>r.name==="EMA"+n))}</tr>`).join("");
-  $("upd").textContent = latestTs ? "data as of " + fmtT(latestTs) : "loading…";
+  $("upd").textContent = latestTs ? "delayed data as of " + fmtT(latestTs) : "loading…";
 }
 function showStatus(){
   const e = Object.values(errs);
