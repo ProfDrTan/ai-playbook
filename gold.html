@@ -220,6 +220,7 @@ function volumeRead(b){
   else if (pChg < 0 && trendWord === "Falling") read = "Price is down over the last 10 bars on falling volume: selling is drying up.";
   else read = `Price ${pChg >= 0 ? "up" : "down"} over the last 10 bars on steady volume: no strong signal from volume.`;
   if (rel >= 1.5) read += ` The last bar traded ${rel.toFixed(1)} times its usual volume: something is happening; check the news.`;
+  else if (v[n-1] === 0) read += " The data feed reported no volume for the last bar.";
   else if (rel <= 0.5) read += ` The last bar was very quiet (${rel.toFixed(1)}× normal).`;
   return { rel, vt, trendWord, obvUp, read: read + (div ? " " + div : ""), short: read.split(":")[0] + (div ? "; " + div.split(":")[0].toLowerCase() : ""), vols: v.slice(-60), closes: c.slice(-60) };
 }
