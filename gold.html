@@ -1,0 +1,297 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Technical Dashboard — AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f1ec;--panel:#fffdf8;--ink:#1c1a16;--mute:#6f6a5f;--line:#e3ddd0;--gold:#b8862b;
+--sb:#0e7a4a;--b:#3c9e6a;--n:#9a958a;--s:#d0613f;--ss:#a5281c;--chip:#efe9dc;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121110;--panel:#1b1a17;--ink:#ece7dc;--mute:#9d978a;--line:#2e2b26;--chip:#26241f;--gold:#d9a845}}
+:root[data-theme="dark"]{--bg:#121110;--panel:#1b1a17;--ink:#ece7dc;--mute:#9d978a;--line:#2e2b26;--chip:#26241f;--gold:#d9a845}
+html,body{height:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.num{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+main{max-width:1100px;margin:0 auto;padding:18px 14px 60px;overflow-x:hidden}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px;border-bottom:2px solid var(--gold);padding-bottom:10px}
+h1{font-size:1.35rem;margin:0}h1 small{color:var(--gold);font-weight:600;margin-left:6px}
+.price{font-size:1.6rem;font-weight:600}.meta{color:var(--mute);font-size:.82rem}
+.strip{display:grid;grid-template-columns:repeat(9,minmax(86px,1fr));gap:6px;margin:16px 0 6px;overflow-x:auto;padding-bottom:4px}
+.tf{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 6px;text-align:center;cursor:pointer;font:inherit;color:inherit}
+.tf b{display:block;font-size:.86rem}.tf span{font-size:.74rem;font-weight:600}
+.tf[aria-pressed="true"]{outline:2px solid var(--gold);background:var(--chip)}
+.c-sb{color:var(--sb)}.c-b{color:var(--b)}.c-n{color:var(--n)}.c-s{color:var(--s)}.c-ss{color:var(--ss)}
+.bg-sb{background:var(--sb)}.bg-b{background:var(--b)}.bg-n{background:var(--n)}.bg-s{background:var(--s)}.bg-ss{background:var(--ss)}
+.align{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:4px 0 2px}.align div{flex:1}
+.story{background:var(--panel);border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0 18px;font-size:.95rem}
+.gauges{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:12px;align-items:end}
+.g{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center}
+.g h3{margin:0 0 2px;font-size:.92rem}.g svg{width:100%;max-width:260px;height:auto;display:block;margin:0 auto}
+.pill{display:inline-block;padding:4px 14px;border-radius:999px;color:#fff;font-weight:700;font-size:.92rem;margin-top:4px}
+.votes{display:flex;justify-content:center;gap:12px;font-size:.78rem;color:var(--mute);margin-top:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h2{font-size:.98rem;margin:0 0 8px;display:flex;justify-content:space-between;gap:8px}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.86rem}
+th.l,td.l{text-align:left}th,td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}
+thead th{color:var(--mute);font-weight:600;font-size:.76rem}tr:last-child td{border-bottom:0}
+.act{font-weight:700}.why{color:var(--mute);font-size:.74rem;white-space:normal;text-align:left;max-width:220px}
+.piv{position:relative;height:60px;margin:22px 34px 10px}.piv .rail{position:absolute;top:18px;left:0;right:0;height:3px;background:var(--line)}
+.piv .m{position:absolute;top:0;transform:translateX(-50%);font-size:.72rem;text-align:center;color:var(--mute);white-space:nowrap}
+.piv .m span{display:block;margin-top:2px}
+.piv .m i{display:block;width:2px;height:12px;background:var(--mute);margin:3px auto 0}
+.piv .now{color:var(--gold);font-weight:700}.piv .now i{background:var(--gold);height:16px;width:3px}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.kpi div{background:var(--chip);border-radius:8px;padding:8px 4px}
+.kpi small{display:block;color:var(--mute);font-size:.72rem}
+.note{color:var(--mute);font-size:.78rem;margin-top:18px}
+@media (max-width:760px){.gauges{grid-template-columns:1fr 1fr}.gauges .main{grid-column:1 / -1;order:-1}.grid2{grid-template-columns:1fr}.strip{grid-template-columns:repeat(9,92px)}}
+
+.status{font-size:.8rem;padding:6px 10px;border-radius:8px;background:var(--chip);margin-top:8px}
+.status.err{background:#f7e1dc;color:#7a2416}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .status.err{background:#3a1f1a;color:#f2b8ab}}
+.btn{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.tog{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--mute)}
+.ra .w.on{background:var(--gold);color:#111;border-radius:3px}
+.sr td.l{white-space:normal}
+</style></head><body><main>
+<header><div><h1>Gold Technical Dashboard<small>GCZ6 · Dec 2026</small></h1>
+<div class="meta">Refreshed every 15 minutes · <span id="upd">loading…</span> · <a href="https://claude.ai/artifact/RZLVoAiTZNm3jeqRz8H1qJ" style="color:var(--gold)">real-time IBKR version</a></div></div>
+<div style="text-align:right"><div class="price num" id="px">–</div><div class="meta" id="bt"></div></div></header>
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px">
+ <button class="btn" id="refresh">Reload data</button>
+ <label class="tog"><input type="checkbox" id="live" checked> Include the bar still forming (live, as Investing.com shows)</label>
+ <button class="btn" id="ra">▶ Read aloud</button></div>
+<div id="status" class="status" hidden></div>
+
+<div class="strip" id="strip" role="group" aria-label="Timeframe"></div>
+<div class="meta" style="margin-top:2px">All nine timeframes at a glance, shortest to longest:</div>
+<div class="align" id="align"></div>
+<div class="story ra" id="story">Loading live data…</div>
+
+<div class="card sr" style="margin-bottom:14px"><h2><span>Support &amp; Resistance</span><span class="meta" id="sr-meta"></span></h2>
+<div class="wrap"><table><thead><tr><th>Zone</th><th>Level</th><th class="l">What makes it a level</th><th>Strength</th></tr></thead><tbody id="sr"></tbody></table></div>
+<p class="meta" style="margin:8px 0 0">Levels within about $10 of each other are merged into one zone; strength counts how many separate signals sit in it. Pivots: P = (H + L + C) ÷ 3, R1 = 2P − L, S1 = 2P − H, R2 = P + (H − L), S2 = P − (H − L), R3 = H + 2(P − L), S3 = L − 2(H − P), where H, L and C are the last completed day's or week's high, low and close. Swing highs and lows are days whose high or low beats the two days either side.</p></div>
+
+<div class="gauges">
+ <div class="g"><h3>Technical Indicators</h3><div id="g-ind"></div></div>
+ <div class="g main"><h3>Summary</h3><div id="g-sum"></div></div>
+ <div class="g"><h3>Moving Averages</h3><div id="g-ma"></div></div>
+</div>
+<div class="grid2">
+ <div class="card"><h2><span>Next bar</span><span class="meta" id="nb-tf"></span></h2>
+  <div class="kpi"><div><small>Last close</small><b class="num" id="k-c"></b></div><div><small>Predicted next close</small><b class="num" id="k-p"></b></div><div><small>Typical bar (ATR)</small><b class="num" id="k-a"></b></div></div>
+  <p class="meta" style="margin:8px 0 0">P = C + 0.1 × S × ATR, where C is the last close, S the summary score (−1 to +1) and ATR the average size of one bar over 14 bars.</p></div>
+ <div class="card"><h2><span>Price, last 60 bars</span><span class="meta">gold line = 20-bar average</span></h2><div id="chart"></div></div>
+</div>
+<div class="grid2">
+ <div class="card"><h2><span>Technical Indicators</span><span class="meta" id="ind-c"></span></h2><div class="wrap"><table><thead><tr><th>Name</th><th>Value</th><th>Action</th><th class="l">Why</th></tr></thead><tbody id="t-ind"></tbody></table></div></div>
+ <div class="card"><h2><span>Moving Averages</span><span class="meta" id="ma-c"></span></h2><div class="wrap"><table><thead><tr><th>Period</th><th>Simple</th><th></th><th>Exponential</th><th></th></tr></thead><tbody id="t-ma"></tbody></table></div></div>
+</div>
+<p class="note">How to read it: each moving average votes Buy if price is above it, Sell if below; each indicator votes by the rule in its "Why" column. Score S = (Buy votes − Sell votes) ÷ number of votes: 0.5 or more is Strong Buy, 0.1 to 0.5 Buy, −0.1 to 0.1 Neutral, −0.5 to −0.1 Sell, −0.5 or less Strong Sell. A moving average with too little history for this contract counts as Neutral. Data: Yahoo Finance bars for the December 2026 gold contract (GCZ26.CMX), fetched every 15 minutes during trading hours. Yahoo runs about 10 minutes behind live prices, so the newest bars can be up to about 25 minutes old; the real-time IBKR version linked at the top has no delay. Daily bars are built from hourly bars on the CME session (22:00–21:00 GMT); 4-hour bars stand in for Investing.com's 5-hour tab.</p>
+</main>
+<script>
+// Gold technical engine (JS port of the course reference engine)
+const E = (() => {
+  const nan = NaN;
+  const sma = (a, n) => a.map((_, i) => { if (i < n - 1) return nan; let s = 0; for (let j = i - n + 1; j <= i; j++) s += a[j]; return s / n; });
+  const ewm = (a, alpha) => { const o = []; let p; a.forEach((x, i) => { if (Number.isNaN(x)) { o.push(p ?? nan); return; } p = p === undefined ? x : alpha * x + (1 - alpha) * p; o.push(p); }); return o; };
+  const ema = (a, n, mask = true) => ewm(a, 2 / (n + 1)).map((v, i) => (mask && i < n - 1) ? nan : v);
+  const rsi = (c, n = 14) => { const d = c.map((x, i) => i ? x - c[i - 1] : nan);
+    const g = d.map(x => Number.isNaN(x) ? nan : Math.max(x, 0)), l = d.map(x => Number.isNaN(x) ? nan : Math.max(-x, 0));
+    const ag = ewm(g, 1 / n), al = ewm(l, 1 / n); return ag.map((v, i) => 100 - 100 / (1 + v / al[i])); };
+  const rollMax = (a, n) => a.map((_, i) => i < n - 1 ? nan : Math.max(...a.slice(i - n + 1, i + 1)));
+  const rollMin = (a, n) => a.map((_, i) => i < n - 1 ? nan : Math.min(...a.slice(i - n + 1, i + 1)));
+  function indicators(b) {
+    const { o, h, l, c } = b, out = {};
+    for (const n of [5, 10, 20, 50, 100, 200]) { out["SMA" + n] = sma(c, n); out["EMA" + n] = ema(c, n); }
+    out.rsi = rsi(c);
+    const e12 = ema(c, 12, false), e26 = ema(c, 26, false), m = e12.map((v, i) => v - e26[i]);
+    out.macd = m; out.macd_sig = ewm(m, 2 / 10);
+    const ll9 = rollMin(l, 9), hh9 = rollMax(h, 9); out.k = c.map((x, i) => 100 * (x - ll9[i]) / (hh9[i] - ll9[i])); out.d = sma(out.k, 6);
+    const tp = c.map((x, i) => (h[i] + l[i] + x) / 3), tps = sma(tp, 14);
+    out.cci = tp.map((x, i) => { if (i < 13) return nan; const w = tp.slice(i - 13, i + 1), mu = tps[i]; const md = w.reduce((s, v) => s + Math.abs(v - mu), 0) / 14; return (x - mu) / (0.015 * md); });
+    const ll14 = rollMin(l, 14), hh14 = rollMax(h, 14); out.willr = c.map((x, i) => -100 * (hh14[i] - x) / (hh14[i] - ll14[i]));
+    out.roc = c.map((x, i) => i < 12 ? nan : 100 * (x / c[i - 12] - 1));
+    const tr = c.map((x, i) => i ? Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])) : h[i] - l[i]);
+    out.atr = ewm(tr, 1 / 14);
+    return out;
+  }
+  const rating = s => s >= .5 ? "Strong Buy" : s >= .1 ? "Buy" : s > -.1 ? "Neutral" : s > -.5 ? "Sell" : "Strong Sell";
+  const band = (x, lo, hi, mid) => Number.isNaN(x) || x > hi || x < lo ? "Neutral" : x > mid ? "Buy" : x < mid ? "Sell" : "Neutral";
+  function analyse(b) {
+    const I = indicators(b), i = b.c.length - 1, C = b.c[i], last = k => I[k][i], v = {};
+    for (const n of [5, 10, 20, 50, 100, 200]) for (const k of ["SMA", "EMA"]) { const x = last(k + n); v[k + n] = Number.isNaN(x) ? "Neutral" : C > x ? "Buy" : C < x ? "Sell" : "Neutral"; }
+    const K = last("k"), D = last("d");
+    v["RSI(14)"] = band(last("rsi"), 30, 70, 50);
+    v["STOCH(9,6)"] = K > D && K < 80 ? "Buy" : K < D && K > 20 ? "Sell" : "Neutral";
+    v["MACD(12,26,9)"] = last("macd") > last("macd_sig") ? "Buy" : last("macd") < last("macd_sig") ? "Sell" : "Neutral";
+    v["CCI(14)"] = band(last("cci"), -200, 200, 0);
+    v["Williams %R(14)"] = band(last("willr"), -80, -20, -50);
+    v["ROC(12)"] = Number.isNaN(last("roc")) ? "Neutral" : last("roc") > 0 ? "Buy" : last("roc") < 0 ? "Sell" : "Neutral";
+    const keys = Object.keys(v), ma = keys.filter(k => /^(S|E)MA/.test(k)), ind = keys.filter(k => !ma.includes(k));
+    const cnt = ks => ({ buy: ks.filter(k => v[k] === "Buy").length, sell: ks.filter(k => v[k] === "Sell").length });
+    const S = cnt(keys), M = cnt(ma), N = cnt(ind), sc = (x, n) => (x.buy - x.sell) / n;
+    const H = b.h[i], L = b.l[i], P = (H + L + C) / 3;
+    return { close: C, time: b.t[i], atr: last("atr"), votes: v,
+      summary: { ...S, score: sc(S, 18), rating: rating(sc(S, 18)) },
+      ma: { ...M, score: sc(M, 12), rating: rating(sc(M, 12)), rows: ma.map(k => ({ name: k, value: last(k), action: v[k] })) },
+      ind: { ...N, score: sc(N, 6), rating: rating(sc(N, 6)), rows: [
+        { name: "RSI(14)", value: last("rsi") }, { name: "STOCH(9,6)", value: K, second: D }, { name: "MACD(12,26,9)", value: last("macd"), second: last("macd_sig") },
+        { name: "CCI(14)", value: last("cci") }, { name: "Williams %R(14)", value: last("willr") }, { name: "ROC(12)", value: last("roc") }].map(r => ({ ...r, action: v[r.name] })) },
+      predicted: C + 0.1 * sc(S, 18) * last("atr"),
+      pivots: { P, R1: 2 * P - L, S1: 2 * P - H, R2: P + (H - L), S2: P - (H - L), R3: H + 2 * (P - L), S3: L - 2 * (H - P) },
+      spark: b.c.slice(-60), spark_ma20: I.SMA20.slice(-60) };
+  }
+  return { analyse, indicators };
+})();
+
+
+const SERVER = "Interactive Brokers (IBKR)", TOOL = "get_price_history";
+const TFS = [["1m","1 Min","ONE_MIN",60],["5m","5 Min","FIVE_MINS",60],["15m","15 Min","FIFTEEN_MINS",120],["30m","30 Min","THIRTY_MINS",120],
+ ["1h","Hourly","ONE_HOUR",300],["4h","4 Hours","FOUR_HOURS",600],["1d","Daily","ONE_DAY",900],["1w","Weekly","ONE_WEEK",3600],["1mo","Monthly","ONE_MONTH",3600]];
+const CLS = {"Strong Buy":"sb","Buy":"b","Neutral":"n","Sell":"s","Strong Sell":"ss"};
+const WHY = {"RSI(14)":"Buy > 50, Sell < 50, Neutral > 70 or < 30","STOCH(9,6)":"Buy if %K (first) is above %D (second); Neutral if %K > 80 or < 20","MACD(12,26,9)":"Buy if MACD line (first) is above signal line (second)","CCI(14)":"Buy > 0, Sell < 0, Neutral beyond ±200","Williams %R(14)":"Buy > −50, Sell < −50, Neutral > −20 or < −80","ROC(12)":"Buy > 0, Sell < 0"};
+const raw = {}, errs = {};
+let curKey = "1h", latestTs = 0;
+const $ = id => document.getElementById(id);
+const f2 = x => x == null || Number.isNaN(x) ? "–" : Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtT = ms => new Date(ms).toUTCString().replace(/^\w+, /,"").replace(":00 GMT"," GMT");
+
+function bars(key){
+  const p = raw[key]; if (!p || !p.time || p.time.length < 30) return null;
+  let t = p.time.map(s => Date.parse(s)), o = p.open, h = p.high, l = p.low, c = p.close, n = t.length;
+  const end = Date.parse(p.chart_end), step = (p.chart_step || 60) * 1000;
+  const forming = end - t[n-1] < step;
+  if (forming && !$("live").checked) n -= 1;
+  const sl = a => a.slice(0, n);
+  return { t: sl(t), o: sl(o), h: sl(h), l: sl(l), c: sl(c), forming: forming && $("live").checked };
+}
+function analyses(){ const out = {}; for (const [k,lab] of TFS){ const b = bars(k); if (b){ try { out[k] = {...E.analyse(b), label: lab, key: k, forming: b.forming}; } catch(e){} } } return out; }
+
+function gauge(score, rating, buy, sell, total){
+  const a = Math.PI*(1-(score+1)/2), cx=130, cy=120, r=95;
+  const seg=(a0,a1,col,op)=>{const p=t=>[cx+r*Math.cos(t),cy-r*Math.sin(t)];const[x0,y0]=p(a0),[x1,y1]=p(a1);return `<path d="M${x0} ${y0} A${r} ${r} 0 0 1 ${x1} ${y1}" stroke="var(--${col})" stroke-width="14" fill="none" opacity="${op}"/>`;};
+  const cuts=[[Math.PI,Math.PI*.75,"ss"],[Math.PI*.75,Math.PI*.55,"s"],[Math.PI*.55,Math.PI*.45,"n"],[Math.PI*.45,Math.PI*.25,"b"],[Math.PI*.25,0,"sb"]], act=CLS[rating];
+  const nx=cx+(r-22)*Math.cos(a), ny=cy-(r-22)*Math.sin(a);
+  return `<svg viewBox="0 0 260 140" role="img" aria-label="${rating}, score ${score.toFixed(2)}">${cuts.map(([x,y,c])=>seg(x,y,c,c===act?1:.28)).join("")}<line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="6" fill="var(--ink)"/><text x="18" y="136" font-size="10" fill="var(--mute)">Strong Sell</text><text x="242" y="136" font-size="10" text-anchor="end" fill="var(--mute)">Strong Buy</text></svg><span class="pill bg-${act}">${rating}</span><div class="votes"><span class="c-sb">Buy ${buy}</span><span>Neutral ${total-buy-sell}</span><span class="c-ss">Sell ${sell}</span><span class="num">S ${score>=0?"+":""}${score.toFixed(2)}</span></div>`;
+}
+function chart(t){
+  const c=t.spark, m=t.spark_ma20, all=c.concat(m.filter(x=>!Number.isNaN(x))), lo=Math.min(...all), hi=Math.max(...all), W=480, H=150;
+  const px=i=>i*(W/(c.length-1)), py=v=>H-8-(v-lo)/(hi-lo||1)*(H-16);
+  const path=a=>a.map((v,i)=>Number.isNaN(v)?"":`${(i&&!Number.isNaN(a[i-1]))?"L":"M"}${px(i).toFixed(1)} ${py(v).toFixed(1)}`).join(" ");
+  const up=c[c.length-1]>=c[0];
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Last 60 closes"><path d="${path(m)}" stroke="var(--gold)" stroke-width="2" fill="none"/><path d="${path(c)}" stroke="var(--${up?"sb":"ss"})" stroke-width="1.6" fill="none"/><text x="2" y="12" font-size="11" fill="var(--mute)">${f2(hi)}</text><text x="2" y="${H-2}" font-size="11" fill="var(--mute)">${f2(lo)}</text></svg>`;
+}
+function levels(A, price){
+  const D = bars("1d"), W = bars("1w"); if (!D || !A["1d"]) return null;
+  // use COMPLETED bars for pivots and swings
+  const done = b => { const n = b.c.length - (b.forming ? 1 : 0); return {h:b.h.slice(0,n), l:b.l.slice(0,n), c:b.c.slice(0,n), t:b.t.slice(0,n)}; };
+  const d = done(D), L = [], n = d.c.length, add = (v, why) => { if (Number.isFinite(v)) L.push({v, why}); };
+  const piv = (H, Lo, C, tag) => { const P=(H+Lo+C)/3; add(P,`${tag} pivot`); add(2*P-Lo,`${tag} R1`); add(2*P-H,`${tag} S1`); add(P+(H-Lo),`${tag} R2`); add(P-(H-Lo),`${tag} S2`); if (tag==="Daily"){ add(H+2*(P-Lo),"Daily R3"); add(Lo-2*(H-P),"Daily S3"); } };
+  piv(d.h[n-1], d.l[n-1], d.c[n-1], "Daily");
+  if (W){ const w = done(W), m = w.c.length; if (m) piv(w.h[m-1], w.l[m-1], w.c[m-1], "Weekly"); }
+  const dt = i => new Date(d.t[i] + 6*3600e3).toUTCString().slice(5,11);
+  add(d.h[n-1], `Last session high (${dt(n-1)})`); add(d.l[n-1], `Last session low (${dt(n-1)})`);
+  for (let i = Math.max(2, n-30); i < n-2; i++){
+    if (d.h[i] > Math.max(d.h[i-1],d.h[i-2],d.h[i+1],d.h[i+2])) add(d.h[i], `Swing high ${dt(i)}`);
+    if (d.l[i] < Math.min(d.l[i-1],d.l[i-2],d.l[i+1],d.l[i+2])) add(d.l[i], `Swing low ${dt(i)}`);
+  }
+  add(Math.max(...d.h.slice(-20)), "20-session high"); add(Math.min(...d.l.slice(-20)), "20-session low");
+  const am = A["1d"].ma.rows; for (const k of ["SMA20","EMA20","SMA50","EMA50","SMA200"]) { const r = am.find(x=>x.name===k); if (r) add(r.value, `Daily ${k.replace("SMA","").replace("EMA","")}-day ${k.startsWith("S")?"simple":"exp."} average`); }
+  L.sort((a,b)=>a.v-b.v);
+  const tol = Math.max(4, 0.12 * A["1d"].atr), zones = [];
+  for (const x of L){ const z = zones[zones.length-1]; if (z && x.v - z.hi <= tol && x.v - z.lo <= 2 * tol){ z.hi = x.v; z.items.push(x); } else zones.push({lo:x.v, hi:x.v, items:[x]}); }
+  const above = zones.filter(z => z.lo > price).slice(0,5), below = zones.filter(z => z.hi < price).slice(-5), inside = zones.filter(z => z.lo <= price && z.hi >= price);
+  return {above, below, inside};
+}
+function srRows(S, price){
+  const str = z => { const k = new Set(z.items.map(i=>i.why.replace(/ \(.*\)/,""))).size; return k >= 4 ? "<b>Highest</b>" : k === 3 ? "High" : k === 2 ? "Medium" : "Low"; };
+  const lvl = z => z.hi - z.lo < 0.5 ? f2(z.lo) : `${f2(z.lo)} – ${f2(z.hi)}`;
+  const why = z => z.items.map(i => `${i.why} ${f2(i.v)}`).join(", ");
+  const rows = [];
+  [...S.above].reverse().forEach((z,i,a) => rows.push(`<tr><td class="act c-${i===a.length-1?"s":"ss"}">R${a.length-i}</td><td class="num">${lvl(z)}</td><td class="why l">${why(z)}</td><td>${str(z)}</td></tr>`));
+  S.inside.forEach(z => rows.push(`<tr><td class="act c-n">At</td><td class="num">${lvl(z)}</td><td class="why l">Price is inside this zone: ${why(z)}</td><td>${str(z)}</td></tr>`));
+  rows.push(`<tr><td class="act" style="color:var(--gold)">Now</td><td class="num" style="color:var(--gold);font-weight:700">${f2(price)}</td><td class="why l"></td><td></td></tr>`);
+  [...S.below].reverse().forEach((z,i) => rows.push(`<tr><td class="act c-${i===0?"b":"sb"}">S${i+1}</td><td class="num">${lvl(z)}</td><td class="why l">${why(z)}</td><td>${str(z)}</td></tr>`));
+  return rows.join("");
+}
+let lastStory = "";
+function render(){
+  const A = analyses(), keys = TFS.map(x=>x[0]).filter(k=>A[k]);
+  if (!keys.length) return;
+  if (!A[curKey]) curKey = keys.includes("1h") ? "1h" : keys[0];
+  const t = A[curKey], one = bars("1m"), price = one ? one.c[one.c.length-1] : t.close;
+  $("px").textContent = f2(price);
+  $("bt").textContent = `${t.label} bar ${["1d","1w","1mo"].includes(t.key) ? "of " + new Date(t.time + 6*3600e3).toUTCString().slice(5,16) : fmtT(t.time)}${t.forming ? " (still forming)" : ""}`;
+  $("strip").innerHTML = TFS.map(([k,lab]) => A[k] ? `<button class="tf" aria-pressed="${k===curKey}" data-k="${k}"><b>${lab}</b><span class="c-${CLS[A[k].summary.rating]}">${A[k].summary.rating}</span></button>` : `<button class="tf" disabled><b>${lab}</b><span class="c-n">${errs[k] ? "unavailable" : "loading"}</span></button>`).join("");
+  document.querySelectorAll(".tf[data-k]").forEach(b => b.onclick = () => { curKey = b.dataset.k; render(); });
+  $("align").innerHTML = keys.map(k => `<div class="bg-${CLS[A[k].summary.rating]}" title="${A[k].label}: ${A[k].summary.rating}"></div>`).join("");
+  const sh = keys.filter(k=>["1m","5m","15m","30m","1h"].includes(k)), lg = keys.filter(k=>!sh.includes(k));
+  const avg = ks => ks.reduce((s,k)=>s+A[k].summary.score,0)/(ks.length||1), word = s => s>=.1?"up":s<=-.1?"down":"flat";
+  const ws = word(avg(sh)), wl = word(avg(lg));
+  lastStory = ws === wl ? `All timeframes lean ${ws}. Short-term and long-term signals agree.` :
+    `Short-term ${ws}, long-term ${wl}. The 1-minute to hourly charts lean ${ws} while the 4-hour to monthly charts lean ${wl}: ${ws==="up"&&wl==="down"?"a bounce inside a downtrend":ws==="down"&&wl==="up"?"a pullback inside an uptrend":"mixed signals"}.`;
+  const S = levels(A, price);
+  if (S){
+    $("sr").innerHTML = srRows(S, price);
+    $("sr-meta").textContent = `nearest five each side of ${f2(price)}`;
+    const r1 = S.above[0], s1 = S.below[S.below.length-1];
+    if (r1) lastStory += ` Nearest resistance ${f2(r1.lo)}${r1.hi-r1.lo>=.5?" to "+f2(r1.hi):""}, ${f2(r1.lo-price)} dollars above.`;
+    if (s1) lastStory += ` Nearest support ${f2(s1.hi)}${s1.hi-s1.lo>=.5?" down to "+f2(s1.lo):""}, ${f2(price-s1.hi)} dollars below.`;
+  }
+  $("story").innerHTML = lastStory.split(" ").map(w => `<span class="w">${w}</span>`).join(" ");
+  $("g-sum").innerHTML = gauge(t.summary.score, t.summary.rating, t.summary.buy, t.summary.sell, 18);
+  $("g-ind").innerHTML = gauge(t.ind.score, t.ind.rating, t.ind.buy, t.ind.sell, 6);
+  $("g-ma").innerHTML = gauge(t.ma.score, t.ma.rating, t.ma.buy, t.ma.sell, 12);
+  $("nb-tf").textContent = t.label; $("k-c").textContent = f2(t.close); $("k-p").textContent = f2(t.predicted); $("k-a").textContent = f2(t.atr);
+  $("chart").innerHTML = chart(t);
+  $("ind-c").textContent = `Buy ${t.ind.buy} · Sell ${t.ind.sell}`;
+  $("t-ind").innerHTML = t.ind.rows.map(r => `<tr><td>${r.name}</td><td class="num">${f2(r.value)}${r.second!==undefined?" / "+f2(r.second):""}</td><td class="act c-${r.action==="Buy"?"b":r.action==="Sell"?"s":"n"}">${r.action}</td><td class="why l">${WHY[r.name]}</td></tr>`).join("");
+  $("ma-c").textContent = `Buy ${t.ma.buy} · Sell ${t.ma.sell}`;
+  const cell = r => `<td class="num">${f2(r.value)}</td><td class="act c-${r.action==="Buy"?"b":r.action==="Sell"?"s":"n"}">${r.action}</td>`;
+  $("t-ma").innerHTML = [5,10,20,50,100,200].map(n => `<tr><td>MA${n}</td>${cell(t.ma.rows.find(r=>r.name==="SMA"+n))}${cell(t.ma.rows.find(r=>r.name==="EMA"+n))}</tr>`).join("");
+  $("upd").textContent = latestTs ? "data as of " + fmtT(latestTs) : "loading…";
+}
+function showStatus(){
+  const e = Object.values(errs);
+  if (!e.length){ $("status").hidden = true; return; }
+  const codes = new Set(e.map(x => x.code)), msg = e.map(x => x.message || "").join(" ");
+  let text;
+  if (/different IP|different device/i.test(msg)) text = "IBKR is logged in on another device, so it refused this page. Log out of IBKR there and tap Refresh now. Last good data stays on screen.";
+  else if (codes.has("needs_reauth")) text = "Your IBKR connection needs to be reconnected: claude.ai Settings → Connectors.";
+  else if (codes.has("server_not_connected")) text = "IBKR isn't connected for this account: add it in claude.ai Settings → Connectors.";
+  else if (codes.has("not_in_manifest") || codes.has("not_granted") || codes.has("approval_required")) text = "This page hasn't been allowed to use your IBKR connection. Allow it when prompted, or use the artifact's Permissions menu.";
+  else text = "IBKR didn't answer for some timeframes (" + [...codes].join(", ") + "). Tap Refresh now to try again.";
+  $("status").textContent = text; $("status").hidden = false; $("status").className = "status err";
+}
+const DATA_URL = "https://raw.githubusercontent.com/ProfDrTan/ai-playbook/gold-data/gold.json";
+async function load(){
+  try {
+    const r = await fetch(DATA_URL + "?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    for (const [k, , step] of TFS){ const p = d.timeframes[step]; if (p && p.time) { raw[k] = p; delete errs[k]; } else errs[k] = {code: "no_data", message: (p && p.error) || "no data"}; }
+    latestTs = Date.parse(d.generated_utc);
+    const age = (Date.now() - latestTs) / 60000;
+    if (age > 45) { $("status").textContent = `Data is ${Math.round(age)} minutes old: the market may be closed, or the 15-minute update is running late.`; $("status").className = "status"; $("status").hidden = false; }
+    else $("status").hidden = true;
+  } catch (e) {
+    $("status").textContent = "Couldn't load the gold data just now (" + e.message + "). The last good data stays on screen; it retries every minute.";
+    $("status").className = "status err"; $("status").hidden = false;
+  }
+  render();
+}
+load(); setInterval(load, 60000);
+$("refresh").onclick = load;
+$("live").onchange = render;
+// Read aloud with word highlighting, reading the summary through to the end of the levels
+$("ra").onclick = () => {
+  if (!("speechSynthesis" in window)) { $("ra").textContent = "Read aloud not supported here"; return; }
+  if (speechSynthesis.speaking){ speechSynthesis.cancel(); $("ra").textContent = "▶ Read aloud"; return; }
+  const words = [...document.querySelectorAll("#story .w")], text = words.map(w => w.textContent).join(" ");
+  const starts = []; let pos = 0; words.forEach(w => { starts.push(pos); pos += w.textContent.length + 1; });
+  const u = new SpeechSynthesisUtterance(text.replace(/–/g," to "));
+  u.onboundary = e => { if (e.name && e.name !== "word") return; let i = starts.findIndex((s,j) => e.charIndex >= s && (j === starts.length-1 || e.charIndex < starts[j+1])); words.forEach((w,j) => w.classList.toggle("on", j === i)); };
+  u.onend = () => { words.forEach(w => w.classList.remove("on")); $("ra").textContent = "▶ Read aloud"; };
+  $("ra").textContent = "■ Stop"; speechSynthesis.speak(u);
+};
+</script></body></html>

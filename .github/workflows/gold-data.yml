@@ -1,0 +1,25 @@
+name: gold-data
+on:
+  schedule:
+    - cron: "*/15 * * * 0-5"   # every 15 min, Sun-Fri (UTC); gold trades Sun 22:00 - Fri 21:00 UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: gold-data, cancel-in-progress: true }
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install yfinance
+      - run: python scripts/gold_bars.py
+      - name: Publish to the gold-data branch (keeps main's history clean)
+        run: |
+          mkdir pub && cp gold.json pub/ && cd pub
+          git init -q -b gold-data
+          git config user.name "gold-bot"; git config user.email "gold-bot@users.noreply.github.com"
+          git add gold.json && git commit -qm "gold data $(date -u +%FT%TZ)"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" gold-data
