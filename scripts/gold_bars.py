@@ -24,7 +24,7 @@ for step, iv, per, secs, rs in TF:
     df, used = cache[key]
     if df is None: out["timeframes"][step] = {"error": "no data from Yahoo"}; continue
     if rs == "session":
-        df = df.resample("1D", offset="22h").agg({"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
+        df = df.resample("24h", offset="22h").agg({"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
     elif rs:
         df = df.resample(rs).agg({"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
     df = df.iloc[-261:]
