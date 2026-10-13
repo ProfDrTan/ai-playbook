@@ -52,6 +52,7 @@ thead th{color:var(--mute);font-weight:600;font-size:.76rem}tr:last-child td{bor
 .tog{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--mute)}
 .ra .w.on{background:var(--gold);color:#111;border-radius:3px}
 .sr td.l{white-space:normal}
+.cbtns{display:flex;gap:4px}.cbtns button{font:inherit;font-size:.74rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:2px 7px;cursor:pointer}.cbtns button[aria-pressed="true"]{background:var(--gold);color:#111;border-color:var(--gold)}
 </style></head><body><main>
 <header><div><h1>Gold Technical Dashboard<small>GCZ6 · Dec 2026 · delayed</small></h1>
 <div class="meta"><span id="upd">loading…</span></div></div>
@@ -63,6 +64,19 @@ thead th{color:var(--mute);font-weight:600;font-size:.76rem}tr:last-child td{bor
  <button class="btn" id="ra">▶ Read aloud</button></div>
 <div id="status" class="status" hidden></div>
 
+
+<div class="card" style="margin-top:12px"><h2><span>Price, volume &amp; market profile</span><span class="cbtns" id="cbtns"></span></h2>
+ <div class="meta num" id="cinfo" style="min-height:1.3em">Tap the chart for a bar's open, high, low, close and volume.</div>
+ <div id="cchart" style="touch-action:pan-y"></div>
+ <div class="meta" style="margin-top:4px"><span style="color:var(--gold)">━</span> POC &nbsp;<span style="color:var(--gold)">┅</span> value-area high / low (today's session) &nbsp;<span style="color:var(--mute)">┈</span> prior session POC &nbsp;<span style="color:var(--mute)">━</span> 20-bar average · side histogram = today's volume at each price</div>
+ <p id="v-read" style="margin:10px 0 0"></p>
+ <div class="kpi" style="margin-top:8px"><div><small>Last bar vs 20-bar avg volume</small><b class="num" id="v-rel"></b></div><div><small>Volume trend (10 vs prior 10 bars)</small><b id="v-trend"></b></div><div><small>On-balance volume, 20 bars</small><b id="v-obv"></b></div></div>
+</div>
+<div class="card" style="margin-top:12px"><h2><span>Market Profile</span><span class="meta" id="mp-meta"></span></h2>
+ <p id="mp-read" style="margin:0 0 8px"></p>
+ <div class="wrap"><table><thead><tr><th>Level</th><th>Today (TPO)</th><th>Today (volume)</th><th>Prior session (TPO)</th></tr></thead><tbody id="mp"></tbody></table></div>
+ <p class="meta" style="margin:8px 0 0">Sessions follow CME gold hours, from 17:00 Chicago time. TPO profile (classic Market Profile): every 30-minute period marks each $0.50 price level it traded at; the point of control (POC) is the price traded in the most periods, and the value area is the range around it holding 70% of all marks, bounded by the value-area high (VAH) and low (VAL). The volume profile does the same with contracts traded instead of time. Built from 5-minute bars, so each bar's volume is spread evenly across its high–low range.</p>
+</div>
 <div class="strip" id="strip" role="group" aria-label="Timeframe"></div>
 <div class="meta" style="margin-top:2px">All nine timeframes at a glance, shortest to longest:</div>
 <div class="align" id="align"></div>
@@ -83,16 +97,11 @@ thead th{color:var(--mute);font-weight:600;font-size:.76rem}tr:last-child td{bor
   <p class="meta" style="margin:8px 0 0">P = C + 0.1 × S × ATR, where C is the last close, S the summary score (−1 to +1) and ATR the average size of one bar over 14 bars.</p></div>
  <div class="card"><h2><span>Price, last 60 bars</span><span class="meta">gold line = 20-bar average</span></h2><div id="chart"></div></div>
 </div>
-<div class="card" style="margin-top:12px"><h2><span>Volume</span><span class="meta" id="vol-tf"></span></h2>
- <div class="kpi" style="grid-template-columns:repeat(3,1fr)"><div><small>Last bar vs 20-bar average</small><b class="num" id="v-rel"></b></div><div><small>Volume trend (last 10 vs prior 10 bars)</small><b id="v-trend"></b></div><div><small>On-balance volume, 20 bars</small><b id="v-obv"></b></div></div>
- <p id="v-read" style="margin:10px 0 0"></p>
- <div id="v-chart"></div>
- <p class="meta" style="margin:6px 0 0">Completed bars only (a forming bar's volume is still partial). Relative volume = last bar's volume ÷ its 20-bar average. On-balance volume (OBV) adds a bar's volume when it closes up and subtracts it when it closes down, so it rises when volume flows into up-moves. Volume does not change the Buy/Sell rating above, so the rating stays comparable with Investing.com.</p></div>
 <div class="grid2">
  <div class="card"><h2><span>Technical Indicators</span><span class="meta" id="ind-c"></span></h2><div class="wrap"><table><thead><tr><th>Name</th><th>Value</th><th>Action</th><th class="l">Why</th></tr></thead><tbody id="t-ind"></tbody></table></div></div>
  <div class="card"><h2><span>Moving Averages</span><span class="meta" id="ma-c"></span></h2><div class="wrap"><table><thead><tr><th>Period</th><th>Simple</th><th></th><th>Exponential</th><th></th></tr></thead><tbody id="t-ma"></tbody></table></div></div>
 </div>
-<p class="note">How to read it: each moving average votes Buy if price is above it, Sell if below; each indicator votes by the rule in its "Why" column. Score S = (Buy votes − Sell votes) ÷ number of votes: 0.5 or more is Strong Buy, 0.1 to 0.5 Buy, −0.1 to 0.1 Neutral, −0.5 to −0.1 Sell, −0.5 or less Strong Sell. A moving average with too little history for this contract counts as Neutral. Data: Yahoo Finance bars for the December 2026 gold contract (GCZ26.CMX), fetched every 15 minutes during trading hours and about 10 minutes behind live prices. Daily bars follow the CME session (22:00–21:00 GMT); 4-hour bars stand in for Investing.com's 5-hour tab.</p>
+<p class="note">How to read it: each moving average votes Buy if price is above it, Sell if below; each indicator votes by the rule in its "Why" column. Score S = (Buy votes − Sell votes) ÷ number of votes: 0.5 or more is Strong Buy, 0.1 to 0.5 Buy, −0.1 to 0.1 Neutral, −0.5 to −0.1 Sell, −0.5 or less Strong Sell. A moving average with too little history for this contract counts as Neutral. Data: Yahoo Finance bars for the December 2026 gold contract (GCZ26.CMX), fetched every 15 minutes during trading hours and about 10 minutes behind live prices. Daily bars follow the CME session; 4-hour bars stand in for Investing.com's 5-hour tab.</p>
 </main>
 <script>
 // Gold technical engine (JS port of the course reference engine)
@@ -230,6 +239,87 @@ function volumeProfile(){
   const px = j => lo + (j + 0.5) * step;
   return { poc: px(poc), vah: px(Hh), val: px(L) };
 }
+
+// ---------- sessions (CME gold: 17:00 America/Chicago) ----------
+function chicagoOffsetH(ms){ const p = new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",hour:"numeric",hour12:false}).formatToParts(new Date(ms)); const h = +p.find(x=>x.type==="hour").value % 24; return ((new Date(ms).getUTCHours() - h) + 24) % 24; }
+function sessionStart(ms){ const off = chicagoOffsetH(ms), d = new Date(ms); let s = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 17 + off); if (s > ms) s -= 864e5; return s; }
+// ---------- market profile from 5-minute bars ----------
+function profile(b, from, to){
+  const idx = []; for (let i = 0; i < b.t.length; i++) if (b.t[i] >= from && b.t[i] < to) idx.push(i);
+  if (idx.length < 6) return null;
+  const tick = 0.5, lo = Math.floor(Math.min(...idx.map(i=>b.l[i])) / tick) * tick, hi = Math.max(...idx.map(i=>b.h[i]));
+  const nb = Math.round((hi - lo) / tick) + 1, tpo = new Array(nb).fill(0), vol = new Array(nb).fill(0);
+  const per = {}; for (const i of idx){ const k = Math.floor((b.t[i] - from) / 18e5); (per[k] = per[k] || {lo: 1e9, hi: -1e9}); per[k].lo = Math.min(per[k].lo, b.l[i]); per[k].hi = Math.max(per[k].hi, b.h[i]);
+    const a = Math.round((b.l[i]-lo)/tick), z = Math.round((b.h[i]-lo)/tick); const v = (b.v[i]||0)/(z-a+1); for (let j = a; j <= z; j++) vol[j] += v; }
+  for (const k in per){ const a = Math.round((per[k].lo-lo)/tick), z = Math.round((per[k].hi-lo)/tick); for (let j = a; j <= z; j++) tpo[j]++; }
+  const va = arr => { const tot = arr.reduce((s,x)=>s+x,0), mx = Math.max(...arr), mid = (nb-1)/2;
+    let poc = 0, best = 1e9; arr.forEach((x,j) => { if (x === mx && Math.abs(j-mid) < best){ best = Math.abs(j-mid); poc = j; } });
+    let inn = arr[poc], L = poc, H = poc; while (inn < 0.7*tot && (L > 0 || H < nb-1)){ const dn = L > 0 ? arr[L-1] : -1, up = H < nb-1 ? arr[H+1] : -1; if (up >= dn){ H++; inn += up; } else { L--; inn += dn; } }
+    return { poc: lo + poc*tick, vah: lo + H*tick, val: lo + L*tick }; };
+  return { tpo: va(tpo), vol: va(vol), high: hi, low: Math.min(...idx.map(i=>b.l[i])), lo, tick, volBins: vol, periods: Object.keys(per).length, first: b.t[idx[0]], last: b.t[idx[idx.length-1]], idx };
+}
+let MP = null;
+function computeMP(){
+  const p = raw["mp5"]; if (!p || !p.time) return null;
+  const b = { t: p.time.map(x=>Date.parse(x)), h: p.high, l: p.low, c: p.close, v: p.volume || [] };
+  const now = Date.parse(p.chart_end), s0 = sessionStart(now), s1 = sessionStart(s0 - 1);
+  const cur = profile(b, s0, now + 1), prev = profile(b, s1, s0);
+  let nakedPrev = null;
+  if (prev && cur){ const touched = cur.idx.some(i => b.l[i] <= prev.tpo.poc && b.h[i] >= prev.tpo.poc); nakedPrev = !touched; }
+  return { cur, prev, nakedPrev, s0 };
+}
+function mpRender(price){
+  MP = computeMP();
+  if (!MP || !MP.cur){ $("mp-read").textContent = "Waiting for enough of today's session to build a profile."; $("mp").innerHTML = ""; return; }
+  const c = MP.cur, p = MP.prev, row = (lab, a, b2, d) => `<tr><td>${lab}</td><td class="num">${a}</td><td class="num">${b2}</td><td class="num">${d}</td></tr>`;
+  $("mp").innerHTML = row("POC", f2(c.tpo.poc), f2(c.vol.poc), p ? f2(p.tpo.poc) : "–") + row("Value-area high (VAH)", f2(c.tpo.vah), f2(c.vol.vah), p ? f2(p.tpo.vah) : "–")
+    + row("Value-area low (VAL)", f2(c.tpo.val), f2(c.vol.val), p ? f2(p.tpo.val) : "–") + row("Session high", f2(c.high), "", p ? f2(p.high) : "–") + row("Session low", f2(c.low), "", p ? f2(p.low) : "–");
+  $("mp-meta").textContent = `today since ${new Date(MP.s0).toUTCString().slice(17,22)} GMT · ${c.periods} half-hour periods`;
+  let r;
+  if (price > c.tpo.vah) r = `Price ${f2(price)} is <b>above today's value</b> (VAH ${f2(c.tpo.vah)}): buyers are pushing into new prices. Holding above VAH means acceptance higher; falling back inside value targets the POC ${f2(c.tpo.poc)}.`;
+  else if (price < c.tpo.val) r = `Price ${f2(price)} is <b>below today's value</b> (VAL ${f2(c.tpo.val)}): sellers are in control. Holding below VAL means acceptance lower; climbing back inside value targets the POC ${f2(c.tpo.poc)}.`;
+  else r = `Price ${f2(price)} is <b>inside today's value</b> (${f2(c.tpo.val)}–${f2(c.tpo.vah)}): balanced trade around the POC ${f2(c.tpo.poc)}. The edges of value are the levels to watch for a break.`;
+  if (p){ const rel = c.tpo.val > p.tpo.vah ? "entirely above yesterday's, a bullish shift" : c.tpo.vah < p.tpo.val ? "entirely below yesterday's, a bearish shift" : c.tpo.poc > p.tpo.poc ? "overlapping yesterday's with a higher POC" : "overlapping yesterday's with a lower POC";
+    r += ` Today's value is ${rel}.`;
+    if (MP.nakedPrev) r += ` Yesterday's POC ${f2(p.tpo.poc)} has not been traded yet today (a "naked" POC, often revisited).`; }
+  $("mp-read").innerHTML = r;
+}
+// ---------- candlestick chart with volume and profile ----------
+let cTf = "1m"; const CTF = [["1m","1m"],["5m","5m"],["15m","15m"],["1h","1h"]];
+function candleChart(){
+  $("cbtns").innerHTML = CTF.map(([k,l]) => `<button aria-pressed="${k===cTf}" data-c="${k}">${l}</button>`).join("");
+  document.querySelectorAll("#cbtns button").forEach(b => b.onclick = () => { cTf = b.dataset.c; render(); });
+  const B = bars(cTf); if (!B){ $("cchart").innerHTML = '<p class="meta">Loading…</p>'; return; }
+  const W = Math.max(320, Math.round($("cchart").clientWidth || 720)), PR = W < 520 ? 52 : 92, N = Math.min(90, B.c.length, Math.floor((W - PR - 58) / 4)), s0 = B.c.length - N, PH = W < 520 ? 210 : 250, VT = PH + 12, VH = W < 520 ? 56 : 70, CW = (W - PR - 58) / N;
+  const o = B.o.slice(s0), h = B.h.slice(s0), l = B.l.slice(s0), c = B.c.slice(s0), v = (B.v || []).slice(s0), t = B.t.slice(s0);
+  let lo = Math.min(...l), hi = Math.max(...h); const span0 = hi - lo || 1;
+  if (MP && MP.cur) for (const p of [MP.cur.tpo.poc, MP.cur.tpo.vah, MP.cur.tpo.val]) if (p > lo - 1.5*span0 && p < hi + 1.5*span0){ lo = Math.min(lo, p); hi = Math.max(hi, p); }
+  const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad; let offTop = 0, offBot = 0;
+  const y = p => 8 + (hi - p) / (hi - lo) * (PH - 16), X = i => 58 + i * CW + CW / 2;
+  const ma = c.map((_, i) => { const all = B.c, j = s0 + i; if (j < 19) return NaN; let sm = 0; for (let k = j - 19; k <= j; k++) sm += all[k]; return sm / 20; });
+  let g = "";
+  for (let k = 0; k <= 4; k++){ const p = lo + (hi - lo) * k / 4; g += `<line x1="58" x2="${W-PR}" y1="${y(p)}" y2="${y(p)}" stroke="var(--line)"/><text x="54" y="${y(p)+4}" font-size="10" text-anchor="end" fill="var(--mute)">${f2(p)}</text>`; }
+  // profile histogram (today's volume at price) on the right
+  if (MP && MP.cur){ const P = MP.cur, mx = Math.max(...P.volBins); P.volBins.forEach((x, j) => { const pr = P.lo + j * P.tick; if (pr < lo || pr > hi || !x) return; const w = x / mx * (PR - 10); g += `<rect x="${W - w}" y="${y(pr + P.tick/2)}" width="${w}" height="${Math.max(1, y(pr) - y(pr + P.tick))}" fill="var(--gold)" opacity="${Math.abs(pr - P.vol.poc) < P.tick ? .9 : .35}"/>`; }); }
+  const lvl = (p, lab, col, dash) => { if (p == null) return ""; if (p < lo || p > hi){ const yy = p > hi ? 12 + 12 * offTop++ : PH - 4 - 12 * offBot++; return `<text x="${W-PR-4}" y="${yy}" font-size="10" text-anchor="end" fill="${col}">${lab} ${f2(p)} ${p > hi ? "↑" : "↓"}</text>`; }
+    return `<line x1="58" x2="${W-PR}" y1="${y(p)}" y2="${y(p)}" stroke="${col}" stroke-width="1.4" stroke-dasharray="${dash}"/><text x="${W-PR-4}" y="${y(p)-3}" font-size="10" text-anchor="end" fill="${col}">${lab} ${f2(p)}</text>`; };
+  if (MP && MP.cur){ g += lvl(MP.cur.tpo.vah, "VAH", "var(--gold)", "5 3") + lvl(MP.cur.tpo.val, "VAL", "var(--gold)", "5 3") + lvl(MP.cur.tpo.poc, "POC", "var(--gold)", ""); }
+  if (MP && MP.prev) g += lvl(MP.prev.tpo.poc, "prior POC", "var(--mute)", "2 3");
+  g += `<path d="${ma.map((m,i)=>Number.isNaN(m)?"":`${i&&!Number.isNaN(ma[i-1])?"L":"M"}${X(i).toFixed(1)} ${y(m).toFixed(1)}`).join(" ")}" stroke="var(--mute)" stroke-width="1.2" fill="none"/>`;
+  const vmax = Math.max(...v, 1), vavg = v.map((_, i) => { const all = B.v, j = s0 + i; if (j < 19) return NaN; let sm = 0; for (let k = j-19; k <= j; k++) sm += all[k]; return sm/20; });
+  for (let i = 0; i < N; i++){ const up = c[i] >= o[i], col = up ? "var(--sb)" : "var(--ss)", bw = Math.max(1, CW * .7);
+    g += `<line x1="${X(i)}" x2="${X(i)}" y1="${y(h[i])}" y2="${y(l[i])}" stroke="${col}"/><rect x="${X(i)-bw/2}" y="${y(Math.max(o[i],c[i]))}" width="${bw}" height="${Math.max(1, Math.abs(y(o[i])-y(c[i])))}" fill="${col}"/>`;
+    const vh = (v[i]||0) / vmax * VH; g += `<rect x="${X(i)-bw/2}" y="${VT + VH - vh}" width="${bw}" height="${vh}" fill="${col}" opacity=".55"/>`; }
+  g += `<path d="${vavg.map((m,i)=>Number.isNaN(m)?"":`${i&&!Number.isNaN(vavg[i-1])?"L":"M"}${X(i).toFixed(1)} ${(VT+VH-m/vmax*VH).toFixed(1)}`).join(" ")}" stroke="var(--gold)" stroke-width="1.2" fill="none"/>`;
+  g += `<text x="54" y="${VT+10}" font-size="10" text-anchor="end" fill="var(--mute)">vol</text>`;
+  const tl = i => new Date(t[i]).toUTCString().slice(17,22);
+  [0, Math.floor(N/2), N-1].forEach(i => g += `<text x="${X(i)}" y="${VT+VH+14}" font-size="10" text-anchor="middle" fill="var(--mute)">${tl(i)}</text>`);
+  $("cchart").innerHTML = `<svg id="csvg" viewBox="0 0 ${W} ${VT+VH+18}" width="${W}" style="max-width:100%;display:block" role="img" aria-label="${cTf} candlestick chart with volume">${g}<line id="cx" x1="0" x2="0" y1="0" y2="${VT+VH}" stroke="var(--ink)" stroke-dasharray="2 2" opacity="0"/></svg>`;
+  const svg = $("csvg"), pick = ev => { const r = svg.getBoundingClientRect(), px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left, xx = px / r.width * W, i = Math.max(0, Math.min(N-1, Math.floor((xx - 58) / CW)));
+    $("cx").setAttribute("x1", X(i)); $("cx").setAttribute("x2", X(i)); $("cx").setAttribute("opacity", ".6");
+    $("cinfo").textContent = `${new Date(t[i]).toUTCString().slice(5,22)} GMT  O ${f2(o[i])}  H ${f2(h[i])}  L ${f2(l[i])}  C ${f2(c[i])}  Vol ${(v[i]||0).toLocaleString()}`; };
+  svg.addEventListener("click", pick); svg.addEventListener("touchstart", pick, {passive: true});
+}
 function levels(A, price){
   const D = bars("1d"), W = bars("1w"); if (!D || !A["1d"]) return null;
   // use COMPLETED bars for pivots and swings
@@ -246,7 +336,8 @@ function levels(A, price){
   }
   add(Math.max(...d.h.slice(-20)), "20-session high"); add(Math.min(...d.l.slice(-20)), "20-session low");
   const am = A["1d"].ma.rows; for (const k of ["SMA20","EMA20","SMA50","EMA50","SMA200"]) { const r = am.find(x=>x.name===k); if (r) add(r.value, `Daily ${k.replace("SMA","").replace("EMA","")}-day ${k.startsWith("S")?"simple":"exp."} average`); }
-  const VP = volumeProfile(); if (VP){ add(VP.poc, "Volume point of control (5 sessions)"); add(VP.vah, "Value-area high (5 sessions)"); add(VP.val, "Value-area low (5 sessions)"); }
+  if (MP && MP.cur){ add(MP.cur.tpo.poc, "Today's POC"); add(MP.cur.tpo.vah, "Today's VAH"); add(MP.cur.tpo.val, "Today's VAL"); }
+  if (MP && MP.prev){ add(MP.prev.tpo.poc, MP.nakedPrev ? "Prior session POC (naked)" : "Prior session POC"); add(MP.prev.tpo.vah, "Prior session VAH"); add(MP.prev.tpo.val, "Prior session VAL"); }
   L.sort((a,b)=>a.v-b.v);
   const tol = Math.max(4, 0.12 * A["1d"].atr), zones = [];
   for (const x of L){ const z = zones[zones.length-1]; if (z && x.v - z.hi <= tol && x.v - z.lo <= 2 * tol){ z.hi = x.v; z.items.push(x); } else zones.push({lo:x.v, hi:x.v, items:[x]}); }
@@ -281,6 +372,7 @@ function render(){
   const ws = word(avg(sh)), wl = word(avg(lg));
   lastStory = ws === wl ? `All timeframes lean ${ws}. Short-term and long-term signals agree.` :
     `Short-term ${ws}, long-term ${wl}. The 1-minute to hourly charts lean ${ws} while the 4-hour to monthly charts lean ${wl}: ${ws==="up"&&wl==="down"?"a bounce inside a downtrend":ws==="down"&&wl==="up"?"a pullback inside an uptrend":"mixed signals"}.`;
+  mpRender(price);
   const S = levels(A, price);
   if (S){
     $("sr").innerHTML = srRows(S, price);
@@ -289,12 +381,12 @@ function render(){
     if (r1) lastStory += ` Nearest resistance ${f2(r1.lo)}${r1.hi-r1.lo>=.5?" to "+f2(r1.hi):""}, ${f2(r1.lo-price)} dollars above.`;
     if (s1) lastStory += ` Nearest support ${f2(s1.hi)}${s1.hi-s1.lo>=.5?" down to "+f2(s1.lo):""}, ${f2(price-s1.hi)} dollars below.`;
   }
-  const V = volumeRead(bars(curKey) || {vDone:[]});
+  const V = volumeRead(bars(cTf) || {vDone:[]});
   if (V){ $("v-rel").textContent = V.rel.toFixed(2) + "×"; $("v-trend").textContent = V.trendWord; $("v-trend").className = V.trendWord==="Rising"?"c-sb":V.trendWord==="Falling"?"c-ss":"";
-    $("v-obv").textContent = V.obvUp ? "Rising" : "Falling"; $("v-obv").className = V.obvUp ? "c-sb" : "c-ss"; $("v-read").innerHTML = "<b>" + V.read.split(":")[0] + ":</b>" + V.read.slice(V.read.indexOf(":")+1); $("v-chart").innerHTML = volChart(V);
-    lastStory += ` Volume on the ${t.label.toLowerCase()} chart: ${V.short.charAt(0).toLowerCase() + V.short.slice(1)}.`; }
-  else { $("v-read").textContent = "No volume data for this timeframe."; $("v-chart").innerHTML = ""; ["v-rel","v-trend","v-obv"].forEach(id => $(id).textContent = "–"); }
-  $("vol-tf").textContent = t.label;
+    $("v-obv").textContent = V.obvUp ? "Rising" : "Falling"; $("v-obv").className = V.obvUp ? "c-sb" : "c-ss"; $("v-read").innerHTML = "<b>" + V.read.split(":")[0] + ":</b>" + V.read.slice(V.read.indexOf(":")+1);
+    lastStory += ` Volume on the ${cTf} chart: ${V.short.charAt(0).toLowerCase() + V.short.slice(1)}.`; }
+  else { $("v-read").textContent = "No volume data for this timeframe."; ["v-rel","v-trend","v-obv"].forEach(id => $(id).textContent = "–"); }
+  candleChart();
   $("story").innerHTML = lastStory.split(" ").map(w => `<span class="w">${w}</span>`).join(" ");
   $("g-sum").innerHTML = gauge(t.summary.score, t.summary.rating, t.summary.buy, t.summary.sell, 18);
   $("g-ind").innerHTML = gauge(t.ind.score, t.ind.rating, t.ind.buy, t.ind.sell, 6);
@@ -327,6 +419,7 @@ async function load(){
     if (!r.ok) throw new Error("HTTP " + r.status);
     const d = await r.json();
     for (const [k, , step] of TFS){ const p = d.timeframes[step]; if (p && p.time) { raw[k] = p; delete errs[k]; } else errs[k] = {code: "no_data", message: (p && p.error) || "no data"}; }
+    if (d.timeframes.MP5 && d.timeframes.MP5.time) raw["mp5"] = d.timeframes.MP5;
     latestTs = Date.parse(d.generated_utc);
     const age = (Date.now() - latestTs) / 60000;
     if (age > 45) { $("status").textContent = `Data is ${Math.round(age)} minutes old: the market may be closed, or the 15-minute update is running late.`; $("status").className = "status"; $("status").hidden = false; }
@@ -340,6 +433,7 @@ async function load(){
 load(); setInterval(load, 60000);
 $("refresh").onclick = load;
 $("live").onchange = render;
+let rsz; window.addEventListener("resize", () => { clearTimeout(rsz); rsz = setTimeout(() => { try { candleChart(); } catch(e){} }, 200); });
 // Read aloud with word highlighting, reading the summary through to the end of the levels
 $("ra").onclick = () => {
   if (!("speechSynthesis" in window)) { $("ra").textContent = "Read aloud not supported here"; return; }

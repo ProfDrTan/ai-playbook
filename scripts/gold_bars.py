@@ -5,7 +5,7 @@ import pandas as pd, yfinance as yf
 SYM, FB = "GCZ26.CMX", "GC=F"
 TF = [("ONE_MIN","1m","7d",60,None),("FIVE_MINS","5m","30d",300,None),("FIFTEEN_MINS","15m","60d",900,None),
       ("THIRTY_MINS","30m","60d",1800,None),("ONE_HOUR","60m","60d",3600,None),("FOUR_HOURS","60m","730d",14400,"4h"),
-      ("ONE_DAY","60m","730d",86400,"session"),("ONE_WEEK","1wk","10y",604800,None),("ONE_MONTH","1mo","max",2678400,None)]
+      ("ONE_DAY","60m","730d",86400,"session"),("MP5","5m","30d",300,"last600"),("ONE_WEEK","1wk","10y",604800,None),("ONE_MONTH","1mo","max",2678400,None)]
 def get(iv, per):
     for s in (SYM, FB):
         df = yf.download(s, interval=iv, period=per, progress=False, auto_adjust=False)
@@ -25,9 +25,9 @@ for step, iv, per, secs, rs in TF:
     if df is None: out["timeframes"][step] = {"error": "no data from Yahoo"}; continue
     if rs == "session":
         df = df.resample("24h", offset="22h").agg({"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}).dropna()
-    elif rs:
+    elif rs and rs != "last600":
         df = df.resample(rs).agg({"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}).dropna()
-    df = df.iloc[-261:]
+    df = df.iloc[-601:] if rs == "last600" else df.iloc[-261:]
     out["timeframes"][step] = {"symbol_used": used, "chart_step": secs, "chart_end": out["generated_utc"],
         "time": [t.strftime("%Y-%m-%dT%H:%M:%SZ") for t in df.index],
         "open": [round(float(x), 2) for x in df["Open"]], "high": [round(float(x), 2) for x in df["High"]],
