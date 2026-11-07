@@ -376,6 +376,7 @@
         <a class="qcard private" href="dashboard.html"><div class="qicon">🔒</div><div class="qtitle">Instructor Dashboard</div><div class="qdesc">Private — live team pipeline monitor.</div></a>
         <a class="qcard private" href="sprint8.html"><div class="qicon">🔒</div><div class="qtitle">Sprint 8 &amp; 9 Planning</div><div class="qdesc">Private — status, rate-limit issue, Monday script.</div></a>
         <a class="qcard" href="tr3-2026.html"><div class="qicon">📅</div><div class="qtitle">TR3 2026 Convention</div><div class="qdesc">Draft schedule — Sprint N = Week N, locked in for next trimester.</div></a>
+        <a class="qcard" href="dt3-next-trimester.html"><div class="qicon">🛠️</div><div class="qtitle">Fix Before Next Trimester</div><div class="qdesc">Lessons from TR3 Sprint 9, each with the fix to build in before Week 1.</div></a>
         <a class="qcard private" href="sprint8-preview.html"><div class="qicon">🔒</div><div class="qtitle">Sprint 8 Announcement (Draft)</div><div class="qdesc">Preview only — not published to the course website yet.</div></a>
         <a class="qcard private" href="team1-case-study.html"><div class="qicon">🔒</div><div class="qtitle">Team 1 Case Study</div><div class="qdesc">Living document — evidence + 13 Scrum principles, for paper/book.</div></a>
         <a class="qcard private" href="scrum-lessons.html"><div class="qicon">🎤</div><div class="qtitle">Scrum Lessons (Presenter Mode)</div><div class="qdesc">Click any principle to reveal the real lesson — for Monday's class.</div></a>
@@ -777,12 +778,24 @@
         <h4>Correct, Don't Just Discard</h4>
         <p>When you catch an AI tool getting something wrong, tell it specifically what was wrong rather than abandoning the conversation and starting fresh elsewhere. This often produces a better result than a brand-new attempt, since the tool now knows exactly what to avoid.</p>
 
+        <h4>Schedule the Check, Don't Trust the Session</h4>
+        <p>An AI assistant works inside a conversation, and a conversation can end before the moment that matters. If a check has to happen at an exact time, such as the second a deadline passes, put it in a scheduled job that runs on its own, and keep the conversation for reading the result.</p>
+        <div class="example strong">
+          <span class="label">Field Note — The Check That Stopped 19 Minutes Early</span>
+          In a university course, an AI assistant was asked to record which student teams had posted their plan on a shared whiteboard by 23:59. It began at 23:09, paused at 23:40 to wait, and only resumed at 07:03 the next morning. Overnight, one team's plan had appeared, and the whiteboard keeps no timestamp anyone can read. The team was marked on time on the benefit of the doubt. The fix was not a more careful assistant: from then on, every plan is also saved to GitHub, which records the time on its own servers, and the deadline check runs as a scheduled job.
+        </div>
+
+        <h4>A Blocked Source Is a Disclosure, Not a Detail</h4>
+        <p>When an AI tool can't reach the source you asked for and quietly uses another one, the answer can look exactly as precise as before. Ask it to say which source it actually used. In the same course, the assistant could not reach the market-data site the students used, switched to a brokerage feed, and said so: index closes matched, but one commodity's closing price was defined differently, so those errors were flagged as approximate.</p>
+
         <h4>Quick-Reference Checklist</h4>
         <ul class="checklist">
           <li>Did I verify anything I'm about to act on that's a fact, number, or current status?</li>
           <li>Am I aware of this tool's knowledge cutoff and whether it has live web access?</li>
           <li>Do I have a backup tool ready in case this one is unavailable when I need it?</li>
           <li>When something's wrong, am I correcting it directly instead of just giving up?</li>
+          <li>Will the check run at the exact time it has to, even if no one is in the conversation?</li>
+          <li>Did the tool tell me which source it actually used?</li>
         </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 06 / 07</span><span>THE AI PLAYBOOK — REV A</span></div>
@@ -851,12 +864,28 @@
           Another team built a GitHub Actions workflow (<code>r10_calibration.yml</code>) that automatically scores each week's prediction against the actual outcome once it's known, logging the result. Most teams file a prediction and move on; this team's pipeline forces them to confront whether their process is actually getting better — the calibration-over-accuracy philosophy the whole course is built on, enforced by code instead of good intentions.
         </div>
 
+        <h4>Test the Change on the Same Week</h4>
+        <p>When a team changes its method, the obvious check is to compare last week's error with this week's. It tells you almost nothing, because this week might simply have been easier to predict. The fix is an A/B lock: before the week starts, lock two predictions for the same target, one with the old method and one with the change. Both face the same market, so the change is the only difference.</p>
+        <div class="example strong">
+          <span class="label">Field Note — Nobody Beat Doing Nothing</span>
+          Before giving this test to students, it was replayed on the four teams' own past predictions. Two things surfaced that nobody had seen in five weeks of predicting. Every team had been predicting too high in a falling market, and their locked numbers were no more accurate than simply repeating Tuesday's close: one team tied that baseline and three did worse. Measuring errors weekly, next to a do-nothing baseline, from the first prediction would have shown this in week two.
+        </div>
+
+        <h4>Make Progress Public, With the Rules Written First</h4>
+        <p>A public scoreboard showing whether each team followed the process, and when its work arrived, changed behaviour within a day. Every team was pushing work in the hours before the next deadline, and the quietest team went from one message in two days to twenty-eight. Two rules are worth writing down before the first result appears: what happens when an arrival time cannot be proved, and whether one missed item may fail two checks. Deciding these after a dispute starts makes the scoreboard negotiable.</p>
+        <div class="try-this">
+          <span class="label">Try This</span>
+          List every file your process depends on and its exact path, then have a check run on every change that reports anything missing, misplaced, in the wrong format or edited after it was locked. Most of the mistakes in this course were caught by people after the deadline; a check would have caught them before it. The full list of fixes is on <a href="dt3-next-trimester.html">Fix Before Next Trimester</a>.
+        </div>
+
         <h4>Quick-Reference Checklist</h4>
         <ul class="checklist">
           <li>Does my recurring report pull from a verifiable source, or from someone's memory of what happened?</li>
           <li>Do I have a validation step that runs before output reaches anyone downstream?</li>
           <li>Does my process check itself against real outcomes, or just move forward optimistically?</li>
           <li>Am I citing evidence (a commit, a run, a timestamp) or just asserting status?</li>
+          <li>When I change a method, am I comparing it with the old method on the same week, and with doing nothing?</li>
+          <li>Are the rules for disputed results written down before the first result is published?</li>
         </ul>
       </div>
       <div class="sheet-titleblock"><span>SHEET 08 / 09</span><span>THE AI PLAYBOOK — REV A</span></div>
