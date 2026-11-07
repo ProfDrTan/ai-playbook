@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Fix Before Next Trimester — CP3405 Lessons | The AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2E4A; --blue-mid:#123C5E; --blue-panel:#163F63;
+    --line-cyan:#8FC7DE; --line-dim:#3E6683; --paper:#EAF3F8;
+    --amber:#E8A63C; --coral:#D9694F; --green:#6FBF8B; --text-body:#CFE4F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--blue-deep);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(143,199,222,0.06) 0px, rgba(143,199,222,0.06) 1px, transparent 1px, transparent 32px);
+    color:var(--text-body); font-family:'IBM Plex Sans', sans-serif; line-height:1.65;
+  }
+  a{color:var(--line-cyan);}
+  main{max-width:880px; margin:0 auto; padding:50px 20px 120px;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--line-cyan); text-decoration:none; display:inline-block; margin-bottom:28px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:3px; color:var(--amber); margin-bottom:14px;}
+  h1{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:clamp(26px,4.5vw,40px); color:var(--paper); line-height:1.2; margin-bottom:18px;}
+  p.sub{font-size:16px; max-width:660px; margin-bottom:22px;}
+  h2{font-family:'IBM Plex Mono', monospace; font-size:15px; letter-spacing:1px; color:var(--amber); margin:44px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--line-dim);}
+  .status{display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:1px; color:var(--coral); border:1px solid var(--coral); border-radius:99px; padding:4px 12px; margin-bottom:20px;}
+  .lesson{background:var(--blue-panel); border-left:3px solid var(--amber); border-radius:0 10px 10px 0; padding:16px 18px; margin-bottom:16px; font-size:15px;}
+  .lesson h3{font-family:'IBM Plex Mono', monospace; font-size:16px; color:var(--paper); margin-bottom:10px;}
+  .lesson .row{display:grid; grid-template-columns:150px 1fr; gap:10px; padding:6px 0; border-top:1px dashed rgba(143,199,222,0.18);}
+  .lesson .k{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:1px; color:var(--line-cyan); padding-top:2px;}
+  .lesson .fix .k{color:var(--green);}
+  .lesson .fix{color:var(--paper);}
+  @media (max-width:560px){ .lesson .row{grid-template-columns:1fr; gap:2px;} }
+  code{background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:3px; color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:0.9em; overflow-wrap:anywhere;}
+  .note{background:rgba(143,199,222,0.06); border-left:3px solid var(--line-cyan); border-radius:0 8px 8px 0; padding:14px 18px; margin:20px 0; font-size:14.5px;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px; margin-bottom:12px;}
+  th{font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:1px; color:var(--amber); text-align:left; padding:9px 12px; border-bottom:2px solid var(--line-dim);}
+  td{padding:9px 12px; border-bottom:1px solid rgba(143,199,222,0.12); vertical-align:top;}
+  .scroll{overflow-x:auto;}
+  footer{margin-top:60px; padding-top:20px; border-top:1px solid var(--line-dim); font-size:12.5px; color:var(--line-dim); text-align:center;}
+  /* Read aloud */
+  .ra-bar{position:fixed; left:0; right:0; bottom:0; background:rgba(11,46,74,0.96); border-top:1px solid var(--line-dim); padding:10px 14px; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; z-index:10;}
+  .ra-bar button{font-family:'IBM Plex Mono', monospace; font-size:13px; background:var(--blue-panel); color:var(--paper); border:1px solid var(--line-cyan); border-radius:99px; padding:7px 14px; cursor:pointer;}
+  .ra-bar button.primary{background:var(--amber); color:var(--blue-deep); border-color:var(--amber); font-weight:700;}
+  .ra-bar .ra-state{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line-cyan);}
+  .ra-here{font-family:'IBM Plex Mono', monospace; font-size:11px; background:none; border:1px solid var(--line-dim); color:var(--line-cyan); border-radius:99px; padding:2px 9px; cursor:pointer; margin-left:8px; vertical-align:middle;}
+  .w.on{background:var(--amber); color:var(--blue-deep); border-radius:3px;}
+</style>
+</head>
+<body>
+<main id="read">
+  <a class="back-link" href="index.html">&larr; Back to AI Playbook</a>
+  <div class="eyebrow">CP3405 DESIGN THINKING III · PLANNING FOR NEXT TRIMESTER</div>
+  <h1>Fix Before Next Trimester: What Sprint 9 of TR3 2026 Taught Us</h1>
+  <p class="sub">Everything below went wrong, or nearly went wrong, during Sprint 9A of TR3 2026 (2–8 November). Each lesson ends with the fix to build in before Week 1 of the next trimester, so the same problem cannot come back.</p>
+  <span class="status">Draft for review · Written 7 Nov 2026</span>
+
+  <h2>1. Deadlines and evidence</h2>
+
+  <div class="lesson">
+    <h3>A deadline check must not depend on a chat session</h3>
+    <div class="row"><div class="k">What happened</div><div>The milestone 1 check (Tue 3 Nov 23:59) was started at 23:09 and stopped at 23:40, before the deadline. When it resumed at 07:03 the next morning, Team 1’s backlog cards had appeared at some unknown time in between. The result had to be given as “on time” on the benefit of the doubt.</div></div>
+    <div class="row"><div class="k">Why</div><div>FigJam keeps no server timestamp that can be read for when a card was added. Only GitHub records arrival time on its own servers.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Every FigJam backlog is also committed to GitHub as <code>docs/backlog-N.md</code> by the same deadline, so its arrival time is recorded by GitHub. Deadline checks run as a scheduled job in the monitor repo at each deadline, not in a chat.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>The automation account needs permission to automate</h3>
+    <div class="row"><div class="k">What happened</div><div>A job to fetch the official Friday closes from Yahoo could not be added to the monitor repo: the access token was refused for workflow files. Yahoo is also blocked from Claude’s own sandbox.</div></div>
+    <div class="row"><div class="k">Why</div><div>The token had permission to change files, but not the workflows permission GitHub requires for anything under <code>.github/workflows/</code>.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Issue the course token with the workflows permission (expiry 366 days or less, as the organisation requires), and test it by adding one harmless workflow before the trimester starts.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>One official source for the actual closes</h3>
+    <div class="row"><div class="k">What happened</div><div>Students measure their errors against Yahoo closes. The instructor-side check had to use IBKR instead. Index closes match, but gold was COMEX’s last trade rather than Yahoo’s close, so gold errors could differ slightly.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>A scheduled job in the monitor repo fetches the Friday closes from Yahoo every Saturday morning SGT into one file. Students and the scoreboard both read that file, so there is exactly one set of “actual” numbers.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>The monitor reported “failure” on every run</h3>
+    <div class="row"><div class="k">What happened</div><div>Every monitor run showed as failed, even though the Discord and GitHub data were saved correctly. Only the last step, publishing history to the public site, was failing.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Fix or remove the failing publish step, so a red run means something is genuinely broken.</div></div>
+  </div>
+
+  <h2>2. Files, formats and paths</h2>
+
+  <div class="lesson">
+    <h3>The prediction format changed almost every week</h3>
+    <div class="row"><div class="k">What happened</div><div>When Sprint 9A asked teams to look back at their predictions from vW4 to vW8, the files were not comparable. Field names changed week to week (<code>team_call</code>, <code>predictions</code>, <code>macro_predictions</code>). Some yields were stored as text such as “5.12%”. Gold was a direction (“DOWN”), not a number, for the first two weeks. Some weeks had no numbers at all.</div></div>
+    <div class="row"><div class="k">Why</div><div>The format grew sprint by sprint as new instruments were added. A single common format was only introduced in Sprint 9A, for vW9.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Publish one prediction format before the first prediction sprint and never change it: <code>week</code>, <code>target_date</code>, then <code>SPX</code>, <code>NDX</code>, <code>GOLD</code>, <code>TNX</code> as plain numbers. Every instrument is a number from the first week. If an instrument is added later, it is added as a new field, and the existing fields stay as they are.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>Typos become data</h3>
+    <div class="row"><div class="k">What happened</div><div>Two locked predictions had the 10-year yield at 4.08 and 4.15 when it was trading around 5.1. Any rule built on past errors, such as removing a team’s bias, is distorted by entries like these.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>A check runs on every push to a team repo and flags any prediction more than 10% away from the latest close as a likely typo, before the lock rather than after it.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>Right content, wrong place</h3>
+    <div class="row"><div class="k">What happened</div><div>One team saved its old-predictions table at <code>data/old_predictions/predictions.csv</code> instead of <code>data/old_predictions.csv</code> and missed the milestone. Another committed a blank peer-check template under a different file name.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Every team repo starts from the template repo with every required file already present as an empty stub, at its exact path. The check on every push reports any required file that is missing or misplaced. Every brief ends with a path checklist.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>Sealed files were edited</h3>
+    <div class="row"><div class="k">What happened</div><div>While building the old-predictions table, one team’s commit also changed two of its sealed prediction files from earlier weeks (a renamed field, a removed data block). The predicted numbers did not change, but the record was no longer original.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Once a week’s lock passes, its prediction file is read-only. The check on every push flags any change to a past prediction file, and the scoreboard shows it.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>Records written before the event they record</h3>
+    <div class="row"><div class="k">What happened</div><div>Two teams’ Sprint 8 live-test records (<code>docs/live-test.md</code>) reached GitHub before the live test took place, so neither counted. No team had a valid peer check.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Every record of an in-class event has a template with the event’s date and time at the top, and only counts if it reaches GitHub after the event starts. The brief says so in one line.</div></div>
+  </div>
+
+  <h2>3. Prediction design</h2>
+
+  <div class="lesson">
+    <h3>Nobody compared against doing nothing</h3>
+    <div class="row"><div class="k">What happened</div><div>A replay of the teams’ own predictions showed all four teams predicting too high for weeks, during a falling market. Their locked numbers were no more accurate than simply repeating Tuesday’s close: one team tied that baseline and three did worse.</div></div>
+    <div class="row"><div class="k">Why</div><div>Errors were only measured in Week 9, so the bias went unnoticed for five weeks, and there was no baseline to compare against.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>From the first prediction sprint, each week’s error is measured automatically on Saturday, next to the do-nothing baseline (the last close known at the lock). Teams see their bias from week two, not week nine.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>Before-and-after cannot tell you whether a change worked</h3>
+    <div class="row"><div class="k">What happened</div><div>Sprint 9B had to be designed late to test each team’s change properly. A smaller error next week could just mean an easier week.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Make the A/B lock the standard way to test any change: the old method and the new method are both locked for the same week, and both are scored against the same close. Plan the last sprints around it from Week 1, so the trimester ends with the loop the architecture describes: prediction, error, change, tested result.</div></div>
+  </div>
+
+  <h2>4. Running the class</h2>
+
+  <div class="lesson">
+    <h3>Public visibility changed behaviour within a day</h3>
+    <div class="row"><div class="k">What happened</div><div>After the Scrum Scoreboard was announced on 4 November, every team was pushing work in the hours before the next deadline. The weakest team’s Discord activity went from 1 message in 48 hours to 28, and two teams that had no backlog added one.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>Launch the scoreboard from Sprint 3, not Sprint 9. Publish its rules on day one, including two decided in advance: an unprovable arrival time is given the benefit of the doubt, and whether one missed item may fail two checks.</div></div>
+  </div>
+
+  <div class="lesson">
+    <h3>Every presenting sprint needs its template with the brief</h3>
+    <div class="row"><div class="k">What happened</div><div>Sprint 9A had no presentation because of the 9 November public holiday, and the Sprint 9B template was only built afterwards.</div></div>
+    <div class="row fix"><div class="k">Fix before Week 1</div><div>For every sprint that ends in a presentation, the template is released together with the brief, and every number on it comes from a file the team already has to commit.</div></div>
+  </div>
+
+  <h2>Checklist for the week before Week 1</h2>
+  <div class="scroll"><table>
+    <tr><th>#</th><th>Item</th><th>Done when</th></tr>
+    <tr><td>1</td><td>Course token with the workflows permission</td><td>One test workflow added and run in the monitor repo</td></tr>
+    <tr><td>2</td><td>Saturday job for official Friday closes</td><td>One file of closes in the monitor repo, updated by the job</td></tr>
+    <tr><td>3</td><td>Monitor runs show green when healthy</td><td>Three consecutive green runs</td></tr>
+    <tr><td>4</td><td>Template repo with every required file as a stub</td><td>Every team repo created from it</td></tr>
+    <tr><td>5</td><td>Check on every push: paths, format, typos, sealed files</td><td>It catches a deliberately broken test file</td></tr>
+    <tr><td>6</td><td>One prediction format, all instruments as numbers</td><td>Published in the first prediction brief</td></tr>
+    <tr><td>7</td><td>Weekly error plus do-nothing baseline, measured automatically</td><td>First Saturday after the first lock</td></tr>
+    <tr><td>8</td><td>Backlog mirrored to <code>docs/backlog-N.md</code></td><td>Stated in every sprint brief</td></tr>
+    <tr><td>9</td><td>Scrum Scoreboard live, rules published</td><td>Sprint 3</td></tr>
+    <tr><td>10</td><td>A/B lock planned into the last two sprints</td><td>In the trimester plan before Week 1</td></tr>
+  </table></div>
+
+  <div class="note">The same lessons are written into the book: Chapter 06 (When AI Gets It Wrong) and Chapter 08 (The Educator’s Pipeline) on the <a href="index.html">AI Playbook home page</a>.</div>
+
+  <footer>The AI Playbook · Professor Dr. Tan Teik Kheong · Stanford University</footer>
+</main>
+
+<div class="ra-bar" id="raBar">
+  <button class="primary" id="raPlay">▶ Read to the end</button>
+  <button id="raPause">❚❚ Pause</button>
+  <button id="raStop">■ Stop</button>
+  <span class="ra-state" id="raState">Tap “Read here” beside any heading to start there.</span>
+</div>
+
+<script>
+(function(){
+  const root=document.getElementById('read');
+  const synth=window.speechSynthesis;
+  const state=document.getElementById('raState');
+  if(!synth){state.textContent='Read aloud is not supported in this browser.';return;}
+  // Wrap every word in readable blocks so the spoken word can be highlighted.
+  const blocks=[...root.querySelectorAll('h1,p.sub,h2,.lesson h3,.lesson .row > div,td,.note')].filter(b=>!b.closest('.back-link'));
+  blocks.forEach(b=>{
+    const walker=document.createTreeWalker(b,NodeFilter.SHOW_TEXT);const nodes=[];let n;
+    while(n=walker.nextNode()) if(n.nodeValue.trim()) nodes.push(n);
+    nodes.forEach(t=>{const f=document.createDocumentFragment();
+      t.nodeValue.split(/(\s+)/).forEach(part=>{ if(!part) return;
+        if(/^\s+$/.test(part)) f.appendChild(document.createTextNode(part));
+        else {const s=document.createElement('span');s.className='w';s.textContent=part;f.appendChild(s);} });
+      t.parentNode.replaceChild(f,t);});
+  });
+  // "Read here" buttons on each heading
+  root.querySelectorAll('h2,.lesson h3').forEach(h=>{const b=document.createElement('button');b.className='ra-here';b.type='button';b.textContent='▶ Read here';
+    b.onclick=()=>start(blocks.indexOf(h));h.appendChild(b);});
+  let idx=0,running=false,current=null;
+  function clear(){root.querySelectorAll('.w.on').forEach(w=>w.classList.remove('on'));}
+  function speakBlock(){
+    if(!running||idx>=blocks.length){running=false;clear();state.textContent='Finished.';return;}
+    const b=blocks[idx];const words=[...b.querySelectorAll('.w')];
+    if(!words.length){idx++;return speakBlock();}
+    const text=words.map(w=>w.textContent).join(' ');
+    const starts=[];let pos=0;words.forEach(w=>{starts.push(pos);pos+=w.textContent.length+1;});
+    const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=1;current=u;
+    u.onboundary=e=>{if(e.name&&e.name!=='word')return;let k=0;while(k+1<starts.length&&starts[k+1]<=e.charIndex)k++;
+      clear();words[k].classList.add('on');if(k===0||k%12===0)words[k].scrollIntoView({block:'center',behavior:'smooth'});};
+    u.onend=()=>{if(current!==u)return;idx++;speakBlock();};
+    state.textContent='Reading…';synth.speak(u);
+  }
+  function start(i){synth.cancel();running=true;idx=Math.max(0,i);current=null;setTimeout(speakBlock,60);}
+  document.getElementById('raPlay').onclick=()=>{ if(synth.paused){synth.resume();state.textContent='Reading…';} else start(running?idx:0); };
+  document.getElementById('raPause').onclick=()=>{if(synth.speaking){synth.pause();state.textContent='Paused.';}};
+  document.getElementById('raStop').onclick=()=>{running=false;current=null;synth.cancel();clear();state.textContent='Stopped.';};
+})();
+</script>
+</body>
+</html>
