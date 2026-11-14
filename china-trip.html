@@ -12,7 +12,7 @@
 :root{
   --paper:#EDF1EC; --panel:#F8FAF7; --ink:#1D2B2A; --muted:#5B6A67; --line:#C9D3CE;
   --jade:#2F7A68; --gold:#B8862A; --seal:#B5352B; --water:#C9DEE6; --grid:rgba(60,80,80,.12);
-  --land:#F3F2EA; --coast:#9DB5BB; --prov:#C4BBA8; --river:#8FB8C8; --railbase:#3B4A48;
+  --land:#F3F2EA; --coast:#9DB5BB; --prov:#C4BBA8; --river:#8FB8C8; --railbase:#3B4A48; --ferry:#2F6FA3;
   --hz:#2F7A68; --gz:#B8862A; --sz:#B5352B;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -23,7 +23,7 @@
     color-scheme:dark;
     --paper:#141B1A; --panel:#1C2523; --ink:#E4ECE8; --muted:#9AABA6; --line:#33433F;
     --jade:#5DB49D; --gold:#D9AA4E; --seal:#E0655A; --water:#0F1C24; --grid:rgba(200,220,215,.08);
-    --land:#1E2724; --coast:#3C5A63; --prov:#4A4F46; --river:#2F5868; --railbase:#B9C6C2;
+    --land:#1E2724; --coast:#3C5A63; --prov:#4A4F46; --river:#2F5868; --railbase:#B9C6C2; --ferry:#7FB3E0;
     --hz:#5DB49D; --gz:#D9AA4E; --sz:#E0655A;
   }
 }
@@ -31,7 +31,7 @@
   color-scheme:dark;
   --paper:#141B1A; --panel:#1C2523; --ink:#E4ECE8; --muted:#9AABA6; --line:#33433F;
   --jade:#5DB49D; --gold:#D9AA4E; --seal:#E0655A; --water:#0F1C24; --grid:rgba(200,220,215,.08);
-  --land:#1E2724; --coast:#3C5A63; --prov:#4A4F46; --river:#2F5868; --railbase:#B9C6C2;
+  --land:#1E2724; --coast:#3C5A63; --prov:#4A4F46; --river:#2F5868; --railbase:#B9C6C2; --ferry:#7FB3E0;
   --hz:#5DB49D; --gz:#D9AA4E; --sz:#E0655A;
 }
 *{box-sizing:border-box}
@@ -66,6 +66,7 @@ h1 small{display:block;font-size:.42em;font-weight:500;color:var(--muted);margin
 .maphead b{color:var(--ink)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
 .legend i{display:inline-block;width:26px;height:0;border-top:3px solid var(--seal);vertical-align:middle;margin-right:6px}
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 12px}.cmp th,.cmp td{border-top:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}.cmp th{font-size:13px}.cmp td:first-child{color:var(--muted);width:28%}
 .legend i.m{border-top:2.5px dashed var(--jade)}
 .legend i.c{border-top:2.5px dotted var(--gold)}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 18px 8px}
@@ -117,6 +118,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--seal);outline-offse
 <div class="views" role="group" aria-label="Map view">
   <button data-view="all" aria-pressed="true">Whole trip</button>
   <button data-view="gba" aria-pressed="false">Greater Bay Area</button>
+  <button data-view="macau" aria-pressed="false">Macau: GZ vs SZ</button>
   <button data-view="notes" aria-pressed="false">Notes &amp; checklist</button>
   <button data-view="mandarin" aria-pressed="false">Mandarin 普通话</button>
 </div>
@@ -126,7 +128,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--seal);outline-offse
   <div class="mapbox">
     <div class="maphead"><span id="mapTitle"><b>Whole trip</b></span><span id="scaleTxt"></span></div>
     <svg id="map" viewBox="0 0 1000 640" role="img" aria-label="Trip map"></svg>
-    <div class="legend"><span><i style="border-top:3px solid var(--railbase)"></i>Rail network (indicative)</span><span><i></i>Your train legs</span><span><i class="m"></i>Metro / walk</span><span><i class="c"></i>Taxi / car</span><span>Numbers = order of the day · km = straight-line distance</span></div>
+    <div class="legend"><span><i style="border-top:3px solid var(--railbase)"></i>Rail network (indicative)</span><span><i></i>Your train legs</span><span><i class="m"></i>Metro / walk</span><span><i class="c"></i>Taxi / car</span><span><i style="border-top:3px dashed var(--ferry)"></i>Ferry</span><span>Numbers = order of the day · km = straight-line distance</span></div>
   </div>
   <div class="panel" id="panel"></div>
 </div>
@@ -167,6 +169,9 @@ const P={
  stpaul:{n:"Ruins of St Paul’s",zh:"大三巴",ll:[22.1975,113.541],a:"l"},
  senado:{n:"Senado Square",zh:"议事亭前地",ll:[22.1935,113.5395],a:"l"},
  taipa:{n:"Taipa Village",zh:"氹仔旧城",ll:[22.1555,113.557],a:"r"},
+ shekou:{n:"Shekou Cruise Centre (ferry to Macau)",zh:"蛇口邮轮中心",ll:[22.4685,113.9136],a:"l"},
+ outerh:{n:"Macau Outer Harbour Ferry Terminal (approx.)",zh:"外港客运码头",ll:[22.1975,113.5576],a:"r"},
+ taipaft:{n:"Taipa Ferry Terminal (approx.)",zh:"氹仔客运码头",ll:[22.165,113.575],a:"r"},
  szn:{n:"Shenzhen North Station",zh:"深圳北站",ll:[22.609,114.029],a:"l"},
  futian:{n:"Base area: Futian Station",zh:"福田站",ll:[22.537,114.050],a:"r",base:"sz"},
  szbay:{n:"Shenzhen Bay Park",zh:"深圳湾公园",ll:[22.507,113.950],a:"l"},
@@ -232,9 +237,19 @@ const D=[
 const BASEC={hz:"var(--hz)",gz:"var(--gz)",sz:"var(--sz)"};
 const VIEWS={
  all:{t:"Whole trip",stops:["hzbase","gzbase","zhuhai","futian"],legs:[],hiRail:["Hangzhou–Guangzhou HSR corridor (indicative)","Guangzhou–Shenzhen–Hong Kong high-speed","Guangzhou–Zhuhai intercity"],ctx:true},
- gba:{t:"Greater Bay Area",stops:["gzs","chen","canton","shunde","fstemple","zhuhai","stpaul","taipa","szn","futian","szbay","octloft","dafen","wk","peak","buddha","szx"],legs:[["gzs","shunde","r"],["shunde","zhuhai","r"],["gzs","szn","r"],["futian","wk","r"]],ctx:true}
+ gba:{t:"Greater Bay Area",stops:["gzs","chen","canton","shunde","fstemple","zhuhai","stpaul","taipa","szn","futian","szbay","octloft","dafen","wk","peak","buddha","szx","shekou"],legs:[["gzs","shunde","r"],["shunde","zhuhai","r"],["gzs","szn","r"],["futian","wk","r"]],ctx:true}
 };
-
+VIEWS.macau={t:"Macau: Guangzhou vs Shenzhen",stops:["gzbase","gzs","zhuhai","stpaul","futian","shekou","outerh","taipaft"],legs:[["gzbase","gzs","m"],["gzs","zhuhai","r"],["zhuhai","stpaul","c"],["futian","shekou","m"],["shekou","outerh","f"],["shekou","taipaft","f"]],ctx:true,panel:`<h2>Macau: from Guangzhou or Shenzhen?</h2><div class="sub">Red = Guangzhou route (current plan, Tue 15) · Blue = Shenzhen ferry option</div>
+<table class="cmp"><tr><th></th><th>From Guangzhou (Gongyuanqian)</th><th>From Shenzhen (Futian)</th></tr>
+<tr><td>Getting to the departure point</td><td>Metro Line 2 → Guangzhou South, ~50–55 min</td><td>Metro Line 2 → Shekou (nearest station Taiziwan); time not published</td></tr>
+<tr><td>Main leg</td><td>Train to Zhuhai: 52 min fastest, ~1 h typical</td><td>Ferry to Outer Harbour ~1 h, or Taipa ~70 min, plus check-in before sailing</td></tr>
+<tr><td>Into Macau</td><td>Walk ≤10 min through Gongbei border</td><td>Immigration at the Macau ferry terminal</td></tr>
+<tr><td>Fare, one way</td><td>¥70–92 (2nd class)</td><td>~¥200–280</td></tr>
+<tr><td>Fare, return</td><td><b>~¥140–184</b></td><td><b>~¥400–560</b></td></tr>
+<tr><td>How often</td><td>Frequent trains all day</td><td>Shekou → Outer Harbour departures 08:15–19:30; → Taipa 09:30–19:00</td></tr>
+<tr><td>Latest you can stay</td><td>Gongbei border open until 01:00</td><td>Last ferry back from Macau: not found – check before booking</td></tr></table>
+<div class="note">Verdict so far: similar travel time (~2 h each way), but the Guangzhou route is about a third of the price and doesn’t tie you to a ferry timetable. Shenzhen only wins if you would rather spend a Shenzhen day on Macau.</div>
+<p style="font-size:12.5px;color:var(--muted)">Sources: Guangzhou South–Zhuhai times/fares, 12306 timetable (Oct 2026); Gongbei hours; ferry fares, China for Travelers (Aug 2026); Shekou departure windows and Taiziwan station, Wikipedia “Shekou Cruise Center”. Ferry terminal positions in Macau are approximate.</p>`};
 const R=6371;
 function hav(a,b){const t=Math.PI/180,dl=(b[0]-a[0])*t,dn=(b[1]-a[1])*t;const h=Math.sin(dl/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
 function fmt(k){return k<1?Math.round(k*1000)+" m":k<20?k.toFixed(1)+" km":Math.round(k)+" km";}
@@ -279,9 +294,9 @@ function render(stops,legs,color,numbered,title){
  let total=0;
  legs.forEach(([a,b,m],i)=>{const A=P[a].ll,B=P[b].ll,d=hav(A,B);total+=d;
   const x1=X(A[1]),y1=Y(A[0]),x2=X(B[1]),y2=Y(B[0]);const len=Math.hypot(x2-x1,y2-y1);
-  const col=m==="r"?"var(--seal)":m==="m"?"var(--jade)":"var(--gold)";
+  const col=m==="r"?"var(--seal)":m==="m"?"var(--jade)":m==="f"?"var(--ferry)":"var(--gold)";
   const ln=el("line",{x1,y1,x2,y2,stroke:col,"stroke-width":m==="r"?4:2.6,"stroke-linecap":"round",class:m==="r"?"route":""});
-  if(m==="m")ln.setAttribute("stroke-dasharray","8 6");if(m==="c")ln.setAttribute("stroke-dasharray","2 6");
+  if(m==="m")ln.setAttribute("stroke-dasharray","8 6");if(m==="c")ln.setAttribute("stroke-dasharray","2 6");if(m==="f")ln.setAttribute("stroke-dasharray","12 5");
   if(m==="r")ln.style.setProperty("--len",len);
   svg.append(ln);
   if(len>60)svg.append(el("text",{x:(x1+x2)/2,y:(y1+y2)/2-6,class:"km","text-anchor":"middle",fill:col},fmt(d)));
@@ -443,6 +458,7 @@ function show(id){
  document.querySelectorAll(".strip button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.day===id));
  if(location.hash.slice(1)!==id)history.replaceState(null,"","#"+id);
  if(VIEWS[id]){const v=VIEWS[id];const tot=render(v.stops,v.legs,"var(--ink)",false,v);
+  if(v.panel){document.getElementById("mapTitle").innerHTML=`<b>${v.t}</b>`;document.getElementById("scaleTxt").textContent="Straight-line distances shown on the map";panel.innerHTML=v.panel;return;}
   document.getElementById("mapTitle").innerHTML=`<b>${v.t}</b>`;document.getElementById("scaleTxt").textContent="Pick a day below for its detail map";
   const hsr=hav(P.hzeast.ll,P.gzs.ll);
   panel.innerHTML=`<h2>${v.t}</h2><div class="sub">12 days, 11 nights, three hotel bases</div>
@@ -456,7 +472,7 @@ function show(id){
  document.getElementById("scaleTxt").textContent=`Total straight-line ${fmt(tot)}`;
  const seen=new Set();let n=0;
  const items=d.stops.filter(k=>!seen.has(k)&&seen.add(k)).map(k=>{n++;const p=P[k];return `<li style="--c:${c}"><span class="n">${n}</span><div><b>${p.n} <span style="font-family:'Noto Serif SC',serif;font-weight:500;color:var(--muted)">${p.zh}</span></b>${d.plan[k]?`<p>${d.plan[k]}</p>`:""}${mlinks(p)}</div></li>`;}).join("");
- const moves=d.legs.map(([a,b,m])=>`${P[a].n.replace("Base area: ","")} → ${P[b].n.replace("Base area: ","")}: ${fmt(hav(P[a].ll,P[b].ll))} (${m==="r"?"rail":m==="m"?"metro/walk":"taxi"})`).join("<br>");
+ const moves=d.legs.map(([a,b,m])=>`${P[a].n.replace("Base area: ","")} → ${P[b].n.replace("Base area: ","")}: ${fmt(hav(P[a].ll,P[b].ll))} (${m==="r"?"rail":m==="m"?"metro/walk":m==="f"?"ferry":"taxi"})`).join("<br>");
  panel.innerHTML=`<h2>${d.t}</h2><div class="sub">${d.date} December · base: ${{hz:"Hangzhou",gz:"Guangzhou",sz:"Shenzhen"}[d.base]}</div>
  ${d.note?`<div class="note">${d.note}</div>`:""}<ol class="stops">${items}</ol>
  <p class="move"><b>Legs (straight-line)</b><br>${moves}</p><button class="zgo" onclick="openZ('${d.id}')">🗣 Mandarin phrases for this day</button><br><br>`;
