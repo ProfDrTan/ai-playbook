@@ -819,6 +819,7 @@ ul.places{list-style:none;padding:0;margin:0}ul.places li{padding:9px 0;border-t
   <button data-view="gzh" aria-pressed="false">Guangzhou hotels</button>
   <button data-view="notes" aria-pressed="false">Notes &amp; checklist</button>
   <button data-view="mandarin" aria-pressed="false">Mandarin 普通话</button>
+  <button data-view="expenses" aria-pressed="false">Expenses</button>
 </div>
 <div class="strip" id="strip" role="group" aria-label="Days"></div>
 
@@ -1134,6 +1135,19 @@ function zRender(){const deck=zDeck();if(zst.i>=deck.length)zst.i=0;if(zst.i<0)z
  document.getElementById("zgot").onclick=()=>{zSetKnown(c[1],true);zst.i++;zst.show=false;zRender()};}
 
 
+
+/* EXPENSES: one row per receipt. [date, item, category, amount, currency, paid with, note]
+   Claude adds rows from the receipts Prof sends. Totals are kept per currency; no conversion is applied. */
+const EXP=[];
+const EXPCAT=["Flights","Hotels","Trains","Local transport","Food","Attractions","Shopping","SIM/data","Other"];
+function expHTML(){const cur=[...new Set(EXP.map(e=>e[4]))];
+ const tot=c=>EXP.filter(e=>e[4]===c).reduce((a,e)=>a+e[3],0);
+ const catRows=EXPCAT.map(k=>{const r=cur.map(c=>EXP.filter(e=>e[2]===k&&e[4]===c).reduce((a,e)=>a+e[3],0));return r.some(v=>v)?`<tr><td>${k}</td>${r.map(v=>`<td>${v?v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}):""}</td>`).join("")}</tr>`:""}).join("");
+ return `<h2>Trip expenses</h2><div class="sub">Running total from the receipts you send. Each currency is totalled separately, exactly as charged.</div>
+ ${EXP.length?`<div class="cards" style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0">${cur.map(c=>`<div class="note" style="margin:0"><b style="font-size:20px">${c} ${tot(c).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</b><br>total paid in ${c}</div>`).join("")}</div>
+ <h3 class="ph">By category</h3><table class="cmp"><tr><th>Category</th>${cur.map(c=>`<th>${c}</th>`).join("")}</tr>${catRows}</table>
+ <h3 class="ph">Every receipt</h3><table class="cmp"><tr><th>Date</th><th>Item</th><th>Category</th><th>Amount</th><th>Paid with</th></tr>${EXP.map(e=>`<tr><td>${e[0]}</td><td>${e[1]}${e[6]?`<br><span style="color:var(--muted);font-size:12.5px">${e[6]}</span>`:""}</td><td>${e[2]}</td><td>${e[4]} ${e[3].toFixed(2)}</td><td>${e[5]||""}</td></tr>`).join("")}</table>`
+ :`<div class="note">No receipts yet. Send each receipt or booking confirmation (screenshot or PDF) in the chat and it will be added here with its date, category, amount, currency and the card used.</div>`}`}
 const OVTXT={gzh:{t:"Guangzhou hotels",sub:"5 candidates against the places on your plan"},hzst:{t:"Hangzhou stations",sub:"Where your hotel sits between Hangzhou West and Hangzhou East"},all:{t:"Whole trip",sub:"12 days, 11 nights, three hotel bases"},gba:{t:"Greater Bay Area",sub:"Guangzhou, Foshan/Shunde, Shenzhen and Hong Kong"}};
 const GZH_OLD=`<h2>Guangzhou hotels</h2><div class="sub">Your Trip.com list (Sat 12 – Thu 17 Dec, 5 nights) matched to the map</div>
 <table class="cmp"><tr><th>Hotel</th><th>Trip.com /night</th><th>Nearest metro</th><th>To Beijing Rd street*</th><th>To Gongyuanqian*</th></tr>
@@ -1174,6 +1188,7 @@ const HZST=`<h2>Hangzhou stations</h2><div class="sub">Hotel: IntercityHotel Xia
 <div class="note">Metro lines from OpenStreetMap data (2026). Train times from Ctrip (4 Nov 2026) and Qunar (Sept 2026) listings; December timetables can change and not every train runs daily.</div>`;
 function setPressed(id){document.querySelectorAll(".views button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===id));document.querySelectorAll(".strip button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.day===id));if(location.hash.slice(1)!==id)history.replaceState(null,"","#"+id);}
 function show(id){const mb=document.querySelector(".mapbox"),mn=document.querySelector(".main");mb.style.display="";mn.style.gridTemplateColumns="";setPressed(id);
+ if(id==="expenses"){mb.style.display="none";mn.style.gridTemplateColumns="1fr";panel.innerHTML=expHTML();return}
  if(id==="mandarin"){mb.style.display="none";mn.style.gridTemplateColumns="1fr";zRender();return}
  if(id==="notes"){drawOverview("all");document.getElementById("mapTitle").innerHTML="<b>Whole trip</b>";document.getElementById("scaleTxt").textContent="";panel.innerHTML=NOTES;drawChk();return}
  if(OVTXT[id]){drawOverview(id);const v=OVTXT[id];document.getElementById("mapTitle").innerHTML=`<b>${v.t}</b>`;document.getElementById("scaleTxt").textContent="Pick a day for its route and directions";
@@ -1184,7 +1199,7 @@ function show(id){const mb=document.querySelector(".mapbox"),mn=document.querySe
  const rides=d.steps.filter(s=>s[2]==="metro").length;
  document.getElementById("mapTitle").innerHTML=`<b>${d.date} Dec</b> · ${d.t}`;document.getElementById("scaleTxt").textContent=rides?`${rides} metro ride${rides>1?"s":""} · zoom in for all station names`:"";
  panel.innerHTML=dayPanel(d);}
-function fromHash(){const h=location.hash.slice(1);show((h==="notes"||h==="mandarin"||OVTXT[h]||D.find(d=>d.id===h))?h:"all")}
+function fromHash(){const h=location.hash.slice(1);show((h==="notes"||h==="mandarin"||h==="expenses"||OVTXT[h]||D.find(d=>d.id===h))?h:"all")}
 window.addEventListener("hashchange",fromHash);
 if(!window.L){document.getElementById("tilenote").hidden=false;document.getElementById("tilenote").innerHTML='The map library didn’t load here. Open the full map at <a href="https://profdrtan.github.io/ai-playbook/china-trip.html" target="_blank" rel="noopener">profdrtan.github.io/ai-playbook/china-trip.html</a>. Directions in the panel still work.';}
 fromHash();
