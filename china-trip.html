@@ -950,7 +950,13 @@ function drawOverview(kind){initMap();if(!MAP)return;LAY.clearLayers();const pts
 function amapNav(a,b,mode){const A=pt(a),B=pt(b);if(A.hk||B.hk)return `https://www.google.com/maps/dir/?api=1&origin=${ll(A).join(",")}&destination=${ll(B).join(",")}&travelmode=${mode==="walk"?"walking":"transit"}`;
  const f=ll(A),t=ll(B);const m=mode==="walk"?"walk":(mode==="taxi"||mode==="robotaxi")?"car":"bus";
  return `https://uri.amap.com/navigation?from=${f[1]},${f[0]},${encodeURIComponent(A.zh)}&to=${t[1]},${t[0]},${encodeURIComponent(B.zh)}&mode=${m}&coordinate=gaode&callnative=1`}
-function stepHTML(s,i){const [a,b,mode,ride,text]=s;const A=pt(a),B=pt(b);const nav=`<a class="nav" href="${amapNav(a,b,mode)}" target="_blank" rel="noopener">${A.hk||B.hk?"Google Maps directions":"Amap directions"}</a>`;
+function cityOf(g){return g[0]>29?"杭州":g[1]>113.7?"深圳":g[0]<22.9?"顺德":g[1]<113.2?"佛山":"广州"}
+function gq(k){const p=pt(k);if(p.hk)return ll(p).join(",");return encodeURIComponent((k.startsWith("st:")?p.zh+"地铁站":p.zh)+" "+cityOf(ll(p)))}
+function navLinks(a,b,mode){const A=pt(a),B=pt(b);const tm=mode==="walk"?"walking":(mode==="taxi"||mode==="robotaxi")?"driving":"transit";
+ const g=`https://www.google.com/maps/dir/?api=1&origin=${gq(a)}&destination=${gq(b)}&travelmode=${tm}`;
+ if(A.hk||B.hk)return `<a class="nav" href="${g}" target="_blank" rel="noopener">Google Maps directions</a>`;
+ return `<span class="navs"><a class="nav" href="${amapNav(a,b,mode)}" target="_blank" rel="noopener">Amap 高德 directions</a> · <a class="nav" href="${g}" target="_blank" rel="noopener">Google Maps (backup)</a></span>`}
+function stepHTML(s,i){const [a,b,mode,ride,text]=s;const A=pt(a),B=pt(b);const nav=navLinks(a,b,mode);
  if(mode==="metro"){const r=RIDES[ride],meta=LC[ride.slice(0,2)+":"+r.line];const n=r.stops.length-1;const tw=TOWARD[ride];
   return `<li class="step"><div class="sh"><span class="badge" style="--lc:${meta[2]}">${meta[0]}</span> <span class="cn">${meta[1]}</span></div>
   ${text?`<p class="tip">${text}</p>`:""}
@@ -961,7 +967,7 @@ function stepHTML(s,i){const [a,b,mode,ride,text]=s;const A=pt(a),B=pt(b);const 
 function dayPanel(d){const seen=[];d.steps.forEach(([a,b])=>[a,b].forEach(k=>{if(!seen.includes(k))seen.push(k)}));
  const places=seen.filter(k=>d.plan&&d.plan[k]).map(k=>{const p=pt(k);const g=ll(p);return `<li><b>${seen.indexOf(k)+1}. ${p.n}</b> <span class="zh">${p.zh}</span><p>${d.plan[k]}</p><span class="lk"><a href="https://uri.amap.com/marker?position=${g[1]},${g[0]}&name=${encodeURIComponent(p.zh)}&coordinate=gaode&callnative=1" target="_blank" rel="noopener">Amap 高德</a><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.zh)}" target="_blank" rel="noopener">Google Maps</a></span></li>`}).join("");
  return `<h2>${d.t}</h2><div class="sub">${d.date} December · base: ${{hz:"Hangzhou",gz:"Guangzhou",sz:"Shenzhen"}[d.base]}</div>${d.note?`<div class="note">${d.note}</div>`:""}
- <h3 class="ph">Step by step</h3><ol class="steps">${d.steps.map(stepHTML).join("")}</ol>
+ <h3 class="ph">Step by step</h3><p class="tip" style="font-size:13px;color:var(--muted);margin:0 0 6px">Amap in Chinese? In the Amap app tap Me → ⚙ Settings → 通用设置 (General) → 语言 (Language) → English. Google Maps links are a backup: they only load in mainland China over roaming data or a VPN, and transit directions there can be patchy.</p><ol class="steps">${d.steps.map(stepHTML).join("")}</ol>
  ${places?`<h3 class="ph">What to do at each stop</h3><ul class="places">${places}</ul>`:""}
  <button class="zgo" onclick="openZ('${d.id}')">🗣 Mandarin phrases for this day</button>`}
 const strip=document.getElementById("strip"),panel=document.getElementById("panel");
