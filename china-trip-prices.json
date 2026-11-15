@@ -1,0 +1,15 @@
+{
+  "note": "Trip.com (sg.trip.com, SGD) totals incl. taxes & fees, cheapest free-cancellation room, 2 adults, 1 room. Logged by the daily price watch.",
+  "hotels": [
+    {"key":"hz_intercity","name":"IntercityHotel Hangzhou Yuhang Xianlin","hotelId":131766270,"checkIn":"2026-12-10","checkOut":"2026-12-12","nights":2,"freeCancelUntil":"2026-12-09 18:00"},
+    {"key":"gz_h1_zhipin","name":"Zhipin Hotel Guangzhou Beijing Road Pedestrian Street","hotelId":115687180,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
+    {"key":"gz_h2_marhaus","name":"MARHAUS Hotel (Beijing Road Tian-Zi Pier)","hotelId":78550651,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
+    {"key":"gz_h3_echarmplus","name":"Echarm Plus Hotel (Beijing Road Dafo Temple)","hotelId":101494125,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
+    {"key":"gz_h4_citycomfort","name":"City Comfort Inn (Beijing Road Ximenkou)","hotelId":133627082,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
+    {"key":"gz_h5_libai","name":"Libai Hotel (SYS Memorial Hall)","hotelId":134622921,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
+    {"key":"gz_p1_paco","name":"Paco Hotel (Guangzhou Beijing Road Metro Station)","hotelId":65572221,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5}
+  ],
+  "log": [
+    {"date":"2026-11-15","hz_intercity":150,"gz_h1_zhipin":258,"gz_h2_marhaus":245,"gz_h3_echarmplus":376,"gz_h4_citycomfort":249,"gz_h5_libai":280,"gz_p1_paco":424}
+  ]
+}
