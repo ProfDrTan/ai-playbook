@@ -812,6 +812,7 @@ ul.places{list-style:none;padding:0;margin:0}ul.places li{padding:9px 0;border-t
 <div class="views" role="group" aria-label="Map view">
   <button data-view="all" aria-pressed="true">Whole trip</button>
   <button data-view="gba" aria-pressed="false">Greater Bay Area</button>
+  <button data-view="hzst" aria-pressed="false">Hangzhou stations</button>
   <button data-view="notes" aria-pressed="false">Notes &amp; checklist</button>
   <button data-view="mandarin" aria-pressed="false">Mandarin 普通话</button>
 </div>
@@ -846,6 +847,7 @@ const PTS={
  hgh:{n:"Xiaoshan Airport",zh:"萧山国际机场",g:[30.2358851,120.4341418],k:"air"},
  hzhotel:{n:"IntercityHotel Xianlin",zh:"杭州余杭闲林城际酒店",g:[30.231824,119.98385],k:"hotel",b:"hz"},
  hzwest:{n:"Hangzhou West Station",zh:"杭州西站",g:[30.2708244,119.929192],k:"rail"},
+ hzeast:{n:"Hangzhou East Station",zh:"杭州东站",g:[30.292859,120.215818],k:"rail"},
  westlake:{n:"West Lake shore (Hubin) & Broken Bridge",zh:"西湖湖滨",w:[30.257,120.158],k:"sight"},
  hefang:{n:"Hefang Street",zh:"河坊街",w:[30.2415,120.168],k:"sight"},
  lingyin:{n:"Lingyin Temple",zh:"灵隐寺",w:[30.2415,120.101],k:"sight"},
@@ -939,6 +941,13 @@ function drawDay(d){initMap();if(!MAP)return;LAY.clearLayers();const all=[];cons
   const m=mk(ll(p),num,"num"+(isSt?" numst":"")+(p.k==="hotel"?" numhotel":""),lab,"right");m._pri=1;m.addTo(LAY);all.push(ll(p))});
  MAP.invalidateSize();if(all.length)MAP.fitBounds(L.latLngBounds(all),{padding:[40,40]});setTimeout(()=>{MAP.invalidateSize();declutter()},80)}
 function drawOverview(kind){initMap();if(!MAP)return;LAY.clearLayers();const pts=[];
+ if(kind==="hzst"){const H=ll(pt("hzhotel")),W=ll(pt("hzwest")),E=ll(pt("hzeast"));
+  L.polyline([H,W],{color:"#2F7A68",weight:5,dashArray:"10 8"}).addTo(LAY);
+  L.polyline([H,E],{color:"#B5352B",weight:5,dashArray:"10 8"}).addTo(LAY);
+  [[[(H[0]+W[0])/2,(H[1]+W[1])/2],"6.8 km to West"],[[(H[0]+E[0])/2,(H[1]+E[1])/2],"23.3 km to East"]].forEach(([p,t])=>{const m=mk(p,"","mst big",t,"right");m._pri=1;m.addTo(LAY)});
+  [["hzhotel","H","num numhotel","IntercityHotel Xianlin (your hotel)"],["hzwest","W","num","杭州西站 Hangzhou West Station"],["hzeast","E","num","杭州东站 Hangzhou East Station"]].forEach(([k,t,c,lab])=>{const m=mk(ll(pt(k)),t,c,lab,"right");m._pri=1;m.addTo(LAY)});
+  L.circleMarker([30.2546,120.150],{radius:5,color:"#555"}).bindTooltip("West Lake (city centre)",{permanent:true,className:"tl",direction:"bottom"}).addTo(LAY);
+  MAP.invalidateSize();MAP.fitBounds(L.latLngBounds([H,W,E]),{padding:[60,60]});setTimeout(()=>{MAP.invalidateSize();declutter()},80);return}
  const bases=[["hzhotel","Hangzhou base","hz"],["st:公园前","Guangzhou base (Gongyuanqian)","gz"],["st:福田","Shenzhen base (Futian)","sz"]];
  const extra=kind==="gba"?[["shunde","Shunde"],["fstemple","Foshan"],["wk","Hong Kong West Kowloon"],["buddha","Lantau"],["st:广州南站","Guangzhou South"],["st:广州东站","Guangzhou East"]]:[];
  if(kind==="all"){L.polyline(curve(ll(pt("hzwest")),ll(pt("st:广州东站"))),{color:"#B5352B",weight:4,dashArray:"12 8"}).bindTooltip("HSR Sun 13, ~6½ h",{permanent:true,className:"tl"}).addTo(LAY)}
@@ -1095,12 +1104,26 @@ function zRender(){const deck=zDeck();if(zst.i>=deck.length)zst.i=0;if(zst.i<0)z
  document.getElementById("zgot").onclick=()=>{zSetKnown(c[1],true);zst.i++;zst.show=false;zRender()};}
 
 
-const OVTXT={all:{t:"Whole trip",sub:"12 days, 11 nights, three hotel bases"},gba:{t:"Greater Bay Area",sub:"Guangzhou, Foshan/Shunde, Shenzhen and Hong Kong"}};
+const OVTXT={hzst:{t:"Hangzhou stations",sub:"Where your hotel sits between Hangzhou West and Hangzhou East"},all:{t:"Whole trip",sub:"12 days, 11 nights, three hotel bases"},gba:{t:"Greater Bay Area",sub:"Guangzhou, Foshan/Shunde, Shenzhen and Hong Kong"}};
+const HZST=`<h2>Hangzhou stations</h2><div class="sub">Hotel: IntercityHotel Xianlin, 1 Xianfu Middle Road, Yuhang</div>
+<table class="cmp"><tr><th></th><th>Hangzhou West 杭州西</th><th>Hangzhou East 杭州东</th></tr>
+<tr><td>Straight line from hotel</td><td><b>6.8 km</b>, same side of the city</td><td><b>23.3 km</b>, across the city centre</td></tr>
+<tr><td>Taxi route</td><td><a href="${amapNav("hzhotel","hzwest","taxi")}" target="_blank" rel="noopener">Amap 高德</a> · <a href="https://www.google.com/maps/dir/?api=1&origin=30.231824,119.98385&destination=30.2708244,119.929192&travelmode=driving" target="_blank" rel="noopener">Google Maps</a></td><td><a href="${amapNav("hzhotel","hzeast","taxi")}" target="_blank" rel="noopener">Amap 高德</a> · <a href="https://www.google.com/maps/dir/?api=1&origin=30.231824,119.98385&destination=30.292859,120.215818&travelmode=driving" target="_blank" rel="noopener">Google Maps</a></td></tr></table>
+<h3 class="ph">Hangzhou West → Guangzhou, direct trains</h3>
+<table class="cmp"><tr><th>Train</th><th>Departs</th><th>Arrives</th><th>Note</th></tr>
+<tr><td>G1305</td><td>08:07</td><td>Guangzhou East 14:43</td><td>Fastest from West, 6 h 36 min</td></tr>
+<tr><td>G2863</td><td>08:50</td><td>Guangzhou East 17:40</td><td>Slow, 8 h 50 min</td></tr>
+<tr><td>G3073</td><td>08:56</td><td>Guangzhou East 15:54</td><td>Mid-afternoon arrival</td></tr>
+<tr><td><b>G3075</b></td><td><b>09:13</b></td><td><b>Guangzhou East ~17:00</b></td><td><b>Recommended</b>: Line 1 straight to Gongyuanqian</td></tr>
+<tr><td>G1182</td><td>11:36</td><td>Guangzhou South 20:31</td><td>Latest daytime option; late dinner</td></tr>
+<tr><td>G3087</td><td>14:12</td><td>Guangzhou station 21:16</td><td>Evening arrival</td></tr></table>
+<div class="note">Times from Ctrip (4 Nov 2026) and Qunar (Sept 2026) listings. December timetables can change and not every train runs daily: check the 12 Dec date when tickets open.</div>`;
 function setPressed(id){document.querySelectorAll(".views button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===id));document.querySelectorAll(".strip button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.day===id));if(location.hash.slice(1)!==id)history.replaceState(null,"","#"+id);}
 function show(id){const mb=document.querySelector(".mapbox"),mn=document.querySelector(".main");mb.style.display="";mn.style.gridTemplateColumns="";setPressed(id);
  if(id==="mandarin"){mb.style.display="none";mn.style.gridTemplateColumns="1fr";zRender();return}
  if(id==="notes"){drawOverview("all");document.getElementById("mapTitle").innerHTML="<b>Whole trip</b>";document.getElementById("scaleTxt").textContent="";panel.innerHTML=NOTES;drawChk();return}
  if(OVTXT[id]){drawOverview(id);const v=OVTXT[id];document.getElementById("mapTitle").innerHTML=`<b>${v.t}</b>`;document.getElementById("scaleTxt").textContent="Pick a day for its route and directions";
+  if(id==="hzst"){panel.innerHTML=HZST;return}
   panel.innerHTML=`<h2>${v.t}</h2><div class="sub">${v.sub}</div><ol class="stops">${D.map(d=>`<li style="--c:${BASEC[d.base]}"><span class="n">${d.date.split(" ")[1]}</span><div><b><a href="#${d.id}">${d.t}</a></b><p>${d.date} December</p></div></li>`).join("")}</ol><div class="note">Day trips: Foshan/Shunde from Guangzhou on Wed 16; Hong Kong from Shenzhen on Fri 18, plus an optional Lantau day on Sun 20. Macau is dropped.</div>`;return}
  const d=D.find(x=>x.id===id);drawDay(d);
  const rides=d.steps.filter(s=>s[2]==="metro").length;
