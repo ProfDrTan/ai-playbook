@@ -1,15 +1,101 @@
 {
   "note": "Trip.com (sg.trip.com, SGD) totals incl. taxes & fees, cheapest free-cancellation room, 2 adults, 1 room. Logged by the daily price watch.",
   "hotels": [
-    {"key":"hz_intercity","name":"IntercityHotel Hangzhou Yuhang Xianlin","hotelId":131766270,"checkIn":"2026-12-10","checkOut":"2026-12-12","nights":2,"freeCancelUntil":"2026-12-09 18:00"},
-    {"key":"gz_h1_zhipin","name":"Zhipin Hotel Guangzhou Beijing Road Pedestrian Street","hotelId":115687180,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
-    {"key":"gz_h2_marhaus","name":"MARHAUS Hotel (Beijing Road Tian-Zi Pier)","hotelId":78550651,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
-    {"key":"gz_h3_echarmplus","name":"Echarm Plus Hotel (Beijing Road Dafo Temple)","hotelId":101494125,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
-    {"key":"gz_h4_citycomfort","name":"City Comfort Inn (Beijing Road Ximenkou)","hotelId":133627082,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
-    {"key":"gz_h5_libai","name":"Libai Hotel (SYS Memorial Hall)","hotelId":134622921,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5},
-    {"key":"gz_p1_paco","name":"Paco Hotel (Guangzhou Beijing Road Metro Station)","hotelId":65572221,"checkIn":"2026-12-12","checkOut":"2026-12-17","nights":5}
+    {
+      "key": "hz_intercity",
+      "name": "IntercityHotel Hangzhou Yuhang Xianlin",
+      "hotelId": 131766270,
+      "checkIn": "2026-12-10",
+      "checkOut": "2026-12-12",
+      "nights": 2,
+      "freeCancelUntil": "2026-12-09 18:00"
+    },
+    {
+      "key": "gz_h1_zhipin",
+      "name": "Zhipin Hotel Guangzhou Beijing Road Pedestrian Street",
+      "hotelId": 115687180,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    },
+    {
+      "key": "gz_h2_marhaus",
+      "name": "MARHAUS Hotel (Beijing Road Tian-Zi Pier)",
+      "hotelId": 78550651,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    },
+    {
+      "key": "gz_h3_echarmplus",
+      "name": "Echarm Plus Hotel (Beijing Road Dafo Temple)",
+      "hotelId": 101494125,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    },
+    {
+      "key": "gz_h4_citycomfort",
+      "name": "City Comfort Inn (Beijing Road Ximenkou)",
+      "hotelId": 133627082,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    },
+    {
+      "key": "gz_h5_libai",
+      "name": "Libai Hotel (SYS Memorial Hall)",
+      "hotelId": 134622921,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    },
+    {
+      "key": "gz_p1_paco",
+      "name": "Paco Hotel (Guangzhou Beijing Road Metro Station)",
+      "hotelId": 65572221,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    }
   ],
   "log": [
-    {"date":"2026-11-15","hz_intercity":150,"gz_h1_zhipin":258,"gz_h2_marhaus":245,"gz_h3_echarmplus":376,"gz_h4_citycomfort":249,"gz_h5_libai":280,"gz_p1_paco":424}
+    {
+      "date": "2026-11-15",
+      "hz_intercity": 150,
+      "gz_h1_zhipin": 258,
+      "gz_h2_marhaus": 245,
+      "gz_h3_echarmplus": 376,
+      "gz_h4_citycomfort": 249,
+      "gz_h5_libai": 280,
+      "gz_p1_paco": 424
+    },
+    {
+      "date": "2026-11-16",
+      "hz_intercity": 143,
+      "hz_intercity_myr": 462,
+      "gz_h1_zhipin": 265,
+      "gz_h1_zhipin_myr": 861,
+      "gz_h2_marhaus": 253,
+      "gz_h2_marhaus_myr": 822,
+      "gz_h3_echarmplus": 384,
+      "gz_h3_echarmplus_myr": 1237,
+      "gz_h4_citycomfort": 254,
+      "gz_h4_citycomfort_myr": 807,
+      "gz_h5_libai": 288,
+      "gz_h5_libai_myr": 933,
+      "gz_p1_paco": 431,
+      "gz_p1_paco_myr": 1389,
+      "notes": {
+        "fx_wise_sgd_myr": 3.177,
+        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9",
+        "gz_h1_zhipin": "free cancel before 18:00 Dec 12",
+        "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
+        "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
+        "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
+        "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
+        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11"
+      }
+    }
   ]
 }
