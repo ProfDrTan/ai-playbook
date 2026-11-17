@@ -834,6 +834,7 @@ body.fsopen{overflow:hidden}
   <button data-view="gba" aria-pressed="false">Greater Bay Area</button>
   <button data-view="hzst" aria-pressed="false">Hangzhou stations</button>
   <button data-view="gzh" aria-pressed="false">Guangzhou hotels</button>
+  <button data-view="dtr" aria-pressed="false">Day trips</button>
   <button data-view="notes" aria-pressed="false">Notes &amp; checklist</button>
   <button data-view="mandarin" aria-pressed="false">Mandarin 普通话</button>
   <button data-view="expenses" aria-pressed="false">Expenses</button>
@@ -898,9 +899,11 @@ const PTS={
  gdmuseum:{n:"Guangdong Museum",zh:"广东省博物馆",w:[23.1155,113.3265],k:"sight"},
  ersha:{n:"Ersha Island sunset",zh:"二沙岛",w:[23.115,113.300],k:"sight"},
  canton:{n:"Canton Tower (lights ~19:00)",zh:"广州塔",w:[23.106,113.325],k:"sight"},
- shunde:{n:"Shunde Station (intercity)",zh:"顺德站",w:[22.843,113.248],k:"rail"},
- qinghui:{n:"Qinghui Garden & Shunde food",zh:"清晖园",w:[22.838,113.2535],k:"food"},
- fstemple:{n:"Foshan Ancestral Temple",zh:"佛山祖庙",w:[23.0336,113.108],k:"sight"},
+ shunde:{n:"Shunde Station (intercity)",zh:"顺德站",g:[22.874975,113.276661],k:"rail"},
+ qinghui:{n:"Qinghui Garden & Shunde food",zh:"清晖园",g:[22.835628,113.255053],k:"food"},
+ zhaoqing:{n:"Seven Star Crags, Zhaoqing",zh:"七星岩",g:[23.085167,112.47546],k:"sight"},
+ zqeast:{n:"Zhaoqing East Station",zh:"肇庆东站",g:[23.2112,112.66279],k:"rail"},
+ fstemple:{n:"Foshan Ancestral Temple",zh:"佛山祖庙",g:[23.02902,113.11306],k:"sight"},
  lingnan:{n:"Lingnan Tiandi",zh:"岭南天地",w:[23.031,113.113],k:"food"},
  szbay:{n:"Shenzhen Bay Park sunset",zh:"深圳湾公园",w:[22.507,113.950],k:"sight"},
  octloft:{n:"OCT Loft",zh:"华侨城创意文化园",w:[22.5405,113.9955],k:"sight"},
@@ -975,6 +978,21 @@ function drawDay(d){window._redraw=()=>drawDay(d);initMap();if(!MAP)return;LAY.c
  MAP.invalidateSize();if(all.length)MAP.fitBounds(L.latLngBounds(all),{padding:[40,40]});setTimeout(()=>{MAP.invalidateSize();declutter()},80)}
 function drawOverview(kind){window._redraw=()=>drawOverview(kind);initMap();if(!MAP)return;LAY.clearLayers();const pts=[];
  if(HZLG){HZLG.remove();HZLG=null}if(HZLG2){HZLG2.remove();HZLG2=null}if(HZLG3){HZLG3.remove();HZLG3=null}if(TILES)TILES.setOpacity(1);
+ if(kind==="dtr"){const pts=[];if(TILES)TILES.setOpacity(.5);
+  const route=(k,c,lab)=>{const r=RIDES[k];L.polyline(r.geom,{color:"#000",weight:14,opacity:.8}).addTo(LAY);L.polyline(r.geom,{color:c,weight:8}).addTo(LAY);r.stops.slice(1,-1).forEach(([zh,en,p])=>mk(p,"","mst",`${zh} ${en}`,"right").addTo(LAY));const g=r.geom[Math.floor(r.geom.length*.5)];const m=mk(g,"","",lab,"right");m._pri=1;m.addTo(LAY);pts.push(...r.geom)};
+  route("gz_gyq_gzs","#00629B","Line 2 (blue): hotels → Guangzhou South · 12 stops · ~28–31 min");
+  route("gz_zm_xl","#C4D600","Guangfo Line (lime): Zumiao ↔ Xilang · 10 stops");
+  route("gz_xl_gyq","#F3D03E","Line 1 (yellow): Xilang ↔ Gongyuanqian · 8 stops");
+  const dash=(a,b,c,lab)=>{L.polyline(curve(a,b),{color:c,weight:5,dashArray:"12 9"}).addTo(LAY);const mid=curve(a,b)[10];const m=mk(mid,"","",lab,"right");m._pri=1;m.addTo(LAY)};
+  const GS=RIDES.gz_gyq_gzs.stops.at(-1)[2],GY=RIDES.gz_gyq_gzs.stops[0][2];
+  dash(GS,ll(pt("shunde")),"#B5352B","Intercity C-train, Guangzhou South → Shunde · ~8–15 min");
+  dash(ll(pt("shunde")),ll(pt("qinghui")),"#B8862A","Taxi");
+  dash(ll(pt("qinghui")),ll(pt("fstemple")),"#B8862A","Taxi Shunde ↔ Foshan (check time in Amap)");
+  dash(GS,ll(pt("zqeast")),"#7a3fb0","Train to Zhaoqing (check 12306 for station & times)");
+  dash(ll(pt("zqeast")),ll(pt("zhaoqing")),"#B8862A","Taxi/bus ~20 km");
+  [[GY,"⇄","num numix","Your hotel area: Gongyuanqian 公园前"],[GS,"🚄","num numrail","GUANGZHOU SOUTH 广州南站"],[ll(pt("shunde")),"🚄","num numrail","SHUNDE STATION 顺德站"],[ll(pt("zqeast")),"🚄","num numrail","ZHAOQING EAST 肇庆东站"],
+   [ll(pt("qinghui")),"★","num numsight","SHUNDE: Qinghui Garden & food street 清晖园"],[ll(pt("fstemple")),"★","num numsight","FOSHAN: Ancestral Temple 祖庙 + Lingnan Tiandi"],[ll(pt("zhaoqing")),"★","num numsight","ZHAOQING: Seven Star Crags 七星岩 (optional)"]].forEach(([p,t,c,lab])=>{const m=mk(p,t,c,lab,"right");m._pri=1;m.addTo(LAY);pts.push(p)});
+  MAP.invalidateSize();MAP.fitBounds(L.latLngBounds(pts),{paddingTopLeft:[40,40],paddingBottomRight:[300,40]});setTimeout(()=>{MAP.invalidateSize();declutter()},80);return}
  if(kind==="gzh"){const pts=[];if(HZLG){HZLG.remove();HZLG=null}
   if(TILES)TILES.setOpacity(.45);GZNET.forEach(([r,c,g])=>L.polyline(g,{color:c||"#888",weight:3,opacity:.3}).addTo(LAY));
   const ped=[[23.1275,113.2694],[23.1195,113.2700]];L.polyline(ped,{color:"#E8590C",weight:14,opacity:.45}).addTo(LAY);
@@ -1183,7 +1201,19 @@ function expHTML(){const cur=[...new Set(EXP.map(e=>e[4]))];
  <h3 class="ph">By category</h3><table class="cmp"><tr><th>Category</th>${cur.map(c=>`<th>${c}</th>`).join("")}</tr>${catRows}</table>
  <h3 class="ph">Every receipt</h3><table class="cmp"><tr><th>Date</th><th>Item</th><th>Category</th><th>Amount</th><th>Paid with</th></tr>${EXP.map(e=>`<tr><td>${e[0]}</td><td>${e[1]}${e[6]?`<br><span style="color:var(--muted);font-size:12.5px">${e[6]}</span>`:""}</td><td>${e[2]}</td><td>${e[4]} ${e[3].toFixed(2)}</td><td>${e[5]||""}</td></tr>`).join("")}</table>`
  :`<div class="note">No receipts yet. Send each receipt or booking confirmation (screenshot or PDF) in the chat and it will be added here with its date, category, amount, currency and the card used.</div>`}`}
-const OVTXT={gzh:{t:"Guangzhou hotels",sub:"5 candidates against the places on your plan"},hzst:{t:"Hangzhou stations",sub:"Where your hotel sits between Hangzhou West and Hangzhou East"},all:{t:"Whole trip",sub:"12 days, 11 nights, three hotel bases"},gba:{t:"Greater Bay Area",sub:"Guangzhou, Foshan/Shunde, Shenzhen and Hong Kong"}};
+const OVTXT={dtr:{t:"Day trips from Guangzhou",sub:"Foshan, Shunde and Zhaoqing: which day, how to get there"},gzh:{t:"Guangzhou hotels",sub:"5 candidates against the places on your plan"},hzst:{t:"Hangzhou stations",sub:"Where your hotel sits between Hangzhou West and Hangzhou East"},all:{t:"Whole trip",sub:"12 days, 11 nights, three hotel bases"},gba:{t:"Greater Bay Area",sub:"Guangzhou, Foshan/Shunde, Shenzhen and Hong Kong"}};
+const DTR=`<h2>Day trips from Guangzhou</h2><div class="sub">Foshan and Shunde need no high-speed train: Foshan is on the metro, Shunde is a short intercity train from Guangzhou South.</div>
+<h3 class="ph">Mon 14 Dec · Foshan + Shunde (already in your plan)</h3>
+<ol class="steps">
+<li class="step"><div class="sh"><span class="badge" style="--lc:#F3D03E">Line 1</span> + <span class="badge" style="--lc:#C4D600">Guangfo Line</span></div><p><b>Foshan by metro</b>: Line 1 from Gongyuanqian toward Xilang (8 stops), change at 西塱 Xilang to the Guangfo Line, ride to 祖庙 Zumiao (10 stops). Guangzhou’s press notes that between Guangzhou and Foshan the metro is better value than the intercity train.</p></li>
+<li class="step"><div class="sh">Foshan Ancestral Temple 祖庙</div><p>Open 8:30–18:00, ticket about ¥20. Visitors mention a lion-dance show at 10:00 (three shows a day), so arriving for 10:00 is worth it. Lingnan Tiandi next door for lunch.</p></li>
+<li class="step"><div class="sh"><span class="badge plain" style="--lc:#B8862A">Taxi</span> Foshan → Shunde</div><p>Taxi/DiDi to Qinghui Garden and the Shunde food streets (double-skin milk, fish dishes). Check the drive time in Amap on the day.</p></li>
+<li class="step"><div class="sh"><span class="badge plain" style="--lc:#B5352B">Intercity train</span> Shunde → Guangzhou South</div><p>C-trains run all day between 顺德 Shunde and 广州南 Guangzhou South, about 8–15 minutes, ¥10 second class. Then Line 2 back to Gongyuanqian (~30 min). Alternative: Guangzhou Metro Line 7 also reaches Shunde (Beijiao/Midea area).</p></li>
+</ol>
+<div class="note">Your current Mon 14 day page runs this the other way round (Shunde first, Foshan last). Doing Foshan first catches the 10:00 lion dance and ends the day with dinner in Shunde. Tell me if you want the Mon 14 page switched.</div>
+<h3 class="ph">Wed 16 Dec · spare day: optional Zhaoqing (Seven Star Crags)</h3>
+<p>Further out (about 100 km west). Train from Guangzhou to Zhaoqing East, then about 20 km by taxi or bus to Seven Star Crags. One traveller review puts the train at about 40 minutes; check 12306 or Trip.com for the station and times. A visitor suggests allowing 5 hours at the site, so it is a full day. Or keep Wed 16 for food and rest in Guangzhou.</p>
+<div class="note">Train lines are drawn as dashed curves, not the real track; metro lines follow the real track. Times are from Ctrip listings (July 2026), Rome2Rio and press reports; recheck the week before.</div>`;
 const GZH_OLD=`<h2>Guangzhou hotels</h2><div class="sub">Your Trip.com list (Sat 12 – Thu 17 Dec, 5 nights) matched to the map</div>
 <table class="cmp"><tr><th>Hotel</th><th>Trip.com /night</th><th>Nearest metro</th><th>To Beijing Rd street*</th><th>To Gongyuanqian*</th></tr>
 ${PACO.map(([id,n,zh,p,st,dist,bj,gyq,rev,pr,sc])=>`<tr><td><b>${id}</b> ${n}<br><span style="color:var(--muted)">${zh}</span><br><span style="font-size:12.5px">${rev}</span><br><a href="https://uri.amap.com/marker?position=${p[1]},${p[0]}&name=${encodeURIComponent(zh)}&coordinate=gaode&callnative=1" target="_blank" rel="noopener">Amap</a> · <a href="https://www.google.com/maps/search/?api=1&query=${p[0]},${p[1]}" target="_blank" rel="noopener">Google Maps</a></td><td><b>${pr}</b>${sc?`<br>Trip score ${sc}`:""}</td><td>${st}<br><b>${dist} m</b></td><td>${bj}</td><td>${gyq}</td></tr>`).join("")}
@@ -1233,6 +1263,7 @@ function show(id){const mb=document.querySelector(".mapbox"),mn=document.querySe
  if(OVTXT[id]){drawOverview(id);const v=OVTXT[id];document.getElementById("mapTitle").innerHTML=`<b>${v.t}</b>`;document.getElementById("scaleTxt").textContent="Pick a day for its route and directions";
   if(id==="hzst"){panel.innerHTML=HZST;return}
   if(id==="gzh"){panel.innerHTML=GZH;return}
+  if(id==="dtr"){panel.innerHTML=DTR;return}
   panel.innerHTML=`<h2>${v.t}</h2><div class="sub">${v.sub}</div><ol class="stops">${D.map(d=>`<li style="--c:${BASEC[d.base]}"><span class="n">${d.date.split(" ")[1]}</span><div><b><a href="#${d.id}">${d.t}</a></b><p>${d.date} December</p></div></li>`).join("")}</ol><div class="note">Day trips: Foshan/Shunde from Guangzhou on Wed 16; Hong Kong from Shenzhen on Fri 18, plus an optional Lantau day on Sun 20. Macau is dropped.</div>`;return}
  const d=D.find(x=>x.id===id);drawDay(d);
  const rides=d.steps.filter(s=>s[2]==="metro").length;
