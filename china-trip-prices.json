@@ -96,6 +96,33 @@
         "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
         "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11"
       }
+    },
+    {
+      "date": "2026-11-17",
+      "hz_intercity": 143,
+      "hz_intercity_myr": 462,
+      "gz_h1_zhipin": 265,
+      "gz_h1_zhipin_myr": 862,
+      "gz_h2_marhaus": 253,
+      "gz_h2_marhaus_myr": 822,
+      "gz_h3_echarmplus": 384,
+      "gz_h3_echarmplus_myr": 1237,
+      "gz_h4_citycomfort": 254,
+      "gz_h4_citycomfort_myr": 807,
+      "gz_h5_libai": 288,
+      "gz_h5_libai_myr": 933,
+      "gz_p1_paco": 431,
+      "gz_p1_paco_myr": 1389,
+      "notes": {
+        "fx_wise_sgd_myr": 3.1771,
+        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9",
+        "gz_h1_zhipin": "free cancel before 18:00 Dec 12",
+        "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
+        "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
+        "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
+        "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
+        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11"
+      }
     }
   ]
 }
