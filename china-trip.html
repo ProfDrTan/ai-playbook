@@ -797,6 +797,15 @@ a.nav{display:inline-block;font-size:13px;font-weight:600;margin-top:4px}
 ul.places{list-style:none;padding:0;margin:0}ul.places li{padding:9px 0;border-top:1px solid var(--line);font-size:14px}ul.places p{margin:2px 0;color:var(--muted)}ul.places .zh{font-family:"Noto Serif SC",serif;color:var(--muted)}ul.places .lk a{margin-right:10px;font-size:12.5px}
 .stn{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid #333;color:#111;display:grid;place-items:center;font:700 11px Figtree,sans-serif;transform:translate(-11px,-11px)}
 .num.numsight{background:#2F6FA3;color:#fff;font-size:10.5px}
+.fsbtn{font:600 13px Figtree,sans-serif;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--ink);color:var(--paper);cursor:pointer}
+.main>*{min-width:0}
+#panel table.cmp{display:block;max-width:100%;overflow-x:auto}
+.hzlg{cursor:pointer}.hzlg.collapsed{max-height:24px;overflow:hidden}.hzlg.collapsed b:first-child:after{content:" ▸ tap"}
+.fsmap{font-size:18px;padding:4px 9px;margin-top:8px}
+.mapbox.full{position:fixed;inset:0;z-index:9999;border-radius:0;border:0;display:flex;flex-direction:column}
+.mapbox.full #lmap{flex:1;height:auto!important;min-height:0}
+.mapbox.full .legend,.mapbox.full .tilenote{display:none!important}
+body.fsopen{overflow:hidden}
 .hzlg{background:rgba(255,255,255,.95);color:#111;border:1px solid #999;border-radius:6px;padding:8px 10px;font:500 13px/1.45 Figtree,sans-serif}.hzlg .sw{display:inline-block;width:22px;height:6px;border-radius:3px;vertical-align:middle;margin-right:4px}
 .legend i.w{border-top:3px dotted #6b7a77}.legend i.t{border-top:3px dashed #B8862A}.legend i.r{border-top:3px dashed #B5352B}
 </style>
@@ -825,7 +834,7 @@ ul.places{list-style:none;padding:0;margin:0}ul.places li{padding:9px 0;border-t
 
 <div class="main">
   <div class="mapbox">
-    <div class="maphead"><span id="mapTitle"><b>Whole trip</b></span><span id="scaleTxt"></span></div>
+    <div class="maphead"><span id="mapTitle"><b>Whole trip</b></span><span style="display:flex;gap:10px;align-items:center"><span id="scaleTxt"></span><button id="fsbtn" class="fsbtn" type="button" aria-pressed="false">⤢ Full screen</button></span></div>
     <div class="tilenote" id="tilenote" hidden>The street map can’t load in this preview. Open the full map at <a href="https://profdrtan.github.io/ai-playbook/china-trip.html" target="_blank" rel="noopener">profdrtan.github.io/ai-playbook/china-trip.html</a>. Routes and stations below still show.</div>
     <div id="lmap"></div>
     <div class="legend"><span><i style="border-top:5px solid #F3D03E"></i>Metro, in the line’s own colour, along the real track</span><span>○ station you pass</span><span><i class="w"></i>Walk</span><span><i class="t"></i>Taxi / DiDi</span><span><i class="r"></i>Train (track not drawn)</span><span>Zoom in to see every station name (names that would overlap are hidden until there is room).</span></div>
@@ -930,7 +939,7 @@ const MODE={walk:["Walk","#6b7a77","2 8"],taxi:["Taxi / DiDi","#B8862A","8 8"],r
 let MAP=null,LAY=null,tileFail=0,HZLG=null;
 function initMap(){if(MAP||!window.L)return;MAP=L.map("lmap",{zoomControl:true,attributionControl:true,zoomSnap:0.25,zoomDelta:0.5});
  L.tileLayer("https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{subdomains:"1234",maxZoom:18,attribution:"Map © 高德 AutoNavi · metro data © OpenStreetMap contributors"}).on("tileerror",()=>{if(++tileFail==4)document.getElementById("tilenote").hidden=false}).addTo(MAP);
- LAY=L.layerGroup().addTo(MAP);MAP.on("zoomend moveend",()=>setTimeout(declutter,0));}
+ LAY=L.layerGroup().addTo(MAP);const fc=L.control({position:"topleft"});fc.onAdd=()=>{const d=L.DomUtil.create("button","fsbtn fsmap");d.type="button";d.title="Full screen";d.textContent="⤢";L.DomEvent.disableClickPropagation(d);d.onclick=()=>setFull(!document.querySelector(".mapbox").classList.contains("full"));return d};fc.addTo(MAP);MAP.on("zoomend moveend",()=>setTimeout(declutter,0));}
 function declutter(){if(!MAP)return;const box=document.getElementById("lmap").getBoundingClientRect();const taken=[];
  const hit=r=>taken.some(t=>r.left<t.right+2&&r.right>t.left-2&&r.top<t.bottom+1&&r.bottom>t.top-1);
  document.querySelectorAll("#lmap .num,#lmap .mst,#lmap .stn").forEach(e=>taken.push(e.getBoundingClientRect()));
@@ -945,7 +954,7 @@ function declutter(){if(!MAP)return;const box=document.getElementById("lmap").ge
   t.classList.add("hid")})}
 function mk(latlng,html,cls,tip,dir){const m=L.marker(latlng,{icon:L.divIcon({className:"",html:`<div class="${cls}">${html}</div>`,iconSize:null}),keyboard:false});if(tip)m.bindTooltip(tip,{permanent:true,direction:dir||"right",className:"tl "+(cls.startsWith("mst")||cls==="stn"?"mst-t":"pri-t"),offset:[10,0]});return m}
 function curve(a,b){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1];const c=[mx-dy*0.12,my+dx*0.12];const out=[];for(let t=0;t<=1.0001;t+=0.05){out.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return out}
-function drawDay(d){initMap();if(!MAP)return;LAY.clearLayers();const all=[];const seen=new Map();let n=0;const order=[];const mst=new Set();
+function drawDay(d){window._redraw=()=>drawDay(d);initMap();if(!MAP)return;LAY.clearLayers();const all=[];const seen=new Map();let n=0;const order=[];const mst=new Set();
  d.steps.forEach(([a,b,mode,ride])=>{[a,b].forEach(k=>{if(!seen.has(k)){seen.set(k,++n);order.push(k)}})});
  d.steps.forEach(([a,b,mode,ride])=>{const A=ll(pt(a)),B=ll(pt(b));
   if(mode==="metro"){const r=RIDES[ride],c=LC[ride.slice(0,2)+":"+r.line][2];
@@ -956,17 +965,17 @@ function drawDay(d){initMap();if(!MAP)return;LAY.clearLayers();const all=[];cons
  order.forEach(k=>{const p=pt(k),num=seen.get(k);const isSt=k.startsWith("st:");const lab=isSt?`${num}. ${p.zh} ${p.n}`:`${num}. ${p.n}`;
   const m=mk(ll(p),num,"num"+(isSt?" numst":"")+(p.k==="hotel"?" numhotel":""),lab,"right");m._pri=1;m.addTo(LAY);all.push(ll(p))});
  MAP.invalidateSize();if(all.length)MAP.fitBounds(L.latLngBounds(all),{padding:[40,40]});setTimeout(()=>{MAP.invalidateSize();declutter()},80)}
-function drawOverview(kind){initMap();if(!MAP)return;LAY.clearLayers();const pts=[];
+function drawOverview(kind){window._redraw=()=>drawOverview(kind);initMap();if(!MAP)return;LAY.clearLayers();const pts=[];
  if(HZLG){HZLG.remove();HZLG=null}
  if(kind==="gzh"){const pts=[];if(HZLG){HZLG.remove();HZLG=null}
   GZNET.forEach(([r,c,g])=>L.polyline(g,{color:c||"#888",weight:4,opacity:.55}).addTo(LAY));
   const ped=[[23.1275,113.2694],[23.1195,113.2700]];L.polyline(ped,{color:"#E8590C",weight:14,opacity:.45}).addTo(LAY);
   const pl=mk([23.1235,113.2697],"","","BEIJING ROAD PEDESTRIAN STREET","left");pl._pri=1;pl.addTo(LAY);
   GZST.forEach(([zh,en,p])=>{const m=mk(p,"","mst",`${zh} ${en}`,"right");m.addTo(LAY)});
-  GZS.forEach(([n,t,p])=>{const m=mk(p,"S"+n,"num numsight",t,"right");m._pri=1;m.addTo(LAY);pts.push(p)});
-  GZC.forEach(c=>{const [id,n,addr,p,hid,sc,tot,pn,near,l12,walk]=c;const m=mk(p,id,"num numhotel",`${id} ${n.split(",")[0]} · S$${pn}/night`,"right");m._pri=1;m.addTo(LAY);pts.push(p)});
+  GZS.forEach(([n,t,p])=>{const m=mk(p,"S"+n,"num numsight",t,"right");m._pri=0;m.addTo(LAY);if(!/Museum|Canton Tower/.test(t))pts.push(p)});
+  GZC.forEach(c=>{const [id,n,addr,p,hid,sc,tot,pn,near,l12,walk]=c;const narrow=document.getElementById("lmap").offsetWidth<600;const m=mk(p,id,"num numhotel",narrow?`${id} · S$${pn}`:`${id} ${n.split(",")[0]} · S$${pn}/night`,"right");m._pri=1;m.addTo(LAY);pts.push(p)});
   pts.push([23.1275,113.2694],[23.1254,113.2642]);
-  const lg=L.control({position:"bottomleft"});lg.onAdd=()=>{const d=L.DomUtil.create("div","hzlg");d.innerHTML='<b>Metro lines</b><br><span class="sw" style="background:#F3D03E"></span>Line 1 yellow<br><span class="sw" style="background:#00629B"></span>Line 2 blue<br><span class="sw" style="background:#C5003E"></span>Line 5 red<br><span class="sw" style="background:#80225F"></span>Line 6 purple<br><span class="sw" style="background:#E8590C;opacity:.5"></span>Beijing Rd pedestrian street<br><span class="num numhotel" style="display:inline-grid;transform:none;width:18px;height:18px;font-size:9px;border-width:1px">H</span> Hotel candidate<br><span class="num numsight" style="display:inline-grid;transform:none;width:18px;height:18px;font-size:9px;border-width:1px">S</span> Place on your plan';return d};lg.addTo(MAP);HZLG=lg;
+  const lg=L.control({position:"bottomleft"});lg.onAdd=()=>{const d=L.DomUtil.create("div","hzlg"+(document.getElementById("lmap").offsetWidth<600?" collapsed":""));d.title="Tap to show or hide the key";d.onclick=()=>d.classList.toggle("collapsed");L.DomEvent.disableClickPropagation(d);d.innerHTML='<b>Metro lines</b><br><span class="sw" style="background:#F3D03E"></span>Line 1 yellow<br><span class="sw" style="background:#00629B"></span>Line 2 blue<br><span class="sw" style="background:#C5003E"></span>Line 5 red<br><span class="sw" style="background:#80225F"></span>Line 6 purple<br><span class="sw" style="background:#E8590C;opacity:.5"></span>Beijing Rd pedestrian street<br><span class="num numhotel" style="display:inline-grid;transform:none;width:18px;height:18px;font-size:9px;border-width:1px">H</span> Hotel candidate<br><span class="num numsight" style="display:inline-grid;transform:none;width:18px;height:18px;font-size:9px;border-width:1px">S</span> Place on your plan';return d};lg.addTo(MAP);HZLG=lg;
   MAP.invalidateSize();MAP.fitBounds(L.latLngBounds(pts),{padding:[50,50]});setTimeout(()=>{MAP.invalidateSize();declutter()},80);return}
  if(kind==="hzst"){const H=ll(pt("hzhotel")),W=ll(pt("hzwest")),E=ll(pt("hzeast"));
   HZNET.forEach(([r,c,g])=>L.polyline(g,{color:c||"#888",weight:3,opacity:.25}).addTo(LAY));
@@ -974,7 +983,7 @@ function drawOverview(kind){initMap();if(!MAP)return;LAY.clearLayers();const pts
   L.polyline([H,Q],{color:"#B8862A",weight:4,dashArray:"8 8"}).addTo(LAY);
   [["h_l3b","#E0B000"],["h_19","#05C3DE"]].forEach(([k,c])=>{const r=HZR[k];L.polyline(r.geom,{color:"#fff",weight:11}).addTo(LAY);L.polyline(r.geom,{color:c,weight:7}).addTo(LAY);
    r.stops.forEach(([zh,en,p],i)=>{if(zh.startsWith("火车"))return;const m=mk(p,i?String(i):"▶",`stn`,`${i?i+". ":"Board: "}${zh} ${en}`,"right");m._pri=1;m.addTo(LAY)})});
-  const lg=L.control({position:"topright"});lg.onAdd=()=>{const d=L.DomUtil.create("div","hzlg");d.innerHTML='<b>Hotel → Hangzhou West</b><br><span style="color:#B8862A">- - -</span> Taxi 2.9 km to 全丰 Quanfeng<br><span class="sw" style="background:#E0B000"></span> Line 3 yellow: <b>5 stops</b> (numbered 1–5) to 火车西站<br><br><b>Hotel → Hangzhou East</b><br>Same as above, then<br><span class="sw" style="background:#05C3DE"></span> Line 19 teal: <b>8 stops</b> (numbered 1–8) to 火车东站<br>= <b>13 metro stops</b> in total';return d};lg.addTo(MAP);HZLG=lg;
+  const lg=L.control({position:"topright"});lg.onAdd=()=>{const d=L.DomUtil.create("div","hzlg"+(document.getElementById("lmap").offsetWidth<600?" collapsed":""));d.title="Tap to show or hide the key";d.onclick=()=>d.classList.toggle("collapsed");L.DomEvent.disableClickPropagation(d);d.innerHTML='<b>Hotel → Hangzhou West</b><br><span style="color:#B8862A">- - -</span> Taxi 2.9 km to 全丰 Quanfeng<br><span class="sw" style="background:#E0B000"></span> Line 3 yellow: <b>5 stops</b> (numbered 1–5) to 火车西站<br><br><b>Hotel → Hangzhou East</b><br>Same as above, then<br><span class="sw" style="background:#05C3DE"></span> Line 19 teal: <b>8 stops</b> (numbered 1–8) to 火车东站<br>= <b>13 metro stops</b> in total';return d};lg.addTo(MAP);HZLG=lg;
   [["hzhotel","H","num numhotel","Your hotel (IntercityHotel Xianlin)"],["hzwest","W","num","HANGZHOU WEST 杭州西站 (7.4 km)"],["hzeast","E","num","HANGZHOU EAST 杭州东站 (23.3 km)"]].forEach(([k,t,c,lab])=>{const m=mk(ll(pt(k)),t,c,lab,"right");m._pri=1;m.addTo(LAY)});
   const mid=[(H[0]+Q[0])/2,(H[1]+Q[1])/2];const t=mk(mid,"","",`Taxi 2.9 km`,"right");t._pri=1;t.addTo(LAY);
   L.circleMarker([30.2546,120.150],{radius:6,color:"#2F6FA3",fillOpacity:.6}).addTo(LAY);const wl=mk([30.2546,120.150],"","","West Lake",'right');wl._pri=1;wl.addTo(LAY);
@@ -1188,8 +1197,12 @@ const HZST=`<h2>Hangzhou stations</h2><div class="sub">Hotel: IntercityHotel Xia
 <tr><td>G821</td><td>16:49</td><td>Guangzhou South 22:29</td><td>Very late</td></tr></table>
 <div class="note"><b>Decision guide for the 12th:</b> early start → G3075 from Hangzhou West (closest station, 5 metro stops or a short taxi). Lie-in → G1301 from Hangzhou East (13 metro stops or a long taxi across the city).</div>
 <div class="note">Metro lines from OpenStreetMap data (2026). Train times from Ctrip (4 Nov 2026) and Qunar (Sept 2026) listings; December timetables can change and not every train runs daily.</div>`;
+function setFull(on){const mb=document.querySelector(".mapbox"),b=document.getElementById("fsbtn");mb.classList.toggle("full",on);document.body.classList.toggle("fsopen",on);b.textContent=on?"✕ Close":"⤢ Full screen";document.querySelectorAll(".fsmap").forEach(x=>x.textContent=on?"✕":"⤢");b.setAttribute("aria-pressed",on);
+ if(MAP){requestAnimationFrame(()=>requestAnimationFrame(()=>{MAP.invalidateSize({pan:false});if(window._redraw)window._redraw()}))}}
+document.getElementById("fsbtn").onclick=()=>setFull(!document.querySelector(".mapbox").classList.contains("full"));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.querySelector(".mapbox.full"))setFull(false)});
 function setPressed(id){document.querySelectorAll(".views button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===id));document.querySelectorAll(".strip button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.day===id));if(location.hash.slice(1)!==id)history.replaceState(null,"","#"+id);}
-function show(id){const mb=document.querySelector(".mapbox"),mn=document.querySelector(".main");mb.style.display="";mn.style.gridTemplateColumns="";setPressed(id);
+function show(id){const mb=document.querySelector(".mapbox"),mn=document.querySelector(".main");if(mb.classList.contains("full"))setFull(false);mb.style.display="";mn.style.gridTemplateColumns="";setPressed(id);
  if(id==="expenses"){mb.style.display="none";mn.style.gridTemplateColumns="1fr";panel.innerHTML=expHTML();return}
  if(id==="mandarin"){mb.style.display="none";mn.style.gridTemplateColumns="1fr";zRender();return}
  if(id==="notes"){drawOverview("all");document.getElementById("mapTitle").innerHTML="<b>Whole trip</b>";document.getElementById("scaleTxt").textContent="";panel.innerHTML=NOTES;drawChk();return}
