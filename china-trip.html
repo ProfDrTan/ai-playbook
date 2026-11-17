@@ -796,9 +796,12 @@ ol.sl li.end{font-weight:700}ol.sl li span{color:var(--muted);font-weight:400}
 a.nav{display:inline-block;font-size:13px;font-weight:600;margin-top:4px}
 ul.places{list-style:none;padding:0;margin:0}ul.places li{padding:9px 0;border-top:1px solid var(--line);font-size:14px}ul.places p{margin:2px 0;color:var(--muted)}ul.places .zh{font-family:"Noto Serif SC",serif;color:var(--muted)}ul.places .lk a{margin-right:10px;font-size:12.5px}
 .stn{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid #333;color:#111;display:grid;place-items:center;font:700 11px Figtree,sans-serif;transform:translate(-11px,-11px)}
+.vbtns{display:flex;flex-direction:column;gap:6px;align-items:flex-end}.vbtn{font:700 13px Figtree,sans-serif;padding:7px 11px;border-radius:6px;border:2px solid #B5352B;background:#fff;color:#B5352B;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.num.numrail{background:#B5352B;color:#fff;width:38px;height:38px;font-size:20px;transform:translate(-19px,-19px);border:3px solid #fff;box-shadow:0 0 0 3px #B5352B}
 .num.nummetro{background:#0B6E4F}
 .num.numix{background:#fff;color:#0B6E4F;border:4px solid #0B6E4F;width:34px;height:34px;font-size:18px;transform:translate(-17px,-17px);box-shadow:0 0 0 4px rgba(11,110,79,.25)}
 .num.numsight{background:#FFC400;color:#7a2e00;font-size:17px;width:30px;height:30px;transform:translate(-15px,-15px);border:3px solid #7a2e00;box-shadow:0 0 0 3px rgba(255,196,0,.45),0 2px 6px rgba(0,0,0,.5)}
+.leaflet-tooltip.rail-t{background:#B5352B;color:#fff;border:0;font:800 14px Figtree,sans-serif}
 .leaflet-tooltip.sight-t{background:#FFF3C4;border:2px solid #C98A00;color:#5a2200;font:700 13px Figtree,sans-serif}
 .fsbtn{font:600 13px Figtree,sans-serif;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--ink);color:var(--paper);cursor:pointer}
 .main>*{min-width:0}
@@ -939,7 +942,7 @@ const DAYS=[
 ];
 const D=DAYS;const BASEC={hz:"var(--hz)",gz:"var(--gz)",sz:"var(--sz)"};
 const MODE={walk:["Walk","#6b7a77","2 8"],taxi:["Taxi / DiDi","#B8862A","8 8"],robotaxi:["Robotaxi","#B8862A","8 8"],rail:["Train","#B5352B","12 8"],hsr:["High-speed train","#B5352B","12 8"],ferry:["Ferry","#2F6FA3","10 6"],tram:["Peak Tram","#2F6FA3","10 6"],mtr:["Hong Kong MTR","#2F6FA3","10 6"],cable:["Cable car","#2F6FA3","10 6"],metro:["Metro","#000",""]};
-let MAP=null,LAY=null,tileFail=0,HZLG=null;
+let MAP=null,LAY=null,tileFail=0,HZLG=null,HZLG2=null;
 function initMap(){if(MAP||!window.L)return;MAP=L.map("lmap",{zoomControl:true,attributionControl:true,zoomSnap:0.25,zoomDelta:0.5});
  L.tileLayer("https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{subdomains:"1234",maxZoom:18,attribution:"Map © 高德 AutoNavi · metro data © OpenStreetMap contributors"}).on("tileerror",()=>{if(++tileFail==4)document.getElementById("tilenote").hidden=false}).addTo(MAP);
  LAY=L.layerGroup().addTo(MAP);const fc=L.control({position:"topleft"});fc.onAdd=()=>{const d=L.DomUtil.create("button","fsbtn fsmap");d.type="button";d.title="Full screen";d.textContent="⤢";L.DomEvent.disableClickPropagation(d);d.onclick=()=>setFull(!document.querySelector(".mapbox").classList.contains("full"));return d};fc.addTo(MAP);MAP.on("zoomend moveend",()=>setTimeout(declutter,0));}
@@ -955,9 +958,9 @@ function declutter(){if(!MAP)return;const box=document.getElementById("lmap").ge
    if(!hit(r)&&r.left>=box.left&&r.right<=box.right&&r.top>=box.top&&r.bottom<=box.bottom){t.style.marginLeft=(x-r0.left)+"px";t.style.marginTop=(y-r0.top)+"px";taken.push(r);return}}
   if(m._pri){const r={left:cand[0][0],right:cand[0][0]+w,top:cand[0][1],bottom:cand[0][1]+h};t.style.marginLeft=(r.left-r0.left)+"px";t.style.marginTop=(r.top-r0.top)+"px";taken.push(r);return}
   t.classList.add("hid")})}
-function mk(latlng,html,cls,tip,dir){const m=L.marker(latlng,{icon:L.divIcon({className:"",html:`<div class="${cls}">${html}</div>`,iconSize:null}),keyboard:false});if(tip)m.bindTooltip(tip,{permanent:true,direction:dir||"right",className:"tl "+(cls.startsWith("mst")||cls==="stn"?"mst-t":cls.includes("numsight")?"sight-t":"pri-t"),offset:[10,0]});return m}
+function mk(latlng,html,cls,tip,dir){const m=L.marker(latlng,{icon:L.divIcon({className:"",html:`<div class="${cls}">${html}</div>`,iconSize:null}),keyboard:false});if(tip)m.bindTooltip(tip,{permanent:true,direction:dir||"right",className:"tl "+(cls.startsWith("mst")||cls==="stn"?"mst-t":cls.includes("numsight")?"sight-t":cls.includes("numrail")?"rail-t":"pri-t"),offset:[10,0]});return m}
 function curve(a,b){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1];const c=[mx-dy*0.12,my+dx*0.12];const out=[];for(let t=0;t<=1.0001;t+=0.05){out.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return out}
-function drawDay(d){window._redraw=()=>drawDay(d);initMap();if(!MAP)return;LAY.clearLayers();const all=[];const seen=new Map();let n=0;const order=[];const mst=new Set();
+function drawDay(d){window._redraw=()=>drawDay(d);initMap();if(!MAP)return;LAY.clearLayers();if(HZLG){HZLG.remove();HZLG=null}if(HZLG2){HZLG2.remove();HZLG2=null}const all=[];const seen=new Map();let n=0;const order=[];const mst=new Set();
  d.steps.forEach(([a,b,mode,ride])=>{[a,b].forEach(k=>{if(!seen.has(k)){seen.set(k,++n);order.push(k)}})});
  d.steps.forEach(([a,b,mode,ride])=>{const A=ll(pt(a)),B=ll(pt(b));
   if(mode==="metro"){const r=RIDES[ride],c=LC[ride.slice(0,2)+":"+r.line][2];
@@ -969,7 +972,7 @@ function drawDay(d){window._redraw=()=>drawDay(d);initMap();if(!MAP)return;LAY.c
   const m=mk(ll(p),num,"num"+(isSt?" numst":"")+(p.k==="hotel"?" numhotel":""),lab,"right");m._pri=1;m.addTo(LAY);all.push(ll(p))});
  MAP.invalidateSize();if(all.length)MAP.fitBounds(L.latLngBounds(all),{padding:[40,40]});setTimeout(()=>{MAP.invalidateSize();declutter()},80)}
 function drawOverview(kind){window._redraw=()=>drawOverview(kind);initMap();if(!MAP)return;LAY.clearLayers();const pts=[];
- if(HZLG){HZLG.remove();HZLG=null}
+ if(HZLG){HZLG.remove();HZLG=null}if(HZLG2){HZLG2.remove();HZLG2=null}
  if(kind==="gzh"){const pts=[];if(HZLG){HZLG.remove();HZLG=null}
   GZNET.forEach(([r,c,g])=>L.polyline(g,{color:c||"#888",weight:4,opacity:.55}).addTo(LAY));
   const ped=[[23.1275,113.2694],[23.1195,113.2700]];L.polyline(ped,{color:"#E8590C",weight:14,opacity:.45}).addTo(LAY);
@@ -977,6 +980,14 @@ function drawOverview(kind){window._redraw=()=>drawOverview(kind);initMap();if(!
   GZST.forEach(([zh,en,p])=>{const m=mk(p,"","mst",`${zh} ${en}`,"right");m.addTo(LAY)});
   GZS.forEach(([n,t,p,zh])=>{const m=mk(p,"★","num numsight",`${n}. ${t} ${zh}`,"right");m._pri=1;m.addTo(LAY);if(!/Guangdong Museum|Canton Tower/.test(t))pts.push(p)});
   GZC.forEach(c=>{const [id,n,addr,p,hid,sc,tot,pn,near,l12,walk]=c;const narrow=document.getElementById("lmap").offsetWidth<600;const m=mk(p,id,"num numhotel"+(id[0]==="M"?" nummetro":""),narrow?`${id} · S$${pn}`:`${id} ${n.split(",")[0]} · S$${pn}/night`,"right");m._pri=1;m.addTo(LAY);pts.push(p)});
+  [["gz_east_gyq","#F3D03E","ARRIVE Sat 12 Dec: Line 1 (yellow) Guangzhou East → Gongyuanqian, no change"],["gz_gyq_gzs","#00629B","LEAVE Thu 17 Dec: Line 2 (blue) Gongyuanqian → Guangzhou South, no change"]].forEach(([k,c,t])=>{const r=RIDES[k];L.polyline(r.geom,{color:"#111",weight:13,opacity:.55}).addTo(LAY);L.polyline(r.geom,{color:c,weight:8}).addTo(LAY);
+   r.stops.slice(1,-1).forEach(([zh,en,p])=>{const m=mk(p,"","mst",`${zh} ${en}`,"right");m.addTo(LAY)});
+   const g=r.geom[Math.floor(r.geom.length*0.5)];const lb=mk(g,"","",`${t} · ${r.stops.length-1} stops`,"right");lb._pri=1;lb.addTo(LAY)});
+  const E=RIDES.gz_east_gyq.stops[0][2],So=RIDES.gz_gyq_gzs.stops[RIDES.gz_gyq_gzs.stops.length-1][2];
+  [[E,"🚄 GUANGZHOU EAST STATION 广州东站 · your train arrives here Sat 12 Dec"],[So,"🚄 GUANGZHOU SOUTH STATION 广州南站 · train to Shenzhen Thu 17 Dec"]].forEach(([p,t])=>{const m=mk(p,"🚄","num numrail",t,"right");m._pri=1;m.addTo(LAY)});
+  const vc=L.control({position:"topright"});vc.onAdd=()=>{const d=L.DomUtil.create("div","vbtns");L.DomEvent.disableClickPropagation(d);
+   const fit=(b)=>{MAP.fitBounds(L.latLngBounds(b),{paddingTopLeft:[70,60],paddingBottomRight:[330,60]});setTimeout(declutter,350)};
+   [["Hotels & sights",()=>fit(pts)],["Arrival 12 Dec: GZ East → hotels",()=>fit(RIDES.gz_east_gyq.geom.concat(GZC.map(c=>c[3])))],["Departure 17 Dec: hotels → GZ South",()=>fit(RIDES.gz_gyq_gzs.geom)]].forEach(([t,fn])=>{const b=L.DomUtil.create("button","vbtn",d);b.type="button";b.textContent=t;b.onclick=fn});return d};vc.addTo(MAP);HZLG2=vc;
   const ix=mk([23.1254207,113.2641764],"⇄","num numix","INTERCHANGE 公园前 Gongyuanqian · Line 1 (to Guangzhou East) + Line 2 (to Guangzhou South)","right");ix._pri=1;ix.addTo(LAY);
   const ix2=mk([23.1146647,113.2657439],"⇄","num numix","Interchange 海珠广场 Haizhu Square · Line 2 + Line 6","right");ix2._pri=1;ix2.addTo(LAY);
   pts.push([23.1275,113.2694],[23.1254,113.2642]);
