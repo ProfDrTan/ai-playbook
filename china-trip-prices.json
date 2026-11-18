@@ -57,6 +57,14 @@
       "checkIn": "2026-12-12",
       "checkOut": "2026-12-17",
       "nights": 5
+    },
+    {
+      "key": "gz_h6_yifang",
+      "name": "YIFANG Apartment (Changdi Road)",
+      "hotelId": 113898020,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
     }
   ],
   "log": [
@@ -121,8 +129,11 @@
         "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
         "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
         "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
-        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11"
-      }
+        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11",
+        "gz_h6_yifang": "Seeded from the Trip.com read when H6 was added to china-trip.html (17 Nov evening); hallway-window double; free cancel before 18:00 Dec 12"
+      },
+      "gz_h6_yifang": 238,
+      "gz_h6_yifang_myr": 775
     },
     {
       "date": "2026-11-18",
