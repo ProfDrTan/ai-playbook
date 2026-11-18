@@ -65,6 +65,22 @@
       "checkIn": "2026-12-12",
       "checkOut": "2026-12-17",
       "nights": 5
+    },
+    {
+      "key": "gz_h7_yifang_dade",
+      "name": "Yifang Apartment (Dade Road, Haizhu Square)",
+      "hotelId": 121070203,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
+    },
+    {
+      "key": "gz_h8_linghui_mercure",
+      "name": "Linghui Mercure (Beijing Road Tianzi Wharf)",
+      "hotelId": 115802897,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
     }
   ],
   "log": [
@@ -159,8 +175,12 @@
         "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12; 'Our last 2!' on pricier rooms only",
         "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
         "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
-        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11; 'Our last 4!' on pricier rooms"
-      }
+        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11; 'Our last 4!' on pricier rooms",
+        "gz_h7_yifang_dade": "RM only, from Prof Tan's Trip.com screenshot 18 Nov: Elegant Queen, free cancellation",
+        "gz_h8_linghui_mercure": "RM only, from Prof Tan's Trip.com screenshot 18 Nov: Queen Room with audio-visual, free cancellation"
+      },
+      "gz_h7_yifang_dade_myr": 484,
+      "gz_h8_linghui_mercure_myr": 745
     }
   ]
 }
