@@ -191,6 +191,14 @@
       },
       "gz_h7_yifang_dade_myr": 484,
       "gz_h8_linghui_mercure_myr": 745
+    },
+    {
+      "date": "2026-11-19",
+      "hz_intercity": 143,
+      "notes": {
+        "run": "INCOMPLETE: Chrome extension disconnected after the first page; only Intercity SGD read. No MYR totals, no Guangzhou prices today.",
+        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144); free cancel before 18:00 Dec 9; 'Our last 3!' only on pricier Family Room"
+      }
     }
   ],
   "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
@@ -304,6 +312,17 @@
         },
         "tags": "Near metro 458, Friendly staff 344",
         "issues": "No complaint text visible on the page (44 less-favourable reviews, not shown)."
+      },
+      "hz_intercity": {
+        "score": 9.8,
+        "count": 629,
+        "sub": {
+          "clean": 9.8,
+          "amenities": 9.8,
+          "location": 9.8,
+          "service": 9.8
+        },
+        "issues": "Guest Suggestion (3): soundproofing, post-stay service responsiveness. 45 consecutive positive; no negative reviews in past 4 months. Newest reviews (Nov 5-16) all 9.5-10."
       }
     }
   }
