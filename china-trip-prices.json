@@ -81,6 +81,14 @@
       "checkIn": "2026-12-12",
       "checkOut": "2026-12-17",
       "nights": 5
+    },
+    {
+      "key": "gz_m5_vienna",
+      "name": "Vienna Hotel (Beijing Road, Gongyuanqian)",
+      "hotelId": 10344127,
+      "checkIn": "2026-12-12",
+      "checkOut": "2026-12-17",
+      "nights": 5
     }
   ],
   "log": [
@@ -146,10 +154,12 @@
         "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
         "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
         "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11",
-        "gz_h6_yifang": "Seeded from the Trip.com read when H6 was added to china-trip.html (17 Nov evening); hallway-window double; free cancel before 18:00 Dec 12"
+        "gz_h6_yifang": "Seeded from the Trip.com read when H6 was added to china-trip.html (17 Nov evening); hallway-window double; free cancel before 18:00 Dec 12",
+        "gz_m5_vienna": "Seeded from the Trip.com read when M5 was added to china-trip.html (17 Nov evening)"
       },
       "gz_h6_yifang": 238,
-      "gz_h6_yifang_myr": 775
+      "gz_h6_yifang_myr": 775,
+      "gz_m5_vienna": 399
     },
     {
       "date": "2026-11-18",
@@ -182,5 +192,119 @@
       "gz_h7_yifang_dade_myr": 484,
       "gz_h8_linghui_mercure_myr": 745
     }
-  ]
+  ],
+  "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
+  "reviews": {
+    "2026-11-19": {
+      "gz_m5_vienna": {
+        "score": 9.1,
+        "count": 3196,
+        "negative": 140,
+        "sub": {
+          "clean": 9.2,
+          "amenities": 8.9,
+          "location": 9.2,
+          "service": 9.2
+        },
+        "tags": "Easy to get around 393, Friendly front desk 189, Close to metro 130, Strange smell in room 48",
+        "issues": "48 reviews tagged room smell; no breakfast included; some rooms windowless (one guest upgraded free); small rooms. Recent 15 reviews (Oct-Nov) all 8-10, quiet, clean."
+      },
+      "gz_h1_zhipin": {
+        "score": 9.3,
+        "count": 2601,
+        "sub": {
+          "clean": 9.4,
+          "amenities": 9.2,
+          "location": 9.3,
+          "service": 9.3
+        },
+        "issues": "72 'guest suggestion' reviews: renovation and corridor-cleaning noise, dust, slow check-in. Cheapest room has no window."
+      },
+      "gz_h2_marhaus": {
+        "score": 9.2,
+        "count": 6723,
+        "negative": 92,
+        "sub": {
+          "clean": 9.3,
+          "amenities": 9.0,
+          "location": 9.2,
+          "service": 9.3
+        },
+        "tags": "River view 367, Delicious breakfast 316",
+        "issues": "Very small rooms/vanity, river view sometimes blocked, insecticide smell in lobby, leaky showerhead, no food delivery to rooms."
+      },
+      "gz_h3_echarmplus": {
+        "score": 9.6,
+        "count": 4263,
+        "sub": {
+          "clean": 9.5,
+          "amenities": 9.5,
+          "location": 9.5,
+          "service": 9.7
+        },
+        "issues": "26 positive in a row. One 2.5 review (Aug): refurbished old building, toilet odour, mould, dust. One key card per room; small rooms."
+      },
+      "gz_h5_libai": {
+        "score_5pt": 4.7,
+        "count_ctrip": 189,
+        "sub_5pt": {
+          "clean": 4.8,
+          "facilities": 4.7,
+          "environment": 4.7,
+          "service": 4.8
+        },
+        "issues": "Odour tag 4 (room change fixed it); 10+ min walk to metro. Free laundry, robot delivery praised."
+      },
+      "gz_p1_paco": {
+        "score": 9.1,
+        "count": 2230,
+        "negative": 58,
+        "sub": {
+          "clean": 9.0,
+          "amenities": 8.8,
+          "location": 9.1,
+          "service": 9.2
+        },
+        "issues": "Mould smell (5.0, Aug), windowless twin rooms, plumbing noise till 2am, leaks, simple breakfast."
+      },
+      "gz_h6_yifang": {
+        "score": 9.6,
+        "count": 2788,
+        "negative": 34,
+        "sub": {
+          "clean": 9.6,
+          "amenities": 9.5,
+          "location": 9.5,
+          "service": 9.6
+        },
+        "issues": "Location needs taxis/8-10 min to metro; dark streets at night; hallway smoke/beer smell; street noise; little English."
+      },
+      "gz_h7_yifang_dade": {
+        "score": 9.1,
+        "count": 1191,
+        "negative": 38,
+        "sub": {
+          "clean": 9.0,
+          "amenities": 9.0,
+          "location": 9.0,
+          "service": 9.2
+        },
+        "tags": "Large rooms 101",
+        "issues": "4.0 (4 Nov): dirty bathroom/towels; worn furnishings; lift via separate entrance 2-3 shops from lobby."
+      },
+      "gz_h8_linghui_mercure": {
+        "score": 9.3,
+        "count": 2842,
+        "negative": 44,
+        "sub": {
+          "clean": 9.4,
+          "amenities": 9.2,
+          "location": 9.3,
+          "service": 9.4
+        },
+        "tags": "Near metro 458, Friendly staff 344",
+        "issues": "No complaint text visible on the page (44 less-favourable reviews, not shown)."
+      }
+    }
+  }
 }
