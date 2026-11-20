@@ -1,757 +1,767 @@
 {
-  "note": "Trip.com (sg.trip.com, SGD) totals incl. taxes & fees, cheapest free-cancellation room, 2 adults, 1 room. Logged by the daily price watch.",
-  "hotels": [
-    {
-      "key": "hz_intercity",
-      "name": "IntercityHotel Hangzhou Yuhang Xianlin",
-      "hotelId": 131766270,
-      "checkIn": "2026-12-10",
-      "checkOut": "2026-12-12",
-      "nights": 2,
-      "freeCancelUntil": "2026-12-09 18:00"
-    },
-    {
-      "key": "gz_h1_zhipin",
-      "name": "Zhipin Hotel Guangzhou Beijing Road Pedestrian Street",
-      "hotelId": 115687180,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h2_marhaus",
-      "name": "MARHAUS Hotel (Beijing Road Tian-Zi Pier)",
-      "hotelId": 78550651,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h3_echarmplus",
-      "name": "Echarm Plus Hotel (Beijing Road Dafo Temple)",
-      "hotelId": 101494125,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h4_citycomfort",
-      "name": "City Comfort Inn (Beijing Road Ximenkou)",
-      "hotelId": 133627082,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h5_libai",
-      "name": "Libai Hotel (SYS Memorial Hall)",
-      "hotelId": 134622921,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_p1_paco",
-      "name": "Paco Hotel (Guangzhou Beijing Road Metro Station)",
-      "hotelId": 65572221,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h6_yifang",
-      "name": "YIFANG Apartment (Changdi Road)",
-      "hotelId": 113898020,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h7_yifang_dade",
-      "name": "Yifang Apartment (Dade Road, Haizhu Square)",
-      "hotelId": 121070203,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_h8_linghui_mercure",
-      "name": "Linghui Mercure (Beijing Road Tianzi Wharf)",
-      "hotelId": 115802897,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "gz_m5_vienna",
-      "name": "Vienna Hotel (Beijing Road, Gongyuanqian)",
-      "hotelId": 10344127,
-      "checkIn": "2026-12-12",
-      "checkOut": "2026-12-17",
-      "nights": 5
-    },
-    {
-      "key": "sz_s1",
-      "name": "Zunxiang·Yaju (Futian Convention & Exhibition Center)",
-      "hotelId": 116903449,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s2",
-      "name": "Bai Lai Ya Ju (Futian Convention & Exhibition Center)",
-      "hotelId": 117752561,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s3",
-      "name": "Laika Hotel (Convention & Exhibition Center, Gangxia)",
-      "hotelId": 130277725,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s4",
-      "name": "MUKER Hotel (Futian Convention & Exhibition Center)",
-      "hotelId": 131633691,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s5",
-      "name": "Shiyatu Vista Skyline Cinema-style Suite (Gangxia)",
-      "hotelId": 116901949,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s6",
-      "name": "Langhua Audio-Video High-Altitude Skyline (Gangxia)",
-      "hotelId": 115996086,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s7",
-      "name": "Wuyi Hotel (Convention & Exhibition Center)",
-      "hotelId": 103836085,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s8",
-      "name": "Silaton Hotel (Convention & Exhibition Center, Futian Station)",
-      "hotelId": 131775315,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s9",
-      "name": "Investment Building Hotel",
-      "hotelId": 474613,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    },
-    {
-      "key": "sz_s10",
-      "name": "Chenduo Hotel (Futian Convention Center Fumin Metro)",
-      "hotelId": 134008948,
-      "checkIn": "2026-12-17",
-      "checkOut": "2026-12-21",
-      "nights": 4
-    }
-  ],
-  "log": [
-    {
-      "date": "2026-11-15",
-      "hz_intercity": 150,
-      "gz_h1_zhipin": 258,
-      "gz_h2_marhaus": 245,
-      "gz_h3_echarmplus": 376,
-      "gz_h4_citycomfort": 249,
-      "gz_h5_libai": 280,
-      "gz_p1_paco": 424
-    },
-    {
-      "date": "2026-11-16",
-      "hz_intercity": 143,
-      "hz_intercity_myr": 462,
-      "gz_h1_zhipin": 265,
-      "gz_h1_zhipin_myr": 861,
-      "gz_h2_marhaus": 253,
-      "gz_h2_marhaus_myr": 822,
-      "gz_h3_echarmplus": 384,
-      "gz_h3_echarmplus_myr": 1237,
-      "gz_h4_citycomfort": 254,
-      "gz_h4_citycomfort_myr": 807,
-      "gz_h5_libai": 288,
-      "gz_h5_libai_myr": 933,
-      "gz_p1_paco": 431,
-      "gz_p1_paco_myr": 1389,
-      "notes": {
-        "fx_wise_sgd_myr": 3.177,
-        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9",
-        "gz_h1_zhipin": "free cancel before 18:00 Dec 12",
-        "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
-        "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
-        "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
-        "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
-        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11"
-      }
-    },
-    {
-      "date": "2026-11-17",
-      "hz_intercity": 143,
-      "hz_intercity_myr": 462,
-      "gz_h1_zhipin": 265,
-      "gz_h1_zhipin_myr": 862,
-      "gz_h2_marhaus": 253,
-      "gz_h2_marhaus_myr": 822,
-      "gz_h3_echarmplus": 384,
-      "gz_h3_echarmplus_myr": 1237,
-      "gz_h4_citycomfort": 254,
-      "gz_h4_citycomfort_myr": 807,
-      "gz_h5_libai": 288,
-      "gz_h5_libai_myr": 933,
-      "gz_p1_paco": 431,
-      "gz_p1_paco_myr": 1389,
-      "notes": {
-        "fx_wise_sgd_myr": 3.1771,
-        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9",
-        "gz_h1_zhipin": "free cancel before 18:00 Dec 12",
-        "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
-        "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
-        "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
-        "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
-        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11",
-        "gz_h6_yifang": "Seeded from the Trip.com read when H6 was added to china-trip.html (17 Nov evening); hallway-window double; free cancel before 18:00 Dec 12",
-        "gz_m5_vienna": "Seeded from the Trip.com read when M5 was added to china-trip.html (17 Nov evening)"
-      },
-      "gz_h6_yifang": 238,
-      "gz_h6_yifang_myr": 775,
-      "gz_m5_vienna": 399
-    },
-    {
-      "date": "2026-11-18",
-      "hz_intercity": 143,
-      "hz_intercity_myr": 462,
-      "gz_h1_zhipin": 265,
-      "gz_h1_zhipin_myr": 862,
-      "gz_h2_marhaus": 252,
-      "gz_h2_marhaus_myr": 822,
-      "gz_h3_echarmplus": 383,
-      "gz_h3_echarmplus_myr": 1237,
-      "gz_h4_citycomfort": 265,
-      "gz_h4_citycomfort_myr": 862,
-      "gz_h5_libai": 287,
-      "gz_h5_libai_myr": 933,
-      "gz_p1_paco": 431,
-      "gz_p1_paco_myr": 1389,
-      "notes": {
-        "fx_wise_sgd_myr": 3.1762,
-        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9; 'Our last 3!' only on pricier 3-adult room",
-        "gz_h1_zhipin": "Tatami Double, incl. breakfast; free cancel before 18:00 Dec 12",
-        "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
-        "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12; 'Our last 2!' on pricier rooms only",
-        "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
-        "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
-        "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11; 'Our last 4!' on pricier rooms",
-        "gz_h7_yifang_dade": "RM only, from Prof Tan's Trip.com screenshot 18 Nov: Elegant Queen, free cancellation",
-        "gz_h8_linghui_mercure": "RM only, from Prof Tan's Trip.com screenshot 18 Nov: Queen Room with audio-visual, free cancellation"
-      },
-      "gz_h7_yifang_dade_myr": 484,
-      "gz_h8_linghui_mercure_myr": 745
-    },
-    {
-      "date": "2026-11-19",
-      "hz_intercity": 143,
-      "notes": {
-        "run": "INCOMPLETE: Chrome extension disconnected after the first page; only Intercity SGD read. No MYR totals, no Guangzhou prices today.",
-        "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144); free cancel before 18:00 Dec 9; 'Our last 3!' only on pricier Family Room"
-      }
-    },
-    {
-      "date": "2026-11-19",
-      "source": "Shenzhen list baseline (Trip.com list page totals, SGD and MYR)",
-      "sz_s1": 246,
-      "sz_s1_myr": 804,
-      "sz_s2": 234,
-      "sz_s2_myr": 767,
-      "sz_s3": 259,
-      "sz_s3_myr": 847,
-      "sz_s4": 247,
-      "sz_s4_myr": 808,
-      "sz_s5": 273,
-      "sz_s5_myr": 890,
-      "sz_s6": 319,
-      "sz_s6_myr": 1036,
-      "sz_s7": 286,
-      "sz_s7_myr": 931,
-      "sz_s8": 250,
-      "sz_s8_myr": 816,
-      "sz_s9": 321,
-      "sz_s9_myr": 1041,
-      "sz_s10": 238,
-      "sz_s10_myr": 778
-    },
-    {
-      "date": "2026-11-20",
-      "hz_intercity": 143,
-      "hz_intercity_myr": 464,
-      "gz_h1_zhipin": 265,
-      "gz_h1_zhipin_myr": 865,
-      "gz_h2_marhaus": 252,
-      "gz_h2_marhaus_myr": 825,
-      "gz_h3_echarmplus": 383,
-      "gz_h3_echarmplus_myr": 1244,
-      "gz_h4_citycomfort": 265,
-      "gz_h4_citycomfort_myr": 866,
-      "gz_h5_libai": 318,
-      "gz_h5_libai_myr": 1035,
-      "gz_p1_paco": 430,
-      "gz_p1_paco_myr": 1395,
-      "gz_h6_yifang": 238,
-      "gz_h6_yifang_myr": 779,
-      "gz_h7_yifang_dade": 148,
-      "gz_h7_yifang_dade_myr": 482,
-      "gz_h8_linghui_mercure": 227,
-      "gz_h8_linghui_mercure_myr": 744,
-      "gz_m5_vienna": 399,
-      "gz_m5_vienna_myr": 1295,
-      "sz_s1": 246,
-      "sz_s1_myr": 804,
-      "sz_s2": 234,
-      "sz_s2_myr": 767,
-      "sz_s3": 259,
-      "sz_s3_myr": 847,
-      "sz_s4": 247,
-      "sz_s4_myr": 808,
-      "sz_s5": 272,
-      "sz_s5_myr": 890,
-      "sz_s6": 318,
-      "sz_s6_myr": 1036,
-      "sz_s7": 285,
-      "sz_s7_myr": 931,
-      "sz_s8": 249,
-      "sz_s8_myr": 816,
-      "sz_s9": 320,
-      "sz_s9_myr": 1041,
-      "sz_s10": 245,
-      "sz_s10_myr": 804,
-      "notes": {
-        "fx_wise_sgd_myr": 3.187,
-        "source": "Trip.com detail pages (SGD and MYR), cheapest free-cancellation rate. Shenzhen 11-19 baseline was list-page totals.",
-        "hz_intercity": "Superior Queen (eSIM bundle); FC before 18:00 Dec 9; 'Our last 3!' only on pricier Family Room",
-        "gz_h1_zhipin": "Tatami Double incl. breakfast; FC before 18:00 Dec 12",
-        "gz_h2_marhaus": "Cozy Queen; FC before 18:00 Dec 12; 'Our last 5!' on S$356 room",
-        "gz_h3_echarmplus": "FC before 20:00 Dec 12; 'Our last 2!' on pricier rooms",
-        "gz_h4_citycomfort": "Smart AV Double; 'Our last 1!' on cheapest room; FC before 18:00 Dec 12",
-        "gz_h5_libai": "Cozy Double; FC before 23:59 Dec 12; up S$31 vs 11-18",
-        "gz_p1_paco": "Superior King; FC before 23:59 Dec 11; 'Our last 4!' on pricier rooms",
-        "gz_h6_yifang": "Leisure Exceptional Double; 'Our last 3!' on cheapest; FC before 18:00 Dec 12",
-        "gz_h7_yifang_dade": "Elegant Queen; FC before 18:00 Dec 12; 'Our last 1!' on S$156 room",
-        "gz_h8_linghui_mercure": "Queen AV; FC before 18:00 Dec 12; 'Our last 3!' on pricier rooms",
-        "gz_m5_vienna": "FC before 18:00 Dec 12; 'Our last 1!' on S$398/S$400 rates",
-        "sz_s1": "FC before 20:00 Dec 17",
-        "sz_s2": "FC before 20:00 Dec 17; 'Our last 4/5' on pricier",
-        "sz_s3": "Cozy AV Double; 'Our last 1!' on cheapest; FC before 18:00 Dec 17",
-        "sz_s4": "Dreamscape Cozy Double; 'Our last 2!' on cheapest; FC before 18:00 Dec 17",
-        "sz_s5": "FC before 22:00 Dec 17",
-        "sz_s6": "Queen; FC before 18:00 Dec 17",
-        "sz_s7": "Boutique Queen; FC before 22:00 Dec 17",
-        "sz_s8": "Quiet Projection King; FC before 18:00 Dec 17",
-        "sz_s9": "Standard Queen; FC before 15:00 Dec 16; 'Our last 2/4' on S$327",
-        "sz_s10": "S$237/RM778 cheapest has only a 30-minute cancellation window; logged true FC rate S$245/RM804 (FC before 18:00 Dec 17); 'Our last 1!' on all rates"
-      }
-    }
-  ],
-  "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
-  "reviews": {
-    "2026-11-19": {
-      "gz_m5_vienna": {
-        "score": 9.1,
-        "count": 3196,
-        "negative": 140,
-        "sub": {
-          "clean": 9.2,
-          "amenities": 8.9,
-          "location": 9.2,
-          "service": 9.2
-        },
-        "tags": "Easy to get around 393, Friendly front desk 189, Close to metro 130, Strange smell in room 48",
-        "issues": "48 reviews tagged room smell; no breakfast included; some rooms windowless (one guest upgraded free); small rooms. Recent 15 reviews (Oct-Nov) all 8-10, quiet, clean."
-      },
-      "gz_h1_zhipin": {
-        "score": 9.3,
-        "count": 2601,
-        "sub": {
-          "clean": 9.4,
-          "amenities": 9.2,
-          "location": 9.3,
-          "service": 9.3
-        },
-        "issues": "72 'guest suggestion' reviews: renovation and corridor-cleaning noise, dust, slow check-in. Cheapest room has no window."
-      },
-      "gz_h2_marhaus": {
-        "score": 9.2,
-        "count": 6723,
-        "negative": 92,
-        "sub": {
-          "clean": 9.3,
-          "amenities": 9.0,
-          "location": 9.2,
-          "service": 9.3
-        },
-        "tags": "River view 367, Delicious breakfast 316",
-        "issues": "Very small rooms/vanity, river view sometimes blocked, insecticide smell in lobby, leaky showerhead, no food delivery to rooms."
-      },
-      "gz_h3_echarmplus": {
-        "score": 9.6,
-        "count": 4263,
-        "sub": {
-          "clean": 9.5,
-          "amenities": 9.5,
-          "location": 9.5,
-          "service": 9.7
-        },
-        "issues": "26 positive in a row. One 2.5 review (Aug): refurbished old building, toilet odour, mould, dust. One key card per room; small rooms."
-      },
-      "gz_h5_libai": {
-        "score_5pt": 4.7,
-        "count_ctrip": 189,
-        "sub_5pt": {
-          "clean": 4.8,
-          "facilities": 4.7,
-          "environment": 4.7,
-          "service": 4.8
-        },
-        "issues": "Odour tag 4 (room change fixed it); 10+ min walk to metro. Free laundry, robot delivery praised."
-      },
-      "gz_p1_paco": {
-        "score": 9.1,
-        "count": 2230,
-        "negative": 58,
-        "sub": {
-          "clean": 9.0,
-          "amenities": 8.8,
-          "location": 9.1,
-          "service": 9.2
-        },
-        "issues": "Mould smell (5.0, Aug), windowless twin rooms, plumbing noise till 2am, leaks, simple breakfast."
-      },
-      "gz_h6_yifang": {
-        "score": 9.6,
-        "count": 2788,
-        "negative": 34,
-        "sub": {
-          "clean": 9.6,
-          "amenities": 9.5,
-          "location": 9.5,
-          "service": 9.6
-        },
-        "issues": "Location needs taxis/8-10 min to metro; dark streets at night; hallway smoke/beer smell; street noise; little English."
-      },
-      "gz_h7_yifang_dade": {
-        "score": 9.1,
-        "count": 1191,
-        "negative": 38,
-        "sub": {
-          "clean": 9.0,
-          "amenities": 9.0,
-          "location": 9.0,
-          "service": 9.2
-        },
-        "tags": "Large rooms 101",
-        "issues": "4.0 (4 Nov): dirty bathroom/towels; worn furnishings; lift via separate entrance 2-3 shops from lobby."
-      },
-      "gz_h8_linghui_mercure": {
-        "score": 9.3,
-        "count": 2842,
-        "negative": 44,
-        "sub": {
-          "clean": 9.4,
-          "amenities": 9.2,
-          "location": 9.3,
-          "service": 9.4
-        },
-        "tags": "Near metro 458, Friendly staff 344",
-        "issues": "No complaint text visible on the page (44 less-favourable reviews, not shown)."
-      },
-      "hz_intercity": {
-        "score": 9.8,
-        "count": 629,
-        "sub": {
-          "clean": 9.8,
-          "amenities": 9.8,
-          "location": 9.8,
-          "service": 9.8
-        },
-        "issues": "Guest Suggestion (3): soundproofing, post-stay service responsiveness. 45 consecutive positive; no negative reviews in past 4 months. Newest reviews (Nov 5-16) all 9.5-10."
-      }
-    },
-    "2026-11-20": {
-      "hz_intercity": {
-        "score": 9.8,
-        "count": 629,
-        "negative": null,
-        "sub": {
-          "clean": 9.8,
-          "amenities": 9.8,
-          "location": 9.8,
-          "service": 9.8
-        },
-        "issues": "Guest Suggestion (3): soundproofing, post-stay service. No negative in 4 months; newest Nov 5-16 all 9.5-10."
-      },
-      "gz_h1_zhipin": {
-        "score": 9.3,
-        "count": 2765,
-        "negative": null,
-        "sub": {
-          "clean": 9.3,
-          "amenities": 9.2,
-          "location": 9.2,
-          "service": 9.3
-        },
-        "issues": "Guest Suggestion 74: renovation/corridor-cleaning noise, dusty rooms, service. Newest 9 reviews 9.5-10."
-      },
-      "gz_h2_marhaus": {
-        "score": 9.2,
-        "count": 6648,
-        "negative": null,
-        "sub": {
-          "clean": 9.3,
-          "amenities": 9.0,
-          "location": 9.2,
-          "service": 9.3
-        },
-        "issues": "Guest Suggestion 93: very small rooms, bathroom, cleanliness, front desk. Newest 7.5-10."
-      },
-      "gz_h3_echarmplus": {
-        "score": 9.5,
-        "count": 4984,
-        "negative": null,
-        "sub": {
-          "clean": 9.5,
-          "amenities": 9.4,
-          "location": 9.5,
-          "service": 9.6
-        },
-        "issues": "Score down 9.6->9.5. Guest Suggestion 63: hygiene, staff, malfunctioning toilets. Two low reviews Oct 30 (4.5 hygiene; 4.0 outdated room). Newest Nov all 10."
-      },
-      "gz_h4_citycomfort": {
-        "score": 9.6,
-        "count": 429,
-        "negative": null,
-        "sub": {
-          "clean": 9.7,
-          "amenities": 9.6,
-          "location": 9.5,
-          "service": 9.6
-        },
-        "issues": "Guest Suggestion 4: takeout wait, lift waits. Newest 9.5-10."
-      },
-      "gz_h5_libai": {
-        "score": 9.5,
-        "count": 190,
-        "negative": null,
-        "sub": {
-          "clean": 9.6,
-          "amenities": 9.5,
-          "location": 9.5,
-          "service": 9.6
-        },
-        "issues": "Trip.com 10-pt now shown. No negative reviews in past 2 months; newest 9-10."
-      },
-      "gz_p1_paco": {
-        "score": 9.1,
-        "count": 2228,
-        "negative": null,
-        "sub": {
-          "clean": 9.0,
-          "amenities": 8.9,
-          "location": 9.2,
-          "service": 9.3
-        },
-        "issues": "Guest Suggestion 58: cleanliness, odours, soundproofing, room size. Newest 9.5-10."
-      },
-      "gz_h6_yifang": {
-        "score": 9.6,
-        "count": 2786,
-        "negative": null,
-        "sub": {
-          "clean": 9.6,
-          "amenities": 9.5,
-          "location": 9.5,
-          "service": 9.6
-        },
-        "issues": "Guest Suggestion 34: thin walls/noise, broken facilities, ignored requests, review-for-perks. NEW 7.0 (Nov 11) thin walls; 6.0 (Nov 3) location."
-      },
-      "gz_h7_yifang_dade": {
-        "score": 9.1,
-        "count": 1191,
-        "negative": null,
-        "sub": {
-          "clean": 9.0,
-          "amenities": 9.0,
-          "location": 9.0,
-          "service": 9.2
-        },
-        "issues": "Guest Suggestion 38: sound, hygiene, service. 4.0 (Nov 5) dirty toilet/towels (already known)."
-      },
-      "gz_h8_linghui_mercure": {
-        "score": 9.3,
-        "count": 2842,
-        "negative": null,
-        "sub": {
-          "clean": 9.4,
-          "amenities": 9.2,
-          "location": 9.3,
-          "service": 9.4
-        },
-        "issues": "Guest Suggestion 44: sound, hygiene, facilities. Newest Nov 9-10."
-      },
-      "gz_m5_vienna": {
-        "score": 9.1,
-        "count": 3200,
-        "negative": null,
-        "sub": {
-          "clean": 9.2,
-          "amenities": 9.0,
-          "location": 9.2,
-          "service": 9.2
-        },
-        "issues": "Guest Suggestion 140: staff, sound, outdated, odours, room allocation. Newest 8-10."
-      },
-      "sz_s1": {
-        "score": 9.4,
-        "count": 7444,
-        "negative": null,
-        "sub": {
-          "clean": 9.4,
-          "amenities": 9.2,
-          "location": 9.4,
-          "service": 9.4
-        },
-        "issues": "GS 77: hygiene, building signage, staff. Newest all 10."
-      },
-      "sz_s2": {
-        "score": 9.2,
-        "count": 6211,
-        "negative": null,
-        "sub": {
-          "clean": 9.2,
-          "amenities": 9.1,
-          "location": 9.4,
-          "service": 9.3
-        },
-        "issues": "GS 78: hygiene, photos mismatch, soundproofing, rude staff. Newest all 10."
-      },
-      "sz_s3": {
-        "score": 9.3,
-        "count": 2649,
-        "negative": null,
-        "sub": {
-          "clean": 9.4,
-          "amenities": 9.1,
-          "location": 9.3,
-          "service": 9.4
-        },
-        "issues": "GS 45: sound, small rooms, toilet stains. Newest 9-10."
-      },
-      "sz_s4": {
-        "score": 9.4,
-        "count": 1797,
-        "negative": null,
-        "sub": {
-          "clean": 9.6,
-          "amenities": 9.4,
-          "location": 9.4,
-          "service": 9.4
-        },
-        "issues": "GS 30: maintenance, cleanliness. 7.0 (Nov 8) 'rebranded, not new'. No negative in 2 months."
-      },
-      "sz_s5": {
-        "score": 9.5,
-        "count": 3817,
-        "negative": null,
-        "sub": {
-          "clean": 9.5,
-          "amenities": 9.4,
-          "location": 9.5,
-          "service": 9.5
-        },
-        "issues": "GS 65: facilities, hygiene, cramped, false marketing. Newest 9-10."
-      },
-      "sz_s6": {
-        "score": 9.6,
-        "count": 26462,
-        "negative": null,
-        "sub": {
-          "clean": 9.6,
-          "amenities": 9.5,
-          "location": 9.6,
-          "service": 9.6
-        },
-        "issues": "GS 223: room smaller than photos, hard to find. 6.0 (Nov 14) tiny converted-apartment room."
-      },
-      "sz_s7": {
-        "score": 9.5,
-        "count": 1303,
-        "negative": null,
-        "sub": {
-          "clean": 9.5,
-          "amenities": 9.4,
-          "location": 9.5,
-          "service": 9.6
-        },
-        "issues": "GS 22: sound, hygiene, cold breakfast. Newest 7.5-10."
-      },
-      "sz_s8": {
-        "score": 9.1,
-        "count": 1196,
-        "negative": null,
-        "sub": {
-          "clean": 9.2,
-          "amenities": 9.0,
-          "location": 9.0,
-          "service": 9.2
-        },
-        "issues": "GS 57: sound, small ill-maintained rooms, hygiene. 5.0 (Oct 21) stained sheets/towels, broken dryer; 2.0 (Aug 22)."
-      },
-      "sz_s9": {
-        "score": 9.1,
-        "count": 735,
-        "negative": null,
-        "sub": {
-          "clean": 9.2,
-          "amenities": 8.6,
-          "location": 9.2,
-          "service": 9.3
-        },
-        "issues": "GS 25: old facilities, unfriendly front desk, bathroom odour, slow drains."
-      },
-      "sz_s10": {
-        "score": 9.0,
-        "count": 923,
-        "negative": null,
-        "sub": {
-          "clean": 9.3,
-          "amenities": 8.8,
-          "location": 8.9,
-          "service": 9.2
-        },
-        "issues": "GS 31: sound, small rooms, little/no natural light, odours, front desk. Newest 7.7-10."
-      }
-    }
+ "note": "Trip.com (sg.trip.com, SGD) totals incl. taxes & fees, cheapest free-cancellation room, 2 adults, 1 room. Logged by the daily price watch.",
+ "hotels": [
+  {
+   "key": "hz_intercity",
+   "name": "IntercityHotel Hangzhou Yuhang Xianlin",
+   "hotelId": 131766270,
+   "checkIn": "2026-12-10",
+   "checkOut": "2026-12-12",
+   "nights": 2,
+   "freeCancelUntil": "2026-12-09 18:00"
+  },
+  {
+   "key": "gz_h1_zhipin",
+   "name": "Zhipin Hotel Guangzhou Beijing Road Pedestrian Street",
+   "hotelId": 115687180,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h2_marhaus",
+   "name": "MARHAUS Hotel (Beijing Road Tian-Zi Pier)",
+   "hotelId": 78550651,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h3_echarmplus",
+   "name": "Echarm Plus Hotel (Beijing Road Dafo Temple)",
+   "hotelId": 101494125,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h4_citycomfort",
+   "name": "City Comfort Inn (Beijing Road Ximenkou)",
+   "hotelId": 133627082,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h5_libai",
+   "name": "Libai Hotel (SYS Memorial Hall)",
+   "hotelId": 134622921,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_p1_paco",
+   "name": "Paco Hotel (Guangzhou Beijing Road Metro Station)",
+   "hotelId": 65572221,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h6_yifang",
+   "name": "YIFANG Apartment (Changdi Road)",
+   "hotelId": 113898020,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h7_yifang_dade",
+   "name": "Yifang Apartment (Dade Road, Haizhu Square)",
+   "hotelId": 121070203,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_h8_linghui_mercure",
+   "name": "Linghui Mercure (Beijing Road Tianzi Wharf)",
+   "hotelId": 115802897,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "gz_m5_vienna",
+   "name": "Vienna Hotel (Beijing Road, Gongyuanqian)",
+   "hotelId": 10344127,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5
+  },
+  {
+   "key": "sz_s1",
+   "name": "Zunxiang·Yaju (Futian Convention & Exhibition Center)",
+   "hotelId": 116903449,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s2",
+   "name": "Bai Lai Ya Ju (Futian Convention & Exhibition Center)",
+   "hotelId": 117752561,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s3",
+   "name": "Laika Hotel (Convention & Exhibition Center, Gangxia)",
+   "hotelId": 130277725,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s4",
+   "name": "MUKER Hotel (Futian Convention & Exhibition Center)",
+   "hotelId": 131633691,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s5",
+   "name": "Shiyatu Vista Skyline Cinema-style Suite (Gangxia)",
+   "hotelId": 116901949,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s6",
+   "name": "Langhua Audio-Video High-Altitude Skyline (Gangxia)",
+   "hotelId": 115996086,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s7",
+   "name": "Wuyi Hotel (Convention & Exhibition Center)",
+   "hotelId": 103836085,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s8",
+   "name": "Silaton Hotel (Convention & Exhibition Center, Futian Station)",
+   "hotelId": 131775315,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s9",
+   "name": "Investment Building Hotel",
+   "hotelId": 474613,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s10",
+   "name": "Chenduo Hotel (Futian Convention Center Fumin Metro)",
+   "hotelId": 134008948,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s11",
+   "name": "Star Hotel (Shenzhen Luohu Wanxiang Shijia Branch)",
+   "hotelId": 119847337,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
   }
+ ],
+ "log": [
+  {
+   "date": "2026-11-15",
+   "hz_intercity": 150,
+   "gz_h1_zhipin": 258,
+   "gz_h2_marhaus": 245,
+   "gz_h3_echarmplus": 376,
+   "gz_h4_citycomfort": 249,
+   "gz_h5_libai": 280,
+   "gz_p1_paco": 424
+  },
+  {
+   "date": "2026-11-16",
+   "hz_intercity": 143,
+   "hz_intercity_myr": 462,
+   "gz_h1_zhipin": 265,
+   "gz_h1_zhipin_myr": 861,
+   "gz_h2_marhaus": 253,
+   "gz_h2_marhaus_myr": 822,
+   "gz_h3_echarmplus": 384,
+   "gz_h3_echarmplus_myr": 1237,
+   "gz_h4_citycomfort": 254,
+   "gz_h4_citycomfort_myr": 807,
+   "gz_h5_libai": 288,
+   "gz_h5_libai_myr": 933,
+   "gz_p1_paco": 431,
+   "gz_p1_paco_myr": 1389,
+   "notes": {
+    "fx_wise_sgd_myr": 3.177,
+    "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9",
+    "gz_h1_zhipin": "free cancel before 18:00 Dec 12",
+    "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
+    "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
+    "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
+    "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
+    "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11"
+   }
+  },
+  {
+   "date": "2026-11-17",
+   "hz_intercity": 143,
+   "hz_intercity_myr": 462,
+   "gz_h1_zhipin": 265,
+   "gz_h1_zhipin_myr": 862,
+   "gz_h2_marhaus": 253,
+   "gz_h2_marhaus_myr": 822,
+   "gz_h3_echarmplus": 384,
+   "gz_h3_echarmplus_myr": 1237,
+   "gz_h4_citycomfort": 254,
+   "gz_h4_citycomfort_myr": 807,
+   "gz_h5_libai": 288,
+   "gz_h5_libai_myr": 933,
+   "gz_p1_paco": 431,
+   "gz_p1_paco_myr": 1389,
+   "notes": {
+    "fx_wise_sgd_myr": 3.1771,
+    "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9",
+    "gz_h1_zhipin": "free cancel before 18:00 Dec 12",
+    "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
+    "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12",
+    "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
+    "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
+    "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11",
+    "gz_h6_yifang": "Seeded from the Trip.com read when H6 was added to china-trip.html (17 Nov evening); hallway-window double; free cancel before 18:00 Dec 12",
+    "gz_m5_vienna": "Seeded from the Trip.com read when M5 was added to china-trip.html (17 Nov evening)"
+   },
+   "gz_h6_yifang": 238,
+   "gz_h6_yifang_myr": 775,
+   "gz_m5_vienna": 399
+  },
+  {
+   "date": "2026-11-18",
+   "hz_intercity": 143,
+   "hz_intercity_myr": 462,
+   "gz_h1_zhipin": 265,
+   "gz_h1_zhipin_myr": 862,
+   "gz_h2_marhaus": 252,
+   "gz_h2_marhaus_myr": 822,
+   "gz_h3_echarmplus": 383,
+   "gz_h3_echarmplus_myr": 1237,
+   "gz_h4_citycomfort": 265,
+   "gz_h4_citycomfort_myr": 862,
+   "gz_h5_libai": 287,
+   "gz_h5_libai_myr": 933,
+   "gz_p1_paco": 431,
+   "gz_p1_paco_myr": 1389,
+   "notes": {
+    "fx_wise_sgd_myr": 3.1762,
+    "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144/RM465); free cancel before 18:00 Dec 9; 'Our last 3!' only on pricier 3-adult room",
+    "gz_h1_zhipin": "Tatami Double, incl. breakfast; free cancel before 18:00 Dec 12",
+    "gz_h2_marhaus": "Cozy Queen; free cancel before 18:00 Dec 12",
+    "gz_h3_echarmplus": "Special Queen; free cancel before 20:00 Dec 12; 'Our last 2!' on pricier rooms only",
+    "gz_h4_citycomfort": "Smart Audio-Visual Double; 'Our last 1!' on cheapest room; free cancel before 18:00 Dec 12",
+    "gz_h5_libai": "Cozy Double; free cancel before 23:59 Dec 12",
+    "gz_p1_paco": "Superior King; free cancel before 23:59 Dec 11; 'Our last 4!' on pricier rooms",
+    "gz_h7_yifang_dade": "RM only, from Prof Tan's Trip.com screenshot 18 Nov: Elegant Queen, free cancellation",
+    "gz_h8_linghui_mercure": "RM only, from Prof Tan's Trip.com screenshot 18 Nov: Queen Room with audio-visual, free cancellation"
+   },
+   "gz_h7_yifang_dade_myr": 484,
+   "gz_h8_linghui_mercure_myr": 745
+  },
+  {
+   "date": "2026-11-19",
+   "hz_intercity": 143,
+   "notes": {
+    "run": "INCOMPLETE: Chrome extension disconnected after the first page; only Intercity SGD read. No MYR totals, no Guangzhou prices today.",
+    "hz_intercity": "Superior Queen, cheapest rate bundles eSIM package (no-package rate S$144); free cancel before 18:00 Dec 9; 'Our last 3!' only on pricier Family Room"
+   }
+  },
+  {
+   "date": "2026-11-19",
+   "source": "Shenzhen list baseline (Trip.com list page totals, SGD and MYR)",
+   "sz_s1": 246,
+   "sz_s1_myr": 804,
+   "sz_s2": 234,
+   "sz_s2_myr": 767,
+   "sz_s3": 259,
+   "sz_s3_myr": 847,
+   "sz_s4": 247,
+   "sz_s4_myr": 808,
+   "sz_s5": 273,
+   "sz_s5_myr": 890,
+   "sz_s6": 319,
+   "sz_s6_myr": 1036,
+   "sz_s7": 286,
+   "sz_s7_myr": 931,
+   "sz_s8": 250,
+   "sz_s8_myr": 816,
+   "sz_s9": 321,
+   "sz_s9_myr": 1041,
+   "sz_s10": 238,
+   "sz_s10_myr": 778
+  },
+  {
+   "date": "2026-11-20",
+   "hz_intercity": 143,
+   "hz_intercity_myr": 464,
+   "gz_h1_zhipin": 265,
+   "gz_h1_zhipin_myr": 865,
+   "gz_h2_marhaus": 252,
+   "gz_h2_marhaus_myr": 825,
+   "gz_h3_echarmplus": 383,
+   "gz_h3_echarmplus_myr": 1244,
+   "gz_h4_citycomfort": 265,
+   "gz_h4_citycomfort_myr": 866,
+   "gz_h5_libai": 318,
+   "gz_h5_libai_myr": 1035,
+   "gz_p1_paco": 430,
+   "gz_p1_paco_myr": 1395,
+   "gz_h6_yifang": 238,
+   "gz_h6_yifang_myr": 779,
+   "gz_h7_yifang_dade": 148,
+   "gz_h7_yifang_dade_myr": 482,
+   "gz_h8_linghui_mercure": 227,
+   "gz_h8_linghui_mercure_myr": 744,
+   "gz_m5_vienna": 399,
+   "gz_m5_vienna_myr": 1295,
+   "sz_s1": 246,
+   "sz_s1_myr": 804,
+   "sz_s2": 234,
+   "sz_s2_myr": 767,
+   "sz_s3": 259,
+   "sz_s3_myr": 847,
+   "sz_s4": 247,
+   "sz_s4_myr": 808,
+   "sz_s5": 272,
+   "sz_s5_myr": 890,
+   "sz_s6": 318,
+   "sz_s6_myr": 1036,
+   "sz_s7": 285,
+   "sz_s7_myr": 931,
+   "sz_s8": 249,
+   "sz_s8_myr": 816,
+   "sz_s9": 320,
+   "sz_s9_myr": 1041,
+   "sz_s10": 245,
+   "sz_s10_myr": 804,
+   "notes": {
+    "fx_wise_sgd_myr": 3.187,
+    "source": "Trip.com detail pages (SGD and MYR), cheapest free-cancellation rate. Shenzhen 11-19 baseline was list-page totals.",
+    "hz_intercity": "Superior Queen (eSIM bundle); FC before 18:00 Dec 9; 'Our last 3!' only on pricier Family Room",
+    "gz_h1_zhipin": "Tatami Double incl. breakfast; FC before 18:00 Dec 12",
+    "gz_h2_marhaus": "Cozy Queen; FC before 18:00 Dec 12; 'Our last 5!' on S$356 room",
+    "gz_h3_echarmplus": "FC before 20:00 Dec 12; 'Our last 2!' on pricier rooms",
+    "gz_h4_citycomfort": "Smart AV Double; 'Our last 1!' on cheapest room; FC before 18:00 Dec 12",
+    "gz_h5_libai": "Cozy Double; FC before 23:59 Dec 12; up S$31 vs 11-18",
+    "gz_p1_paco": "Superior King; FC before 23:59 Dec 11; 'Our last 4!' on pricier rooms",
+    "gz_h6_yifang": "Leisure Exceptional Double; 'Our last 3!' on cheapest; FC before 18:00 Dec 12",
+    "gz_h7_yifang_dade": "Elegant Queen; FC before 18:00 Dec 12; 'Our last 1!' on S$156 room",
+    "gz_h8_linghui_mercure": "Queen AV; FC before 18:00 Dec 12; 'Our last 3!' on pricier rooms",
+    "gz_m5_vienna": "FC before 18:00 Dec 12; 'Our last 1!' on S$398/S$400 rates",
+    "sz_s1": "FC before 20:00 Dec 17",
+    "sz_s2": "FC before 20:00 Dec 17; 'Our last 4/5' on pricier",
+    "sz_s3": "Cozy AV Double; 'Our last 1!' on cheapest; FC before 18:00 Dec 17",
+    "sz_s4": "Dreamscape Cozy Double; 'Our last 2!' on cheapest; FC before 18:00 Dec 17",
+    "sz_s5": "FC before 22:00 Dec 17",
+    "sz_s6": "Queen; FC before 18:00 Dec 17",
+    "sz_s7": "Boutique Queen; FC before 22:00 Dec 17",
+    "sz_s8": "Quiet Projection King; FC before 18:00 Dec 17",
+    "sz_s9": "Standard Queen; FC before 15:00 Dec 16; 'Our last 2/4' on S$327",
+    "sz_s10": "S$237/RM778 cheapest has only a 30-minute cancellation window; logged true FC rate S$245/RM804 (FC before 18:00 Dec 17); 'Our last 1!' on all rates"
+   },
+   "sz_s11": 220,
+   "sz_s11_myr": 703
+  }
+ ],
+ "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
+ "reviews": {
+  "2026-11-19": {
+   "gz_m5_vienna": {
+    "score": 9.1,
+    "count": 3196,
+    "negative": 140,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 8.9,
+     "location": 9.2,
+     "service": 9.2
+    },
+    "tags": "Easy to get around 393, Friendly front desk 189, Close to metro 130, Strange smell in room 48",
+    "issues": "48 reviews tagged room smell; no breakfast included; some rooms windowless (one guest upgraded free); small rooms. Recent 15 reviews (Oct-Nov) all 8-10, quiet, clean."
+   },
+   "gz_h1_zhipin": {
+    "score": 9.3,
+    "count": 2601,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.2,
+     "location": 9.3,
+     "service": 9.3
+    },
+    "issues": "72 'guest suggestion' reviews: renovation and corridor-cleaning noise, dust, slow check-in. Cheapest room has no window."
+   },
+   "gz_h2_marhaus": {
+    "score": 9.2,
+    "count": 6723,
+    "negative": 92,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 9.0,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "tags": "River view 367, Delicious breakfast 316",
+    "issues": "Very small rooms/vanity, river view sometimes blocked, insecticide smell in lobby, leaky showerhead, no food delivery to rooms."
+   },
+   "gz_h3_echarmplus": {
+    "score": 9.6,
+    "count": 4263,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.5,
+     "location": 9.5,
+     "service": 9.7
+    },
+    "issues": "26 positive in a row. One 2.5 review (Aug): refurbished old building, toilet odour, mould, dust. One key card per room; small rooms."
+   },
+   "gz_h5_libai": {
+    "score_5pt": 4.7,
+    "count_ctrip": 189,
+    "sub_5pt": {
+     "clean": 4.8,
+     "facilities": 4.7,
+     "environment": 4.7,
+     "service": 4.8
+    },
+    "issues": "Odour tag 4 (room change fixed it); 10+ min walk to metro. Free laundry, robot delivery praised."
+   },
+   "gz_p1_paco": {
+    "score": 9.1,
+    "count": 2230,
+    "negative": 58,
+    "sub": {
+     "clean": 9.0,
+     "amenities": 8.8,
+     "location": 9.1,
+     "service": 9.2
+    },
+    "issues": "Mould smell (5.0, Aug), windowless twin rooms, plumbing noise till 2am, leaks, simple breakfast."
+   },
+   "gz_h6_yifang": {
+    "score": 9.6,
+    "count": 2788,
+    "negative": 34,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "Location needs taxis/8-10 min to metro; dark streets at night; hallway smoke/beer smell; street noise; little English."
+   },
+   "gz_h7_yifang_dade": {
+    "score": 9.1,
+    "count": 1191,
+    "negative": 38,
+    "sub": {
+     "clean": 9.0,
+     "amenities": 9.0,
+     "location": 9.0,
+     "service": 9.2
+    },
+    "tags": "Large rooms 101",
+    "issues": "4.0 (4 Nov): dirty bathroom/towels; worn furnishings; lift via separate entrance 2-3 shops from lobby."
+   },
+   "gz_h8_linghui_mercure": {
+    "score": 9.3,
+    "count": 2842,
+    "negative": 44,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.2,
+     "location": 9.3,
+     "service": 9.4
+    },
+    "tags": "Near metro 458, Friendly staff 344",
+    "issues": "No complaint text visible on the page (44 less-favourable reviews, not shown)."
+   },
+   "hz_intercity": {
+    "score": 9.8,
+    "count": 629,
+    "sub": {
+     "clean": 9.8,
+     "amenities": 9.8,
+     "location": 9.8,
+     "service": 9.8
+    },
+    "issues": "Guest Suggestion (3): soundproofing, post-stay service responsiveness. 45 consecutive positive; no negative reviews in past 4 months. Newest reviews (Nov 5-16) all 9.5-10."
+   }
+  },
+  "2026-11-20": {
+   "hz_intercity": {
+    "score": 9.8,
+    "count": 629,
+    "negative": null,
+    "sub": {
+     "clean": 9.8,
+     "amenities": 9.8,
+     "location": 9.8,
+     "service": 9.8
+    },
+    "issues": "Guest Suggestion (3): soundproofing, post-stay service. No negative in 4 months; newest Nov 5-16 all 9.5-10."
+   },
+   "gz_h1_zhipin": {
+    "score": 9.3,
+    "count": 2765,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 9.2,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "Guest Suggestion 74: renovation/corridor-cleaning noise, dusty rooms, service. Newest 9 reviews 9.5-10."
+   },
+   "gz_h2_marhaus": {
+    "score": 9.2,
+    "count": 6648,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 9.0,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "Guest Suggestion 93: very small rooms, bathroom, cleanliness, front desk. Newest 7.5-10."
+   },
+   "gz_h3_echarmplus": {
+    "score": 9.5,
+    "count": 4984,
+    "negative": null,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.4,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "Score down 9.6->9.5. Guest Suggestion 63: hygiene, staff, malfunctioning toilets. Two low reviews Oct 30 (4.5 hygiene; 4.0 outdated room). Newest Nov all 10."
+   },
+   "gz_h4_citycomfort": {
+    "score": 9.6,
+    "count": 429,
+    "negative": null,
+    "sub": {
+     "clean": 9.7,
+     "amenities": 9.6,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "Guest Suggestion 4: takeout wait, lift waits. Newest 9.5-10."
+   },
+   "gz_h5_libai": {
+    "score": 9.5,
+    "count": 190,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "Trip.com 10-pt now shown. No negative reviews in past 2 months; newest 9-10."
+   },
+   "gz_p1_paco": {
+    "score": 9.1,
+    "count": 2228,
+    "negative": null,
+    "sub": {
+     "clean": 9.0,
+     "amenities": 8.9,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "Guest Suggestion 58: cleanliness, odours, soundproofing, room size. Newest 9.5-10."
+   },
+   "gz_h6_yifang": {
+    "score": 9.6,
+    "count": 2786,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "Guest Suggestion 34: thin walls/noise, broken facilities, ignored requests, review-for-perks. NEW 7.0 (Nov 11) thin walls; 6.0 (Nov 3) location."
+   },
+   "gz_h7_yifang_dade": {
+    "score": 9.1,
+    "count": 1191,
+    "negative": null,
+    "sub": {
+     "clean": 9.0,
+     "amenities": 9.0,
+     "location": 9.0,
+     "service": 9.2
+    },
+    "issues": "Guest Suggestion 38: sound, hygiene, service. 4.0 (Nov 5) dirty toilet/towels (already known)."
+   },
+   "gz_h8_linghui_mercure": {
+    "score": 9.3,
+    "count": 2842,
+    "negative": null,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.2,
+     "location": 9.3,
+     "service": 9.4
+    },
+    "issues": "Guest Suggestion 44: sound, hygiene, facilities. Newest Nov 9-10."
+   },
+   "gz_m5_vienna": {
+    "score": 9.1,
+    "count": 3200,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 9.0,
+     "location": 9.2,
+     "service": 9.2
+    },
+    "issues": "Guest Suggestion 140: staff, sound, outdated, odours, room allocation. Newest 8-10."
+   },
+   "sz_s1": {
+    "score": 9.4,
+    "count": 7444,
+    "negative": null,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.2,
+     "location": 9.4,
+     "service": 9.4
+    },
+    "issues": "GS 77: hygiene, building signage, staff. Newest all 10."
+   },
+   "sz_s2": {
+    "score": 9.2,
+    "count": 6211,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 9.1,
+     "location": 9.4,
+     "service": 9.3
+    },
+    "issues": "GS 78: hygiene, photos mismatch, soundproofing, rude staff. Newest all 10."
+   },
+   "sz_s3": {
+    "score": 9.3,
+    "count": 2649,
+    "negative": null,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.1,
+     "location": 9.3,
+     "service": 9.4
+    },
+    "issues": "GS 45: sound, small rooms, toilet stains. Newest 9-10."
+   },
+   "sz_s4": {
+    "score": 9.4,
+    "count": 1797,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.4,
+     "location": 9.4,
+     "service": 9.4
+    },
+    "issues": "GS 30: maintenance, cleanliness. 7.0 (Nov 8) 'rebranded, not new'. No negative in 2 months."
+   },
+   "sz_s5": {
+    "score": 9.5,
+    "count": 3817,
+    "negative": null,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.4,
+     "location": 9.5,
+     "service": 9.5
+    },
+    "issues": "GS 65: facilities, hygiene, cramped, false marketing. Newest 9-10."
+   },
+   "sz_s6": {
+    "score": 9.6,
+    "count": 26462,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.6,
+     "service": 9.6
+    },
+    "issues": "GS 223: room smaller than photos, hard to find. 6.0 (Nov 14) tiny converted-apartment room."
+   },
+   "sz_s7": {
+    "score": 9.5,
+    "count": 1303,
+    "negative": null,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.4,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "GS 22: sound, hygiene, cold breakfast. Newest 7.5-10."
+   },
+   "sz_s8": {
+    "score": 9.1,
+    "count": 1196,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 9.0,
+     "location": 9.0,
+     "service": 9.2
+    },
+    "issues": "GS 57: sound, small ill-maintained rooms, hygiene. 5.0 (Oct 21) stained sheets/towels, broken dryer; 2.0 (Aug 22)."
+   },
+   "sz_s9": {
+    "score": 9.1,
+    "count": 735,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 8.6,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "GS 25: old facilities, unfriendly front desk, bathroom odour, slow drains."
+   },
+   "sz_s10": {
+    "score": 9.0,
+    "count": 923,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 8.8,
+     "location": 8.9,
+     "service": 9.2
+    },
+    "issues": "GS 31: sound, small rooms, little/no natural light, odours, front desk. Newest 7.7-10."
+   }
+  }
+ }
 }
