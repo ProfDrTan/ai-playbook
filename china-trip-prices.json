@@ -177,7 +177,8 @@
    "checkIn": "2026-12-17",
    "checkOut": "2026-12-21",
    "nights": 4,
-   "note": "No availability on Trip.com for 17–21 Dec as of 20 Nov; alert if rooms appear"
+   "note": "Not on Trip.com for these dates; check Agoda: https://www.agoda.com/en-sg/star-hotel-shenzhen-huaqiang-road-metro-station-central-park-branch/hotel/shenzhen-cn.html?checkIn=2026-12-17&los=4&adults=2&rooms=1 (20 Nov: Duplex Double S$60/night, Standard S$50, Select Bed S$52)",
+   "source": "agoda"
   }
  ],
  "log": [
@@ -381,7 +382,8 @@
     "sz_s8": "Quiet Projection King; FC before 18:00 Dec 17",
     "sz_s9": "Standard Queen; FC before 15:00 Dec 16; 'Our last 2/4' on S$327",
     "sz_s10": "S$237/RM778 cheapest has only a 30-minute cancellation window; logged true FC rate S$245/RM804 (FC before 18:00 Dec 17); 'Our last 1!' on all rates"
-   }
+   },
+   "sz_s11_agoda_per_night": 60
   }
  ],
  "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
