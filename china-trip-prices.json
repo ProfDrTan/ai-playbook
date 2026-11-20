@@ -197,6 +197,30 @@
    "checkOut": "2026-12-21",
    "nights": 4,
    "note": "Sold out on Agoda for 17-21 Dec as of 20 Nov; alert if rooms reappear"
+  },
+  {
+   "key": "sz_s14",
+   "name": "Golden Central Hotel (Shenzhen Convention & Exhibition Center)",
+   "hotelId": 535657,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s15",
+   "name": "Xiangzhang Yun Xi (Shenzhen Futian Convention and Exhibition Center)",
+   "hotelId": 1380744,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
+  },
+  {
+   "key": "sz_s16",
+   "name": "Wanyoo Esports Hotel (Shenzhen Futian Metro Station Branch)",
+   "hotelId": 125831451,
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4
   }
  ],
  "log": [
@@ -403,7 +427,13 @@
    },
    "sz_s11_agoda_per_night": 60,
    "sz_s12": 153,
-   "sz_s12_myr": 488
+   "sz_s12_myr": 488,
+   "sz_s14": 375,
+   "sz_s14_myr": 1193,
+   "sz_s15": 298,
+   "sz_s15_myr": 949,
+   "sz_s16": 378,
+   "sz_s16_myr": 1207
   }
  ],
  "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
