@@ -798,7 +798,7 @@ ul.places{list-style:none;padding:0;margin:0}ul.places li{padding:9px 0;border-t
 .stn{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid #333;color:#111;display:grid;place-items:center;font:700 11px Figtree,sans-serif;transform:translate(-11px,-11px)}
 .vbtns{display:flex;flex-direction:column;gap:6px;align-items:flex-end}.vbtn{font:700 13px Figtree,sans-serif;padding:7px 11px;border-radius:6px;border:2px solid #B5352B;background:#fff;color:#B5352B;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .lbadge{transform:translate(-50%,-50%);background:var(--lc);color:#000;font:800 12px Figtree,sans-serif;padding:2px 7px;border:2px solid #000;border-radius:10px;white-space:nowrap}
-.jump{font:600 13px Figtree,sans-serif;padding:6px;border-radius:6px;border:2px solid #0B6E4F;max-width:260px;background:#fff}
+.popopen .vbtns,.popopen .jump,.popopen .hzlg,.popopen .leaflet-left .leaflet-control{display:none!important}.jump{font:600 13px Figtree,sans-serif;padding:6px;border-radius:6px;border:2px solid #0B6E4F;max-width:260px;background:#fff}
 .num.numrail{background:#B5352B;color:#fff;width:38px;height:38px;font-size:20px;transform:translate(-19px,-19px);border:3px solid #fff;box-shadow:0 0 0 3px #B5352B}
 .num.nummetro{background:#0B6E4F}
 .num.numix{background:#fff;color:#0B6E4F;border:4px solid #0B6E4F;width:34px;height:34px;font-size:18px;transform:translate(-17px,-17px);box-shadow:0 0 0 4px rgba(11,110,79,.25)}
@@ -986,7 +986,7 @@ function drawDay(d){window._redraw=()=>drawDay(d);initMap();if(!MAP)return;LAY.c
  MAP.invalidateSize();if(all.length)MAP.fitBounds(L.latLngBounds(all),{padding:[40,40]});setTimeout(()=>{MAP.invalidateSize();declutter()},80)}
 function drawOverview(kind){window._redraw=()=>drawOverview(kind);initMap();if(!MAP)return;LAY.clearLayers();const pts=[];
  if(HZLG){HZLG.remove();HZLG=null}if(HZLG2){HZLG2.remove();HZLG2=null}if(HZLG3){HZLG3.remove();HZLG3=null}if(TILES)TILES.setOpacity(1);
- if(kind==="szh"){const pts=[];
+ if(kind==="szh"){const pts=[];if(!window._popfix){window._popfix=1;MAP.on("popupopen",()=>MAP.getContainer().classList.add("popopen"));MAP.on("popupclose",()=>MAP.getContainer().classList.remove("popopen"))}
   if(TILES)TILES.setOpacity(.45);
   SZNET.forEach(([r,c,g])=>L.polyline(g,{color:c||"#888",weight:3,opacity:.3}).addTo(LAY));
   SZST.forEach(([zh,en,p])=>{mk(p,"","mst",`${zh} ${en}`,"right").addTo(LAY)});
@@ -1023,7 +1023,7 @@ function drawOverview(kind){window._redraw=()=>drawOverview(kind);initMap();if(!
   HKS.forEach(([id,t,p,zh])=>{const m=mk(p,"★","num numsight",`${id}. ${t} ${zh}`,"right");m.addTo(LAY)});
   SZS.forEach(([n,t,p,zh])=>{const m=mk(p,"★","num numsight",`${n}. ${t} ${zh}`,"right");m.addTo(LAY)});
   const narrow=document.getElementById("lmap").offsetWidth<600;
-  SZC.forEach(c=>{const [id,n,p,hid,sc,tot]=c;const pn=Math.round(tot/4);const m=mk(p,id,"num numhotel",narrow?`${id} · S$${pn}`:`${id} ${n.split(" (")[0]} · S$${pn}/night`,"right");m._pri=1;m.addTo(LAY);pts.push(p)});
+  SZC.forEach(c=>{const [id,n,p,hid,sc,tot]=c;const pn=Math.round(tot/4);const m=mk(p,id,"num numhotel",narrow?`${id} · S$${pn}`:`${id} ${n.split(" (")[0]} · S$${pn}/night`,"right");m._pri=1;m.bindPopup(`<div style="font:14px Figtree,sans-serif;max-width:250px"><b>${id} · ${n}</b><br>S$${tot} for 4 nights (S$${pn}/night) · MYR ${c[6].toLocaleString()}<br>Score ${sc}<br>🚇 ${c[7]}<br>🛂 To HK border: ${c[8]}<br>🚄 To Futian HSR: ${(c[9]/1000).toFixed(1)} km<br><i>${c[10]}</i><br><a href="https://sg.trip.com/hotels/detail/?hotelId=${hid}&checkIn=2026-12-17&checkOut=2026-12-21&adult=2&curr=SGD" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;padding:7px 10px;background:#287DFA;color:#fff;border-radius:6px;font-weight:700;text-decoration:none">Open on Trip.com (SGD) ↗</a> <a href="https://sg.trip.com/hotels/detail/?hotelId=${hid}&checkIn=2026-12-17&checkOut=2026-12-21&adult=2&curr=MYR" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;padding:7px 10px;background:#fff;color:#287DFA;border:2px solid #287DFA;border-radius:6px;font-weight:700;text-decoration:none">MYR ↗</a></div>`,{maxWidth:270});m.addTo(LAY);pts.push(p)});
   [[HUB,"🚄","num numrail","🚄 FUTIAN STATION 福田站 · high-speed to HK West Kowloon · your train from Guangzhou arrives here Thu 17 · Metro L2/L3/L11"],[WK,"🚄","num numrail","🚄 HK WEST KOWLOON 香港西九龙 · both immigrations inside · open 06:00–24:00"],[CHK,"🛂","num numrail","🛂 FUTIAN CHECKPOINT 福田口岸 · end of Metro L4 + L10 · walk across to Lok Ma Chau"]].forEach(([p,i,c,t])=>{const m=mk(p,i,c,t,"right");m._pri=1;m.addTo(LAY)});
   [[[22.5348793,114.0680654],"Gangxia 岗厦 · Line 1 + Line 10"],[[22.5347335,114.0610484],"Convention & Exhibition Center 会展中心 · Line 1 + Line 4"],[[22.5238651,114.0662392],"Fumin 福民 · Line 4 + 7 + 10"],[[22.5404084,114.0686776],"Gangxia North 岗厦北 · Line 11 to the airport"]].forEach(([p,t])=>{const m=mk(p,"⇄","num numix",`INTERCHANGE ${t}`,"right");m.addTo(LAY)});
   const core=pts.concat([HUB,CHK]);
