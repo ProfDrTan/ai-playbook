@@ -187,6 +187,16 @@
    "checkIn": "2026-12-17",
    "checkOut": "2026-12-21",
    "nights": 4
+  },
+  {
+   "key": "sz_s13",
+   "name": "Gangshahui Garden Executive Apartment Hotel (Agoda h51938569)",
+   "source": "agoda",
+   "url": "https://www.agoda.com/en-sg/h51938569/hotel/shenzhen-cn.html?checkIn=2026-12-17&los=4&adults=2&rooms=1",
+   "checkIn": "2026-12-17",
+   "checkOut": "2026-12-21",
+   "nights": 4,
+   "note": "Sold out on Agoda for 17-21 Dec as of 20 Nov; alert if rooms reappear"
   }
  ],
  "log": [
