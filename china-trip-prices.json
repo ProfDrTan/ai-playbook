@@ -88,7 +88,18 @@
    "hotelId": 10344127,
    "checkIn": "2026-12-12",
    "checkOut": "2026-12-17",
-   "nights": 5
+   "nights": 5,
+   "booked": "2026-11-20, S$433.15 - TO BE CANCELLED (replaced by Mihua 22 Nov)"
+  },
+  {
+   "key": "gz_m7_mihua",
+   "name": "Mihua International Apartment (Beijing Road, Mingyue Haoting) - in-room washer",
+   "hotelId": 133668484,
+   "checkIn": "2026-12-12",
+   "checkOut": "2026-12-17",
+   "nights": 5,
+   "booked": "2026-11-22, CNY 1,822 on DBS UnionPay (Exquisite Queen)",
+   "freeCancelUntil": "2026-12-12 18:00"
   },
   {
    "key": "sz_s1",
