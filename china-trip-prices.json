@@ -8,7 +8,8 @@
    "checkIn": "2026-12-10",
    "checkOut": "2026-12-12",
    "nights": 2,
-   "freeCancelUntil": "2026-12-09 18:00"
+   "freeCancelUntil": "2026-12-09 18:00",
+   "booked": "2026-11-15, MYR 451.66"
   },
   {
    "key": "gz_h1_zhipin",
@@ -88,7 +89,9 @@
    "hotelId": 10344127,
    "checkIn": "2026-12-12",
    "checkOut": "2026-12-17",
-   "nights": 5
+   "nights": 5,
+   "booked": "2026-11-20, S$433.15",
+   "freeCancelUntil": "2026-12-12 18:00"
   },
   {
    "key": "sz_s1",
@@ -96,7 +99,9 @@
    "hotelId": 116903449,
    "checkIn": "2026-12-17",
    "checkOut": "2026-12-21",
-   "nights": 4
+   "nights": 4,
+   "booked": "2026-11-22, CNY 1,323 (SGD 256.66) on DBS UnionPay",
+   "freeCancelUntil": "2026-12-17 20:00"
   },
   {
    "key": "sz_s2",
