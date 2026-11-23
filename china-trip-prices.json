@@ -615,6 +615,91 @@
     "sz_s15": "FC before 18:00 Dec 17; 'Our last 2!' on cheapest",
     "sz_s16": "FC before 23:59 Dec 17; 'Our last 2!' on cheapest"
    }
+  },
+  {
+   "date": "2026-11-23",
+   "hz_intercity": 143,
+   "hz_intercity_myr": 465,
+   "gz_h1_zhipin": 265,
+   "gz_h1_zhipin_myr": 868,
+   "gz_h2_marhaus": 254,
+   "gz_h2_marhaus_myr": 830,
+   "gz_h3_echarmplus": 384,
+   "gz_h3_echarmplus_myr": 1247,
+   "gz_h4_citycomfort": 257,
+   "gz_h4_citycomfort_myr": 839,
+   "gz_h5_libai": 312,
+   "gz_h5_libai_myr": 1018,
+   "gz_p1_paco": 432,
+   "gz_p1_paco_myr": 1399,
+   "gz_h6_yifang": 238,
+   "gz_h6_yifang_myr": 781,
+   "gz_h7_yifang_dade": 147,
+   "gz_h7_yifang_dade_myr": 479,
+   "gz_h8_linghui_mercure": 355,
+   "gz_h8_linghui_mercure_myr": 1153,
+   "gz_m7_mihua": 350,
+   "gz_m7_mihua_myr": 1138,
+   "sz_s1": 246,
+   "sz_s1_myr": 806,
+   "sz_s2": 235,
+   "sz_s2_myr": 769,
+   "sz_s3": 260,
+   "sz_s3_myr": 849,
+   "sz_s4": 248,
+   "sz_s4_myr": 810,
+   "sz_s5": 273,
+   "sz_s5_myr": 892,
+   "sz_s6": 319,
+   "sz_s6_myr": 1039,
+   "sz_s7": 286,
+   "sz_s7_myr": 933,
+   "sz_s8": 259,
+   "sz_s8_myr": 846,
+   "sz_s9": 321,
+   "sz_s9_myr": 1044,
+   "sz_s10": 237,
+   "sz_s10_myr": 777,
+   "sz_s12": 152,
+   "sz_s12_myr": 497,
+   "sz_s14": 364,
+   "sz_s14_myr": 1183,
+   "sz_s15": 287,
+   "sz_s15_myr": 937,
+   "sz_s16": 368,
+   "sz_s16_myr": 1196,
+   "notes": {
+    "fx_wise_sgd_myr": 3.197,
+    "source": "Trip.com detail pages (SGD and MYR), cheapest free-cancellation rate",
+    "gz_m5_vienna": "Not checked (cancelled 22 Nov)",
+    "sz_s11": "Not checked (Agoda)",
+    "sz_s13": "Agoda 23 Nov: '1 room type sold out' (was 2); header teases Executive Double S$63/night FC but room list shows only 1-adult shared-bath no-window single (S$82/night) and 2-Bedroom Suite sold out",
+    "hz_intercity": "Superior Queen; FC before 18:00 Dec 9; 'Our last 1!' only on pricier rooms",
+    "gz_h1_zhipin": "FC before 18:00 Dec 12",
+    "gz_h2_marhaus": "Cozy Queen; FC before 18:00 Dec 12; 'Our last 5!' on pricier",
+    "gz_h3_echarmplus": "Special Queen; FC before 20:00 Dec 12; 'Our last 2/3!' on pricier",
+    "gz_h4_citycomfort": "Smart AV Double; FC before 18:00 Dec 12; 'Our last 1!' on cheapest",
+    "gz_h5_libai": "Cozy Double; FC before 23:59 Dec 12; 'Our last 4!' on pricier",
+    "gz_p1_paco": "Superior King; FC before 23:59 Dec 11; 'Our last 4!' on cheapest",
+    "gz_h6_yifang": "Leisure Exceptional Double; FC before 18:00 Dec 12; 'Our last 3!' on cheapest",
+    "gz_h7_yifang_dade": "Elegant Queen; FC before 18:00 Dec 12; 'Our last 1!' on S$154",
+    "gz_h8_linghui_mercure": "Deluxe Queen; FC before 18:00 Dec 12; 'Our last 3!' on cheapest",
+    "gz_m7_mihua": "Exquisite Queen (booked type); FC before 18:00 Dec 12; 'Our last 1!' on cheapest",
+    "sz_s1": "Superior Double; FC before 20:00 Dec 17",
+    "sz_s2": "FC before 20:00 Dec 17; 'Our last 4/5' on pricier",
+    "sz_s3": "Cozy AV Double; FC before 18:00 Dec 17; 'Our last 1!' on cheapest",
+    "sz_s4": "Dreamscape Cozy Double; FC before 18:00 Dec 17; 'Our last 2!' on cheapest",
+    "sz_s5": "Quiet Garden Balcony; FC before 22:00 Dec 17; 'Our last 1!' on pricier",
+    "sz_s6": "Queen; FC before 18:00 Dec 17",
+    "sz_s7": "Boutique Queen; FC before 22:00 Dec 17",
+    "sz_s8": "Quiet Projection King; FC before 18:00 Dec 17",
+    "sz_s9": "Standard Queen; FC before 15:00 Dec 16; 'Our last 4/2' on S$328",
+    "sz_s10": "Chen An Simple Double; FC before 18:00 Dec 17; 'Our last 2!' on cheapest",
+    "sz_s12": "Cozy Queen; FC before 23:59 Dec 16; 'Our last 5/2' on pricier",
+    "sz_s14": "Cheapest FC now 'Business Twin Room No Window'; FC before 23:00 Dec 16",
+    "sz_s15": "Superior Memory Foam Double; FC before 18:00 Dec 17; 'Our last 2!' on cheapest",
+    "sz_s16": "Cheapest FC is 'Guestroom - Single Occupancy'; FC before 23:59 Dec 17; 'Our last 2!'"
+   }
   }
  ],
  "reviews_note": "Trip.com guest-review snapshots (sg/my/us/se trip.com review pages; Libai from ctrip.com, 5-point scale). score, count, negative = Trip.com 'Negative reviews' filter count; issues = complaints seen in recent reviews.",
@@ -1609,6 +1694,308 @@
      "service": 9.7
     },
     "issues": "GS 7. No negative in 8 months."
+   }
+  },
+  "2026-11-23": {
+   "hz_intercity": {
+    "score": 9.8,
+    "count": 631,
+    "negative": null,
+    "sub": {
+     "clean": 9.8,
+     "amenities": 9.8,
+     "location": 9.8,
+     "service": 9.8
+    },
+    "issues": "GS 3: soundproofing. 47 consecutive positive; newest Nov 16 10.0."
+   },
+   "gz_h1_zhipin": {
+    "score": 9.3,
+    "count": 2786,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 9.2,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "GS 74. No negative in past month; newest Nov 21 10."
+   },
+   "gz_h2_marhaus": {
+    "score": 9.2,
+    "count": 6658,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 9.0,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "GS 93: small rooms, cleanliness. Nothing new."
+   },
+   "gz_h3_echarmplus": {
+    "score": 9.5,
+    "count": 5024,
+    "negative": null,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.4,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "GS 63. 73 consecutive positive."
+   },
+   "gz_h4_citycomfort": {
+    "score": 9.6,
+    "count": 432,
+    "negative": null,
+    "sub": {
+     "clean": 9.7,
+     "amenities": 9.6,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "GS 4. Nothing new."
+   },
+   "gz_h5_libai": {
+    "score": 9.5,
+    "count": 198,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "No negative in past 2 months."
+   },
+   "gz_p1_paco": {
+    "score": 9.1,
+    "count": 2239,
+    "negative": null,
+    "sub": {
+     "clean": 9.0,
+     "amenities": 8.8,
+     "location": 9.1,
+     "service": 9.2
+    },
+    "issues": "GS 58: cleanliness, odours, sound. Score 9.0->9.1."
+   },
+   "gz_h6_yifang": {
+    "score": 9.6,
+    "count": 2791,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "GS 34: thin walls. Nothing new; newest Nov 23 9.5."
+   },
+   "gz_h7_yifang_dade": {
+    "score": 9.1,
+    "count": 1199,
+    "negative": null,
+    "sub": {
+     "clean": 9.0,
+     "amenities": 9.0,
+     "location": 9.0,
+     "service": 9.2
+    },
+    "issues": "GS 38. Newest Nov 22 8/10."
+   },
+   "gz_h8_linghui_mercure": {
+    "score": 9.3,
+    "count": 2858,
+    "negative": null,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.2,
+     "location": 9.3,
+     "service": 9.4
+    },
+    "issues": "GS 44. Nothing new."
+   },
+   "gz_m7_mihua": {
+    "score": 9.2,
+    "count": 952,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 9.1,
+     "location": 9.1,
+     "service": 9.3
+    },
+    "issues": "GS 17: soundproofing, dirty sheets/odours, parking fee. 21 consecutive positive."
+   },
+   "sz_s1": {
+    "score": 9.4,
+    "count": 7474,
+    "negative": null,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.2,
+     "location": 9.4,
+     "service": 9.4
+    },
+    "issues": "GS 77. 67 consecutive positive."
+   },
+   "sz_s2": {
+    "score": 9.2,
+    "count": 6234,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 9.1,
+     "location": 9.4,
+     "service": 9.3
+    },
+    "issues": "GS 78. Nothing new."
+   },
+   "sz_s3": {
+    "score": 9.3,
+    "count": 2673,
+    "negative": null,
+    "sub": {
+     "clean": 9.4,
+     "amenities": 9.1,
+     "location": 9.3,
+     "service": 9.4
+    },
+    "issues": "GS 45. 34 consecutive positive."
+   },
+   "sz_s4": {
+    "score": 9.4,
+    "count": 1819,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.4,
+     "location": 9.4,
+     "service": 9.4
+    },
+    "issues": "GS 31. Nothing new."
+   },
+   "sz_s5": {
+    "score": 9.5,
+    "count": 3831,
+    "negative": null,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.4,
+     "location": 9.5,
+     "service": 9.5
+    },
+    "issues": "GS 66. Nothing new."
+   },
+   "sz_s6": {
+    "score": 9.6,
+    "count": 26574,
+    "negative": null,
+    "sub": {
+     "clean": 9.6,
+     "amenities": 9.5,
+     "location": 9.6,
+     "service": 9.6
+    },
+    "issues": "GS 223. 86 consecutive positive."
+   },
+   "sz_s7": {
+    "score": 9.5,
+    "count": 1337,
+    "negative": null,
+    "sub": {
+     "clean": 9.5,
+     "amenities": 9.3,
+     "location": 9.5,
+     "service": 9.6
+    },
+    "issues": "GS 22->23. Nothing serious."
+   },
+   "sz_s8": {
+    "score": 9.1,
+    "count": 1217,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 9.0,
+     "location": 9.0,
+     "service": 9.2
+    },
+    "issues": "GS 57. No negative in past month."
+   },
+   "sz_s9": {
+    "score": 9.1,
+    "count": 736,
+    "negative": null,
+    "sub": {
+     "clean": 9.2,
+     "amenities": 8.6,
+     "location": 9.2,
+     "service": 9.3
+    },
+    "issues": "GS 25. NEW Nov 22 7.0: cockroach in room (staff changed room)."
+   },
+   "sz_s10": {
+    "score": 9.1,
+    "count": 934,
+    "negative": null,
+    "sub": {
+     "clean": 9.3,
+     "amenities": 8.8,
+     "location": 8.9,
+     "service": 9.2
+    },
+    "issues": "GS 32->33. Nothing new."
+   },
+   "sz_s12": {
+    "score": 8.9,
+    "count": 296,
+    "negative": null,
+    "sub": {
+     "clean": 8.8,
+     "amenities": 8.9,
+     "location": 8.7,
+     "service": 9.1
+    },
+    "issues": "GS 20 (musty smell, AC). Nothing new."
+   },
+   "sz_s14": {
+    "score": 8.9,
+    "count": 1258,
+    "negative": null,
+    "sub": {
+     "clean": 8.9,
+     "amenities": 8.6,
+     "location": 8.9,
+     "service": 9.1
+    },
+    "issues": "GS 38. Newest Nov 14 7.5 (door-slamming noise)."
+   },
+   "sz_s15": {
+    "score": 8.5,
+    "count": 1992,
+    "negative": null,
+    "sub": {
+     "clean": 8.5,
+     "amenities": 8.3,
+     "location": 8.4,
+     "service": 8.6
+    },
+    "issues": "GS 207: smoke, mould."
+   },
+   "sz_s16": {
+    "score": 9.7,
+    "count": 834,
+    "negative": null,
+    "sub": {
+     "clean": 9.7,
+     "amenities": 9.7,
+     "location": 9.7,
+     "service": 9.7
+    },
+    "issues": "GS 7. 103 consecutive positive."
    }
   }
  }
